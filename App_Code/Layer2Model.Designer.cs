@@ -18,28 +18,29 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ExerciseBases_Exercise", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.ExerciseBases_Exercise), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "ExerciseBases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "LoggedExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_MuscleGroupExercise", "ExerciseBases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "MuscleGroups", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.MuscleGroup), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ExerciseBases", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ScheduledExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "SetAttributes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SetAttribute), "ExerciseGoals", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_RoutineExerciseGoal", "Routines", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Routine), "ExerciseGoals", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerEmailNotification", "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Notifications_EmailNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Notifications_EmailNotification), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "LoggedExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerRoutine", "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Routines", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Routine), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "ScheduledRoutines", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerStatistics", "Statistics", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Statistic), "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LimitBreaker), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "ScheduledExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "LimitBreakers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Suggestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Suggestion), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "Routines", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Routine), "LoggedExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "SetAttributes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SetAttribute), "LoggedExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "SuggestedExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SuggestedExercis), "MuscleGroups", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.MuscleGroup), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_EmailNotification_inherits_Notification", "Notifications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notification), "Notifications_EmailNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Notifications_EmailNotification), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledReminder_inherits_Notification", "Notifications", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notification), "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Notifications_ScheduledReminder), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseScheduledReminder", "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notifications_ScheduledReminder), "ScheduledExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledRoutineScheduledReminder", "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notifications_ScheduledReminder), "ScheduledRoutines", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "Routines", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Routine), "ScheduledRoutines", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "SuggestedExercises", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SuggestedExercis), "Suggestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Suggestion), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ExerciseBases_Exercise", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.ExerciseBases_Exercise), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_MuscleGroupExercise", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "MuscleGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.MuscleGroup), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "SetAttribute", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SetAttribute), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_RoutineExerciseGoal", "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Routine), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerEmailNotification", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Notifications_EmailNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Notifications_EmailNotification), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerRoutine", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Routine), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "ScheduledRoutine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerStatistics", "Statistic", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Statistic), "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LimitBreaker), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Suggestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Suggestion), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Routine), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LoggedExercis), "SetAttribute", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.SetAttribute), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "SuggestedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SuggestedExercis), "MuscleGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.MuscleGroup), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_EmailNotification_inherits_Notification", "Notification", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notification), "Notifications_EmailNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Notifications_EmailNotification), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledReminder_inherits_Notification", "Notification", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notification), "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Notifications_ScheduledReminder), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseScheduledReminder", "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notifications_ScheduledReminder), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledRoutineScheduledReminder", "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notifications_ScheduledReminder), "ScheduledRoutine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Routine), "ScheduledRoutine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "SuggestedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SuggestedExercis), "Suggestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Suggestion), true)]
 
 #endregion
 
@@ -837,18 +838,40 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "LoggedExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "ExerciseGoal")]
+        public EntityCollection<ExerciseGoal> ExerciseGoals
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseGoal");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseGoal", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "LoggedExercis")]
         public EntityCollection<LoggedExercis> LoggedExercises
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_ExerciseLoggedExercise", "LoggedExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_ExerciseLoggedExercise", "LoggedExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_ExerciseLoggedExercise", "LoggedExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_ExerciseLoggedExercise", "LoggedExercis", value);
                 }
             }
         }
@@ -859,18 +882,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupExercise", "MuscleGroups")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupExercise", "MuscleGroup")]
         public EntityCollection<MuscleGroup> MuscleGroups
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupExercise", "MuscleGroups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupExercise", "MuscleGroup");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupExercise", "MuscleGroups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupExercise", "MuscleGroup", value);
                 }
             }
         }
@@ -881,18 +904,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ScheduledExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ScheduledExercis")]
         public EntityCollection<ScheduledExercis> ScheduledExercises
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseExercise", "ScheduledExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseExercise", "ScheduledExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseExercise", "ScheduledExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseExercise", "ScheduledExercis", value);
                 }
             }
         }
@@ -1091,16 +1114,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBases")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBas")]
         public ExerciseBas ExerciseBas
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas").Value = value;
             }
         }
         /// <summary>
@@ -1112,13 +1135,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas", value);
                 }
             }
         }
@@ -1142,12 +1165,14 @@ namespace Layer2Model
         /// <param name="id">Initial value of the id property.</param>
         /// <param name="setAttribute_id">Initial value of the SetAttribute_id property.</param>
         /// <param name="routine_id">Initial value of the Routine_id property.</param>
-        public static ExerciseGoal CreateExerciseGoal(global::System.Int32 id, global::System.Int32 setAttribute_id, global::System.Int32 routine_id)
+        /// <param name="exerciseBase_id">Initial value of the ExerciseBase_id property.</param>
+        public static ExerciseGoal CreateExerciseGoal(global::System.Int32 id, global::System.Int32 setAttribute_id, global::System.Int32 routine_id, global::System.Int32 exerciseBase_id)
         {
             ExerciseGoal exerciseGoal = new ExerciseGoal();
             exerciseGoal.id = id;
             exerciseGoal.SetAttribute_id = setAttribute_id;
             exerciseGoal.Routine_id = routine_id;
+            exerciseGoal.ExerciseBase_id = exerciseBase_id;
             return exerciseGoal;
         }
 
@@ -1228,6 +1253,30 @@ namespace Layer2Model
         private global::System.Int32 _Routine_id;
         partial void OnRoutine_idChanging(global::System.Int32 value);
         partial void OnRoutine_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ExerciseBase_id
+        {
+            get
+            {
+                return _ExerciseBase_id;
+            }
+            set
+            {
+                OnExerciseBase_idChanging(value);
+                ReportPropertyChanging("ExerciseBase_id");
+                _ExerciseBase_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ExerciseBase_id");
+                OnExerciseBase_idChanged();
+            }
+        }
+        private global::System.Int32 _ExerciseBase_id;
+        partial void OnExerciseBase_idChanging(global::System.Int32 value);
+        partial void OnExerciseBase_idChanged();
 
         #endregion
     
@@ -1239,16 +1288,54 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "SetAttributes")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "ExerciseBas")]
+        public ExerciseBas ExerciseBas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ExerciseBas> ExerciseBasReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "SetAttribute")]
         public SetAttribute SetAttribute
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttributes").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttributes").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute").Value = value;
             }
         }
         /// <summary>
@@ -1260,13 +1347,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttributes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttributes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute", value);
                 }
             }
         }
@@ -1277,16 +1364,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_RoutineExerciseGoal", "Routines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_RoutineExerciseGoal", "Routine")]
         public Routine Routine
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routines").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routine").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routines").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routine").Value = value;
             }
         }
         /// <summary>
@@ -1298,13 +1385,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routine", value);
                 }
             }
         }
@@ -1895,18 +1982,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LoggedExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LoggedExercis")]
         public EntityCollection<LoggedExercis> LoggedExercises
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_LimitBreakerLoggedExercise", "LoggedExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_LimitBreakerLoggedExercise", "LoggedExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_LimitBreakerLoggedExercise", "LoggedExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_LimitBreakerLoggedExercise", "LoggedExercis", value);
                 }
             }
         }
@@ -1917,18 +2004,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerRoutine", "Routines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerRoutine", "Routine")]
         public EntityCollection<Routine> Routines
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Routine>("Layer2Model.FK_LimitBreakerRoutine", "Routines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Routine>("Layer2Model.FK_LimitBreakerRoutine", "Routine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Routine>("Layer2Model.FK_LimitBreakerRoutine", "Routines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Routine>("Layer2Model.FK_LimitBreakerRoutine", "Routine", value);
                 }
             }
         }
@@ -1939,18 +2026,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "ScheduledRoutines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "ScheduledRoutine")]
         public EntityCollection<ScheduledRoutine> ScheduledRoutines
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledRoutine>("Layer2Model.FK_LimitBreakerScheduledRoutine", "ScheduledRoutines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledRoutine>("Layer2Model.FK_LimitBreakerScheduledRoutine", "ScheduledRoutine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledRoutine>("Layer2Model.FK_LimitBreakerScheduledRoutine", "ScheduledRoutines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledRoutine>("Layer2Model.FK_LimitBreakerScheduledRoutine", "ScheduledRoutine", value);
                 }
             }
         }
@@ -1961,16 +2048,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerStatistics", "Statistics")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerStatistics", "Statistic")]
         public Statistic Statistic
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistics").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistic").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistics").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistic").Value = value;
             }
         }
         /// <summary>
@@ -1982,13 +2069,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistics");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistic");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistics", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Statistic>("Layer2Model.FK_LimitBreakerStatistics", "Statistic", value);
                 }
             }
         }
@@ -1999,18 +2086,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "ScheduledExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "ScheduledExercis")]
         public EntityCollection<ScheduledExercis> ScheduledExercises
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "ScheduledExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "ScheduledExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "ScheduledExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "ScheduledExercis", value);
                 }
             }
         }
@@ -2021,18 +2108,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "Suggestions")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "Suggestion")]
         public EntityCollection<Suggestion> Suggestions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionLimitBreaker", "Suggestions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionLimitBreaker", "Suggestion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionLimitBreaker", "Suggestions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionLimitBreaker", "Suggestion", value);
                 }
             }
         }
@@ -2056,16 +2143,14 @@ namespace Layer2Model
         /// <param name="sets">Initial value of the sets property.</param>
         /// <param name="timeLogged">Initial value of the timeLogged property.</param>
         /// <param name="id">Initial value of the id property.</param>
-        /// <param name="setAttribute_id">Initial value of the SetAttribute_id property.</param>
         /// <param name="limitBreaker_id">Initial value of the LimitBreaker_id property.</param>
         /// <param name="exerciseBase_id">Initial value of the ExerciseBase_id property.</param>
-        public static LoggedExercis CreateLoggedExercis(global::System.Int16 sets, global::System.DateTime timeLogged, global::System.Int64 id, global::System.Int32 setAttribute_id, global::System.Int32 limitBreaker_id, global::System.Int32 exerciseBase_id)
+        public static LoggedExercis CreateLoggedExercis(global::System.Int16 sets, global::System.DateTime timeLogged, global::System.Int64 id, global::System.Int32 limitBreaker_id, global::System.Int32 exerciseBase_id)
         {
             LoggedExercis loggedExercis = new LoggedExercis();
             loggedExercis.sets = sets;
             loggedExercis.timeLogged = timeLogged;
             loggedExercis.id = id;
-            loggedExercis.SetAttribute_id = setAttribute_id;
             loggedExercis.LimitBreaker_id = limitBreaker_id;
             loggedExercis.ExerciseBase_id = exerciseBase_id;
             return loggedExercis;
@@ -2178,30 +2263,6 @@ namespace Layer2Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 SetAttribute_id
-        {
-            get
-            {
-                return _SetAttribute_id;
-            }
-            set
-            {
-                OnSetAttribute_idChanging(value);
-                ReportPropertyChanging("SetAttribute_id");
-                _SetAttribute_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SetAttribute_id");
-                OnSetAttribute_idChanged();
-            }
-        }
-        private global::System.Int32 _SetAttribute_id;
-        partial void OnSetAttribute_idChanging(global::System.Int32 value);
-        partial void OnSetAttribute_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 LimitBreaker_id
         {
             get
@@ -2279,16 +2340,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "ExerciseBases")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "ExerciseBas")]
         public ExerciseBas ExerciseBas
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBases").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBases").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas").Value = value;
             }
         }
         /// <summary>
@@ -2300,13 +2361,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBases");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBases", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas", value);
                 }
             }
         }
@@ -2317,16 +2378,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LimitBreaker")]
         public LimitBreaker LimitBreaker
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreakers").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreaker").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreakers").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreaker").Value = value;
             }
         }
         /// <summary>
@@ -2338,13 +2399,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerLoggedExercise", "LimitBreaker", value);
                 }
             }
         }
@@ -2355,16 +2416,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "Routines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "Routine")]
         public Routine Routine
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routines").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routine").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routines").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routine").Value = value;
             }
         }
         /// <summary>
@@ -2376,13 +2437,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_LoggedExerciseRoutine", "Routine", value);
                 }
             }
         }
@@ -2393,34 +2454,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "SetAttributes")]
-        public SetAttribute SetAttribute
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "SetAttribute")]
+        public EntityCollection<SetAttribute> SetAttributes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttributes").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttributes").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SetAttribute> SetAttributeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttributes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttribute");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttributes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttribute", value);
                 }
             }
         }
@@ -2567,16 +2612,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupExercise", "ExerciseBases")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupExercise", "ExerciseBas")]
         public ExerciseBas ExerciseBas
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBases").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBases").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas").Value = value;
             }
         }
         /// <summary>
@@ -2588,13 +2633,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBases");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBases", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas", value);
                 }
             }
         }
@@ -2605,16 +2650,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "SuggestedExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "SuggestedExercis")]
         public SuggestedExercis SuggestedExercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercises").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercises").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis").Value = value;
             }
         }
         /// <summary>
@@ -2626,13 +2671,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis", value);
                 }
             }
         }
@@ -2965,16 +3010,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerEmailNotification", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerEmailNotification", "LimitBreaker")]
         public LimitBreaker LimitBreaker
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreakers").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreaker").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreakers").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreaker").Value = value;
             }
         }
         /// <summary>
@@ -2986,13 +3031,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerEmailNotification", "LimitBreaker", value);
                 }
             }
         }
@@ -3003,16 +3048,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_EmailNotification_inherits_Notification", "Notifications")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_EmailNotification_inherits_Notification", "Notification")]
         public Notification Notification
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notifications").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notification").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notifications").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notification").Value = value;
             }
         }
         /// <summary>
@@ -3024,13 +3069,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notifications");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notification");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notifications", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Notification>("Layer2Model.FK_EmailNotification_inherits_Notification", "Notification", value);
                 }
             }
         }
@@ -3125,16 +3170,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledReminder_inherits_Notification", "Notifications")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledReminder_inherits_Notification", "Notification")]
         public Notification Notification
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notifications").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notification").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notifications").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notification").Value = value;
             }
         }
         /// <summary>
@@ -3146,13 +3191,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notifications");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notification");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notifications", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Notification>("Layer2Model.FK_ScheduledReminder_inherits_Notification", "Notification", value);
                 }
             }
         }
@@ -3163,18 +3208,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseScheduledReminder", "ScheduledExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseScheduledReminder", "ScheduledExercis")]
         public EntityCollection<ScheduledExercis> ScheduledExercises
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseScheduledReminder", "ScheduledExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseScheduledReminder", "ScheduledExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseScheduledReminder", "ScheduledExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledExercis>("Layer2Model.FK_ScheduledExerciseScheduledReminder", "ScheduledExercis", value);
                 }
             }
         }
@@ -3185,18 +3230,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledRoutineScheduledReminder", "ScheduledRoutines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledRoutineScheduledReminder", "ScheduledRoutine")]
         public EntityCollection<ScheduledRoutine> ScheduledRoutines
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineScheduledReminder", "ScheduledRoutines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineScheduledReminder", "ScheduledRoutine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineScheduledReminder", "ScheduledRoutines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineScheduledReminder", "ScheduledRoutine", value);
                 }
             }
         }
@@ -3343,18 +3388,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_RoutineExerciseGoal", "ExerciseGoals")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_RoutineExerciseGoal", "ExerciseGoal")]
         public EntityCollection<ExerciseGoal> ExerciseGoals
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_RoutineExerciseGoal", "ExerciseGoals");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_RoutineExerciseGoal", "ExerciseGoal");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_RoutineExerciseGoal", "ExerciseGoals", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_RoutineExerciseGoal", "ExerciseGoal", value);
                 }
             }
         }
@@ -3365,16 +3410,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerRoutine", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerRoutine", "LimitBreaker")]
         public LimitBreaker LimitBreaker
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreakers").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreaker").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreakers").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreaker").Value = value;
             }
         }
         /// <summary>
@@ -3386,13 +3431,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerRoutine", "LimitBreaker", value);
                 }
             }
         }
@@ -3403,18 +3448,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "LoggedExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "LoggedExercis")]
         public EntityCollection<LoggedExercis> LoggedExercises
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_LoggedExerciseRoutine", "LoggedExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_LoggedExerciseRoutine", "LoggedExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_LoggedExerciseRoutine", "LoggedExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_LoggedExerciseRoutine", "LoggedExercis", value);
                 }
             }
         }
@@ -3425,18 +3470,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "ScheduledRoutines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "ScheduledRoutine")]
         public EntityCollection<ScheduledRoutine> ScheduledRoutines
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineRoutine", "ScheduledRoutines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineRoutine", "ScheduledRoutine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineRoutine", "ScheduledRoutines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ScheduledRoutine>("Layer2Model.FK_ScheduledRoutineRoutine", "ScheduledRoutine", value);
                 }
             }
         }
@@ -3635,16 +3680,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ExerciseBases")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ExerciseBas")]
         public ExerciseBas ExerciseBas
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBases").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBases").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas").Value = value;
             }
         }
         /// <summary>
@@ -3656,13 +3701,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBases");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBases", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas", value);
                 }
             }
         }
@@ -3673,16 +3718,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "LimitBreaker")]
         public LimitBreaker LimitBreaker
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreakers").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreaker").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreakers").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreaker").Value = value;
             }
         }
         /// <summary>
@@ -3694,13 +3739,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_ScheduledExerciseLimitBreaker", "LimitBreaker", value);
                 }
             }
         }
@@ -3937,16 +3982,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "LimitBreaker")]
         public LimitBreaker LimitBreaker
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreakers").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreaker").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreakers").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreaker").Value = value;
             }
         }
         /// <summary>
@@ -3958,13 +4003,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_LimitBreakerScheduledRoutine", "LimitBreaker", value);
                 }
             }
         }
@@ -4013,16 +4058,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "Routines")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "Routine")]
         public Routine Routine
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routines").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routine").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routines").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routine").Value = value;
             }
         }
         /// <summary>
@@ -4034,13 +4079,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routines");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routine");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routines", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_ScheduledRoutineRoutine", "Routine", value);
                 }
             }
         }
@@ -4062,10 +4107,12 @@ namespace Layer2Model
         /// Create a new SetAttribute object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
-        public static SetAttribute CreateSetAttribute(global::System.Int32 id)
+        /// <param name="loggedExercise_id">Initial value of the LoggedExercise_id property.</param>
+        public static SetAttribute CreateSetAttribute(global::System.Int32 id, global::System.Int64 loggedExercise_id)
         {
             SetAttribute setAttribute = new SetAttribute();
             setAttribute.id = id;
+            setAttribute.LoggedExercise_id = loggedExercise_id;
             return setAttribute;
         }
 
@@ -4194,6 +4241,30 @@ namespace Layer2Model
         private Nullable<global::System.Int16> _reps;
         partial void OnrepsChanging(Nullable<global::System.Int16> value);
         partial void OnrepsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 LoggedExercise_id
+        {
+            get
+            {
+                return _LoggedExercise_id;
+            }
+            set
+            {
+                OnLoggedExercise_idChanging(value);
+                ReportPropertyChanging("LoggedExercise_id");
+                _LoggedExercise_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LoggedExercise_id");
+                OnLoggedExercise_idChanged();
+            }
+        }
+        private global::System.Int64 _LoggedExercise_id;
+        partial void OnLoggedExercise_idChanging(global::System.Int64 value);
+        partial void OnLoggedExercise_idChanged();
 
         #endregion
     
@@ -4205,18 +4276,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "ExerciseGoals")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "ExerciseGoal")]
         public EntityCollection<ExerciseGoal> ExerciseGoals
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalSetAttributes", "ExerciseGoals");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalSetAttributes", "ExerciseGoal");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalSetAttributes", "ExerciseGoals", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalSetAttributes", "ExerciseGoal", value);
                 }
             }
         }
@@ -4227,18 +4298,34 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "LoggedExercises")]
-        public EntityCollection<LoggedExercis> LoggedExercises
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "LoggedExercis")]
+        public LoggedExercis LoggedExercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LoggedExercis>("Layer2Model.FK_LoggedExerciseSetAttributes", "LoggedExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LoggedExercis>("Layer2Model.FK_LoggedExerciseSetAttributes", "LoggedExercis").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LoggedExercis>("Layer2Model.FK_LoggedExerciseSetAttributes", "LoggedExercis").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LoggedExercis> LoggedExercisReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LoggedExercis>("Layer2Model.FK_LoggedExerciseSetAttributes", "LoggedExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LoggedExercis>("Layer2Model.FK_LoggedExerciseSetAttributes", "LoggedExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LoggedExercis>("Layer2Model.FK_LoggedExerciseSetAttributes", "LoggedExercis", value);
                 }
             }
         }
@@ -4489,18 +4576,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerStatistics", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_LimitBreakerStatistics", "LimitBreaker")]
         public EntityCollection<LimitBreaker> LimitBreakers
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LimitBreaker>("Layer2Model.FK_LimitBreakerStatistics", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LimitBreaker>("Layer2Model.FK_LimitBreakerStatistics", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LimitBreaker>("Layer2Model.FK_LimitBreakerStatistics", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LimitBreaker>("Layer2Model.FK_LimitBreakerStatistics", "LimitBreaker", value);
                 }
             }
         }
@@ -4747,18 +4834,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "MuscleGroups")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "MuscleGroup")]
         public EntityCollection<MuscleGroup> MuscleGroups
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupSuggestedExercise", "MuscleGroups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupSuggestedExercise", "MuscleGroup");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupSuggestedExercise", "MuscleGroups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupSuggestedExercise", "MuscleGroup", value);
                 }
             }
         }
@@ -4769,18 +4856,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "Suggestions")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "Suggestion")]
         public EntityCollection<Suggestion> Suggestions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionSuggestedExercise", "Suggestions");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionSuggestedExercise", "Suggestion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionSuggestedExercise", "Suggestions", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionSuggestedExercise", "Suggestion", value);
                 }
             }
         }
@@ -4979,16 +5066,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "LimitBreakers")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "LimitBreaker")]
         public LimitBreaker LimitBreaker
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreakers").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreakers").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker").Value = value;
             }
         }
         /// <summary>
@@ -5000,13 +5087,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreakers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreakers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker", value);
                 }
             }
         }
@@ -5017,16 +5104,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "SuggestedExercises")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "SuggestedExercis")]
         public SuggestedExercis SuggestedExercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercises").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercises").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis").Value = value;
             }
         }
         /// <summary>
@@ -5038,13 +5125,13 @@ namespace Layer2Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercises");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercises", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis", value);
                 }
             }
         }
