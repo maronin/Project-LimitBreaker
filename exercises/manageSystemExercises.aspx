@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
-    <h3 >Manage System Exercises</h3>
+    <h3>Manage System Exercises</h3>
     <h4>Add system exercises</h4>
     <h4>Delete system exercise</h4>
     <h4>Disable system exercise</h4>

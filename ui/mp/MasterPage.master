@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
    <div id="main">
-      
+   <!-- We will replace the normal Visual studio buttons with Juice UI when we have the time-->   
    <h1>Project LimitBreaker</h1>
   
    <div id="menu">
