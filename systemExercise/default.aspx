@@ -1,5 +1,9 @@
+<<<<<<< HEAD:exercises/manageSystemExercises.aspx
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" 
 CodeFile="manageSystemExercises.aspx.cs" Inherits="manageSystemExercises" %>
+=======
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="Default" %>
+>>>>>>> 382890b28868dc386615a4c8c995b1f1b93ed643:systemExercise/default.aspx
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">

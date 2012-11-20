@@ -17,6 +17,10 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
     }
     protected void btnManageSysExercise_Click(object sender, EventArgs e)
     {
+<<<<<<< HEAD
         //Response.Redirect("~/exercises/manageSystemExercises.aspx");
+=======
+        Response.Redirect("~/systemExercise/default.aspx");
+>>>>>>> 382890b28868dc386615a4c8c995b1f1b93ed643
     }
 }
