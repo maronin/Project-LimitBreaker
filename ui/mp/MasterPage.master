@@ -17,8 +17,7 @@
   
    <div id="menu">
    <asp:Button ID="Button2" runat="server" Text="Manage User Routines" CssClass="button" Enabled="False" />
-   <asp:Button ID="btnManageSysExercise" runat="server" Text="Manage System Exercises" 
-           CssClass="button" onclick="btnManageSysExercise_Click" />
+   <asp:Button ID="btnManageSysExercise" runat="server" Text="Manage System Exercises" CssClass="button" onclick="btnManageSysExercise_Click" ToolTip="Manage System Exericses" />
    <asp:Button ID="Button3" runat="server" Text="Suggest Custom Exercises" CssClass="button" Enabled="False" />
    <asp:Button ID="Button4" runat="server" Text="Analyze Performance" CssClass="button" Enabled="False" />
    <asp:Button ID="Button5" runat="server" Text="Record Exercises" CssClass="button" Enabled="False" />

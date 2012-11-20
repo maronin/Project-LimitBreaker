@@ -14,7 +14,7 @@
                 SEARCH EXERCISE:
             </label>
             <asp:TextBox runat="server" ID="autocomplete" ClientIDMode="Static" />
-            <juice:Autocomplete ID="Autocomplete1" runat="server" TargetControlID="autocomplete"
-                Source="ActionScript, AppleScript, Asp, BASIC, C, C++, Clojure, COBOL, ColdFusion, Erlang, Fortran, Groovy, Haskell, Java, JavaScript, Lisp, Perl, PHP, Python, Ruby, Scala, Scheme" />
+            <juice:Autocomplete ID="Autocomplete1" runat="server" 
+                TargetControlID="autocomplete" />
         </div>
 </asp:Content>

@@ -17,6 +17,6 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
     }
     protected void btnManageSysExercise_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/exercises/manageSystemExercises.aspx");
+        //Response.Redirect("~/exercises/manageSystemExercises.aspx");
     }
 }
