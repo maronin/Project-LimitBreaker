@@ -18,29 +18,25 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ExerciseBases_Exercise", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.ExerciseBases_Exercise), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_MuscleGroupExercise", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "MuscleGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.MuscleGroup), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ExerciseBas", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.ExerciseBas), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "SetAttribute", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SetAttribute), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseExerciseExp", "Exercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Exercis), "ExerciseExp", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseExp), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "Exercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Exercis), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_RoutineExerciseGoal", "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Routine), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SetAttributesExerciseGoal", "SetAttribute", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SetAttribute), "ExerciseGoal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ExerciseGoal), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "Exercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Exercis), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
+[assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "Exercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Exercis), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerEmailNotification", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Notifications_EmailNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Notifications_EmailNotification), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerLoggedExercise", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerRoutine", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Routine), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerScheduledRoutine", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "ScheduledRoutine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LimitBreakerStatistics", "Statistic", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Statistic), "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LimitBreaker), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseLimitBreaker", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "LimitBreaker", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LimitBreaker), "Suggestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Suggestion), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LoggedExerciseRoutine", "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Routine), "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.LoggedExercis), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_LoggedExerciseSetAttributes", "LoggedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.LoggedExercis), "SetAttribute", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.SetAttribute), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "SuggestedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SuggestedExercis), "MuscleGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.MuscleGroup), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_EmailNotification_inherits_Notification", "Notification", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notification), "Notifications_EmailNotification", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Notifications_EmailNotification), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledReminder_inherits_Notification", "Notification", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notification), "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Layer2Model.Notifications_ScheduledReminder), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledExerciseScheduledReminder", "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notifications_ScheduledReminder), "ScheduledExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledExercis), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledRoutineScheduledReminder", "Notifications_ScheduledReminder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Notifications_ScheduledReminder), "ScheduledRoutine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
 [assembly: EdmRelationshipAttribute("Layer2Model", "FK_ScheduledRoutineRoutine", "Routine", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.Routine), "ScheduledRoutine", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.ScheduledRoutine), true)]
-[assembly: EdmRelationshipAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "SuggestedExercis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Layer2Model.SuggestedExercis), "Suggestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Layer2Model.Suggestion), true)]
 
 #endregion
 
@@ -95,34 +91,18 @@ namespace Layer2Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ExerciseBas> ExerciseBases
+        public ObjectSet<ExerciseExp> ExerciseExps
         {
             get
             {
-                if ((_ExerciseBases == null))
+                if ((_ExerciseExps == null))
                 {
-                    _ExerciseBases = base.CreateObjectSet<ExerciseBas>("ExerciseBases");
+                    _ExerciseExps = base.CreateObjectSet<ExerciseExp>("ExerciseExps");
                 }
-                return _ExerciseBases;
+                return _ExerciseExps;
             }
         }
-        private ObjectSet<ExerciseBas> _ExerciseBases;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ExerciseBases_Exercise> ExerciseBases_Exercise
-        {
-            get
-            {
-                if ((_ExerciseBases_Exercise == null))
-                {
-                    _ExerciseBases_Exercise = base.CreateObjectSet<ExerciseBases_Exercise>("ExerciseBases_Exercise");
-                }
-                return _ExerciseBases_Exercise;
-            }
-        }
-        private ObjectSet<ExerciseBases_Exercise> _ExerciseBases_Exercise;
+        private ObjectSet<ExerciseExp> _ExerciseExps;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -139,6 +119,22 @@ namespace Layer2Model
             }
         }
         private ObjectSet<ExerciseGoal> _ExerciseGoals;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Exercis> Exercises
+        {
+            get
+            {
+                if ((_Exercises == null))
+                {
+                    _Exercises = base.CreateObjectSet<Exercis>("Exercises");
+                }
+                return _Exercises;
+            }
+        }
+        private ObjectSet<Exercis> _Exercises;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -203,22 +199,6 @@ namespace Layer2Model
             }
         }
         private ObjectSet<LoggedExercis> _LoggedExercises;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<MuscleGroup> MuscleGroups
-        {
-            get
-            {
-                if ((_MuscleGroups == null))
-                {
-                    _MuscleGroups = base.CreateObjectSet<MuscleGroup>("MuscleGroups");
-                }
-                return _MuscleGroups;
-            }
-        }
-        private ObjectSet<MuscleGroup> _MuscleGroups;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -347,56 +327,16 @@ namespace Layer2Model
             }
         }
         private ObjectSet<Statistic> _Statistics;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<SuggestedExercis> SuggestedExercises
-        {
-            get
-            {
-                if ((_SuggestedExercises == null))
-                {
-                    _SuggestedExercises = base.CreateObjectSet<SuggestedExercis>("SuggestedExercises");
-                }
-                return _SuggestedExercises;
-            }
-        }
-        private ObjectSet<SuggestedExercis> _SuggestedExercises;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Suggestion> Suggestions
-        {
-            get
-            {
-                if ((_Suggestions == null))
-                {
-                    _Suggestions = base.CreateObjectSet<Suggestion>("Suggestions");
-                }
-                return _Suggestions;
-            }
-        }
-        private ObjectSet<Suggestion> _Suggestions;
 
         #endregion
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ExerciseBases EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the ExerciseExps EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToExerciseBases(ExerciseBas exerciseBas)
+        public void AddToExerciseExps(ExerciseExp exerciseExp)
         {
-            base.AddObject("ExerciseBases", exerciseBas);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ExerciseBases_Exercise EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToExerciseBases_Exercise(ExerciseBases_Exercise exerciseBases_Exercise)
-        {
-            base.AddObject("ExerciseBases_Exercise", exerciseBases_Exercise);
+            base.AddObject("ExerciseExps", exerciseExp);
         }
     
         /// <summary>
@@ -405,6 +345,14 @@ namespace Layer2Model
         public void AddToExerciseGoals(ExerciseGoal exerciseGoal)
         {
             base.AddObject("ExerciseGoals", exerciseGoal);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Exercises EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToExercises(Exercis exercis)
+        {
+            base.AddObject("Exercises", exercis);
         }
     
         /// <summary>
@@ -437,14 +385,6 @@ namespace Layer2Model
         public void AddToLoggedExercises(LoggedExercis loggedExercis)
         {
             base.AddObject("LoggedExercises", loggedExercis);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the MuscleGroups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMuscleGroups(MuscleGroup muscleGroup)
-        {
-            base.AddObject("MuscleGroups", muscleGroup);
         }
     
         /// <summary>
@@ -510,22 +450,6 @@ namespace Layer2Model
         {
             base.AddObject("Statistics", statistic);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the SuggestedExercises EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSuggestedExercises(SuggestedExercis suggestedExercis)
-        {
-            base.AddObject("SuggestedExercises", suggestedExercis);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Suggestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSuggestions(Suggestion suggestion)
-        {
-            base.AddObject("Suggestions", suggestion);
-        }
 
         #endregion
     }
@@ -538,15 +462,15 @@ namespace Layer2Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="ExerciseBas")]
+    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="Exercis")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ExerciseBas : EntityObject
+    public partial class Exercis : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ExerciseBas object.
+        /// Create a new Exercis object.
         /// </summary>
         /// <param name="name">Initial value of the name property.</param>
         /// <param name="rep">Initial value of the rep property.</param>
@@ -555,17 +479,19 @@ namespace Layer2Model
         /// <param name="time">Initial value of the time property.</param>
         /// <param name="enabled">Initial value of the enabled property.</param>
         /// <param name="id">Initial value of the id property.</param>
-        public static ExerciseBas CreateExerciseBas(global::System.String name, global::System.Boolean rep, global::System.Boolean weight, global::System.Boolean distance, global::System.Boolean time, global::System.Boolean enabled, global::System.Int32 id)
+        /// <param name="muscleGroups">Initial value of the muscleGroups property.</param>
+        public static Exercis CreateExercis(global::System.String name, global::System.Boolean rep, global::System.Boolean weight, global::System.Boolean distance, global::System.Boolean time, global::System.Boolean enabled, global::System.Int32 id, global::System.String muscleGroups)
         {
-            ExerciseBas exerciseBas = new ExerciseBas();
-            exerciseBas.name = name;
-            exerciseBas.rep = rep;
-            exerciseBas.weight = weight;
-            exerciseBas.distance = distance;
-            exerciseBas.time = time;
-            exerciseBas.enabled = enabled;
-            exerciseBas.id = id;
-            return exerciseBas;
+            Exercis exercis = new Exercis();
+            exercis.name = name;
+            exercis.rep = rep;
+            exercis.weight = weight;
+            exercis.distance = distance;
+            exercis.time = time;
+            exercis.enabled = enabled;
+            exercis.id = id;
+            exercis.muscleGroups = muscleGroups;
+            return exercis;
         }
 
         #endregion
@@ -789,6 +715,30 @@ namespace Layer2Model
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String muscleGroups
+        {
+            get
+            {
+                return _muscleGroups;
+            }
+            set
+            {
+                OnmuscleGroupsChanging(value);
+                ReportPropertyChanging("muscleGroups");
+                _muscleGroups = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("muscleGroups");
+                OnmuscleGroupsChanged();
+            }
+        }
+        private global::System.String _muscleGroups;
+        partial void OnmuscleGroupsChanging(global::System.String value);
+        partial void OnmuscleGroupsChanged();
 
         #endregion
     
@@ -800,34 +750,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBases_Exercise")]
-        public ExerciseBases_Exercise ExerciseBases_Exercise
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseExerciseExp", "ExerciseExp")]
+        public EntityCollection<ExerciseExp> ExerciseExps
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBases_Exercise>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases_Exercise").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBases_Exercise>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases_Exercise").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ExerciseBases_Exercise> ExerciseBases_ExerciseReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBases_Exercise>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases_Exercise");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseExp>("Layer2Model.FK_ExerciseExerciseExp", "ExerciseExp");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBases_Exercise>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBases_Exercise", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseExp>("Layer2Model.FK_ExerciseExerciseExp", "ExerciseExp", value);
                 }
             }
         }
@@ -882,28 +816,6 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupExercise", "MuscleGroup")]
-        public EntityCollection<MuscleGroup> MuscleGroups
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupExercise", "MuscleGroup");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupExercise", "MuscleGroup", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ScheduledExercis")]
         public EntityCollection<ScheduledExercis> ScheduledExercises
         {
@@ -926,32 +838,34 @@ namespace Layer2Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="ExerciseBases_Exercise")]
+    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="ExerciseExp")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ExerciseBases_Exercise : EntityObject
+    public partial class ExerciseExp : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ExerciseBases_Exercise object.
+        /// Create a new ExerciseExp object.
         /// </summary>
-        /// <param name="baseExperiecne">Initial value of the baseExperiecne property.</param>
+        /// <param name="baseExperience">Initial value of the baseExperience property.</param>
         /// <param name="weightModifier">Initial value of the weightModifier property.</param>
         /// <param name="repModifier">Initial value of the repModifier property.</param>
         /// <param name="distanceModifier">Initial value of the distanceModifier property.</param>
         /// <param name="timeModifier">Initial value of the timeModifier property.</param>
         /// <param name="id">Initial value of the id property.</param>
-        public static ExerciseBases_Exercise CreateExerciseBases_Exercise(global::System.Double baseExperiecne, global::System.Double weightModifier, global::System.Double repModifier, global::System.Double distanceModifier, global::System.Double timeModifier, global::System.Int32 id)
+        /// <param name="exercise_id">Initial value of the Exercise_id property.</param>
+        public static ExerciseExp CreateExerciseExp(global::System.Double baseExperience, global::System.Double weightModifier, global::System.Double repModifier, global::System.Double distanceModifier, global::System.Double timeModifier, global::System.Int32 id, global::System.Int32 exercise_id)
         {
-            ExerciseBases_Exercise exerciseBases_Exercise = new ExerciseBases_Exercise();
-            exerciseBases_Exercise.baseExperiecne = baseExperiecne;
-            exerciseBases_Exercise.weightModifier = weightModifier;
-            exerciseBases_Exercise.repModifier = repModifier;
-            exerciseBases_Exercise.distanceModifier = distanceModifier;
-            exerciseBases_Exercise.timeModifier = timeModifier;
-            exerciseBases_Exercise.id = id;
-            return exerciseBases_Exercise;
+            ExerciseExp exerciseExp = new ExerciseExp();
+            exerciseExp.baseExperience = baseExperience;
+            exerciseExp.weightModifier = weightModifier;
+            exerciseExp.repModifier = repModifier;
+            exerciseExp.distanceModifier = distanceModifier;
+            exerciseExp.timeModifier = timeModifier;
+            exerciseExp.id = id;
+            exerciseExp.Exercise_id = exercise_id;
+            return exerciseExp;
         }
 
         #endregion
@@ -962,24 +876,24 @@ namespace Layer2Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Double baseExperiecne
+        public global::System.Double baseExperience
         {
             get
             {
-                return _baseExperiecne;
+                return _baseExperience;
             }
             set
             {
-                OnbaseExperiecneChanging(value);
-                ReportPropertyChanging("baseExperiecne");
-                _baseExperiecne = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("baseExperiecne");
-                OnbaseExperiecneChanged();
+                OnbaseExperienceChanging(value);
+                ReportPropertyChanging("baseExperience");
+                _baseExperience = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("baseExperience");
+                OnbaseExperienceChanged();
             }
         }
-        private global::System.Double _baseExperiecne;
-        partial void OnbaseExperiecneChanging(global::System.Double value);
-        partial void OnbaseExperiecneChanged();
+        private global::System.Double _baseExperience;
+        partial void OnbaseExperienceChanging(global::System.Double value);
+        partial void OnbaseExperienceChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1103,6 +1017,30 @@ namespace Layer2Model
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Exercise_id
+        {
+            get
+            {
+                return _Exercise_id;
+            }
+            set
+            {
+                OnExercise_idChanging(value);
+                ReportPropertyChanging("Exercise_id");
+                _Exercise_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Exercise_id");
+                OnExercise_idChanged();
+            }
+        }
+        private global::System.Int32 _Exercise_id;
+        partial void OnExercise_idChanging(global::System.Int32 value);
+        partial void OnExercise_idChanged();
 
         #endregion
     
@@ -1114,16 +1052,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_Exercise_inherits_ExerciseBase", "ExerciseBas")]
-        public ExerciseBas ExerciseBas
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseExerciseExp", "Exercis")]
+        public Exercis Exercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseExerciseExp", "Exercis").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseExerciseExp", "Exercis").Value = value;
             }
         }
         /// <summary>
@@ -1131,17 +1069,17 @@ namespace Layer2Model
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ExerciseBas> ExerciseBasReference
+        public EntityReference<Exercis> ExercisReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseExerciseExp", "Exercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_Exercise_inherits_ExerciseBase", "ExerciseBas", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exercis>("Layer2Model.FK_ExerciseExerciseExp", "Exercis", value);
                 }
             }
         }
@@ -1163,16 +1101,16 @@ namespace Layer2Model
         /// Create a new ExerciseGoal object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
-        /// <param name="setAttribute_id">Initial value of the SetAttribute_id property.</param>
         /// <param name="routine_id">Initial value of the Routine_id property.</param>
         /// <param name="exerciseBase_id">Initial value of the ExerciseBase_id property.</param>
-        public static ExerciseGoal CreateExerciseGoal(global::System.Int32 id, global::System.Int32 setAttribute_id, global::System.Int32 routine_id, global::System.Int32 exerciseBase_id)
+        /// <param name="setAttribute_id">Initial value of the SetAttribute_id property.</param>
+        public static ExerciseGoal CreateExerciseGoal(global::System.Int32 id, global::System.Int32 routine_id, global::System.Int32 exerciseBase_id, global::System.Int32 setAttribute_id)
         {
             ExerciseGoal exerciseGoal = new ExerciseGoal();
             exerciseGoal.id = id;
-            exerciseGoal.SetAttribute_id = setAttribute_id;
             exerciseGoal.Routine_id = routine_id;
             exerciseGoal.ExerciseBase_id = exerciseBase_id;
+            exerciseGoal.SetAttribute_id = setAttribute_id;
             return exerciseGoal;
         }
 
@@ -1205,30 +1143,6 @@ namespace Layer2Model
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 SetAttribute_id
-        {
-            get
-            {
-                return _SetAttribute_id;
-            }
-            set
-            {
-                OnSetAttribute_idChanging(value);
-                ReportPropertyChanging("SetAttribute_id");
-                _SetAttribute_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SetAttribute_id");
-                OnSetAttribute_idChanged();
-            }
-        }
-        private global::System.Int32 _SetAttribute_id;
-        partial void OnSetAttribute_idChanging(global::System.Int32 value);
-        partial void OnSetAttribute_idChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1277,6 +1191,30 @@ namespace Layer2Model
         private global::System.Int32 _ExerciseBase_id;
         partial void OnExerciseBase_idChanging(global::System.Int32 value);
         partial void OnExerciseBase_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SetAttribute_id
+        {
+            get
+            {
+                return _SetAttribute_id;
+            }
+            set
+            {
+                OnSetAttribute_idChanging(value);
+                ReportPropertyChanging("SetAttribute_id");
+                _SetAttribute_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SetAttribute_id");
+                OnSetAttribute_idChanged();
+            }
+        }
+        private global::System.Int32 _SetAttribute_id;
+        partial void OnSetAttribute_idChanging(global::System.Int32 value);
+        partial void OnSetAttribute_idChanged();
 
         #endregion
     
@@ -1288,16 +1226,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "ExerciseBas")]
-        public ExerciseBas ExerciseBas
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalExerciseBase", "Exercis")]
+        public Exercis Exercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseGoalExerciseBase", "Exercis").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseGoalExerciseBase", "Exercis").Value = value;
             }
         }
         /// <summary>
@@ -1305,55 +1243,17 @@ namespace Layer2Model
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ExerciseBas> ExerciseBasReference
+        public EntityReference<Exercis> ExercisReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseGoalExerciseBase", "Exercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseGoalExerciseBase", "ExerciseBas", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "SetAttribute")]
-        public SetAttribute SetAttribute
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SetAttribute> SetAttributeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SetAttribute>("Layer2Model.FK_ExerciseGoalSetAttributes", "SetAttribute", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exercis>("Layer2Model.FK_ExerciseGoalExerciseBase", "Exercis", value);
                 }
             }
         }
@@ -1392,6 +1292,44 @@ namespace Layer2Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Routine>("Layer2Model.FK_RoutineExerciseGoal", "Routine", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SetAttributesExerciseGoal", "SetAttribute")]
+        public SetAttribute SetAttribute
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_SetAttributesExerciseGoal", "SetAttribute").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_SetAttributesExerciseGoal", "SetAttribute").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SetAttribute> SetAttributeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SetAttribute>("Layer2Model.FK_SetAttributesExerciseGoal", "SetAttribute");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SetAttribute>("Layer2Model.FK_SetAttributesExerciseGoal", "SetAttribute", value);
                 }
             }
         }
@@ -2101,28 +2039,6 @@ namespace Layer2Model
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "Suggestion")]
-        public EntityCollection<Suggestion> Suggestions
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionLimitBreaker", "Suggestion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionLimitBreaker", "Suggestion", value);
-                }
-            }
-        }
 
         #endregion
     }
@@ -2340,16 +2256,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "ExerciseBas")]
-        public ExerciseBas ExerciseBas
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseLoggedExercise", "Exercis")]
+        public Exercis Exercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseLoggedExercise", "Exercis").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseLoggedExercise", "Exercis").Value = value;
             }
         }
         /// <summary>
@@ -2357,17 +2273,17 @@ namespace Layer2Model
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ExerciseBas> ExerciseBasReference
+        public EntityReference<Exercis> ExercisReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ExerciseLoggedExercise", "Exercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ExerciseLoggedExercise", "ExerciseBas", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exercis>("Layer2Model.FK_ExerciseLoggedExercise", "Exercis", value);
                 }
             }
         }
@@ -2466,218 +2382,6 @@ namespace Layer2Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SetAttribute>("Layer2Model.FK_LoggedExerciseSetAttributes", "SetAttribute", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="MuscleGroup")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class MuscleGroup : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new MuscleGroup object.
-        /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="exerciseBase_id">Initial value of the ExerciseBase_id property.</param>
-        /// <param name="suggestedExercise_id">Initial value of the SuggestedExercise_id property.</param>
-        public static MuscleGroup CreateMuscleGroup(global::System.Int16 id, global::System.String name, global::System.Int32 exerciseBase_id, global::System.Int32 suggestedExercise_id)
-        {
-            MuscleGroup muscleGroup = new MuscleGroup();
-            muscleGroup.id = id;
-            muscleGroup.name = name;
-            muscleGroup.ExerciseBase_id = exerciseBase_id;
-            muscleGroup.SuggestedExercise_id = suggestedExercise_id;
-            return muscleGroup;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int16 id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id");
-                    OnidChanged();
-                }
-            }
-        }
-        private global::System.Int16 _id;
-        partial void OnidChanging(global::System.Int16 value);
-        partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ExerciseBase_id
-        {
-            get
-            {
-                return _ExerciseBase_id;
-            }
-            set
-            {
-                OnExerciseBase_idChanging(value);
-                ReportPropertyChanging("ExerciseBase_id");
-                _ExerciseBase_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ExerciseBase_id");
-                OnExerciseBase_idChanged();
-            }
-        }
-        private global::System.Int32 _ExerciseBase_id;
-        partial void OnExerciseBase_idChanging(global::System.Int32 value);
-        partial void OnExerciseBase_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 SuggestedExercise_id
-        {
-            get
-            {
-                return _SuggestedExercise_id;
-            }
-            set
-            {
-                OnSuggestedExercise_idChanging(value);
-                ReportPropertyChanging("SuggestedExercise_id");
-                _SuggestedExercise_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SuggestedExercise_id");
-                OnSuggestedExercise_idChanged();
-            }
-        }
-        private global::System.Int32 _SuggestedExercise_id;
-        partial void OnSuggestedExercise_idChanging(global::System.Int32 value);
-        partial void OnSuggestedExercise_idChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupExercise", "ExerciseBas")]
-        public ExerciseBas ExerciseBas
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ExerciseBas> ExerciseBasReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_MuscleGroupExercise", "ExerciseBas", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "SuggestedExercis")]
-        public SuggestedExercis SuggestedExercis
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SuggestedExercis> SuggestedExercisReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SuggestedExercis>("Layer2Model.FK_MuscleGroupSuggestedExercise", "SuggestedExercis", value);
                 }
             }
         }
@@ -3680,16 +3384,16 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "ExerciseBas")]
-        public ExerciseBas ExerciseBas
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ScheduledExerciseExercise", "Exercis")]
+        public Exercis Exercis
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ScheduledExerciseExercise", "Exercis").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ScheduledExerciseExercise", "Exercis").Value = value;
             }
         }
         /// <summary>
@@ -3697,17 +3401,17 @@ namespace Layer2Model
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ExerciseBas> ExerciseBasReference
+        public EntityReference<Exercis> ExercisReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exercis>("Layer2Model.FK_ScheduledExerciseExercise", "Exercis");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ExerciseBas>("Layer2Model.FK_ScheduledExerciseExercise", "ExerciseBas", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exercis>("Layer2Model.FK_ScheduledExerciseExercise", "Exercis", value);
                 }
             }
         }
@@ -4276,18 +3980,18 @@ namespace Layer2Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_ExerciseGoalSetAttributes", "ExerciseGoal")]
+        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SetAttributesExerciseGoal", "ExerciseGoal")]
         public EntityCollection<ExerciseGoal> ExerciseGoals
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalSetAttributes", "ExerciseGoal");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ExerciseGoal>("Layer2Model.FK_SetAttributesExerciseGoal", "ExerciseGoal");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_ExerciseGoalSetAttributes", "ExerciseGoal", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ExerciseGoal>("Layer2Model.FK_SetAttributesExerciseGoal", "ExerciseGoal", value);
                 }
             }
         }
@@ -4588,550 +4292,6 @@ namespace Layer2Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LimitBreaker>("Layer2Model.FK_LimitBreakerStatistics", "LimitBreaker", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="SuggestedExercis")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class SuggestedExercis : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new SuggestedExercis object.
-        /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="rep">Initial value of the rep property.</param>
-        /// <param name="wieght">Initial value of the wieght property.</param>
-        /// <param name="distance">Initial value of the distance property.</param>
-        /// <param name="time">Initial value of the time property.</param>
-        public static SuggestedExercis CreateSuggestedExercis(global::System.Int32 id, global::System.String name, global::System.Boolean rep, global::System.Boolean wieght, global::System.Boolean distance, global::System.Boolean time)
-        {
-            SuggestedExercis suggestedExercis = new SuggestedExercis();
-            suggestedExercis.id = id;
-            suggestedExercis.name = name;
-            suggestedExercis.rep = rep;
-            suggestedExercis.wieght = wieght;
-            suggestedExercis.distance = distance;
-            suggestedExercis.time = time;
-            return suggestedExercis;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id");
-                    OnidChanged();
-                }
-            }
-        }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String equipment
-        {
-            get
-            {
-                return _equipment;
-            }
-            set
-            {
-                OnequipmentChanging(value);
-                ReportPropertyChanging("equipment");
-                _equipment = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("equipment");
-                OnequipmentChanged();
-            }
-        }
-        private global::System.String _equipment;
-        partial void OnequipmentChanging(global::System.String value);
-        partial void OnequipmentChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String videoLink
-        {
-            get
-            {
-                return _videoLink;
-            }
-            set
-            {
-                OnvideoLinkChanging(value);
-                ReportPropertyChanging("videoLink");
-                _videoLink = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("videoLink");
-                OnvideoLinkChanged();
-            }
-        }
-        private global::System.String _videoLink;
-        partial void OnvideoLinkChanging(global::System.String value);
-        partial void OnvideoLinkChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean rep
-        {
-            get
-            {
-                return _rep;
-            }
-            set
-            {
-                OnrepChanging(value);
-                ReportPropertyChanging("rep");
-                _rep = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("rep");
-                OnrepChanged();
-            }
-        }
-        private global::System.Boolean _rep;
-        partial void OnrepChanging(global::System.Boolean value);
-        partial void OnrepChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean wieght
-        {
-            get
-            {
-                return _wieght;
-            }
-            set
-            {
-                OnwieghtChanging(value);
-                ReportPropertyChanging("wieght");
-                _wieght = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("wieght");
-                OnwieghtChanged();
-            }
-        }
-        private global::System.Boolean _wieght;
-        partial void OnwieghtChanging(global::System.Boolean value);
-        partial void OnwieghtChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean distance
-        {
-            get
-            {
-                return _distance;
-            }
-            set
-            {
-                OndistanceChanging(value);
-                ReportPropertyChanging("distance");
-                _distance = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("distance");
-                OndistanceChanged();
-            }
-        }
-        private global::System.Boolean _distance;
-        partial void OndistanceChanging(global::System.Boolean value);
-        partial void OndistanceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean time
-        {
-            get
-            {
-                return _time;
-            }
-            set
-            {
-                OntimeChanging(value);
-                ReportPropertyChanging("time");
-                _time = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("time");
-                OntimeChanged();
-            }
-        }
-        private global::System.Boolean _time;
-        partial void OntimeChanging(global::System.Boolean value);
-        partial void OntimeChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_MuscleGroupSuggestedExercise", "MuscleGroup")]
-        public EntityCollection<MuscleGroup> MuscleGroups
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupSuggestedExercise", "MuscleGroup");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MuscleGroup>("Layer2Model.FK_MuscleGroupSuggestedExercise", "MuscleGroup", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "Suggestion")]
-        public EntityCollection<Suggestion> Suggestions
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionSuggestedExercise", "Suggestion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Suggestion>("Layer2Model.FK_SuggestionSuggestedExercise", "Suggestion", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Layer2Model", Name="Suggestion")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Suggestion : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Suggestion object.
-        /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="reason">Initial value of the reason property.</param>
-        /// <param name="status">Initial value of the status property.</param>
-        /// <param name="expiryDate">Initial value of the expiryDate property.</param>
-        /// <param name="suggestedExercises_id">Initial value of the SuggestedExercises_id property.</param>
-        /// <param name="limitBreakers_id">Initial value of the LimitBreakers_id property.</param>
-        public static Suggestion CreateSuggestion(global::System.Int32 id, global::System.String reason, global::System.String status, global::System.DateTime expiryDate, global::System.Int32 suggestedExercises_id, global::System.Int32 limitBreakers_id)
-        {
-            Suggestion suggestion = new Suggestion();
-            suggestion.id = id;
-            suggestion.reason = reason;
-            suggestion.status = status;
-            suggestion.expiryDate = expiryDate;
-            suggestion.SuggestedExercises_id = suggestedExercises_id;
-            suggestion.LimitBreakers_id = limitBreakers_id;
-            return suggestion;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id");
-                    OnidChanged();
-                }
-            }
-        }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String reason
-        {
-            get
-            {
-                return _reason;
-            }
-            set
-            {
-                OnreasonChanging(value);
-                ReportPropertyChanging("reason");
-                _reason = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("reason");
-                OnreasonChanged();
-            }
-        }
-        private global::System.String _reason;
-        partial void OnreasonChanging(global::System.String value);
-        partial void OnreasonChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String status
-        {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                OnstatusChanging(value);
-                ReportPropertyChanging("status");
-                _status = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("status");
-                OnstatusChanged();
-            }
-        }
-        private global::System.String _status;
-        partial void OnstatusChanging(global::System.String value);
-        partial void OnstatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime expiryDate
-        {
-            get
-            {
-                return _expiryDate;
-            }
-            set
-            {
-                OnexpiryDateChanging(value);
-                ReportPropertyChanging("expiryDate");
-                _expiryDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("expiryDate");
-                OnexpiryDateChanged();
-            }
-        }
-        private global::System.DateTime _expiryDate;
-        partial void OnexpiryDateChanging(global::System.DateTime value);
-        partial void OnexpiryDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 SuggestedExercises_id
-        {
-            get
-            {
-                return _SuggestedExercises_id;
-            }
-            set
-            {
-                OnSuggestedExercises_idChanging(value);
-                ReportPropertyChanging("SuggestedExercises_id");
-                _SuggestedExercises_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SuggestedExercises_id");
-                OnSuggestedExercises_idChanged();
-            }
-        }
-        private global::System.Int32 _SuggestedExercises_id;
-        partial void OnSuggestedExercises_idChanging(global::System.Int32 value);
-        partial void OnSuggestedExercises_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 LimitBreakers_id
-        {
-            get
-            {
-                return _LimitBreakers_id;
-            }
-            set
-            {
-                OnLimitBreakers_idChanging(value);
-                ReportPropertyChanging("LimitBreakers_id");
-                _LimitBreakers_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LimitBreakers_id");
-                OnLimitBreakers_idChanged();
-            }
-        }
-        private global::System.Int32 _LimitBreakers_id;
-        partial void OnLimitBreakers_idChanging(global::System.Int32 value);
-        partial void OnLimitBreakers_idChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionLimitBreaker", "LimitBreaker")]
-        public LimitBreaker LimitBreaker
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<LimitBreaker> LimitBreakerReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LimitBreaker>("Layer2Model.FK_SuggestionLimitBreaker", "LimitBreaker", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Layer2Model", "FK_SuggestionSuggestedExercise", "SuggestedExercis")]
-        public SuggestedExercis SuggestedExercis
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SuggestedExercis> SuggestedExercisReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SuggestedExercis>("Layer2Model.FK_SuggestionSuggestedExercise", "SuggestedExercis", value);
                 }
             }
         }
