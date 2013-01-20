@@ -22,5 +22,11 @@ public partial class userRoutines_Default : System.Web.UI.Page
         // convert to a temporary list of routines so that it can be bound
         dvRoutineDetails.DataSource = new List<Routine> { manager.getRoutine(Convert.ToInt32(rblRoutines.SelectedValue)) };
         dvRoutineDetails.DataBind();
+
+        bool loggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+        if (loggedIn)
+            LoginName1.Visible = true;
+        else
+            LoginName1.Visible = false;
     }
 }

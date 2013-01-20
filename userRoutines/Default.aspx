@@ -22,6 +22,9 @@
     </div>
     <div id="testContent">
         <h4>View Details (test purposes)</h4>
+        <p>User:
+            <asp:LoginName ID="LoginName1" runat="server" Visible="False" />
+        </p>
         <asp:DetailsView ID="dvRoutineDetails" runat="server" Height="50px" CellPadding="5"></asp:DetailsView>
     </div>
 </asp:Content>

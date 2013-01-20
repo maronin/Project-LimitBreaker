@@ -28,6 +28,7 @@
                     Enabled="False" />
                 <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
                     Enabled="False" />
+                <asp:Button ID="Button9" runat="server" Text="Login" CssClass="button" OnClick="Button9_Click" />
                 <br />
 
             </div>

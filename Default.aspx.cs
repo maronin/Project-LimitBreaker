@@ -9,6 +9,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        /*
         // used to programmatically create a user (for test purposes)
         try
         {
@@ -18,5 +19,6 @@ public partial class _Default : System.Web.UI.Page
         {
             Response.Write("<br />" + ex.Message + "<br />");
         }
+         * */
     }
 }
