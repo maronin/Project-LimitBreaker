@@ -13,6 +13,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         manager = new routineManager();
+        CreateNewRoutine.userID = Page.User.Identity.Name;
     }
 
     // When a routine is selected from the list, user will be able to modify, delete and view details of the routine
