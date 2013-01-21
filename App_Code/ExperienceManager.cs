@@ -15,7 +15,7 @@ public class ExperienceManager
 		//
 	}
 
-    public bool createNewExerciseExp(int exerciseID, double baseExp, double weightMod, double repMod, double distanceMod, double timeMod)
+    public bool createNewExerciseExp(string exerciseName, double baseExp, double weightMod, double repMod, double distanceMod, double timeMod)
     {
         bool rc = false;
 
@@ -24,7 +24,7 @@ public class ExperienceManager
             try
             {
                 ExerciseExp newExerciseExp = new ExerciseExp();
-                Exercise exercise = context.Exercises.Where(s => s.id == exerciseID).FirstOrDefault();
+                Exercise exercise = context.Exercises.Where(s => s.name == exerciseName).FirstOrDefault();
 
                 newExerciseExp.Exercise = exercise;
                 newExerciseExp.baseExperience = baseExp;
