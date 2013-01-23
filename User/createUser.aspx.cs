@@ -11,4 +11,9 @@ public partial class User_createUser : System.Web.UI.Page
     {
 
     }
+    protected void Create_Click(object sender, EventArgs e)
+    {
+        System.Web.Security.MembershipCreateStatus status;
+        System.Web.Security.Membership.CreateUser(((TextBox)LoginView1.FindControl("userName")).Text, ((TextBox)LoginView1.FindControl("password")).Text, ((TextBox)LoginView1.FindControl("email")).Text, "WTF", "123 answer", true, out status);
+    }
 }
