@@ -64,4 +64,28 @@ public class routineManager
             return rc;
         }
     }
+
+    public SetAttributes createSetAttribute(int rep, double weight, int distance, int time)
+    {
+        using (var context = new Layer2Container())
+        {
+            SetAttributes rc = new SetAttributes();
+            try
+            {
+                rc.distance = distance;
+                rc.reps = Convert.ToInt16(rep);
+                rc.time = time;
+                rc.weight = weight;
+
+                context.SetAttributes.AddObject(rc);
+                context.SaveChanges();
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+            }
+
+            return rc;
+        }
+    }
 }
