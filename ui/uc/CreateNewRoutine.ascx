@@ -32,23 +32,12 @@
             <p>Exercise List</p>
         </td>
         <td>
-            <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" SelectionMode="Multiple" Width="100%" AutoPostBack="True"></asp:ListBox>
+            <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="lbExerciseList_SelectedIndexChanged"></asp:ListBox>
             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="getExercisesByMuscleGroup" TypeName="SystemExerciseManager">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ddlMuscleGroups" Name="muscleGroup" PropertyName="SelectedValue" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
-            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>
-            <p>Selected</p>
-        </td>
-        <td>
-            <asp:ListBox ID="lbSelected" runat="server" Width="100%" OnSelectedIndexChanged="lbSelected_SelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
-            <asp:Button ID="btnRemove" runat="server" Text="Remove" OnClick="btnRemove_Click" />
         </td>
         <td>&nbsp;</td>
     </tr>
@@ -72,35 +61,66 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:TextBox ID="tbRep" runat="server" Enabled="False"></asp:TextBox>
+                        <asp:TextBox ID="tbRep" runat="server" Enabled="False" ValidationGroup="GoalValues"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="tbWeight" runat="server" Enabled="False"></asp:TextBox>
+                        <asp:TextBox ID="tbWeight" runat="server" Enabled="False" ValidationGroup="GoalValues"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="tbDistance" runat="server" Enabled="False"></asp:TextBox>
+                        <asp:TextBox ID="tbDistance" runat="server" Enabled="False" ValidationGroup="GoalValues"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="tbTime" runat="server" Enabled="False"></asp:TextBox>
+                        <asp:TextBox ID="tbTime" runat="server" Enabled="False" ValidationGroup="GoalValues"></asp:TextBox>
                     </td>
                 </tr>
             </table>
+            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" ValidationGroup="GoalValues" />
+
+        </td>
+        <td>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbRep" ErrorMessage="Strictly numbers only (no spaces)" ForeColor="Red" ValidationExpression="[0-9]+" ValidationGroup="GoalValues"></asp:RegularExpressionValidator>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Selected</p>
+        </td>
+        <td>
+            <asp:ListBox ID="lbSelected" runat="server" Width="100%" OnSelectedIndexChanged="lbSelected_SelectedIndexChanged" AutoPostBack="True">
+                <asp:ListItem>Selected Items</asp:ListItem>
+            </asp:ListBox>
+            <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" Text="Edit" ValidationGroup="GoalValues" />
+            <asp:Button ID="btnRemove" runat="server" Text="Remove" OnClick="btnRemove_Click" />
         </td>
         <td>&nbsp;</td>
     </tr>
+
     <tr>
         <td>
             <p>Routine Name</p>
         </td>
         <td>
-            <asp:TextBox ID="tbRoutineName" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbRoutineName" runat="server" ValidationGroup="RtnName"></asp:TextBox>
             <br />
-            <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" />
+            <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClientClick="return Validate()" OnClick="btnConfirm_Click" />
         </td>
         <td>
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9]+" ValidationGroup="RtnName" Display="Dynamic"></asp:RegularExpressionValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbRoutineName" Display="Dynamic" ErrorMessage="Name is needed" ForeColor="Red" ValidationGroup="RtnName"></asp:RequiredFieldValidator>
         </td>
     </tr>
+    <!-- credit to: Mudassar Khan 2012, url: http://www.aspsnippets.com/Articles/Validate-Multiple-Validation-Groups-with-one-Button-in-ASPNet.aspx -->
+    <script type="text/javascript">
+        function Validate() {
+            var isValid = false;
+            isValid = Page_ClientValidate('GoalValues');
+            if (isValid) {
+                isValid = Page_ClientValidate('RtnName');
+            }
+            return isValid;
+        }
+    </script>
+
 </table>
 
 
