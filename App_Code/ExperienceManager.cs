@@ -45,4 +45,12 @@ public class ExperienceManager
 
         return rc;
     }
+
+    public ExerciseExp getExerciseExpByExerciseName(string name)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.ExerciseExps.Where(s => s.Exercise.name == name).FirstOrDefault();
+        }
+    }
 }

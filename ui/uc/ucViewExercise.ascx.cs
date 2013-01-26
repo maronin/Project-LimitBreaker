@@ -14,6 +14,11 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         get { return ExerciseDDL.SelectedItem.Value; }
     }
 
+    public int ddlCount
+    {
+        get { return ExerciseDDL.Items.Count; }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         exerciseAutoComplete.SourceList = manager.getExerciseNamesAC();

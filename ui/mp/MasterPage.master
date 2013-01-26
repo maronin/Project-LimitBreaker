@@ -26,8 +26,7 @@
                     CssClass="button" onclick="Button6_Click" />
                 <asp:Button ID="Button7" runat="server" Text="Manage Workout Schedule" CssClass="button"
                     Enabled="False" />
-                <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
-                    Enabled="False" />
+                <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button" onclick="Button8_Click" />
                 <br />
 
             </div>
