@@ -15,15 +15,17 @@
             </asp:Panel>
             <asp:Repeater ID="rpt_calendar" runat="server" 
                 onitemdatabound="rpt_calendar_ItemDataBound">
+
                 <ItemTemplate>
-                    <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto">
+                    <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto" >
                         <asp:LinkButton ID="lnk_dayLink" runat="server" />
                         <asp:Literal ID="ltl_dayEvents" runat="server" />
                         <br />
-                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                     </asp:Panel>
                 </ItemTemplate>
             </asp:Repeater>
+
             <div style="clear:both; height:0; overflow:hidden">&nbsp;</div> <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
         </asp:Panel>
 

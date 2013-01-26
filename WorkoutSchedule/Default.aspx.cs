@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Text;
 public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 {
+    ScheduleManager manager = new ScheduleManager();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -64,7 +65,26 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         lnk_dayLink.Text = sb.ToString();
         lnk_dayLink.CommandArgument = dt.ToString();
         //Check to see if we have any dates matching today
+        Label lbl = (Label)e.Item.FindControl("Label1");
 
+        List<ScheduledRoutine> routine;
+        List<scheduledItem> items;
+
+        items = manager.getScheduledItems();
+        
+        
+        routine = manager.getRoutines();
+
+        foreach (scheduledItem item in items)
+        {
+            if (item.startTime.ToString("MMMM dd, yyyy") == dt.ToString("MMMM dd, yyyy"))
+            {
+                lbl.Text = lbl.Text +  "<b>" + item.itemName + "</b>" + " " + item.startTime.ToString("hh:mm tt") + "<br/>";
+
+            }
+        }
+        
+        
 
     }
     protected void lnk_loadCalendar_Click(object sender, EventArgs e)
