@@ -124,11 +124,13 @@ p
 }
 newExerciseForm, tr
 {
+    border-style: none;
     width: 300px;
 }
 
 newExerciseForm, tr, td
 {
+     border-style: none;
     width: 200px;
 }
 
@@ -142,21 +144,20 @@ newExerciseForm, tr, td
     font-size: medium;
 }
 
-
 #calendarTable
 {
     border: thin solid #000000;
 }
-calendarTable, tr
+#calendarTable tr
 {
     border: thin solid #000000;
 }
 
-calendarTable, tr, td
+#calendarTable tr td
 {
     border: thin solid #000000;
 }
-calendarTable, tr, td, p
+#calendarTable tr td p
 {
     text-align: center;
 }
