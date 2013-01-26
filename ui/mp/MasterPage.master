@@ -24,17 +24,12 @@
                     Enabled="False" />
                 <asp:Button ID="Button6" runat="server" Text="Manage User Accounts" 
                     CssClass="button" onclick="Button6_Click" />
-<<<<<<< HEAD
-                <asp:Button ID="Button7" runat="server" Text="Manage Workout Schedule" CssClass="button"
-                    Enabled="False" />
-                <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button" onclick="Button8_Click" />
-=======
                 <asp:Button ID="btnWorkOutSchedule" runat="server" 
                     Text="Manage Workout Schedule" CssClass="button"
                     Enabled="True" onclick="btnWorkOutSchedule_Click" />
                 <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
-                    Enabled="False" />
->>>>>>> a550f93ba33d6e0d5b1122595f6eab986253868d
+                    Enabled="true" onclick="Button8_Click" />
+
                 <br />
 
             </div>
