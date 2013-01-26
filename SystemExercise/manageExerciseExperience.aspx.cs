@@ -23,17 +23,43 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
     private void viewExerciseExp_userControlEventHappened(object sender, EventArgs e)
     {
         loadFields();
+        saveResultLbl.Text = "";
     }
 
     protected void saveExpBtn_Click(object sender, EventArgs e)
     {
-        if (expMngr.modifyExerciseExpByName(viewExerciseExp.ddlValue, Convert.ToDouble(baseTxtBox.Text), Convert.ToDouble(weightTxtBox.Text), Convert.ToDouble(repTxtBox.Text), Convert.ToDouble(distanceTxtBox.Text), Convert.ToDouble(timeTxtBox.Text)))
-            loadFields();
+        try
+        {
+            if (expMngr.modifyExerciseExpByName(viewExerciseExp.ddlValue, Convert.ToDouble(baseTxtBox.Text), Convert.ToDouble(weightTxtBox.Text), Convert.ToDouble(repTxtBox.Text), Convert.ToDouble(distanceTxtBox.Text), Convert.ToDouble(timeTxtBox.Text)))
+                saveResultLbl.Text = "Exercise experience successfully modified!";
+            else
+                saveResultLbl.Text = "Something went wrong with the update and the exercise has not been modified...";
+        }
+
+        catch (Exception ex)
+        {
+            saveResultLbl.Text = "Something went wrong with the update and the exercise has not been modified: " + ex.Message;
+        }
+
+        loadFields();
     }
 
     protected void addExpBtn_Click(object sender, EventArgs e)
     {
+        try
+        {
+            if (expMngr.createNewExerciseExp(viewExerciseExp.ddlValue, Convert.ToDouble(addBaseTxtBox.Text), Convert.ToDouble(addWeightTxtBox.Text), Convert.ToDouble(addRepTxtBox.Text), Convert.ToDouble(addDistanceTxtBox.Text), Convert.ToDouble(addTimeTxtBox.Text)))
+                saveResultLbl.Text = "Exercise experience has been successfully added to the selected exercise!";
+            else
+                addResultLbl.Text = "Something went wrong with the adding of the exercise experience and it has not been added to the selected exercise...";
+        }
 
+        catch (Exception ex)
+        {
+            addResultLbl.Text = "Something went wrong with the adding of the exercise experience and it has not been added to the selected exercise: " + ex.Message;
+        }
+
+        loadFields();
     }
 
     protected void loadFields()
