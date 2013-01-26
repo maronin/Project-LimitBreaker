@@ -33,6 +33,7 @@ public class ExperienceManager
                 newExerciseExp.distanceModifier = distanceMod;
                 newExerciseExp.timeModifier = timeMod;
 
+                context.ExerciseExps.AddObject(newExerciseExp);
                 context.SaveChanges();
                 rc = true;
             }
@@ -40,6 +41,35 @@ public class ExperienceManager
             catch (Exception e)
             {
                 Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+            }
+        }
+
+        return rc;
+    }
+
+    public bool modifyExerciseExpByName(string exerciseName, double baseExp, double weightMod, double repMod, double distanceMod, double timeMod)
+    {
+        bool rc = false;
+
+        using (var context = new Layer2Container())
+        {
+            try
+            {
+                ExerciseExp exerciseExp = context.ExerciseExps.Where(s => s.Exercise.name == exerciseName).FirstOrDefault();
+
+                exerciseExp.baseExperience = baseExp;
+                exerciseExp.weightModifier = weightMod;
+                exerciseExp.repModifier = repMod;
+                exerciseExp.distanceModifier = distanceMod;
+                exerciseExp.timeModifier = timeMod;
+
+                context.SaveChanges();
+                rc = true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
 

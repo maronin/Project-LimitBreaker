@@ -8,15 +8,14 @@ using System.Web.UI.WebControls;
 public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 {
     SystemExerciseManager manager = new SystemExerciseManager();
+    public event EventHandler userControlEventHappened;
 
-    public string ddlValue
+    private void OnUserControlEvent()
     {
-        get { return ExerciseDDL.SelectedItem.Value; }
-    }
-
-    public int ddlCount
-    {
-        get { return ExerciseDDL.Items.Count; }
+        if (userControlEventHappened != null)
+        {
+            userControlEventHappened(this, EventArgs.Empty);
+        }
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -47,6 +46,8 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         }
         else
             exerciesNotFound();
+
+        OnUserControlEvent();
     }
 
     protected void MuscleGroupRBL_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,6 +67,8 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         }
         else
             exerciesNotFound();
+
+        OnUserControlEvent();
     }
 
     protected void ExerciseDDL_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,6 +93,8 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         exerciseEnabled.Visible = true;
         exerciseEnabled.Text = exercise.enabled.ToString();
         //populateForm();
+
+        OnUserControlEvent();
     }
 
     protected void exerciesNotFound()
@@ -101,4 +106,16 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         exerciseEnabled.Visible = false;
         exceriseNotFound.Visible = true;
     }
+
+    public string ddlValue
+    {
+        get { return ExerciseDDL.SelectedItem.Value; }
+    }
+
+    public int ddlCount
+    {
+        get { return ExerciseDDL.Items.Count; }
+    }
+
+
 }
