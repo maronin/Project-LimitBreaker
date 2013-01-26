@@ -23,8 +23,14 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
     {
         Response.Redirect("~/User/createUser.aspx");
     }
+<<<<<<< HEAD
+    protected void Button8_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/SystemExercise/manageExerciseExperience.aspx");
+=======
     protected void btnWorkOutSchedule_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/WorkoutSchedule/default.aspx");
+>>>>>>> a550f93ba33d6e0d5b1122595f6eab986253868d
     }
 }
