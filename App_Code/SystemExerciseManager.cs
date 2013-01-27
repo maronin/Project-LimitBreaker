@@ -171,6 +171,7 @@ public class SystemExerciseManager
             //context.ContextOptions.LazyLoadingEnabled = false;
             var query = (from exercise in context.Exercises
                          where exercise.muscleGroups.Contains(muscleGroup)
+                         && exercise.enabled == true
                          select exercise);
 
 
