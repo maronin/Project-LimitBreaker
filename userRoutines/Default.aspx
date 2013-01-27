@@ -7,9 +7,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h4>List of Routines</h4>
-    <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="rblRoutines_SelectedIndexChanged">
-    </asp:RadioButtonList>
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="viewRoutines" TypeName="routineManager"></asp:ObjectDataSource>
+    <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="rblRoutines_SelectedIndexChanged">
+            </asp:RadioButtonList>
     <p>
         <em style="font-size: medium">Note: I plan on combining several functions (e.g. View + Delete + Modify routines) in a single table so that each routine listed also has the option to be modified or deleted.</em>
     </p>

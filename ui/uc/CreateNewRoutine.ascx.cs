@@ -12,7 +12,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     SystemExerciseManager sysManager;
     routineManager routManager;
     Dictionary<int, int[]> exGoals;// = new Dictionary<string, int[]>();
-
+    RadioButtonList rbl;
     protected void Page_Load(object sender, EventArgs e)
     {
         sysManager = new SystemExerciseManager();
@@ -30,6 +30,9 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
             Session.Abandon();
         }
+        rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");// = routManager.viewRoutines().ToList();
+        rbl.DataSource = routManager.viewRoutines().ToList();
+        rbl.DataBind();
     }
     protected void btnAdd_Click(object sender, EventArgs e)
     {
@@ -224,6 +227,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
     void clearAll()
     {
+        Session.Clear();
         ddlMuscleGroups.SelectedIndex = 0;
         lbSelected.Items.Clear();
         lbSelected.Items.Insert(0, "Selected Items");
@@ -240,6 +244,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
         tbWeight.Text = "";
         tbWeight.Enabled = false;
+
     }
 
     protected void btnConfirm_Click(object sender, EventArgs e)
@@ -255,11 +260,11 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         String str = "";
 
         // user id to be changed later so that function createNewRoutine makes a routine for specified user
-        //rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1);
+        rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1);
 
         if (exGoals != null)
         {
-            loggedExercises = routManager.createLoggedExercises(exerciseList, 1, 4);
+            loggedExercises = routManager.createLoggedExercises(exerciseList, 1, rt.id);
             //str += "logged exercise <br/>";
 
             dictLoggedExercises = routManager.convertIntToLoggedExercise(exGoals);
@@ -268,7 +273,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
             setAttributes = routManager.createSetAttribute(dictLoggedExercises);
             //str += "setAttributes <br/>";
 
-            exerciseGoals = routManager.createExerciseGoals(4, setAttributes);
+            exerciseGoals = routManager.createExerciseGoals(rt.id, setAttributes);
             //str += "exerciseGoals <br/>";
 
 
@@ -287,7 +292,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         Response.Write(str);
         //GridView1.DataSource = exGoals;
         //GridView1.DataBind();
-
         clearAll();
+        Response.Redirect(Request.RawUrl);
     }
 }

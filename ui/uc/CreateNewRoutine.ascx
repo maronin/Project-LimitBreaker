@@ -102,7 +102,7 @@
         <td>
             <asp:TextBox ID="tbRoutineName" runat="server" ValidationGroup="RtnName"></asp:TextBox>
             <br />
-            <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClientClick="return Validate()" OnClick="btnConfirm_Click" />
+            <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClientClick="return Validate()" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" />
         </td>
         <td>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9]+" ValidationGroup="RtnName" Display="Dynamic"></asp:RegularExpressionValidator>
@@ -127,8 +127,7 @@
 
 
 
-<asp:GridView ID="GridView1" runat="server">
-</asp:GridView>
+
 
 
 

@@ -22,6 +22,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
         // bind the data source of the details view with a routine object
         // convert to a temporary list of routines so that it can be bound
         dvRoutineDetails.DataSource = new List<Routine> { manager.getRoutine(Convert.ToInt32(rblRoutines.SelectedValue)) };
+        //dvRoutineDetails.DataSource = CreateNewRoutine.routineList;
         dvRoutineDetails.DataBind();
 
         bool loggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;

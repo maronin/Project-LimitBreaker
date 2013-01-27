@@ -129,13 +129,20 @@ public class routineManager
         {
             Dictionary<LoggedExercise, int[]> rc = new Dictionary<LoggedExercise, int[]>();
             LoggedExercise le = new LoggedExercise();
+            HttpResponse response = System.Web.HttpContext.Current.Response;
+            foreach (KeyValuePair<int, int[]> pair in exGoals)
+            {
+                response.Write("<br/> dictionary id:" + pair.Key);
+            }
+
             try
             {
                 foreach (KeyValuePair<int, int[]> pair in exGoals)
                 {
-                    le = context.LoggedExercises.Where(x => x.ExerciseBase.id == pair.Key).FirstOrDefault();
+                    le = context.LoggedExercises.Where(x => x.ExerciseBase.id == pair.Key).OrderByDescending(x => x.id).FirstOrDefault();
                     if (le != null)
                         rc.Add(le, pair.Value);
+                    response.Write("<br/> exGoals id:" + pair.Key +"& le.id:"+le.id);
                 }
             }
             catch (NullReferenceException e)
@@ -164,12 +171,17 @@ public class routineManager
             LoggedExercise id = new LoggedExercise();
             try
             {
-
+                HttpResponse response = System.Web.HttpContext.Current.Response;
+                foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
+                {
+                    response.Write("<br/> loggedExercises:" + pair.Key.id);
+                }
 
                 foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
                 {
                     id = context.LoggedExercises.Where(x => pair.Key.id == x.id).FirstOrDefault();
                     sa.LoggedExercise = id;
+                    response.Write("<br/> sa id:" + sa.id + "& id.id" + id.id);
                     sa.reps = Convert.ToInt16(pair.Value[0]);
                     sa.weight = pair.Value[1];
                     sa.distance = pair.Value[2];
@@ -202,24 +214,20 @@ public class routineManager
             try
             {
                 Routine rt = new Routine();
-                HttpResponse response = System.Web.HttpContext.Current.Response;
-                foreach (SetAttributes pair in setAttributes)
-                {
-                    response.Write("<br/> SetAttributes:" + pair.id);
-                }
-
+                
+               
                 foreach (SetAttributes sa in setAttributes)
                 {
                     rt = context.Routines.Where(x => x.id == routineID).First();
                     eg.Routine = rt;
                     id = context.SetAttributes.Where(x => x.id == sa.id).FirstOrDefault();
                     eg.SetAttribute = id;
-                    response.Write("<br/> Ssa id:" + sa.id + "& id.id" + id.id);
+                   
                     Exercise ex = context.Exercises.Where(x => x.id == id.LoggedExercise.ExerciseBase.id).FirstOrDefault();
                     if (ex != null)
                         eg.ExerciseBase = ex;
-                    response.Write("<br/> ex id:" + ex.id);
-                    response.Write("<br/><br/> eg.id:" + eg.id + "<br/>eg.said:"+eg.SetAttribute.id+"<br/>eg.exid"+eg.SetAttribute.LoggedExercise.ExerciseBase.id);
+                    //response.Write("<br/> ex id:" + ex.id);
+                    //response.Write("<br/><br/> eg.id:" + eg.id + "<br/>eg.said:"+eg.SetAttribute.id+"<br/>eg.exid"+eg.SetAttribute.LoggedExercise.ExerciseBase.id);
                     context.ExerciseGoals.AddObject(eg);
                     rc.Add(eg);
                     eg = new ExerciseGoal();
@@ -227,10 +235,12 @@ public class routineManager
                     rt = new Routine();
                 }
                 context.SaveChanges();
+                /*
                 foreach (ExerciseGoal pair in rc)
                 {
                     response.Write("<br/><br/> rc:" + pair.id + "<br/>rc.rt" + pair.Routine.id + "<br/>rc.set" + pair.SetAttribute.id + "<br/>rc.ex"+pair.SetAttribute.LoggedExercise.ExerciseBase.id);
                 }
+                 * */
             }
             catch (NullReferenceException e)
             {
