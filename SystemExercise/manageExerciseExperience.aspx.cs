@@ -16,6 +16,9 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
         if (!Page.IsPostBack)
         {
+            functionalityMultiView.ActiveViewIndex = 0;
+            mngExerciseExpBtn.Enabled = false;
+            mngUserExpBtn.Enabled = true;
             loadFields();
         }
     }
@@ -60,6 +63,20 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         }
 
         loadFields();
+    }
+
+    protected void mngExerciseExpBtn_Click(object sender, EventArgs e)
+    {
+        mngExerciseExpBtn.Enabled = false;
+        mngUserExpBtn.Enabled = true;
+        functionalityMultiView.ActiveViewIndex = 0;
+    }
+
+    protected void mngUserExpBtn_Click(object sender, EventArgs e)
+    {
+        mngUserExpBtn.Enabled = false;
+        mngExerciseExpBtn.Enabled = true;
+        functionalityMultiView.ActiveViewIndex = 1;
     }
 
     protected void loadFields()
