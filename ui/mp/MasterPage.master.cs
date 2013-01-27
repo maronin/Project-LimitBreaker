@@ -13,10 +13,22 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
     }
     protected void btnManageSysExercise_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/systemExercise/default.aspx");
+        Response.Redirect("~/SystemExercise/default.aspx");
     }
     protected void btnManageUserRoutines_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/userRoutines/default.aspx");
+        Response.Redirect("~/UserRoutines/default.aspx");
+    }
+    protected void Button6_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/User/createUser.aspx");
+    }
+    protected void Button8_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/SystemExercise/manageExerciseExperience.aspx");
+    }
+    protected void btnWorkOutSchedule_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/WorkoutSchedule/default.aspx");
     }
 }
