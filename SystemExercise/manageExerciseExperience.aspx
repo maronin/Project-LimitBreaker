@@ -7,10 +7,6 @@
         {
             width: 296px;
         }
-        .style7
-        {
-            width: 260px;
-        }
         .style9
         {
             width: 175px;
@@ -22,6 +18,10 @@
         .style11
         {
             width: 250px;
+        }
+        .style12
+        {
+            width: 255px;
         }
     </style>
 </asp:Content>
@@ -254,7 +254,46 @@
 
 <asp:View ID="userExpView" runat="server">
 
+<h4>Modify Inactive User Experience Point Atrophy</h4>
 
+<table>
+<tr>
+<td class="style12">Days Allowed Inactive:</td>
+<td class="style9">
+    <asp:TextBox ID="inactiveTimeTxtBox" runat="server"></asp:TextBox>
+</td>
+<td class="style10">
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
+        ErrorMessage="*Required" ControlToValidate="inactiveTimeTxtBox" 
+        Display="Dynamic" ForeColor="Red" ValidationGroup="expAtrophy"></asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server"
+        ErrorMessage="*Must be a whole number less than 100" 
+        ControlToValidate="inactiveTimeTxtBox" Display="Dynamic" ForeColor="Red" 
+        ValidationGroup="expAtrophy" ValidationExpression="[0-9]{1,2}"></asp:RegularExpressionValidator>
+</td>
+</tr>
+
+<tr>
+<td class="style12">Experience Loss Per Day:</td>
+<td class="style9">
+    <asp:TextBox ID="expLossTxtBox" runat="server"></asp:TextBox>
+</td>
+<td class="style10">
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
+        ErrorMessage="*Required" ControlToValidate="expLossTxtBox" 
+        Display="Dynamic" ForeColor="Red" ValidationGroup="expAtrophy"></asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server"
+        ErrorMessage="*Must be a whole number" 
+        ControlToValidate="expLossTxtBox" Display="Dynamic" ForeColor="Red" 
+        ValidationGroup="expAtrophy" ValidationExpression="[0-9]+"></asp:RegularExpressionValidator>
+</td>
+</tr>
+
+</table>
+<br />
+    <asp:Button ID="saveAtrophyBtn" runat="server" Text="Save" 
+        onclick="saveAtrophyBtn_Click" />
+    <asp:Label ID="saveAtrophyResultLbl" runat="server" Text=""></asp:Label>
 
 </asp:View>
 

@@ -109,4 +109,12 @@ public class ExperienceManager
 
         return rc;
     }
+
+    public ExperienceAtrophy getExperienceAtrophy()
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.ExperienceAtrophies.FirstOrDefault();
+        }
+    }
 }
