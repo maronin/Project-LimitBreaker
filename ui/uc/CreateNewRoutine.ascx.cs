@@ -11,7 +11,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
     SystemExerciseManager sysManager;
     routineManager routManager;
-    Dictionary<string, int[]> exGoals;// = new Dictionary<string, int[]>();
+    Dictionary<int, int[]> exGoals;// = new Dictionary<string, int[]>();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,7 +20,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
         if (Session["exGoals"] == null)
         {
-            exGoals = new Dictionary<string, int[]>();
+            exGoals = new Dictionary<int, int[]>();
             Session["exGoals"] = exGoals;
         }
 
@@ -53,7 +53,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
                     goals[2] = tbDistance.Enabled == true ? Convert.ToInt32(tbDistance.Text.Trim()) : 0;
                 if (tbTime.Text.Trim() != null)
                     goals[3] = tbTime.Enabled == true ? Convert.ToInt32(tbTime.Text.Trim()) : 0;
-                AddOrUpdate(li.Text, goals);
+                AddOrUpdate(Convert.ToInt32(li.Value), goals);
             }
         }
 
@@ -67,11 +67,11 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     {
         if (lbSelected.SelectedIndex != 0)
         {
-            exGoals = Session["exGoals"] != null ? (Dictionary<string, int[]>)Session["exGoals"] : null;
+            exGoals = Session["exGoals"] != null ? (Dictionary<int, int[]>)Session["exGoals"] : null;
             if (exGoals != null)
             {
-                if (exGoals.ContainsKey(lbSelected.SelectedItem.Text))
-                    exGoals.Remove(lbSelected.SelectedItem.Text);
+                if (exGoals.ContainsKey(Convert.ToInt32(lbSelected.SelectedItem.Value)))
+                    exGoals.Remove(Convert.ToInt32(lbSelected.SelectedItem.Value));
             }
             while (lbSelected.SelectedItem != null)
             {
@@ -92,21 +92,21 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
                                 select item;
 
             Exercise selectedExercise = sysManager.getExercise(lbSelected.SelectedItem.ToString());
-            exGoals = Session["exGoals"] != null ? (Dictionary<string, int[]>)Session["exGoals"] : null;
+            exGoals = Session["exGoals"] != null ? (Dictionary<int, int[]>)Session["exGoals"] : null;
 
             if (exGoals != null)
             {
                 tbRep.Enabled = selectedExercise.rep == true ? true : false;
-                tbRep.Text = tbRep.Enabled == true ? exGoals[selectedExercise.name].GetValue(0).ToString() : Convert.ToString(0);
+                tbRep.Text = tbRep.Enabled == true ? exGoals[selectedExercise.id].GetValue(0).ToString() : Convert.ToString(0);
 
                 tbWeight.Enabled = selectedExercise.weight == true ? true : false;
-                tbWeight.Text = tbWeight.Enabled == true ? exGoals[selectedExercise.name].GetValue(1).ToString() : Convert.ToString(0);
+                tbWeight.Text = tbWeight.Enabled == true ? exGoals[selectedExercise.id].GetValue(1).ToString() : Convert.ToString(0);
 
                 tbDistance.Enabled = selectedExercise.distance == true ? true : false;
-                tbDistance.Text = tbDistance.Enabled == true ? exGoals[selectedExercise.name].GetValue(2).ToString() : Convert.ToString(0);
+                tbDistance.Text = tbDistance.Enabled == true ? exGoals[selectedExercise.id].GetValue(2).ToString() : Convert.ToString(0);
 
                 tbTime.Enabled = selectedExercise.time == true ? true : false;
-                tbTime.Text = tbTime.Enabled == true ? exGoals[selectedExercise.name].GetValue(3).ToString() : Convert.ToString(0);
+                tbTime.Text = tbTime.Enabled == true ? exGoals[selectedExercise.id].GetValue(3).ToString() : Convert.ToString(0);
             }
         }
         else
@@ -125,9 +125,9 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         }
     }
 
-    void AddOrUpdate(string key, int[] value)
+    void AddOrUpdate(int key, int[] value)
     {
-        exGoals = Session["exGoals"] != null ? (Dictionary<string, int[]>)Session["exGoals"] : null;
+        exGoals = Session["exGoals"] != null ? (Dictionary<int, int[]>)Session["exGoals"] : null;
         if (exGoals != null)
         {
             if (exGoals.ContainsKey(key) == true)
@@ -180,7 +180,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
                                 where item.Selected
                                 select item;
 
-            exGoals = Session["exGoals"] != null ? (Dictionary<string, int[]>)Session["exGoals"] : null;
+            exGoals = Session["exGoals"] != null ? (Dictionary<int, int[]>)Session["exGoals"] : null;
             Exercise selectedExercise = sysManager.getExercise(lbSelected.SelectedItem.ToString());
 
             int[] goals = new int[4] { 0, 0, 0, 0 };
@@ -195,7 +195,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
                     goals[2] = tbDistance.Enabled == true ? Convert.ToInt32(tbDistance.Text.Trim()) : 0;
                 if (tbTime.Text.Trim() != null)
                     goals[3] = tbTime.Enabled == true ? Convert.ToInt32(tbTime.Text.Trim()) : 0;
-                AddOrUpdate(selectedExercise.name, goals);
+                AddOrUpdate(selectedExercise.id, goals);
             }
             for (int i = 0; i < lbSelected.Items.Count; i++)
             {
@@ -203,8 +203,57 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
             }
         }
     }
+
+    ICollection<Exercise> convertListBox(ListBox lb)
+    {
+        ICollection<Exercise> rc = new List<Exercise>();
+        Exercise ex = new Exercise();
+
+        if (lb.Items.Count > 1)
+        {
+            for (int i = 1; i < lb.Items.Count; i++)
+            {
+                ex = sysManager.getExercise(lb.Items[i].ToString());
+                if (ex != null)
+                    rc.Add(ex);
+            }
+        }
+
+        return rc;
+    }
+
+    void clearAll()
+    {
+        ddlMuscleGroups.SelectedIndex = 0;
+        for (int i = 1; i < lbSelected.Items.Count; i++)
+        {
+            lbSelected.Items.RemoveAt(i);
+        }
+        tbRoutineName.Text = "";
+    }
+
     protected void btnConfirm_Click(object sender, EventArgs e)
     {
+        Routine rt = new Routine();
+        ICollection<Exercise> exerciseList = convertListBox(lbSelected);
+        ICollection<LoggedExercise> loggedExercises = new List<LoggedExercise>();
+        ICollection<SetAttributes> setAttributes = new List<SetAttributes>();
+        Dictionary<LoggedExercise, int[]> dictLoggedExercises = new Dictionary<LoggedExercise,int[]>();
+        ICollection<ExerciseGoal> exerciseGoals = new List<ExerciseGoal>();
 
+        // user id to be changed later so that function createNewRoutine makes a routine for specified user
+        //rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1);
+        
+        //if (rt != null)
+            loggedExercises = routManager.createLoggedExercises(exerciseList, 1, 4);
+        /*
+        if (loggedExercises != null)
+            dictLoggedExercises = routManager.convertIntToLoggedExercise(exGoals);
+        if (dictLoggedExercises != null)
+            setAttributes = routManager.createSetAttribute(dictLoggedExercises);
+        if (setAttributes != null)
+            exerciseGoals = routManager.createExerciseGoals(4, setAttributes);
+        */
+        clearAll();
     }
 }
