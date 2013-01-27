@@ -174,7 +174,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     }
     protected void btnEdit_Click(object sender, EventArgs e)
     {
-        if (lbSelected.SelectedIndex != 0)
+        if (lbSelected.SelectedIndex != 0 && lbSelected.SelectedIndex > 0)
         {
             var selectedItems = from item in lbSelected.Items.OfType<ListItem>()
                                 where item.Selected
@@ -225,35 +225,68 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     void clearAll()
     {
         ddlMuscleGroups.SelectedIndex = 0;
-        for (int i = 1; i < lbSelected.Items.Count; i++)
-        {
-            lbSelected.Items.RemoveAt(i);
-        }
+        lbSelected.Items.Clear();
+        lbSelected.Items.Insert(0, "Selected Items");
+
         tbRoutineName.Text = "";
+        tbDistance.Text = "";
+        tbDistance.Enabled = false;
+
+        tbRep.Text = "";
+        tbRep.Enabled = false;
+
+        tbTime.Text = "";
+        tbTime.Enabled = false;
+
+        tbWeight.Text = "";
+        tbWeight.Enabled = false;
     }
 
     protected void btnConfirm_Click(object sender, EventArgs e)
     {
+        exGoals = Session["exGoals"] != null ? (Dictionary<int, int[]>)Session["exGoals"] : null;
         Routine rt = new Routine();
         ICollection<Exercise> exerciseList = convertListBox(lbSelected);
         ICollection<LoggedExercise> loggedExercises = new List<LoggedExercise>();
         ICollection<SetAttributes> setAttributes = new List<SetAttributes>();
-        Dictionary<LoggedExercise, int[]> dictLoggedExercises = new Dictionary<LoggedExercise,int[]>();
+        Dictionary<LoggedExercise, int[]> dictLoggedExercises = new Dictionary<LoggedExercise, int[]>();
         ICollection<ExerciseGoal> exerciseGoals = new List<ExerciseGoal>();
+
+        String str = "";
 
         // user id to be changed later so that function createNewRoutine makes a routine for specified user
         //rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1);
-        
-        //if (rt != null)
+
+        if (exGoals != null)
+        {
             loggedExercises = routManager.createLoggedExercises(exerciseList, 1, 4);
-        /*
-        if (loggedExercises != null)
+            str += "logged exercise <br/>";
+
             dictLoggedExercises = routManager.convertIntToLoggedExercise(exGoals);
-        if (dictLoggedExercises != null)
+            str += "dictLoggedExercises <br/>";
+
             setAttributes = routManager.createSetAttribute(dictLoggedExercises);
-        if (setAttributes != null)
+            str += "setAttributes <br/>";
+
             exerciseGoals = routManager.createExerciseGoals(4, setAttributes);
-        */
+            str += "exerciseGoals <br/>";
+
+
+
+            foreach (KeyValuePair<int, int[]> pair in exGoals)
+            {
+                str += "<br/> exGoals.pairKey = " + pair.Key;
+            }
+
+            foreach (KeyValuePair<LoggedExercise, int[]> pair in dictLoggedExercises)
+            {
+                str += "<br/> LoggedExercise.pairKey = " + pair.Key.id;
+            }
+        }
+        Response.Write(str);
+        //GridView1.DataSource = exGoals;
+        //GridView1.DataBind();
+
         clearAll();
     }
 }

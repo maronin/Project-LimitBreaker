@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
 
 /// <summary>
 /// Summary description for routineManager
@@ -71,8 +72,12 @@ public class routineManager
     {
         using (var context = new Layer2Container())
         {
+            //context.ContextOptions.LazyLoadingEnabled = false;
+            //context.ContextOptions.ProxyCreationEnabled = false;
+
             LoggedExercise le = new LoggedExercise();
             ICollection<LoggedExercise> rc = new List<LoggedExercise>();
+            Exercise id = new Exercise();
             try
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
@@ -82,91 +87,18 @@ public class routineManager
                 {
                     foreach (Exercise ex in exercises)
                     {
+                        // stops the object out of context error
+                        id = context.Exercises.Where(x => ex.id == x.id).FirstOrDefault();
                         le.LimitBreaker = lb;
-                        le.ExerciseBase = ex;
-                        le.timeLogged = new DateTime(0);
+                        le.ExerciseBase = id;
+                        le.timeLogged = DateTime.Now;
                         le.sets = 0;
                         if (rt != null)
                         {
                             le.Routine = rt;
                         }
-
                         context.LoggedExercises.AddObject(le);
                         rc.Add(le);
-                    }
-                    //context.SaveChanges();
-                }
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
-            }
-
-            return rc;
-        }
-    }
-
-    /*
-     * 4th step
-     * int[0] = rep
-     * int[1] = weight
-     * int[2] = distance
-     * int[3] = time
-     * */
-    public ICollection<SetAttributes> createSetAttribute(Dictionary<LoggedExercise, int[]> loggedExercises)
-    {
-        using (var context = new Layer2Container())
-        {
-            ICollection<SetAttributes> rc = new List<SetAttributes>();
-            SetAttributes sa = new SetAttributes();
-            try
-            {
-                foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
-                {
-                    sa.LoggedExercise = pair.Key;
-                    sa.reps = Convert.ToInt16(pair.Value[0]);
-                    sa.weight = pair.Value[1];
-                    sa.distance = pair.Value[2];
-                    sa.time = pair.Value[3];
-
-                    context.SetAttributes.AddObject(sa);
-                    rc.Add(sa);
-                    sa = new SetAttributes();
-                }
-                context.SaveChanges();
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
-            }
-
-            return rc;
-        }
-    }
-
-    // 5th step
-    public ICollection<ExerciseGoal> createExerciseGoals(int routineID, ICollection<SetAttributes> setAttributes)
-    {
-        using (var context = new Layer2Container())
-        {
-            ICollection<ExerciseGoal> rc = new List<ExerciseGoal>();
-            ExerciseGoal eg = new ExerciseGoal();
-            try
-            {
-                Routine rt = context.Routines.Where(x => x.id == routineID).First();
-                
-                if (rt != null)
-                {
-                    foreach (SetAttributes sa in setAttributes)
-                    {
-                        eg.Routine = rt;
-                        eg.SetAttribute = sa;
-                        Exercise ex = context.Exercises.Where(x => x.id == sa.LoggedExercise.ExerciseBase.id).First();
-                        if (ex != null)
-                            eg.ExerciseBase = ex;
-
-                        context.ExerciseGoals.AddObject(eg);
-                        rc.Add(eg);
                     }
                     context.SaveChanges();
                 }
@@ -174,9 +106,15 @@ public class routineManager
             catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
             }
 
-            return rc;
+            return rc.ToList();
         }
     }
 
@@ -205,4 +143,84 @@ public class routineManager
         }
 
     }
+
+    /*
+     * 4th step
+     * int[0] = rep
+     * int[1] = weight
+     * int[2] = distance
+     * int[3] = time
+     * */
+    public ICollection<SetAttributes> createSetAttribute(Dictionary<LoggedExercise, int[]> loggedExercises)
+    {
+        using (var context = new Layer2Container())
+        {
+            ICollection<SetAttributes> rc = new List<SetAttributes>();
+            SetAttributes sa = new SetAttributes();
+            LoggedExercise id = new LoggedExercise();
+            try
+            {
+                foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
+                {
+                    id = context.LoggedExercises.Where(x => pair.Key.id == x.id).FirstOrDefault();
+                    sa.LoggedExercise = id;
+                    sa.reps = Convert.ToInt16(pair.Value[0]);
+                    sa.weight = pair.Value[1];
+                    sa.distance = pair.Value[2];
+                    sa.time = pair.Value[3];
+
+                    context.SetAttributes.AddObject(sa);
+                    rc.Add(sa);
+                    sa = new SetAttributes();
+                }
+                context.SaveChanges();
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+            }
+
+            return rc;
+        }
+    }
+
+    // 5th step
+    public ICollection<ExerciseGoal> createExerciseGoals(int routineID, ICollection<SetAttributes> setAttributes)
+    {
+        using (var context = new Layer2Container())
+        {
+            ICollection<ExerciseGoal> rc = new List<ExerciseGoal>();
+            ExerciseGoal eg = new ExerciseGoal();
+            SetAttributes id = new SetAttributes();
+            try
+            {
+                Routine rt = context.Routines.Where(x => x.id == routineID).First();
+                
+                if (rt != null)
+                {
+                    foreach (SetAttributes sa in setAttributes)
+                    {
+                        eg.Routine = rt;
+                        id = context.SetAttributes.Where(x => x.id == sa.id).FirstOrDefault();
+                        eg.SetAttribute = id;
+                        Exercise ex = context.Exercises.Where(x => x.id == id.LoggedExercise.ExerciseBase.id).First();
+                        if (ex != null)
+                            eg.ExerciseBase = ex;
+
+                        context.ExerciseGoals.AddObject(eg);
+                        rc.Add(eg);
+                    }
+                    context.SaveChanges();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+            }
+
+            return rc;
+        }
+    }
+
+
 }
