@@ -260,19 +260,19 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         if (exGoals != null)
         {
             loggedExercises = routManager.createLoggedExercises(exerciseList, 1, 4);
-            str += "logged exercise <br/>";
+            //str += "logged exercise <br/>";
 
             dictLoggedExercises = routManager.convertIntToLoggedExercise(exGoals);
-            str += "dictLoggedExercises <br/>";
+            //str += "dictLoggedExercises <br/>";
 
             setAttributes = routManager.createSetAttribute(dictLoggedExercises);
-            str += "setAttributes <br/>";
+            //str += "setAttributes <br/>";
 
             exerciseGoals = routManager.createExerciseGoals(4, setAttributes);
-            str += "exerciseGoals <br/>";
+            //str += "exerciseGoals <br/>";
 
 
-
+            /*
             foreach (KeyValuePair<int, int[]> pair in exGoals)
             {
                 str += "<br/> exGoals.pairKey = " + pair.Key;
@@ -282,6 +282,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
             {
                 str += "<br/> LoggedExercise.pairKey = " + pair.Key.id;
             }
+             * */
         }
         Response.Write(str);
         //GridView1.DataSource = exGoals;

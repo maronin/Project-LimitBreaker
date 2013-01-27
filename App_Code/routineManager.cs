@@ -87,6 +87,7 @@ public class routineManager
                 {
                     foreach (Exercise ex in exercises)
                     {
+
                         // stops the object out of context error
                         id = context.Exercises.Where(x => ex.id == x.id).FirstOrDefault();
                         le.LimitBreaker = lb;
@@ -99,6 +100,9 @@ public class routineManager
                         }
                         context.LoggedExercises.AddObject(le);
                         rc.Add(le);
+
+                        le = new LoggedExercise();
+                        id = new Exercise();
                     }
                     context.SaveChanges();
                 }
@@ -160,6 +164,8 @@ public class routineManager
             LoggedExercise id = new LoggedExercise();
             try
             {
+
+
                 foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
                 {
                     id = context.LoggedExercises.Where(x => pair.Key.id == x.id).FirstOrDefault();
@@ -172,6 +178,7 @@ public class routineManager
                     context.SetAttributes.AddObject(sa);
                     rc.Add(sa);
                     sa = new SetAttributes();
+                    id = new LoggedExercise();
                 }
                 context.SaveChanges();
             }
@@ -194,23 +201,35 @@ public class routineManager
             SetAttributes id = new SetAttributes();
             try
             {
-                Routine rt = context.Routines.Where(x => x.id == routineID).First();
-                
-                if (rt != null)
+                Routine rt = new Routine();
+                HttpResponse response = System.Web.HttpContext.Current.Response;
+                foreach (SetAttributes pair in setAttributes)
                 {
-                    foreach (SetAttributes sa in setAttributes)
-                    {
-                        eg.Routine = rt;
-                        id = context.SetAttributes.Where(x => x.id == sa.id).FirstOrDefault();
-                        eg.SetAttribute = id;
-                        Exercise ex = context.Exercises.Where(x => x.id == id.LoggedExercise.ExerciseBase.id).First();
-                        if (ex != null)
-                            eg.ExerciseBase = ex;
+                    response.Write("<br/> SetAttributes:" + pair.id);
+                }
 
-                        context.ExerciseGoals.AddObject(eg);
-                        rc.Add(eg);
-                    }
-                    context.SaveChanges();
+                foreach (SetAttributes sa in setAttributes)
+                {
+                    rt = context.Routines.Where(x => x.id == routineID).First();
+                    eg.Routine = rt;
+                    id = context.SetAttributes.Where(x => x.id == sa.id).FirstOrDefault();
+                    eg.SetAttribute = id;
+                    response.Write("<br/> Ssa id:" + sa.id + "& id.id" + id.id);
+                    Exercise ex = context.Exercises.Where(x => x.id == id.LoggedExercise.ExerciseBase.id).FirstOrDefault();
+                    if (ex != null)
+                        eg.ExerciseBase = ex;
+                    response.Write("<br/> ex id:" + ex.id);
+                    response.Write("<br/><br/> eg.id:" + eg.id + "<br/>eg.said:"+eg.SetAttribute.id+"<br/>eg.exid"+eg.SetAttribute.LoggedExercise.ExerciseBase.id);
+                    context.ExerciseGoals.AddObject(eg);
+                    rc.Add(eg);
+                    eg = new ExerciseGoal();
+                    id = new SetAttributes();
+                    rt = new Routine();
+                }
+                context.SaveChanges();
+                foreach (ExerciseGoal pair in rc)
+                {
+                    response.Write("<br/><br/> rc:" + pair.id + "<br/>rc.rt" + pair.Routine.id + "<br/>rc.set" + pair.SetAttribute.id + "<br/>rc.ex"+pair.SetAttribute.LoggedExercise.ExerciseBase.id);
                 }
             }
             catch (NullReferenceException e)
