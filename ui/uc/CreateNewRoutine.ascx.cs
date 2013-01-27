@@ -11,7 +11,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
     SystemExerciseManager sysManager;
     routineManager routManager;
-    Dictionary<int, int[]> exGoals;// = new Dictionary<string, int[]>();
+    Dictionary<int, int[]> exGoals;
     RadioButtonList rbl;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,12 +27,18 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         if (!IsPostBack)
         {
             // full refresh of page will abandon current session
-
             Session.Abandon();
+            rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
+            rbl.DataSource = routManager.viewRoutines().ToList();
+            rbl.DataTextField = "name";
+            rbl.DataValueField = "id";
+            rbl.DataBind();
+
+            // to get the id of the button so that enter = submit
+            tbRoutineName.Attributes.Add("onKeyPress",
+                 "doClick('" + btnConfirm.ClientID + "',event)");
         }
-        rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");// = routManager.viewRoutines().ToList();
-        rbl.DataSource = routManager.viewRoutines().ToList();
-        rbl.DataBind();
+
     }
     protected void btnAdd_Click(object sender, EventArgs e)
     {
@@ -139,22 +145,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
                 exGoals.Add(key, value);
         }
     }
-    /* for debugging dictionary
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        exGoals = Session["exGoals"] != null ? (Dictionary<string, int[]>)Session["exGoals"] : null;
-        if (exGoals != null)
-        {
-            foreach (KeyValuePair<string, int[]> pair in exGoals)
-            {
-                Response.Write("<br/>" + pair.Key);
-                for (int i = 0; i < 4; i++)
-                {
-                    Response.Write("<br/>+" + pair.Value[i]);
-                }
-            }
-        }
-    }*/
+
     protected void lbExerciseList_SelectedIndexChanged(object sender, EventArgs e)
     {
         var selectedItems = from item in lbExerciseList.Items.OfType<ListItem>()
@@ -257,42 +248,20 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         Dictionary<LoggedExercise, int[]> dictLoggedExercises = new Dictionary<LoggedExercise, int[]>();
         ICollection<ExerciseGoal> exerciseGoals = new List<ExerciseGoal>();
 
-        String str = "";
-
         // user id to be changed later so that function createNewRoutine makes a routine for specified user
         rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1);
 
         if (exGoals != null)
         {
             loggedExercises = routManager.createLoggedExercises(exerciseList, 1, rt.id);
-            //str += "logged exercise <br/>";
-
             dictLoggedExercises = routManager.convertIntToLoggedExercise(exGoals);
-            //str += "dictLoggedExercises <br/>";
-
             setAttributes = routManager.createSetAttribute(dictLoggedExercises);
-            //str += "setAttributes <br/>";
-
             exerciseGoals = routManager.createExerciseGoals(rt.id, setAttributes);
-            //str += "exerciseGoals <br/>";
-
-
-            /*
-            foreach (KeyValuePair<int, int[]> pair in exGoals)
-            {
-                str += "<br/> exGoals.pairKey = " + pair.Key;
-            }
-
-            foreach (KeyValuePair<LoggedExercise, int[]> pair in dictLoggedExercises)
-            {
-                str += "<br/> LoggedExercise.pairKey = " + pair.Key.id;
-            }
-             * */
         }
-        Response.Write(str);
-        //GridView1.DataSource = exGoals;
-        //GridView1.DataBind();
         clearAll();
+
+        // redirect page to itself (refresh)
         Response.Redirect(Request.RawUrl);
     }
+
 }

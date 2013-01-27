@@ -61,6 +61,12 @@ public class routineManager
             catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
             }
 
             return rc;
@@ -72,9 +78,6 @@ public class routineManager
     {
         using (var context = new Layer2Container())
         {
-            //context.ContextOptions.LazyLoadingEnabled = false;
-            //context.ContextOptions.ProxyCreationEnabled = false;
-
             LoggedExercise le = new LoggedExercise();
             ICollection<LoggedExercise> rc = new List<LoggedExercise>();
             Exercise id = new Exercise();
@@ -87,7 +90,6 @@ public class routineManager
                 {
                     foreach (Exercise ex in exercises)
                     {
-
                         // stops the object out of context error
                         id = context.Exercises.Where(x => ex.id == x.id).FirstOrDefault();
                         le.LimitBreaker = lb;
@@ -101,6 +103,7 @@ public class routineManager
                         context.LoggedExercises.AddObject(le);
                         rc.Add(le);
 
+                        // required to add new instances of loggedExercises
                         le = new LoggedExercise();
                         id = new Exercise();
                     }
@@ -129,25 +132,25 @@ public class routineManager
         {
             Dictionary<LoggedExercise, int[]> rc = new Dictionary<LoggedExercise, int[]>();
             LoggedExercise le = new LoggedExercise();
-            HttpResponse response = System.Web.HttpContext.Current.Response;
-            foreach (KeyValuePair<int, int[]> pair in exGoals)
-            {
-                response.Write("<br/> dictionary id:" + pair.Key);
-            }
-
             try
             {
                 foreach (KeyValuePair<int, int[]> pair in exGoals)
                 {
+                    // ordered by descending to grab the latest exercises entered
                     le = context.LoggedExercises.Where(x => x.ExerciseBase.id == pair.Key).OrderByDescending(x => x.id).FirstOrDefault();
                     if (le != null)
                         rc.Add(le, pair.Value);
-                    response.Write("<br/> exGoals id:" + pair.Key +"& le.id:"+le.id);
                 }
             }
             catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
             }
 
             return rc;
@@ -157,10 +160,7 @@ public class routineManager
 
     /*
      * 4th step
-     * int[0] = rep
-     * int[1] = weight
-     * int[2] = distance
-     * int[3] = time
+     * int[0] = rep, int[1] = weight, int[2] = distance, int[3] = time
      * */
     public ICollection<SetAttributes> createSetAttribute(Dictionary<LoggedExercise, int[]> loggedExercises)
     {
@@ -171,17 +171,10 @@ public class routineManager
             LoggedExercise id = new LoggedExercise();
             try
             {
-                HttpResponse response = System.Web.HttpContext.Current.Response;
-                foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
-                {
-                    response.Write("<br/> loggedExercises:" + pair.Key.id);
-                }
-
                 foreach (KeyValuePair<LoggedExercise, int[]> pair in loggedExercises)
                 {
                     id = context.LoggedExercises.Where(x => pair.Key.id == x.id).FirstOrDefault();
                     sa.LoggedExercise = id;
-                    response.Write("<br/> sa id:" + sa.id + "& id.id" + id.id);
                     sa.reps = Convert.ToInt16(pair.Value[0]);
                     sa.weight = pair.Value[1];
                     sa.distance = pair.Value[2];
@@ -197,6 +190,12 @@ public class routineManager
             catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
             }
 
             return rc;
@@ -211,23 +210,19 @@ public class routineManager
             ICollection<ExerciseGoal> rc = new List<ExerciseGoal>();
             ExerciseGoal eg = new ExerciseGoal();
             SetAttributes id = new SetAttributes();
+            Routine rt = new Routine();
             try
             {
-                Routine rt = new Routine();
-                
-               
                 foreach (SetAttributes sa in setAttributes)
                 {
                     rt = context.Routines.Where(x => x.id == routineID).First();
                     eg.Routine = rt;
                     id = context.SetAttributes.Where(x => x.id == sa.id).FirstOrDefault();
                     eg.SetAttribute = id;
-                   
+
                     Exercise ex = context.Exercises.Where(x => x.id == id.LoggedExercise.ExerciseBase.id).FirstOrDefault();
                     if (ex != null)
                         eg.ExerciseBase = ex;
-                    //response.Write("<br/> ex id:" + ex.id);
-                    //response.Write("<br/><br/> eg.id:" + eg.id + "<br/>eg.said:"+eg.SetAttribute.id+"<br/>eg.exid"+eg.SetAttribute.LoggedExercise.ExerciseBase.id);
                     context.ExerciseGoals.AddObject(eg);
                     rc.Add(eg);
                     eg = new ExerciseGoal();
@@ -235,16 +230,16 @@ public class routineManager
                     rt = new Routine();
                 }
                 context.SaveChanges();
-                /*
-                foreach (ExerciseGoal pair in rc)
-                {
-                    response.Write("<br/><br/> rc:" + pair.id + "<br/>rc.rt" + pair.Routine.id + "<br/>rc.set" + pair.SetAttribute.id + "<br/>rc.ex"+pair.SetAttribute.LoggedExercise.ExerciseBase.id);
-                }
-                 * */
             }
             catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
             }
 
             return rc;

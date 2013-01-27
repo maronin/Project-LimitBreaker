@@ -1,4 +1,26 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CreateNewRoutine.ascx.cs" Inherits="ui_uc_CreateNewRoutine" %>
+<!-- credits to: kubben, url: http://www.codeproject.com/Articles/17241/Capturing-the-Enter-key-to-cause-a-button-click -->
+<script type="text/javascript">
+    function doClick(buttonName, e) {
+        //the purpose of this function is to allow the enter key to 
+        //point to the correct button to click.
+        var key;
+
+        if (window.event)
+            key = window.event.keyCode;     //IE
+        else
+            key = e.which;     //firefox
+
+        if (key == 13) {
+            //Get the button the user wants to have clicked
+            var btn = document.getElementById(buttonName);
+            if (btn != null) { //If we find the button click it
+                btn.click();
+                event.keyCode = 0
+            }
+        }
+    }
+</script>
 <style type="text/css">
     .auto-style1 {
         width: 100%;
@@ -105,7 +127,7 @@
             <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClientClick="return Validate()" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" />
         </td>
         <td>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9]+" ValidationGroup="RtnName" Display="Dynamic"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9 ]+" ValidationGroup="RtnName" Display="Dynamic"></asp:RegularExpressionValidator>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbRoutineName" Display="Dynamic" ErrorMessage="Name is needed" ForeColor="Red" ValidationGroup="RtnName"></asp:RequiredFieldValidator>
         </td>
     </tr>
