@@ -13,6 +13,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         manager = new routineManager();
+        CreateNewRoutine.userID = Page.User.Identity.Name;
     }
 
     // When a routine is selected from the list, user will be able to modify, delete and view details of the routine
@@ -20,7 +21,13 @@ public partial class userRoutines_Default : System.Web.UI.Page
     {
         // bind the data source of the details view with a routine object
         // convert to a temporary list of routines so that it can be bound
-        dvRoutineDetails.DataSource = new List<Routine> { manager.getRoutine(Convert.ToInt32(rblRoutines.SelectedValue)) };
+        dvRoutineDetails.DataSource = new List<Routine> { manager.getRoutine(Convert.ToInt32(rblRoutines.SelectedValue.ToString())) };
         dvRoutineDetails.DataBind();
+
+        bool loggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+        if (loggedIn)
+            LoginName1.Visible = true;
+        else
+            LoginName1.Visible = false;
     }
 }
