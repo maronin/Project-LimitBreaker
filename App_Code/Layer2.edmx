@@ -735,15 +735,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" Nullable="false" />
           <Property Name="username" Nullable="false" Type="String" />
           <Property Type="String" Name="gender" Nullable="false" />
-          <Property Type="DateTime" Name="dateOfBirth" Nullable="false" />
+          <Property Type="Int16" Name="age" Nullable="false" />
           <Property Type="Boolean" Name="verified" Nullable="false" />
           <Property Type="Boolean" Name="deactivated" Nullable="false" />
-          <Property Type="String" Name="role" Nullable="false" />
-          <Property Type="String" Name="status" Nullable="false" />
-          <Property Type="DateTime" Name="lastTimeSuggestionMade" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" />
           <NavigationProperty Name="ScheduledExercise" Relationship="Layer2.ScheduledExerciseLimitBreaker" FromRole="LimitBreaker" ToRole="ScheduledExercise" />
           <NavigationProperty Name="EmailNotifications" Relationship="Layer2.LimitBreakerEmailNotification" FromRole="LimitBreaker" ToRole="EmailNotification" />
           <NavigationProperty Name="Statistics" Relationship="Layer2.LimitBreakerStatistics" FromRole="LimitBreaker" ToRole="Statistics" />
@@ -769,7 +766,7 @@
           <Property Type="Double" Name="weight" Nullable="false" />
           <Property Type="Double" Name="height" Nullable="false" />
           <Property Type="Double" Name="rmr" Nullable="false" />
-          <Property Type="Double" Name="bmr" Nullable="false" />
+          <Property Type="Double" Name="bmi" Nullable="false" />
           <Property Type="Double" Name="vo2MAX" Nullable="false" />
           <NavigationProperty Name="LimitBreaker" Relationship="Layer2.LimitBreakerStatistics" FromRole="Statistics" ToRole="LimitBreaker" />
         </EntityType>
@@ -931,15 +928,12 @@
       <EntityTypeMapping TypeName="IsTypeOf(Layer2.LimitBreaker)">
         <MappingFragment StoreEntitySet="LimitBreakers">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="gender" ColumnName="gender" />
-          <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+          <ScalarProperty Name="age" ColumnName="dateOfBirth" />
           <ScalarProperty Name="verified" ColumnName="verified" />
           <ScalarProperty Name="deactivated" ColumnName="deactivated" />
-          <ScalarProperty Name="role" ColumnName="role" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="lastTimeSuggestionMade" ColumnName="lastTimeSuggestionMade" />
+          <ScalarProperty Name="email" ColumnName="status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -952,7 +946,7 @@
           <ScalarProperty Name="weight" ColumnName="weight" />
           <ScalarProperty Name="height" ColumnName="height" />
           <ScalarProperty Name="rmr" ColumnName="rmr" />
-          <ScalarProperty Name="bmr" ColumnName="bmr" />
+          <ScalarProperty Name="bmi" ColumnName="bmr" />
           <ScalarProperty Name="vo2MAX" ColumnName="vo2MAX" />
         </MappingFragment>
       </EntityTypeMapping>
