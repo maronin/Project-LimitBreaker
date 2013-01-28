@@ -79,11 +79,25 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         mngUserExpBtn.Enabled = false;
         mngExerciseExpBtn.Enabled = true;
         functionalityMultiView.ActiveViewIndex = 1;
+        loadUserExpFields();
     }
 
     protected void saveAtrophyBtn_Click(object sender, EventArgs e)
     {
+        try
+        {
+            if (expMngr.modifyExperienceAtrophy(Convert.ToInt32(inactiveTimeTxtBox.Text), Convert.ToInt32(expLossTxtBox.Text)))
+                saveAtrophyResultLbl.Text = "Experience atrophy has been successfully modified!";
+            else
+                saveAtrophyResultLbl.Text = "Something went wrong with the modifying of expereince atrophy...";
+        }
 
+        catch (Exception ex)
+        {
+            saveAtrophyResultLbl.Text = "Something went wrong with the modifying of expereince atrophy: " + ex.Message;
+        }
+
+        loadUserExpFields();
     }
 
     protected void loadExerciseExpFields()
