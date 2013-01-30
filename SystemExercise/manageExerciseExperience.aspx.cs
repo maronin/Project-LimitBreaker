@@ -16,13 +16,17 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
         if (!Page.IsPostBack)
         {
-            loadFields();
+            functionalityMultiView.ActiveViewIndex = 0;
+            mngExerciseExpBtn.Enabled = false;
+            mngUserExpBtn.Enabled = true;
+            loadExerciseExpFields();
+            loadUserExpFields();
         }
     }
 
     private void viewExerciseExp_userControlEventHappened(object sender, EventArgs e)
     {
-        loadFields();
+        loadExerciseExpFields();
         saveResultLbl.Text = "";
     }
 
@@ -41,7 +45,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             saveResultLbl.Text = "Something went wrong with the update and the exercise has not been modified: " + ex.Message;
         }
 
-        loadFields();
+        loadExerciseExpFields();
     }
 
     protected void addExpBtn_Click(object sender, EventArgs e)
@@ -59,10 +63,44 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             addResultLbl.Text = "Something went wrong with the adding of the exercise experience and it has not been added to the selected exercise: " + ex.Message;
         }
 
-        loadFields();
+        loadExerciseExpFields();
+    }
+    
+    protected void mngExerciseExpBtn_Click(object sender, EventArgs e)
+    {
+        mngExerciseExpBtn.Enabled = false;
+        mngUserExpBtn.Enabled = true;
+        functionalityMultiView.ActiveViewIndex = 0;
+        saveAtrophyResultLbl.Text = "";
     }
 
-    protected void loadFields()
+    protected void mngUserExpBtn_Click(object sender, EventArgs e)
+    {
+        mngUserExpBtn.Enabled = false;
+        mngExerciseExpBtn.Enabled = true;
+        functionalityMultiView.ActiveViewIndex = 1;
+        loadUserExpFields();
+    }
+
+    protected void saveAtrophyBtn_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (expMngr.modifyExperienceAtrophy(Convert.ToInt32(inactiveTimeTxtBox.Text), Convert.ToInt32(expLossTxtBox.Text)))
+                saveAtrophyResultLbl.Text = "Experience atrophy has been successfully modified!";
+            else
+                saveAtrophyResultLbl.Text = "Something went wrong with the modifying of expereince atrophy...";
+        }
+
+        catch (Exception ex)
+        {
+            saveAtrophyResultLbl.Text = "Something went wrong with the modifying of expereince atrophy: " + ex.Message;
+        }
+
+        loadUserExpFields();
+    }
+
+    protected void loadExerciseExpFields()
     {
         if (viewExerciseExp.ddlCount != 0)
         {
@@ -157,5 +195,22 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             manageExperienceMultiView.ActiveViewIndex = 0;
         }
 
+    }
+
+    protected void loadUserExpFields()
+    {
+        try
+        {
+            ExperienceAtrophy expAtrphy = expMngr.getExperienceAtrophy();
+            expLossTxtBox.Text = expAtrphy.baseLoss.ToString();
+            inactiveTimeTxtBox.Text = expAtrphy.graceDays.ToString();
+        }
+
+        catch (Exception ex)
+        {
+            saveAtrophyResultLbl.Text = "Something went wrong with retrieving values from the database: " + ex.Message;
+            expLossTxtBox.Text = "0";
+            inactiveTimeTxtBox.Text = "0";
+        }
     }
 }

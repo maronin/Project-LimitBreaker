@@ -83,4 +83,38 @@ public class ExperienceManager
             return context.ExerciseExps.Where(s => s.Exercise.name == name).FirstOrDefault();
         }
     }
+
+    public bool modifyExperienceAtrophy(int days, int loss)
+    {
+        bool rc = false;
+
+        using (var context = new Layer2Container())
+        {
+            try
+            {
+                ExperienceAtrophy expAtrophy = context.ExperienceAtrophies.FirstOrDefault();
+
+                expAtrophy.graceDays = days;
+                expAtrophy.baseLoss = loss;
+
+                context.SaveChanges();
+                rc = true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        return rc;
+    }
+
+    public ExperienceAtrophy getExperienceAtrophy()
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.ExperienceAtrophies.FirstOrDefault();
+        }
+    }
 }
