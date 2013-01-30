@@ -117,4 +117,12 @@ public class ExperienceManager
             return context.ExperienceAtrophies.FirstOrDefault();
         }
     }
+
+    public LevelFormula getLevelFormulaValues()
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.LevelFormulas.FirstOrDefault();
+        }
+    }
 }

@@ -269,8 +269,45 @@
                     <h4>
                         Modify Required Experience For Leveling Up</h4>
 
-
-
+                    <table>
+                        <tr>
+                            <td class="style12">
+                                Max Level:
+                            </td>
+                            <td class ="style9">
+                                <asp:TextBox ID="maxLvlTxtBox" runat="server"></asp:TextBox>
+                            </td>
+                            <td class="style10">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style12">
+                                Base Required Exp:
+                            </td>
+                            <td class="style9">
+                                <asp:TextBox ID="baseReqTxtBox" runat="server"></asp:TextBox>
+                            </td>
+                            <td class="style10">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style12">
+                                Required Exp Modifier:
+                            </td>
+                            <td class="style9">
+                                <asp:TextBox ID="expModTxtBox" runat="server"></asp:TextBox>
+                            </td>
+                            <td class="style10">
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <asp:Button ID="saveLvlFormulaBtn" runat="server" Text="Save" 
+                        onclick="saveLvlFormulaBtn_Click" />
+                    <asp:Label ID="saveLvlFormulaResultLbl" runat="server" Text=""></asp:Label>
                 </div>
             </asp:View>
         </asp:MultiView>

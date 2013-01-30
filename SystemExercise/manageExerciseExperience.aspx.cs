@@ -100,6 +100,11 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         loadUserExpFields();
     }
 
+    protected void saveLvlFormulaBtn_Click(object sender, EventArgs e)
+    {
+
+    }
+
     protected void loadExerciseExpFields()
     {
         if (viewExerciseExp.ddlCount != 0)
@@ -211,6 +216,22 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             saveAtrophyResultLbl.Text = "Something went wrong with retrieving values from the database: " + ex.Message;
             expLossTxtBox.Text = "0";
             inactiveTimeTxtBox.Text = "0";
+        }
+
+        try
+        {
+            LevelFormula lvlForm = expMngr.getLevelFormulaValues();
+            maxLvlTxtBox.Text = lvlForm.maxLevel.ToString();
+            baseReqTxtBox.Text = lvlForm.baseRequired.ToString();
+            expModTxtBox.Text = lvlForm.expModifier.ToString();
+        }
+
+        catch (Exception ex)
+        {
+            saveLvlFormulaResultLbl.Text = "Something went wrong with retrieving values from the database: " + ex.Message;
+            maxLvlTxtBox.Text = "0";
+            baseReqTxtBox.Text = "0";
+            expModTxtBox.Text = "0";
         }
     }
 }
