@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 01/31/2013 16:58:01
+-- Date Created: 01/31/2013 18:07:45
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -17,23 +17,20 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_LoggedExerciseSetAttributes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SetAttributes] DROP CONSTRAINT [FK_LoggedExerciseSetAttributes];
+IF OBJECT_ID(N'[dbo].[FK_ExerciseExerciseExp]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ExerciseExps] DROP CONSTRAINT [FK_ExerciseExerciseExp];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ScheduledExerciseExercise]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ScheduledExercises] DROP CONSTRAINT [FK_ScheduledExerciseExercise];
+IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalExercise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalExercise];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RoutineExerciseGoal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_RoutineExerciseGoal];
+IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalLimitBreaker]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalLimitBreaker];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ScheduledRoutineRoutine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ScheduledRoutines] DROP CONSTRAINT [FK_ScheduledRoutineRoutine];
+IF OBJECT_ID(N'[dbo].[FK_ExerciseLoggedExercise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_ExerciseLoggedExercise];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ScheduledExerciseLimitBreaker]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ScheduledExercises] DROP CONSTRAINT [FK_ScheduledExerciseLimitBreaker];
-GO
-IF OBJECT_ID(N'[dbo].[FK_LimitBreakerStatistics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[LimitBreakers] DROP CONSTRAINT [FK_LimitBreakerStatistics];
+IF OBJECT_ID(N'[dbo].[FK_LimitBreakerLoggedExercise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_LimitBreakerLoggedExercise];
 GO
 IF OBJECT_ID(N'[dbo].[FK_LimitBreakerRoutine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Routines] DROP CONSTRAINT [FK_LimitBreakerRoutine];
@@ -41,67 +38,70 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_LimitBreakerScheduledRoutine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ScheduledRoutines] DROP CONSTRAINT [FK_LimitBreakerScheduledRoutine];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LimitBreakerLoggedExercise]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_LimitBreakerLoggedExercise];
+IF OBJECT_ID(N'[dbo].[FK_LimitBreakerStatistics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LimitBreakers] DROP CONSTRAINT [FK_LimitBreakerStatistics];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LoggedExerciseRoutine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_LoggedExerciseRoutine];
+IF OBJECT_ID(N'[dbo].[FK_LoggedExerciseSetAttributes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SetAttributes] DROP CONSTRAINT [FK_LoggedExerciseSetAttributes];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ExerciseLoggedExercise]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_ExerciseLoggedExercise];
+IF OBJECT_ID(N'[dbo].[FK_NotificationLimitBreaker]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Notifications] DROP CONSTRAINT [FK_NotificationLimitBreaker];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalExerciseBase]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalExerciseBase];
+IF OBJECT_ID(N'[dbo].[FK_RoutineExercise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Exercises] DROP CONSTRAINT [FK_RoutineExercise];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ExerciseExerciseExp]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ExerciseExps] DROP CONSTRAINT [FK_ExerciseExerciseExp];
+IF OBJECT_ID(N'[dbo].[FK_ScheduledExerciseExercise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduledExercises] DROP CONSTRAINT [FK_ScheduledExerciseExercise];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SetAttributesExerciseGoal]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_SetAttributesExerciseGoal];
+IF OBJECT_ID(N'[dbo].[FK_ScheduledExerciseLimitBreaker]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduledExercises] DROP CONSTRAINT [FK_ScheduledExerciseLimitBreaker];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ScheduledRoutineRoutine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ScheduledRoutines] DROP CONSTRAINT [FK_ScheduledRoutineRoutine];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Exercises]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Exercises];
-GO
-IF OBJECT_ID(N'[dbo].[ScheduledExercises]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ScheduledExercises];
-GO
-IF OBJECT_ID(N'[dbo].[LoggedExercises]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[LoggedExercises];
-GO
-IF OBJECT_ID(N'[dbo].[SetAttributes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SetAttributes];
+IF OBJECT_ID(N'[dbo].[ExerciseExps]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ExerciseExps];
 GO
 IF OBJECT_ID(N'[dbo].[ExerciseGoals]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExerciseGoals];
 GO
-IF OBJECT_ID(N'[dbo].[Routines]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Routines];
-GO
-IF OBJECT_ID(N'[dbo].[ScheduledRoutines]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ScheduledRoutines];
-GO
-IF OBJECT_ID(N'[dbo].[LevelFormulas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[LevelFormulas];
+IF OBJECT_ID(N'[dbo].[Exercises]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Exercises];
 GO
 IF OBJECT_ID(N'[dbo].[ExperienceAtrophies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExperienceAtrophies];
 GO
-IF OBJECT_ID(N'[dbo].[Notifications]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Notifications];
+IF OBJECT_ID(N'[dbo].[LevelFormulas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LevelFormulas];
 GO
 IF OBJECT_ID(N'[dbo].[LimitBreakers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[LimitBreakers];
 GO
+IF OBJECT_ID(N'[dbo].[LoggedExercises]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LoggedExercises];
+GO
+IF OBJECT_ID(N'[dbo].[Notifications]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Notifications];
+GO
+IF OBJECT_ID(N'[dbo].[Routines]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Routines];
+GO
+IF OBJECT_ID(N'[dbo].[ScheduledExercises]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ScheduledExercises];
+GO
+IF OBJECT_ID(N'[dbo].[ScheduledRoutines]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ScheduledRoutines];
+GO
+IF OBJECT_ID(N'[dbo].[SetAttributes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SetAttributes];
+GO
 IF OBJECT_ID(N'[dbo].[Statistics]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Statistics];
-GO
-IF OBJECT_ID(N'[dbo].[ExerciseExps]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ExerciseExps];
 GO
 
 -- --------------------------------------------------
@@ -119,8 +119,7 @@ CREATE TABLE [dbo].[Exercises] (
     [time] bit  NOT NULL,
     [enabled] bit  NOT NULL,
     [id] int IDENTITY(1,1) NOT NULL,
-    [muscleGroups] nvarchar(max)  NOT NULL,
-    [Routine_id] int  NOT NULL
+    [muscleGroups] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -173,7 +172,8 @@ CREATE TABLE [dbo].[Routines] (
     [id] int IDENTITY(1,1) NOT NULL,
     [last_modified] datetime  NOT NULL,
     [name] nvarchar(max)  NOT NULL,
-    [LimitBreaker_id] int  NOT NULL
+    [LimitBreaker_id] int  NOT NULL,
+    [Exercise_id] int  NULL
 );
 GO
 
@@ -520,18 +520,18 @@ ON [dbo].[ExerciseGoals]
     ([Exercise_id]);
 GO
 
--- Creating foreign key on [Routine_id] in table 'Exercises'
-ALTER TABLE [dbo].[Exercises]
-ADD CONSTRAINT [FK_RoutineExercise]
-    FOREIGN KEY ([Routine_id])
-    REFERENCES [dbo].[Routines]
+-- Creating foreign key on [Exercise_id] in table 'Routines'
+ALTER TABLE [dbo].[Routines]
+ADD CONSTRAINT [FK_ExerciseRoutine]
+    FOREIGN KEY ([Exercise_id])
+    REFERENCES [dbo].[Exercises]
         ([id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_RoutineExercise'
-CREATE INDEX [IX_FK_RoutineExercise]
-ON [dbo].[Exercises]
-    ([Routine_id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_ExerciseRoutine'
+CREATE INDEX [IX_FK_ExerciseRoutine]
+ON [dbo].[Routines]
+    ([Exercise_id]);
 GO
 
 -- --------------------------------------------------
