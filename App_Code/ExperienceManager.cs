@@ -151,5 +151,30 @@ public class ExperienceManager
         }
 
         return rc;
-     }
+    }
+
+    public int calculateLoggedExerciseExperience(string exerciseName, List<SetAttributes> setValues)
+    {
+        int resultExp = 0;
+        ExerciseExp exerciseExp = getExerciseExpByExerciseName(exerciseName);
+
+        //use modifiers in exerciseExp and the values in setValues to calculate the exp and store it in resultExp
+        //eg exerciseExp.timeModifer * setValues.set1.time
+
+        return resultExp;
+    }
+
+    public int calculateLoggedRoutineExperience(int routineId)
+    {
+        int resultExp = 0;
+        routineManager rm = new routineManager();
+        List<LoggedExercise> loggedExerciseSet = rm.getLoggedExercisesInRoutineById(routineId);
+
+        foreach (LoggedExercise le in loggedExerciseSet)
+        {
+            resultExp += calculateLoggedExerciseExperience(le.ExerciseBase.name, le.SetAttributes.ToList());
+        }
+
+        return resultExp;
+    }
 }

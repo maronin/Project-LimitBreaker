@@ -247,4 +247,11 @@ public class routineManager
     }
 
 
+    public List<LoggedExercise> getLoggedExercisesInRoutineById(int routineId)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.LoggedExercises.Where(s => s.Routine.id == routineId).OrderBy(o => o.id).ToList();
+        }
+    }
 }
