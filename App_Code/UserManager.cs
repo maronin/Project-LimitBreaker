@@ -62,4 +62,9 @@ public class UserManager
         }
         return rc;
     }
+
+    public double convertHeightToMetric(Double foot, Double inches)
+    {
+        return foot * 30.48 + inches * 2.54;
+    }
 }

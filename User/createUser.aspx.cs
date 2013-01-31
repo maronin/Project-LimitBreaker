@@ -18,12 +18,15 @@ public partial class User_createUser : System.Web.UI.Page
         String password=((TextBox)LoginView1.FindControl("password")).Text;
         String email=((TextBox)LoginView1.FindControl("email")).Text;
         String gender=((RadioButtonList)LoginView1.FindControl("gender")).SelectedValue;
-        Double 
+        String tempFoot=((TextBox)LoginView1.FindControl("heightFoot")).Text;
+        String tempInch=((TextBox)LoginView1.FindControl("heightInch")).Text;
 
         System.Web.Security.MembershipCreateStatus status;
         System.Web.Security.Membership.CreateUser(userName, password, email, "none", "none", true, out status);
         System.Web.Security.Roles.AddUserToRole(userName, "user");
 
-        manager.createNewLimitBreaker(userName, email, 
+        Double height=manager.convertHeightToMetric(Convert.ToDouble(tempFoot), Convert.ToDouble(tempInch));
+
+        manager.createNewLimitBreaker(userName, email, gender,
     }
 }
