@@ -71,7 +71,6 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         mngExerciseExpBtn.Enabled = false;
         mngUserExpBtn.Enabled = true;
         functionalityMultiView.ActiveViewIndex = 0;
-        saveAtrophyResultLbl.Text = "";
     }
 
     protected void mngUserExpBtn_Click(object sender, EventArgs e)
@@ -79,6 +78,8 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         mngUserExpBtn.Enabled = false;
         mngExerciseExpBtn.Enabled = true;
         functionalityMultiView.ActiveViewIndex = 1;
+        saveAtrophyResultLbl.Text = "";
+        saveLvlFormulaResultLbl.Text = "";
         loadUserExpFields();
     }
 
@@ -97,12 +98,27 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             saveAtrophyResultLbl.Text = "Something went wrong with the modifying of expereince atrophy: " + ex.Message;
         }
 
+        saveLvlFormulaResultLbl.Text = "";
         loadUserExpFields();
     }
 
     protected void saveLvlFormulaBtn_Click(object sender, EventArgs e)
     {
+        try
+        {
+            if (expMngr.modifyLevelFormula(Convert.ToInt32(maxLvlTxtBox.Text), Convert.ToDouble(expModTxtBox.Text), Convert.ToInt32(baseReqTxtBox.Text)))
+                saveLvlFormulaResultLbl.Text = "The level formula has been successfully modified!";
+            else
+                saveLvlFormulaResultLbl.Text = "Something went wrong with the modifying of the level formula...";
+        }
 
+        catch (Exception ex)
+        {
+            saveLvlFormulaResultLbl.Text = "Something went wrong with the modifying of the level formula: " + ex.Message;
+        }
+
+        saveAtrophyResultLbl.Text = "";
+        loadUserExpFields();
     }
 
     protected void loadExerciseExpFields()

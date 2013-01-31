@@ -278,7 +278,13 @@
                                 <asp:TextBox ID="maxLvlTxtBox" runat="server"></asp:TextBox>
                             </td>
                             <td class="style10">
-                                
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Required"
+                                    ControlToValidate="maxLvlTxtBox" Display="Dynamic" ForeColor="Red" 
+                                    ValidationGroup="lvlFormula"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server"
+                                    ErrorMessage="*Must be a whole number" ControlToValidate="maxLvlTxtBox"
+                                    Display="Dynamic" ForeColor="Red" ValidationGroup="lvlFormula" 
+                                    ValidationExpression="[0-9]+"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                         <tr>
@@ -289,7 +295,13 @@
                                 <asp:TextBox ID="baseReqTxtBox" runat="server"></asp:TextBox>
                             </td>
                             <td class="style10">
-                                
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*Required"
+                                    ControlToValidate="baseReqTxtBox" Display="Dynamic" ForeColor="Red" 
+                                    ValidationGroup="lvlFormula"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server"
+                                    ErrorMessage="*Must be a whole number" ControlToValidate="baseReqTxtBox"
+                                    Display="Dynamic" ForeColor="Red" ValidationGroup="lvlFormula" 
+                                    ValidationExpression="[0-9]+"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                         <tr>
@@ -300,13 +312,19 @@
                                 <asp:TextBox ID="expModTxtBox" runat="server"></asp:TextBox>
                             </td>
                             <td class="style10">
-                                
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*Required"
+                                    ControlToValidate="expModTxtBox" Display="Dynamic" ForeColor="Red" 
+                                    ValidationGroup="lvlFormula"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server"
+                                    ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" ControlToValidate="expModTxtBox"
+                                    Display="Dynamic" ForeColor="Red" ValidationGroup="lvlFormula" 
+                                    ValidationExpression="[0-9]+([\.][0-9]{1,3})?$"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
                     <br />
                     <asp:Button ID="saveLvlFormulaBtn" runat="server" Text="Save" 
-                        onclick="saveLvlFormulaBtn_Click" />
+                        onclick="saveLvlFormulaBtn_Click" ValidationGroup="lvlFormula" />
                     <asp:Label ID="saveLvlFormulaResultLbl" runat="server" Text=""></asp:Label>
                 </div>
             </asp:View>
