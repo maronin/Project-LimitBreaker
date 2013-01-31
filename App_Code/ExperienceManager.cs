@@ -117,4 +117,39 @@ public class ExperienceManager
             return context.ExperienceAtrophies.FirstOrDefault();
         }
     }
+
+    public LevelFormula getLevelFormulaValues()
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.LevelFormulas.FirstOrDefault();
+        }
+    }
+
+    public bool modifyLevelFormula(int maxLvl, double expMod, int baseReq)
+    {
+        bool rc = false;
+
+        using (var context = new Layer2Container())
+        {
+            try
+            {
+                LevelFormula lvlForm = context.LevelFormulas.FirstOrDefault();
+
+                lvlForm.maxLevel = maxLvl;
+                lvlForm.expModifier = expMod;
+                lvlForm.baseRequired = baseReq;
+
+                context.SaveChanges();
+                rc = true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        return rc;
+     }
 }
