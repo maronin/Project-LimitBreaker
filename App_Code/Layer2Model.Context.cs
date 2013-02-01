@@ -40,29 +40,11 @@ public partial class Layer2Container : ObjectContext
 
     #region ObjectSet Properties
 
-    public ObjectSet<Exercise> Exercises
+    public ObjectSet<ExerciseExp> ExerciseExps
     {
-        get { return _exercises  ?? (_exercises = CreateObjectSet<Exercise>("Exercises")); }
+        get { return _exerciseExps  ?? (_exerciseExps = CreateObjectSet<ExerciseExp>("ExerciseExps")); }
     }
-    private ObjectSet<Exercise> _exercises;
-
-    public ObjectSet<ScheduledExercise> ScheduledExercises
-    {
-        get { return _scheduledExercises  ?? (_scheduledExercises = CreateObjectSet<ScheduledExercise>("ScheduledExercises")); }
-    }
-    private ObjectSet<ScheduledExercise> _scheduledExercises;
-
-    public ObjectSet<LoggedExercise> LoggedExercises
-    {
-        get { return _loggedExercises  ?? (_loggedExercises = CreateObjectSet<LoggedExercise>("LoggedExercises")); }
-    }
-    private ObjectSet<LoggedExercise> _loggedExercises;
-
-    public ObjectSet<SetAttributes> SetAttributes
-    {
-        get { return _setAttributes  ?? (_setAttributes = CreateObjectSet<SetAttributes>("SetAttributes")); }
-    }
-    private ObjectSet<SetAttributes> _setAttributes;
+    private ObjectSet<ExerciseExp> _exerciseExps;
 
     public ObjectSet<ExerciseGoal> ExerciseGoals
     {
@@ -70,23 +52,11 @@ public partial class Layer2Container : ObjectContext
     }
     private ObjectSet<ExerciseGoal> _exerciseGoals;
 
-    public ObjectSet<Routine> Routines
+    public ObjectSet<Exercise> Exercises
     {
-        get { return _routines  ?? (_routines = CreateObjectSet<Routine>("Routines")); }
+        get { return _exercises  ?? (_exercises = CreateObjectSet<Exercise>("Exercises")); }
     }
-    private ObjectSet<Routine> _routines;
-
-    public ObjectSet<ScheduledRoutine> ScheduledRoutines
-    {
-        get { return _scheduledRoutines  ?? (_scheduledRoutines = CreateObjectSet<ScheduledRoutine>("ScheduledRoutines")); }
-    }
-    private ObjectSet<ScheduledRoutine> _scheduledRoutines;
-
-    public ObjectSet<LevelFormula> LevelFormulas
-    {
-        get { return _levelFormulas  ?? (_levelFormulas = CreateObjectSet<LevelFormula>("LevelFormulas")); }
-    }
-    private ObjectSet<LevelFormula> _levelFormulas;
+    private ObjectSet<Exercise> _exercises;
 
     public ObjectSet<ExperienceAtrophy> ExperienceAtrophies
     {
@@ -94,11 +64,11 @@ public partial class Layer2Container : ObjectContext
     }
     private ObjectSet<ExperienceAtrophy> _experienceAtrophies;
 
-    public ObjectSet<Notification> Notifications
+    public ObjectSet<LevelFormula> LevelFormulas
     {
-        get { return _notifications  ?? (_notifications = CreateObjectSet<Notification>("Notifications")); }
+        get { return _levelFormulas  ?? (_levelFormulas = CreateObjectSet<LevelFormula>("LevelFormulas")); }
     }
-    private ObjectSet<Notification> _notifications;
+    private ObjectSet<LevelFormula> _levelFormulas;
 
     public ObjectSet<LimitBreaker> LimitBreakers
     {
@@ -106,17 +76,47 @@ public partial class Layer2Container : ObjectContext
     }
     private ObjectSet<LimitBreaker> _limitBreakers;
 
-    public ObjectSet<Statistics> Statistics
+    public ObjectSet<LoggedExercis> LoggedExercises
     {
-        get { return _statistics  ?? (_statistics = CreateObjectSet<Statistics>("Statistics")); }
+        get { return _loggedExercises  ?? (_loggedExercises = CreateObjectSet<LoggedExercis>("LoggedExercises")); }
     }
-    private ObjectSet<Statistics> _statistics;
+    private ObjectSet<LoggedExercis> _loggedExercises;
 
-    public ObjectSet<ExerciseExp> ExerciseExps
+    public ObjectSet<Notification> Notifications
     {
-        get { return _exerciseExps  ?? (_exerciseExps = CreateObjectSet<ExerciseExp>("ExerciseExps")); }
+        get { return _notifications  ?? (_notifications = CreateObjectSet<Notification>("Notifications")); }
     }
-    private ObjectSet<ExerciseExp> _exerciseExps;
+    private ObjectSet<Notification> _notifications;
+
+    public ObjectSet<Routine> Routines
+    {
+        get { return _routines  ?? (_routines = CreateObjectSet<Routine>("Routines")); }
+    }
+    private ObjectSet<Routine> _routines;
+
+    public ObjectSet<ScheduledExercis> ScheduledExercises
+    {
+        get { return _scheduledExercises  ?? (_scheduledExercises = CreateObjectSet<ScheduledExercis>("ScheduledExercises")); }
+    }
+    private ObjectSet<ScheduledExercis> _scheduledExercises;
+
+    public ObjectSet<ScheduledRoutine> ScheduledRoutines
+    {
+        get { return _scheduledRoutines  ?? (_scheduledRoutines = CreateObjectSet<ScheduledRoutine>("ScheduledRoutines")); }
+    }
+    private ObjectSet<ScheduledRoutine> _scheduledRoutines;
+
+    public ObjectSet<SetAttribute> SetAttributes
+    {
+        get { return _setAttributes  ?? (_setAttributes = CreateObjectSet<SetAttribute>("SetAttributes")); }
+    }
+    private ObjectSet<SetAttribute> _setAttributes;
+
+    public ObjectSet<Statistic> Statistics
+    {
+        get { return _statistics  ?? (_statistics = CreateObjectSet<Statistic>("Statistics")); }
+    }
+    private ObjectSet<Statistic> _statistics;
 
     #endregion
 }
