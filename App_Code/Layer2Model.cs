@@ -192,37 +192,37 @@ public partial class Exercise
     }
     private ExerciseGoal _exerciseGoal;
 
-    public virtual ICollection<MuscleGroup> MuscleGroups
+    public virtual ICollection<Routine> Routines
     {
         get
         {
-            if (_muscleGroups == null)
+            if (_routines == null)
             {
-                var newCollection = new FixupCollection<MuscleGroup>();
-                newCollection.CollectionChanged += FixupMuscleGroups;
-                _muscleGroups = newCollection;
+                var newCollection = new FixupCollection<Routine>();
+                newCollection.CollectionChanged += FixupRoutines;
+                _routines = newCollection;
             }
-            return _muscleGroups;
+            return _routines;
         }
         set
         {
-            if (!ReferenceEquals(_muscleGroups, value))
+            if (!ReferenceEquals(_routines, value))
             {
-                var previousValue = _muscleGroups as FixupCollection<MuscleGroup>;
+                var previousValue = _routines as FixupCollection<Routine>;
                 if (previousValue != null)
                 {
-                    previousValue.CollectionChanged -= FixupMuscleGroups;
+                    previousValue.CollectionChanged -= FixupRoutines;
                 }
-                _muscleGroups = value;
-                var newValue = value as FixupCollection<MuscleGroup>;
+                _routines = value;
+                var newValue = value as FixupCollection<Routine>;
                 if (newValue != null)
                 {
-                    newValue.CollectionChanged += FixupMuscleGroups;
+                    newValue.CollectionChanged += FixupRoutines;
                 }
             }
         }
     }
-    private ICollection<MuscleGroup> _muscleGroups;
+    private ICollection<Routine> _routines;
 
     #endregion
 
@@ -298,11 +298,11 @@ public partial class Exercise
         }
     }
 
-    private void FixupMuscleGroups(object sender, NotifyCollectionChangedEventArgs e)
+    private void FixupRoutines(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
         {
-            foreach (MuscleGroup item in e.NewItems)
+            foreach (Routine item in e.NewItems)
             {
                 if (!item.Exercises.Contains(this))
                 {
@@ -313,7 +313,7 @@ public partial class Exercise
 
         if (e.OldItems != null)
         {
-            foreach (MuscleGroup item in e.OldItems)
+            foreach (Routine item in e.OldItems)
             {
                 if (item.Exercises.Contains(this))
                 {
@@ -1129,90 +1129,6 @@ public partial class LoggedExercise
     #endregion
 
 }
-public partial class MuscleGroup
-{
-    #region Primitive Properties
-
-    public virtual int Id
-    {
-        get;
-        set;
-    }
-
-    public virtual string name
-    {
-        get;
-        set;
-    }
-
-    #endregion
-
-    #region Navigation Properties
-
-    public virtual ICollection<Exercise> Exercises
-    {
-        get
-        {
-            if (_exercises == null)
-            {
-                var newCollection = new FixupCollection<Exercise>();
-                newCollection.CollectionChanged += FixupExercises;
-                _exercises = newCollection;
-            }
-            return _exercises;
-        }
-        set
-        {
-            if (!ReferenceEquals(_exercises, value))
-            {
-                var previousValue = _exercises as FixupCollection<Exercise>;
-                if (previousValue != null)
-                {
-                    previousValue.CollectionChanged -= FixupExercises;
-                }
-                _exercises = value;
-                var newValue = value as FixupCollection<Exercise>;
-                if (newValue != null)
-                {
-                    newValue.CollectionChanged += FixupExercises;
-                }
-            }
-        }
-    }
-    private ICollection<Exercise> _exercises;
-
-    #endregion
-
-    #region Association Fixup
-
-    private void FixupExercises(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null)
-        {
-            foreach (Exercise item in e.NewItems)
-            {
-                if (!item.MuscleGroups.Contains(this))
-                {
-                    item.MuscleGroups.Add(this);
-                }
-            }
-        }
-
-        if (e.OldItems != null)
-        {
-            foreach (Exercise item in e.OldItems)
-            {
-                if (item.MuscleGroups.Contains(this))
-                {
-                    item.MuscleGroups.Remove(this);
-                }
-            }
-        }
-    }
-
-    #endregion
-
-}
 public partial class Notification
 {
     #region Primitive Properties
@@ -1356,6 +1272,38 @@ public partial class Routine
     }
     private LimitBreaker _limitBreaker;
 
+    public virtual ICollection<Exercise> Exercises
+    {
+        get
+        {
+            if (_exercises == null)
+            {
+                var newCollection = new FixupCollection<Exercise>();
+                newCollection.CollectionChanged += FixupExercises;
+                _exercises = newCollection;
+            }
+            return _exercises;
+        }
+        set
+        {
+            if (!ReferenceEquals(_exercises, value))
+            {
+                var previousValue = _exercises as FixupCollection<Exercise>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupExercises;
+                }
+                _exercises = value;
+                var newValue = value as FixupCollection<Exercise>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupExercises;
+                }
+            }
+        }
+    }
+    private ICollection<Exercise> _exercises;
+
     #endregion
 
     #region Association Fixup
@@ -1393,6 +1341,31 @@ public partial class Routine
                 if (ReferenceEquals(item.Routine, this))
                 {
                     item.Routine = null;
+                }
+            }
+        }
+    }
+
+    private void FixupExercises(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (Exercise item in e.NewItems)
+            {
+                if (!item.Routines.Contains(this))
+                {
+                    item.Routines.Add(this);
+                }
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (Exercise item in e.OldItems)
+            {
+                if (item.Routines.Contains(this))
+                {
+                    item.Routines.Remove(this);
                 }
             }
         }

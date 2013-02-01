@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/01/2013 16:03:54
+-- Date Created: 02/01/2013 16:35:07
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -56,6 +56,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalExercise]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalExercise];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ExerciseRoutine_Exercise]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ExerciseRoutine] DROP CONSTRAINT [FK_ExerciseRoutine_Exercise];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ExerciseRoutine_Routine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ExerciseRoutine] DROP CONSTRAINT [FK_ExerciseRoutine_Routine];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -100,6 +106,9 @@ GO
 IF OBJECT_ID(N'[dbo].[ExerciseExps]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExerciseExps];
 GO
+IF OBJECT_ID(N'[dbo].[ExerciseRoutine]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ExerciseRoutine];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -115,7 +124,8 @@ CREATE TABLE [dbo].[Exercises] (
     [distance] bit  NOT NULL,
     [time] bit  NOT NULL,
     [enabled] bit  NOT NULL,
-    [id] int IDENTITY(1,1) NOT NULL
+    [id] int IDENTITY(1,1) NOT NULL,
+    [muscleGroups] nvarchar(max)  NOT NULL
 );
 GO
 

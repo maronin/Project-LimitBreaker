@@ -118,12 +118,6 @@ public partial class Layer2Container : ObjectContext
     }
     private ObjectSet<ExerciseExp> _exerciseExps;
 
-    public ObjectSet<MuscleGroup> MuscleGroups
-    {
-        get { return _muscleGroups  ?? (_muscleGroups = CreateObjectSet<MuscleGroup>("MuscleGroups")); }
-    }
-    private ObjectSet<MuscleGroup> _muscleGroups;
-
     #endregion
 
 }
