@@ -119,4 +119,5 @@ public partial class Layer2Container : ObjectContext
     private ObjectSet<ExerciseExp> _exerciseExps;
 
     #endregion
+
 }

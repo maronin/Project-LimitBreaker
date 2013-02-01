@@ -37,7 +37,7 @@ public class ScheduleManager
                             orderby e.startTime
                             select new scheduledItem
                             {
-                                itemName = e.ExerciseBase.name,
+                                itemName = e.Exercise.name,
                                 startTime = e.startTime,
                                 user = e.LimitBreakers
                             };

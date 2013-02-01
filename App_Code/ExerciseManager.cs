@@ -52,6 +52,8 @@ public class ExerciseManager
         return result;
     }
 
+    //BIG FUCKING ISSUE WITH THIS FUNCTION ON LINE 68!! This is a note for future reference.
+    //The logic fault is that if you clear a LoggedExercise's refernece to an exercise and the exercise still exists, then wtf?! Solution: deleting an exercise is NOT allowed, only disabling
     public bool deleteExerciseByName(string name)
     {
         bool result = true;
