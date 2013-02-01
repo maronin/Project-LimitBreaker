@@ -1066,10 +1066,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Layer2" ZoomLevel="94" >
-        <EntityTypeShape EntityType="Layer2.Exercise" Width="1.5" PointX="4.25" PointY="0.5" Height="3.5186979166666656" />
-        <EntityTypeShape EntityType="Layer2.ScheduledExercise" Width="2.25" PointX="0.5" PointY="5.125" Height="1.7879850260416665" />
-        <EntityTypeShape EntityType="Layer2.LoggedExercise" Width="1.5" PointX="3.5" PointY="7.375" Height="2.5571907552083335" />
-        <EntityTypeShape EntityType="Layer2.SetAttributes" Width="1.5" PointX="0.5" PointY="7.375" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="Layer2.Exercise" Width="1.5" PointX="4.125" PointY="3.625" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="Layer2.ScheduledExercise" Width="2.25" PointX="0.5" PointY="8.75" Height="1.7879850260416665" />
+        <EntityTypeShape EntityType="Layer2.LoggedExercise" Width="1.5" PointX="3.25" PointY="0.5" Height="2.5571907552083335" />
+        <EntityTypeShape EntityType="Layer2.SetAttributes" Width="1.5" PointX="0.5" PointY="0.5" Height="2.3648893229166656" />
         <AssociationConnector Association="Layer2.LoggedExerciseSetAttributes">
           <ConnectorPoint PointX="7.4375" PointY="4.3071907552083335" />
           <ConnectorPoint PointX="7.4375" PointY="7.375" />
@@ -1079,17 +1079,17 @@
           <ConnectorPoint PointX="3.9570325" PointY="4.451396484375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Layer2.ExerciseGoal" Width="1.5" PointX="7.75" PointY="0.5" Height="1.7879850260416665" />
-        <EntityTypeShape EntityType="Layer2.Routine" Width="1.5" PointX="5.75" PointY="8.375" Height="2.3648893229166665" />
-        <EntityTypeShape EntityType="Layer2.ScheduledRoutine" Width="1.875" PointX="9.875" PointY="8.375" Height="1.7879850260416665" />
+        <EntityTypeShape EntityType="Layer2.Routine" Width="1.5" PointX="5.125" PointY="9" Height="2.3648893229166665" />
+        <EntityTypeShape EntityType="Layer2.ScheduledRoutine" Width="1.875" PointX="9.125" PointY="9.125" Height="1.7879850260416665" />
         <AssociationConnector Association="Layer2.ScheduledRoutineRoutine">
           <ConnectorPoint PointX="12.125" PointY="3.6824446614583333" />
           <ConnectorPoint PointX="11.125" PointY="3.6824446614583333" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Layer2.ExerciseExp" Width="1.625" PointX="0.5" PointY="0.5" Height="2.364889322916667" />
+        <EntityTypeShape EntityType="Layer2.ExerciseExp" Width="1.625" PointX="0.5" PointY="3" Height="2.364889322916667" />
         <EntityTypeShape EntityType="Layer2.LevelFormula" Width="1.5" PointX="10.5" PointY="0.625" Height="1.787985026041667" />
         <EntityTypeShape EntityType="Layer2.ExperienceAtrophy" Width="1.75" PointX="12.875" PointY="0.625" Height="1.59568359375" />
         <EntityTypeShape EntityType="Layer2.Notification" Width="1.5" PointX="11" PointY="5.875" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="Layer2.LimitBreaker" Width="2.125" PointX="7.5" PointY="3.75" Height="4.2879036458333335" />
+        <EntityTypeShape EntityType="Layer2.LimitBreaker" Width="2.125" PointX="7.5" PointY="3.875" Height="4.2879036458333335" />
         <AssociationConnector Association="Layer2.ScheduledExerciseLimitBreaker">
           <ConnectorPoint PointX="2.75" PointY="6.390580391906072" />
           <ConnectorPoint PointX="3.7604166666666665" PointY="6.3905803919060711" />
@@ -1140,7 +1140,7 @@
         <AssociationConnector Association="Layer2.ExerciseGoalLimitBreaker" />
         <AssociationConnector Association="Layer2.ExerciseGoalExercise" />
         <AssociationConnector Association="Layer2.ExerciseRoutine" />
-        <EntityTypeShape EntityType="Layer2.MuscleGroup" Width="1.5" PointX="0.625" PointY="3.25" />
+        <EntityTypeShape EntityType="Layer2.MuscleGroup" Width="1.5" PointX="0.5" PointY="6.125" />
         <AssociationConnector Association="Layer2.MuscleGroupExercise" />
       </Diagram>
     </edmx:Diagrams>
