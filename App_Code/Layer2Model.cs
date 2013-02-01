@@ -94,16 +94,120 @@ public partial class Exercise
         set;
     }
 
+    public virtual Nullable<int> Routines_id
+    {
+        get { return _routines_id; }
+        set
+        {
+            try
+            {
+                _settingFK = true;
+                if (_routines_id != value)
+                {
+                    if (Routine != null && Routine.id != value)
+                    {
+                        Routine = null;
+                    }
+                    _routines_id = value;
+                }
+            }
+            finally
+            {
+                _settingFK = false;
+            }
+        }
+    }
+    private Nullable<int> _routines_id;
+
     #endregion
     #region Navigation Properties
 
-    public virtual ICollection<ScheduledExercise> ScheduledExercises
+    public virtual ICollection<ExerciseExp> ExerciseExps
+    {
+        get
+        {
+            if (_exerciseExps == null)
+            {
+                var newCollection = new FixupCollection<ExerciseExp>();
+                newCollection.CollectionChanged += FixupExerciseExps;
+                _exerciseExps = newCollection;
+            }
+            return _exerciseExps;
+        }
+        set
+        {
+            if (!ReferenceEquals(_exerciseExps, value))
+            {
+                var previousValue = _exerciseExps as FixupCollection<ExerciseExp>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupExerciseExps;
+                }
+                _exerciseExps = value;
+                var newValue = value as FixupCollection<ExerciseExp>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupExerciseExps;
+                }
+            }
+        }
+    }
+    private ICollection<ExerciseExp> _exerciseExps;
+
+    public virtual ICollection<ExerciseGoal> ExerciseGoals
+    {
+        get
+        {
+            if (_exerciseGoals == null)
+            {
+                var newCollection = new FixupCollection<ExerciseGoal>();
+                newCollection.CollectionChanged += FixupExerciseGoals;
+                _exerciseGoals = newCollection;
+            }
+            return _exerciseGoals;
+        }
+        set
+        {
+            if (!ReferenceEquals(_exerciseGoals, value))
+            {
+                var previousValue = _exerciseGoals as FixupCollection<ExerciseGoal>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupExerciseGoals;
+                }
+                _exerciseGoals = value;
+                var newValue = value as FixupCollection<ExerciseGoal>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupExerciseGoals;
+                }
+            }
+        }
+    }
+    private ICollection<ExerciseGoal> _exerciseGoals;
+
+    public virtual Routine Routine
+    {
+        get { return _routine; }
+        set
+        {
+            if (!ReferenceEquals(_routine, value))
+            {
+                var previousValue = _routine;
+                _routine = value;
+                FixupRoutine(previousValue);
+            }
+        }
+    }
+    private Routine _routine;
+
+    public virtual ICollection<ScheduledExercis> ScheduledExercises
     {
         get
         {
             if (_scheduledExercises == null)
             {
-                var newCollection = new FixupCollection<ScheduledExercise>();
+                var newCollection = new FixupCollection<ScheduledExercis>();
                 newCollection.CollectionChanged += FixupScheduledExercises;
                 _scheduledExercises = newCollection;
             }
@@ -113,13 +217,13 @@ public partial class Exercise
         {
             if (!ReferenceEquals(_scheduledExercises, value))
             {
-                var previousValue = _scheduledExercises as FixupCollection<ScheduledExercise>;
+                var previousValue = _scheduledExercises as FixupCollection<ScheduledExercis>;
                 if (previousValue != null)
                 {
                     previousValue.CollectionChanged -= FixupScheduledExercises;
                 }
                 _scheduledExercises = value;
-                var newValue = value as FixupCollection<ScheduledExercise>;
+                var newValue = value as FixupCollection<ScheduledExercis>;
                 if (newValue != null)
                 {
                     newValue.CollectionChanged += FixupScheduledExercises;
@@ -127,126 +231,109 @@ public partial class Exercise
             }
         }
     }
-    private ICollection<ScheduledExercise> _scheduledExercises;
+    private ICollection<ScheduledExercis> _scheduledExercises;
 
-    public virtual ICollection<LoggedExercise> LoggedExercise
+    public virtual ICollection<LoggedExercis> LoggedExercises
     {
         get
         {
-            if (_loggedExercise == null)
+            if (_loggedExercises == null)
             {
-                var newCollection = new FixupCollection<LoggedExercise>();
-                newCollection.CollectionChanged += FixupLoggedExercise;
-                _loggedExercise = newCollection;
+                var newCollection = new FixupCollection<LoggedExercis>();
+                newCollection.CollectionChanged += FixupLoggedExercises;
+                _loggedExercises = newCollection;
             }
-            return _loggedExercise;
+            return _loggedExercises;
         }
         set
         {
-            if (!ReferenceEquals(_loggedExercise, value))
+            if (!ReferenceEquals(_loggedExercises, value))
             {
-                var previousValue = _loggedExercise as FixupCollection<LoggedExercise>;
+                var previousValue = _loggedExercises as FixupCollection<LoggedExercis>;
                 if (previousValue != null)
                 {
-                    previousValue.CollectionChanged -= FixupLoggedExercise;
+                    previousValue.CollectionChanged -= FixupLoggedExercises;
                 }
-                _loggedExercise = value;
-                var newValue = value as FixupCollection<LoggedExercise>;
+                _loggedExercises = value;
+                var newValue = value as FixupCollection<LoggedExercis>;
                 if (newValue != null)
                 {
-                    newValue.CollectionChanged += FixupLoggedExercise;
+                    newValue.CollectionChanged += FixupLoggedExercises;
                 }
             }
         }
     }
-    private ICollection<LoggedExercise> _loggedExercise;
-
-    public virtual ExerciseExp ExerciseExp
-    {
-        get { return _exerciseExp; }
-        set
-        {
-            if (!ReferenceEquals(_exerciseExp, value))
-            {
-                var previousValue = _exerciseExp;
-                _exerciseExp = value;
-                FixupExerciseExp(previousValue);
-            }
-        }
-    }
-    private ExerciseExp _exerciseExp;
-
-    public virtual ExerciseGoal ExerciseGoal
-    {
-        get { return _exerciseGoal; }
-        set
-        {
-            if (!ReferenceEquals(_exerciseGoal, value))
-            {
-                var previousValue = _exerciseGoal;
-                _exerciseGoal = value;
-                FixupExerciseGoal(previousValue);
-            }
-        }
-    }
-    private ExerciseGoal _exerciseGoal;
-
-    public virtual Routine Routines
-    {
-        get { return _routines; }
-        set
-        {
-            if (!ReferenceEquals(_routines, value))
-            {
-                var previousValue = _routines;
-                _routines = value;
-                FixupRoutines(previousValue);
-            }
-        }
-    }
-    private Routine _routines;
+    private ICollection<LoggedExercis> _loggedExercises;
 
     #endregion
     #region Association Fixup
 
-    private void FixupExerciseExp(ExerciseExp previousValue)
+    private bool _settingFK = false;
+
+    private void FixupRoutine(Routine previousValue)
     {
-        if (previousValue != null && ReferenceEquals(previousValue.Exercise, this))
+        if (previousValue != null && previousValue.Exercises.Contains(this))
         {
-            previousValue.Exercise = null;
+            previousValue.Exercises.Remove(this);
         }
 
-        if (ExerciseExp != null)
+        if (Routine != null)
         {
-            ExerciseExp.Exercise = this;
-        }
-    }
-
-    private void FixupExerciseGoal(ExerciseGoal previousValue)
-    {
-        if (previousValue != null && ReferenceEquals(previousValue.Exercise, this))
-        {
-            previousValue.Exercise = null;
-        }
-
-        if (ExerciseGoal != null)
-        {
-            ExerciseGoal.Exercise = this;
-        }
-    }
-
-    private void FixupRoutines(Routine previousValue)
-    {
-        if (previousValue != null && previousValue.Exercise.Contains(this))
-        {
-            previousValue.Exercise.Remove(this);
-        }
-
-        if (Routines != null)
-        {
-            if (!Routines.Exercise.Contains(this))
+            if (!Routine.Exercises.Contains(this))
             {
-                Routines.Exercise.Add(this);
+                Routine.Exercises.Add(this);
+            }
+            if (Routines_id != Routine.id)
+            {
+                Routines_id = Routine.id;
+            }
+        }
+        else if (!_settingFK)
+        {
+            Routines_id = null;
+        }
+    }
+
+    private void FixupExerciseExps(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (ExerciseExp item in e.NewItems)
+            {
+                item.Exercise = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (ExerciseExp item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Exercise, this))
+                {
+                    item.Exercise = null;
+                }
+            }
+        }
+    }
+
+    private void FixupExerciseGoals(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (ExerciseGoal item in e.NewItems)
+            {
+                item.Exercise = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (ExerciseGoal item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Exercise, this))
+                {
+                    item.Exercise = null;
+                }
             }
         }
     }
@@ -255,41 +342,41 @@ public partial class Exercise
     {
         if (e.NewItems != null)
         {
-            foreach (ScheduledExercise item in e.NewItems)
+            foreach (ScheduledExercis item in e.NewItems)
             {
-                item.ExerciseBase = this;
+                item.Exercise = this;
             }
         }
 
         if (e.OldItems != null)
         {
-            foreach (ScheduledExercise item in e.OldItems)
+            foreach (ScheduledExercis item in e.OldItems)
             {
-                if (ReferenceEquals(item.ExerciseBase, this))
+                if (ReferenceEquals(item.Exercise, this))
                 {
-                    item.ExerciseBase = null;
+                    item.Exercise = null;
                 }
             }
         }
     }
 
-    private void FixupLoggedExercise(object sender, NotifyCollectionChangedEventArgs e)
+    private void FixupLoggedExercises(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
         {
-            foreach (LoggedExercise item in e.NewItems)
+            foreach (LoggedExercis item in e.NewItems)
             {
-                item.ExerciseBase = this;
+                item.Exercise = this;
             }
         }
 
         if (e.OldItems != null)
         {
-            foreach (LoggedExercise item in e.OldItems)
+            foreach (LoggedExercis item in e.OldItems)
             {
-                if (ReferenceEquals(item.ExerciseBase, this))
+                if (ReferenceEquals(item.Exercise, this))
                 {
-                    item.ExerciseBase = null;
+                    item.Exercise = null;
                 }
             }
         }
@@ -337,6 +424,23 @@ public partial class ExerciseExp
         set;
     }
 
+    public virtual int Exercise_id
+    {
+        get { return _exercise_id; }
+        set
+        {
+            if (_exercise_id != value)
+            {
+                if (Exercise != null && Exercise.id != value)
+                {
+                    Exercise = null;
+                }
+                _exercise_id = value;
+            }
+        }
+    }
+    private int _exercise_id;
+
     #endregion
     #region Navigation Properties
 
@@ -360,14 +464,21 @@ public partial class ExerciseExp
 
     private void FixupExercise(Exercise previousValue)
     {
-        if (previousValue != null && ReferenceEquals(previousValue.ExerciseExp, this))
+        if (previousValue != null && previousValue.ExerciseExps.Contains(this))
         {
-            previousValue.ExerciseExp = null;
+            previousValue.ExerciseExps.Remove(this);
         }
 
         if (Exercise != null)
         {
-            Exercise.ExerciseExp = this;
+            if (!Exercise.ExerciseExps.Contains(this))
+            {
+                Exercise.ExerciseExps.Add(this);
+            }
+            if (Exercise_id != Exercise.id)
+            {
+                Exercise_id = Exercise.id;
+            }
         }
     }
 
@@ -407,23 +518,42 @@ public partial class ExerciseGoal
         set;
     }
 
-    #endregion
-    #region Navigation Properties
-
-    public virtual LimitBreaker LimitBreaker
+    public virtual int LimitBreaker_id
     {
-        get { return _limitBreaker; }
+        get { return _limitBreaker_id; }
         set
         {
-            if (!ReferenceEquals(_limitBreaker, value))
+            if (_limitBreaker_id != value)
             {
-                var previousValue = _limitBreaker;
-                _limitBreaker = value;
-                FixupLimitBreaker(previousValue);
+                if (LimitBreaker != null && LimitBreaker.id != value)
+                {
+                    LimitBreaker = null;
+                }
+                _limitBreaker_id = value;
             }
         }
     }
-    private LimitBreaker _limitBreaker;
+    private int _limitBreaker_id;
+
+    public virtual int Exercise_id
+    {
+        get { return _exercise_id; }
+        set
+        {
+            if (_exercise_id != value)
+            {
+                if (Exercise != null && Exercise.id != value)
+                {
+                    Exercise = null;
+                }
+                _exercise_id = value;
+            }
+        }
+    }
+    private int _exercise_id;
+
+    #endregion
+    #region Navigation Properties
 
     public virtual Exercise Exercise
     {
@@ -440,8 +570,43 @@ public partial class ExerciseGoal
     }
     private Exercise _exercise;
 
+    public virtual LimitBreaker LimitBreaker
+    {
+        get { return _limitBreaker; }
+        set
+        {
+            if (!ReferenceEquals(_limitBreaker, value))
+            {
+                var previousValue = _limitBreaker;
+                _limitBreaker = value;
+                FixupLimitBreaker(previousValue);
+            }
+        }
+    }
+    private LimitBreaker _limitBreaker;
+
     #endregion
     #region Association Fixup
+
+    private void FixupExercise(Exercise previousValue)
+    {
+        if (previousValue != null && previousValue.ExerciseGoals.Contains(this))
+        {
+            previousValue.ExerciseGoals.Remove(this);
+        }
+
+        if (Exercise != null)
+        {
+            if (!Exercise.ExerciseGoals.Contains(this))
+            {
+                Exercise.ExerciseGoals.Add(this);
+            }
+            if (Exercise_id != Exercise.id)
+            {
+                Exercise_id = Exercise.id;
+            }
+        }
+    }
 
     private void FixupLimitBreaker(LimitBreaker previousValue)
     {
@@ -456,19 +621,10 @@ public partial class ExerciseGoal
             {
                 LimitBreaker.ExerciseGoals.Add(this);
             }
-        }
-    }
-
-    private void FixupExercise(Exercise previousValue)
-    {
-        if (previousValue != null && ReferenceEquals(previousValue.ExerciseGoal, this))
-        {
-            previousValue.ExerciseGoal = null;
-        }
-
-        if (Exercise != null)
-        {
-            Exercise.ExerciseGoal = this;
+            if (LimitBreaker_id != LimitBreaker.id)
+            {
+                LimitBreaker_id = LimitBreaker.id;
+            }
         }
     }
 
@@ -574,55 +730,89 @@ public partial class LimitBreaker
         set;
     }
 
+    public virtual int Statistics_id
+    {
+        get { return _statistics_id; }
+        set
+        {
+            if (_statistics_id != value)
+            {
+                if (Statistic != null && Statistic.id != value)
+                {
+                    Statistic = null;
+                }
+                _statistics_id = value;
+            }
+        }
+    }
+    private int _statistics_id;
+
     #endregion
     #region Navigation Properties
 
-    public virtual ICollection<ScheduledExercise> ScheduledExercise
+    public virtual ICollection<ExerciseGoal> ExerciseGoals
     {
         get
         {
-            if (_scheduledExercise == null)
+            if (_exerciseGoals == null)
             {
-                var newCollection = new FixupCollection<ScheduledExercise>();
-                newCollection.CollectionChanged += FixupScheduledExercise;
-                _scheduledExercise = newCollection;
+                var newCollection = new FixupCollection<ExerciseGoal>();
+                newCollection.CollectionChanged += FixupExerciseGoals;
+                _exerciseGoals = newCollection;
             }
-            return _scheduledExercise;
+            return _exerciseGoals;
         }
         set
         {
-            if (!ReferenceEquals(_scheduledExercise, value))
+            if (!ReferenceEquals(_exerciseGoals, value))
             {
-                var previousValue = _scheduledExercise as FixupCollection<ScheduledExercise>;
+                var previousValue = _exerciseGoals as FixupCollection<ExerciseGoal>;
                 if (previousValue != null)
                 {
-                    previousValue.CollectionChanged -= FixupScheduledExercise;
+                    previousValue.CollectionChanged -= FixupExerciseGoals;
                 }
-                _scheduledExercise = value;
-                var newValue = value as FixupCollection<ScheduledExercise>;
+                _exerciseGoals = value;
+                var newValue = value as FixupCollection<ExerciseGoal>;
                 if (newValue != null)
                 {
-                    newValue.CollectionChanged += FixupScheduledExercise;
+                    newValue.CollectionChanged += FixupExerciseGoals;
                 }
             }
         }
     }
-    private ICollection<ScheduledExercise> _scheduledExercise;
+    private ICollection<ExerciseGoal> _exerciseGoals;
 
-    public virtual Statistics Statistics
+    public virtual ICollection<LoggedExercis> LoggedExercises
     {
-        get { return _statistics; }
+        get
+        {
+            if (_loggedExercises == null)
+            {
+                var newCollection = new FixupCollection<LoggedExercis>();
+                newCollection.CollectionChanged += FixupLoggedExercises;
+                _loggedExercises = newCollection;
+            }
+            return _loggedExercises;
+        }
         set
         {
-            if (!ReferenceEquals(_statistics, value))
+            if (!ReferenceEquals(_loggedExercises, value))
             {
-                var previousValue = _statistics;
-                _statistics = value;
-                FixupStatistics(previousValue);
+                var previousValue = _loggedExercises as FixupCollection<LoggedExercis>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupLoggedExercises;
+                }
+                _loggedExercises = value;
+                var newValue = value as FixupCollection<LoggedExercis>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupLoggedExercises;
+                }
             }
         }
     }
-    private Statistics _statistics;
+    private ICollection<LoggedExercis> _loggedExercises;
 
     public virtual ICollection<Routine> Routines
     {
@@ -688,37 +878,20 @@ public partial class LimitBreaker
     }
     private ICollection<ScheduledRoutine> _scheduledRoutines;
 
-    public virtual ICollection<LoggedExercise> LoggedExercises
+    public virtual Statistic Statistic
     {
-        get
-        {
-            if (_loggedExercises == null)
-            {
-                var newCollection = new FixupCollection<LoggedExercise>();
-                newCollection.CollectionChanged += FixupLoggedExercises;
-                _loggedExercises = newCollection;
-            }
-            return _loggedExercises;
-        }
+        get { return _statistic; }
         set
         {
-            if (!ReferenceEquals(_loggedExercises, value))
+            if (!ReferenceEquals(_statistic, value))
             {
-                var previousValue = _loggedExercises as FixupCollection<LoggedExercise>;
-                if (previousValue != null)
-                {
-                    previousValue.CollectionChanged -= FixupLoggedExercises;
-                }
-                _loggedExercises = value;
-                var newValue = value as FixupCollection<LoggedExercise>;
-                if (newValue != null)
-                {
-                    newValue.CollectionChanged += FixupLoggedExercises;
-                }
+                var previousValue = _statistic;
+                _statistic = value;
+                FixupStatistic(previousValue);
             }
         }
     }
-    private ICollection<LoggedExercise> _loggedExercises;
+    private Statistic _statistic;
 
     public virtual ICollection<Notification> Notifications
     {
@@ -752,71 +925,100 @@ public partial class LimitBreaker
     }
     private ICollection<Notification> _notifications;
 
-    public virtual ICollection<ExerciseGoal> ExerciseGoals
+    public virtual ICollection<ScheduledExercis> ScheduledExercises
     {
         get
         {
-            if (_exerciseGoals == null)
+            if (_scheduledExercises == null)
             {
-                var newCollection = new FixupCollection<ExerciseGoal>();
-                newCollection.CollectionChanged += FixupExerciseGoals;
-                _exerciseGoals = newCollection;
+                var newCollection = new FixupCollection<ScheduledExercis>();
+                newCollection.CollectionChanged += FixupScheduledExercises;
+                _scheduledExercises = newCollection;
             }
-            return _exerciseGoals;
+            return _scheduledExercises;
         }
         set
         {
-            if (!ReferenceEquals(_exerciseGoals, value))
+            if (!ReferenceEquals(_scheduledExercises, value))
             {
-                var previousValue = _exerciseGoals as FixupCollection<ExerciseGoal>;
+                var previousValue = _scheduledExercises as FixupCollection<ScheduledExercis>;
                 if (previousValue != null)
                 {
-                    previousValue.CollectionChanged -= FixupExerciseGoals;
+                    previousValue.CollectionChanged -= FixupScheduledExercises;
                 }
-                _exerciseGoals = value;
-                var newValue = value as FixupCollection<ExerciseGoal>;
+                _scheduledExercises = value;
+                var newValue = value as FixupCollection<ScheduledExercis>;
                 if (newValue != null)
                 {
-                    newValue.CollectionChanged += FixupExerciseGoals;
+                    newValue.CollectionChanged += FixupScheduledExercises;
                 }
             }
         }
     }
-    private ICollection<ExerciseGoal> _exerciseGoals;
+    private ICollection<ScheduledExercis> _scheduledExercises;
 
     #endregion
     #region Association Fixup
 
-    private void FixupStatistics(Statistics previousValue)
+    private void FixupStatistic(Statistic previousValue)
     {
-        if (previousValue != null && ReferenceEquals(previousValue.LimitBreaker, this))
+        if (previousValue != null && previousValue.LimitBreakers.Contains(this))
         {
-            previousValue.LimitBreaker = null;
+            previousValue.LimitBreakers.Remove(this);
         }
 
-        if (Statistics != null)
+        if (Statistic != null)
         {
-            Statistics.LimitBreaker = this;
+            if (!Statistic.LimitBreakers.Contains(this))
+            {
+                Statistic.LimitBreakers.Add(this);
+            }
+            if (Statistics_id != Statistic.id)
+            {
+                Statistics_id = Statistic.id;
+            }
         }
     }
 
-    private void FixupScheduledExercise(object sender, NotifyCollectionChangedEventArgs e)
+    private void FixupExerciseGoals(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
         {
-            foreach (ScheduledExercise item in e.NewItems)
+            foreach (ExerciseGoal item in e.NewItems)
             {
-                item.LimitBreakers = this;
+                item.LimitBreaker = this;
             }
         }
 
         if (e.OldItems != null)
         {
-            foreach (ScheduledExercise item in e.OldItems)
+            foreach (ExerciseGoal item in e.OldItems)
             {
-                if (ReferenceEquals(item.LimitBreakers, this))
+                if (ReferenceEquals(item.LimitBreaker, this))
                 {
-                    item.LimitBreakers = null;
+                    item.LimitBreaker = null;
+                }
+            }
+        }
+    }
+
+    private void FixupLoggedExercises(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (LoggedExercis item in e.NewItems)
+            {
+                item.LimitBreaker = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (LoggedExercis item in e.OldItems)
+            {
+                if (ReferenceEquals(item.LimitBreaker, this))
+                {
+                    item.LimitBreaker = null;
                 }
             }
         }
@@ -866,28 +1068,6 @@ public partial class LimitBreaker
         }
     }
 
-    private void FixupLoggedExercises(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null)
-        {
-            foreach (LoggedExercise item in e.NewItems)
-            {
-                item.LimitBreaker = this;
-            }
-        }
-
-        if (e.OldItems != null)
-        {
-            foreach (LoggedExercise item in e.OldItems)
-            {
-                if (ReferenceEquals(item.LimitBreaker, this))
-                {
-                    item.LimitBreaker = null;
-                }
-            }
-        }
-    }
-
     private void FixupNotifications(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
@@ -910,11 +1090,11 @@ public partial class LimitBreaker
         }
     }
 
-    private void FixupExerciseGoals(object sender, NotifyCollectionChangedEventArgs e)
+    private void FixupScheduledExercises(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems != null)
         {
-            foreach (ExerciseGoal item in e.NewItems)
+            foreach (ScheduledExercis item in e.NewItems)
             {
                 item.LimitBreaker = this;
             }
@@ -922,7 +1102,7 @@ public partial class LimitBreaker
 
         if (e.OldItems != null)
         {
-            foreach (ExerciseGoal item in e.OldItems)
+            foreach (ScheduledExercis item in e.OldItems)
             {
                 if (ReferenceEquals(item.LimitBreaker, this))
                 {
@@ -934,7 +1114,7 @@ public partial class LimitBreaker
 
     #endregion
 }
-public partial class LoggedExercise
+public partial class LoggedExercis
 {
     #region Primitive Properties
 
@@ -962,40 +1142,42 @@ public partial class LoggedExercise
         set;
     }
 
-    #endregion
-    #region Navigation Properties
-
-    public virtual ICollection<SetAttributes> SetAttributes
+    public virtual int LimitBreaker_id
     {
-        get
-        {
-            if (_setAttributes == null)
-            {
-                var newCollection = new FixupCollection<SetAttributes>();
-                newCollection.CollectionChanged += FixupSetAttributes;
-                _setAttributes = newCollection;
-            }
-            return _setAttributes;
-        }
+        get { return _limitBreaker_id; }
         set
         {
-            if (!ReferenceEquals(_setAttributes, value))
+            if (_limitBreaker_id != value)
             {
-                var previousValue = _setAttributes as FixupCollection<SetAttributes>;
-                if (previousValue != null)
+                if (LimitBreaker != null && LimitBreaker.id != value)
                 {
-                    previousValue.CollectionChanged -= FixupSetAttributes;
+                    LimitBreaker = null;
                 }
-                _setAttributes = value;
-                var newValue = value as FixupCollection<SetAttributes>;
-                if (newValue != null)
-                {
-                    newValue.CollectionChanged += FixupSetAttributes;
-                }
+                _limitBreaker_id = value;
             }
         }
     }
-    private ICollection<SetAttributes> _setAttributes;
+    private int _limitBreaker_id;
+
+    public virtual int ExerciseBase_id
+    {
+        get { return _exerciseBase_id; }
+        set
+        {
+            if (_exerciseBase_id != value)
+            {
+                if (Exercise != null && Exercise.id != value)
+                {
+                    Exercise = null;
+                }
+                _exerciseBase_id = value;
+            }
+        }
+    }
+    private int _exerciseBase_id;
+
+    #endregion
+    #region Navigation Properties
 
     public virtual LimitBreaker LimitBreaker
     {
@@ -1012,20 +1194,52 @@ public partial class LoggedExercise
     }
     private LimitBreaker _limitBreaker;
 
-    public virtual Exercise ExerciseBase
+    public virtual ICollection<SetAttribute> SetAttributes
     {
-        get { return _exerciseBase; }
+        get
+        {
+            if (_setAttributes == null)
+            {
+                var newCollection = new FixupCollection<SetAttribute>();
+                newCollection.CollectionChanged += FixupSetAttributes;
+                _setAttributes = newCollection;
+            }
+            return _setAttributes;
+        }
         set
         {
-            if (!ReferenceEquals(_exerciseBase, value))
+            if (!ReferenceEquals(_setAttributes, value))
             {
-                var previousValue = _exerciseBase;
-                _exerciseBase = value;
-                FixupExerciseBase(previousValue);
+                var previousValue = _setAttributes as FixupCollection<SetAttribute>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupSetAttributes;
+                }
+                _setAttributes = value;
+                var newValue = value as FixupCollection<SetAttribute>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupSetAttributes;
+                }
             }
         }
     }
-    private Exercise _exerciseBase;
+    private ICollection<SetAttribute> _setAttributes;
+
+    public virtual Exercise Exercise
+    {
+        get { return _exercise; }
+        set
+        {
+            if (!ReferenceEquals(_exercise, value))
+            {
+                var previousValue = _exercise;
+                _exercise = value;
+                FixupExercise(previousValue);
+            }
+        }
+    }
+    private Exercise _exercise;
 
     #endregion
     #region Association Fixup
@@ -1043,21 +1257,29 @@ public partial class LoggedExercise
             {
                 LimitBreaker.LoggedExercises.Add(this);
             }
+            if (LimitBreaker_id != LimitBreaker.id)
+            {
+                LimitBreaker_id = LimitBreaker.id;
+            }
         }
     }
 
-    private void FixupExerciseBase(Exercise previousValue)
+    private void FixupExercise(Exercise previousValue)
     {
-        if (previousValue != null && previousValue.LoggedExercise.Contains(this))
+        if (previousValue != null && previousValue.LoggedExercises.Contains(this))
         {
-            previousValue.LoggedExercise.Remove(this);
+            previousValue.LoggedExercises.Remove(this);
         }
 
-        if (ExerciseBase != null)
+        if (Exercise != null)
         {
-            if (!ExerciseBase.LoggedExercise.Contains(this))
+            if (!Exercise.LoggedExercises.Contains(this))
             {
-                ExerciseBase.LoggedExercise.Add(this);
+                Exercise.LoggedExercises.Add(this);
+            }
+            if (ExerciseBase_id != Exercise.id)
+            {
+                ExerciseBase_id = Exercise.id;
             }
         }
     }
@@ -1066,7 +1288,7 @@ public partial class LoggedExercise
     {
         if (e.NewItems != null)
         {
-            foreach (SetAttributes item in e.NewItems)
+            foreach (SetAttribute item in e.NewItems)
             {
                 item.LoggedExercise = this;
             }
@@ -1074,7 +1296,7 @@ public partial class LoggedExercise
 
         if (e.OldItems != null)
         {
-            foreach (SetAttributes item in e.OldItems)
+            foreach (SetAttribute item in e.OldItems)
             {
                 if (ReferenceEquals(item.LoggedExercise, this))
                 {
@@ -1114,6 +1336,23 @@ public partial class Notification
         set;
     }
 
+    public virtual int LimitBreaker_id
+    {
+        get { return _limitBreaker_id; }
+        set
+        {
+            if (_limitBreaker_id != value)
+            {
+                if (LimitBreaker != null && LimitBreaker.id != value)
+                {
+                    LimitBreaker = null;
+                }
+                _limitBreaker_id = value;
+            }
+        }
+    }
+    private int _limitBreaker_id;
+
     #endregion
     #region Navigation Properties
 
@@ -1148,6 +1387,10 @@ public partial class Notification
             {
                 LimitBreaker.Notifications.Add(this);
             }
+            if (LimitBreaker_id != LimitBreaker.id)
+            {
+                LimitBreaker_id = LimitBreaker.id;
+            }
         }
     }
 
@@ -1175,8 +1418,72 @@ public partial class Routine
         set;
     }
 
+    public virtual int LimitBreaker_id
+    {
+        get { return _limitBreaker_id; }
+        set
+        {
+            if (_limitBreaker_id != value)
+            {
+                if (LimitBreaker != null && LimitBreaker.id != value)
+                {
+                    LimitBreaker = null;
+                }
+                _limitBreaker_id = value;
+            }
+        }
+    }
+    private int _limitBreaker_id;
+
     #endregion
     #region Navigation Properties
+
+    public virtual ICollection<Exercise> Exercises
+    {
+        get
+        {
+            if (_exercises == null)
+            {
+                var newCollection = new FixupCollection<Exercise>();
+                newCollection.CollectionChanged += FixupExercises;
+                _exercises = newCollection;
+            }
+            return _exercises;
+        }
+        set
+        {
+            if (!ReferenceEquals(_exercises, value))
+            {
+                var previousValue = _exercises as FixupCollection<Exercise>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupExercises;
+                }
+                _exercises = value;
+                var newValue = value as FixupCollection<Exercise>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupExercises;
+                }
+            }
+        }
+    }
+    private ICollection<Exercise> _exercises;
+
+    public virtual LimitBreaker LimitBreaker
+    {
+        get { return _limitBreaker; }
+        set
+        {
+            if (!ReferenceEquals(_limitBreaker, value))
+            {
+                var previousValue = _limitBreaker;
+                _limitBreaker = value;
+                FixupLimitBreaker(previousValue);
+            }
+        }
+    }
+    private LimitBreaker _limitBreaker;
 
     public virtual ICollection<ScheduledRoutine> ScheduledRoutines
     {
@@ -1210,53 +1517,6 @@ public partial class Routine
     }
     private ICollection<ScheduledRoutine> _scheduledRoutines;
 
-    public virtual LimitBreaker LimitBreaker
-    {
-        get { return _limitBreaker; }
-        set
-        {
-            if (!ReferenceEquals(_limitBreaker, value))
-            {
-                var previousValue = _limitBreaker;
-                _limitBreaker = value;
-                FixupLimitBreaker(previousValue);
-            }
-        }
-    }
-    private LimitBreaker _limitBreaker;
-
-    public virtual ICollection<Exercise> Exercise
-    {
-        get
-        {
-            if (_exercise == null)
-            {
-                var newCollection = new FixupCollection<Exercise>();
-                newCollection.CollectionChanged += FixupExercise;
-                _exercise = newCollection;
-            }
-            return _exercise;
-        }
-        set
-        {
-            if (!ReferenceEquals(_exercise, value))
-            {
-                var previousValue = _exercise as FixupCollection<Exercise>;
-                if (previousValue != null)
-                {
-                    previousValue.CollectionChanged -= FixupExercise;
-                }
-                _exercise = value;
-                var newValue = value as FixupCollection<Exercise>;
-                if (newValue != null)
-                {
-                    newValue.CollectionChanged += FixupExercise;
-                }
-            }
-        }
-    }
-    private ICollection<Exercise> _exercise;
-
     #endregion
     #region Association Fixup
 
@@ -1272,6 +1532,32 @@ public partial class Routine
             if (!LimitBreaker.Routines.Contains(this))
             {
                 LimitBreaker.Routines.Add(this);
+            }
+            if (LimitBreaker_id != LimitBreaker.id)
+            {
+                LimitBreaker_id = LimitBreaker.id;
+            }
+        }
+    }
+
+    private void FixupExercises(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (Exercise item in e.NewItems)
+            {
+                item.Routine = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (Exercise item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Routine, this))
+                {
+                    item.Routine = null;
+                }
             }
         }
     }
@@ -1298,31 +1584,9 @@ public partial class Routine
         }
     }
 
-    private void FixupExercise(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null)
-        {
-            foreach (Exercise item in e.NewItems)
-            {
-                item.Routines = this;
-            }
-        }
-
-        if (e.OldItems != null)
-        {
-            foreach (Exercise item in e.OldItems)
-            {
-                if (ReferenceEquals(item.Routines, this))
-                {
-                    item.Routines = null;
-                }
-            }
-        }
-    }
-
     #endregion
 }
-public partial class ScheduledExercise
+public partial class ScheduledExercis
 {
     #region Primitive Properties
 
@@ -1344,70 +1608,112 @@ public partial class ScheduledExercise
         set;
     }
 
+    public virtual int ExerciseBase_id
+    {
+        get { return _exerciseBase_id; }
+        set
+        {
+            if (_exerciseBase_id != value)
+            {
+                if (Exercise != null && Exercise.id != value)
+                {
+                    Exercise = null;
+                }
+                _exerciseBase_id = value;
+            }
+        }
+    }
+    private int _exerciseBase_id;
+
+    public virtual int LimitBreakers_id
+    {
+        get { return _limitBreakers_id; }
+        set
+        {
+            if (_limitBreakers_id != value)
+            {
+                if (LimitBreaker != null && LimitBreaker.id != value)
+                {
+                    LimitBreaker = null;
+                }
+                _limitBreakers_id = value;
+            }
+        }
+    }
+    private int _limitBreakers_id;
+
     #endregion
     #region Navigation Properties
 
-    public virtual Exercise ExerciseBase
+    public virtual Exercise Exercise
     {
-        get { return _exerciseBase; }
+        get { return _exercise; }
         set
         {
-            if (!ReferenceEquals(_exerciseBase, value))
+            if (!ReferenceEquals(_exercise, value))
             {
-                var previousValue = _exerciseBase;
-                _exerciseBase = value;
-                FixupExerciseBase(previousValue);
+                var previousValue = _exercise;
+                _exercise = value;
+                FixupExercise(previousValue);
             }
         }
     }
-    private Exercise _exerciseBase;
+    private Exercise _exercise;
 
-    public virtual LimitBreaker LimitBreakers
+    public virtual LimitBreaker LimitBreaker
     {
-        get { return _limitBreakers; }
+        get { return _limitBreaker; }
         set
         {
-            if (!ReferenceEquals(_limitBreakers, value))
+            if (!ReferenceEquals(_limitBreaker, value))
             {
-                var previousValue = _limitBreakers;
-                _limitBreakers = value;
-                FixupLimitBreakers(previousValue);
+                var previousValue = _limitBreaker;
+                _limitBreaker = value;
+                FixupLimitBreaker(previousValue);
             }
         }
     }
-    private LimitBreaker _limitBreakers;
+    private LimitBreaker _limitBreaker;
 
     #endregion
     #region Association Fixup
 
-    private void FixupExerciseBase(Exercise previousValue)
+    private void FixupExercise(Exercise previousValue)
     {
         if (previousValue != null && previousValue.ScheduledExercises.Contains(this))
         {
             previousValue.ScheduledExercises.Remove(this);
         }
 
-        if (ExerciseBase != null)
+        if (Exercise != null)
         {
-            if (!ExerciseBase.ScheduledExercises.Contains(this))
+            if (!Exercise.ScheduledExercises.Contains(this))
             {
-                ExerciseBase.ScheduledExercises.Add(this);
+                Exercise.ScheduledExercises.Add(this);
+            }
+            if (ExerciseBase_id != Exercise.id)
+            {
+                ExerciseBase_id = Exercise.id;
             }
         }
     }
 
-    private void FixupLimitBreakers(LimitBreaker previousValue)
+    private void FixupLimitBreaker(LimitBreaker previousValue)
     {
-        if (previousValue != null && previousValue.ScheduledExercise.Contains(this))
+        if (previousValue != null && previousValue.ScheduledExercises.Contains(this))
         {
-            previousValue.ScheduledExercise.Remove(this);
+            previousValue.ScheduledExercises.Remove(this);
         }
 
-        if (LimitBreakers != null)
+        if (LimitBreaker != null)
         {
-            if (!LimitBreakers.ScheduledExercise.Contains(this))
+            if (!LimitBreaker.ScheduledExercises.Contains(this))
             {
-                LimitBreakers.ScheduledExercise.Add(this);
+                LimitBreaker.ScheduledExercises.Add(this);
+            }
+            if (LimitBreakers_id != LimitBreaker.id)
+            {
+                LimitBreakers_id = LimitBreaker.id;
             }
         }
     }
@@ -1436,23 +1742,42 @@ public partial class ScheduledRoutine
         set;
     }
 
-    #endregion
-    #region Navigation Properties
-
-    public virtual Routine Routine
+    public virtual int Routine_id
     {
-        get { return _routine; }
+        get { return _routine_id; }
         set
         {
-            if (!ReferenceEquals(_routine, value))
+            if (_routine_id != value)
             {
-                var previousValue = _routine;
-                _routine = value;
-                FixupRoutine(previousValue);
+                if (Routine != null && Routine.id != value)
+                {
+                    Routine = null;
+                }
+                _routine_id = value;
             }
         }
     }
-    private Routine _routine;
+    private int _routine_id;
+
+    public virtual int LimitBreaker_id
+    {
+        get { return _limitBreaker_id; }
+        set
+        {
+            if (_limitBreaker_id != value)
+            {
+                if (LimitBreaker != null && LimitBreaker.id != value)
+                {
+                    LimitBreaker = null;
+                }
+                _limitBreaker_id = value;
+            }
+        }
+    }
+    private int _limitBreaker_id;
+
+    #endregion
+    #region Navigation Properties
 
     public virtual LimitBreaker LimitBreaker
     {
@@ -1469,24 +1794,23 @@ public partial class ScheduledRoutine
     }
     private LimitBreaker _limitBreaker;
 
-    #endregion
-    #region Association Fixup
-
-    private void FixupRoutine(Routine previousValue)
+    public virtual Routine Routine
     {
-        if (previousValue != null && previousValue.ScheduledRoutines.Contains(this))
+        get { return _routine; }
+        set
         {
-            previousValue.ScheduledRoutines.Remove(this);
-        }
-
-        if (Routine != null)
-        {
-            if (!Routine.ScheduledRoutines.Contains(this))
+            if (!ReferenceEquals(_routine, value))
             {
-                Routine.ScheduledRoutines.Add(this);
+                var previousValue = _routine;
+                _routine = value;
+                FixupRoutine(previousValue);
             }
         }
     }
+    private Routine _routine;
+
+    #endregion
+    #region Association Fixup
 
     private void FixupLimitBreaker(LimitBreaker previousValue)
     {
@@ -1501,12 +1825,36 @@ public partial class ScheduledRoutine
             {
                 LimitBreaker.ScheduledRoutines.Add(this);
             }
+            if (LimitBreaker_id != LimitBreaker.id)
+            {
+                LimitBreaker_id = LimitBreaker.id;
+            }
+        }
+    }
+
+    private void FixupRoutine(Routine previousValue)
+    {
+        if (previousValue != null && previousValue.ScheduledRoutines.Contains(this))
+        {
+            previousValue.ScheduledRoutines.Remove(this);
+        }
+
+        if (Routine != null)
+        {
+            if (!Routine.ScheduledRoutines.Contains(this))
+            {
+                Routine.ScheduledRoutines.Add(this);
+            }
+            if (Routine_id != Routine.id)
+            {
+                Routine_id = Routine.id;
+            }
         }
     }
 
     #endregion
 }
-public partial class SetAttributes
+public partial class SetAttribute
 {
     #region Primitive Properties
 
@@ -1540,10 +1888,27 @@ public partial class SetAttributes
         set;
     }
 
+    public virtual long LoggedExercise_id
+    {
+        get { return _loggedExercise_id; }
+        set
+        {
+            if (_loggedExercise_id != value)
+            {
+                if (LoggedExercise != null && LoggedExercise.id != value)
+                {
+                    LoggedExercise = null;
+                }
+                _loggedExercise_id = value;
+            }
+        }
+    }
+    private long _loggedExercise_id;
+
     #endregion
     #region Navigation Properties
 
-    public virtual LoggedExercise LoggedExercise
+    public virtual LoggedExercis LoggedExercise
     {
         get { return _loggedExercise; }
         set
@@ -1556,12 +1921,12 @@ public partial class SetAttributes
             }
         }
     }
-    private LoggedExercise _loggedExercise;
+    private LoggedExercis _loggedExercise;
 
     #endregion
     #region Association Fixup
 
-    private void FixupLoggedExercise(LoggedExercise previousValue)
+    private void FixupLoggedExercise(LoggedExercis previousValue)
     {
         if (previousValue != null && previousValue.SetAttributes.Contains(this))
         {
@@ -1574,12 +1939,16 @@ public partial class SetAttributes
             {
                 LoggedExercise.SetAttributes.Add(this);
             }
+            if (LoggedExercise_id != LoggedExercise.id)
+            {
+                LoggedExercise_id = LoggedExercise.id;
+            }
         }
     }
 
     #endregion
 }
-public partial class Statistics
+public partial class Statistic
 {
     #region Primitive Properties
 
@@ -1634,34 +2003,60 @@ public partial class Statistics
     #endregion
     #region Navigation Properties
 
-    public virtual LimitBreaker LimitBreaker
+    public virtual ICollection<LimitBreaker> LimitBreakers
     {
-        get { return _limitBreaker; }
+        get
+        {
+            if (_limitBreakers == null)
+            {
+                var newCollection = new FixupCollection<LimitBreaker>();
+                newCollection.CollectionChanged += FixupLimitBreakers;
+                _limitBreakers = newCollection;
+            }
+            return _limitBreakers;
+        }
         set
         {
-            if (!ReferenceEquals(_limitBreaker, value))
+            if (!ReferenceEquals(_limitBreakers, value))
             {
-                var previousValue = _limitBreaker;
-                _limitBreaker = value;
-                FixupLimitBreaker(previousValue);
+                var previousValue = _limitBreakers as FixupCollection<LimitBreaker>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupLimitBreakers;
+                }
+                _limitBreakers = value;
+                var newValue = value as FixupCollection<LimitBreaker>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupLimitBreakers;
+                }
             }
         }
     }
-    private LimitBreaker _limitBreaker;
+    private ICollection<LimitBreaker> _limitBreakers;
 
     #endregion
     #region Association Fixup
 
-    private void FixupLimitBreaker(LimitBreaker previousValue)
+    private void FixupLimitBreakers(object sender, NotifyCollectionChangedEventArgs e)
     {
-        if (previousValue != null && ReferenceEquals(previousValue.Statistics, this))
+        if (e.NewItems != null)
         {
-            previousValue.Statistics = null;
+            foreach (LimitBreaker item in e.NewItems)
+            {
+                item.Statistic = this;
+            }
         }
 
-        if (LimitBreaker != null)
+        if (e.OldItems != null)
         {
-            LimitBreaker.Statistics = this;
+            foreach (LimitBreaker item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Statistic, this))
+                {
+                    item.Statistic = null;
+                }
+            }
         }
     }
 
