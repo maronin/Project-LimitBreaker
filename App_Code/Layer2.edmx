@@ -674,8 +674,8 @@
           <End Type="Layer2.Exercise" Role="Exercise" Multiplicity="1" />
         </Association>
         <Association Name="ExerciseRoutine">
-          <End Type="Layer2.Exercise" Role="Exercise" Multiplicity="0..1" />
-          <End Type="Layer2.Routine" Role="Routine" Multiplicity="*" />
+          <End Type="Layer2.Exercise" Role="Exercise" Multiplicity="*" />
+          <End Type="Layer2.Routine" Role="Routine" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -937,7 +937,7 @@
       <EndProperty Name="Routine">
         <ScalarProperty Name="id" ColumnName="id" />
       </EndProperty>
-      <Condition ColumnName="Exercise_id" IsNull="false" />
+            <Condition ColumnName="Exercise_id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
