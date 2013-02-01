@@ -191,37 +191,20 @@ public partial class Exercise
     }
     private ExerciseGoal _exerciseGoal;
 
-    public virtual ICollection<Routine> Routines
+    public virtual Routine Routines
     {
-        get
-        {
-            if (_routines == null)
-            {
-                var newCollection = new FixupCollection<Routine>();
-                newCollection.CollectionChanged += FixupRoutines;
-                _routines = newCollection;
-            }
-            return _routines;
-        }
+        get { return _routines; }
         set
         {
             if (!ReferenceEquals(_routines, value))
             {
-                var previousValue = _routines as FixupCollection<Routine>;
-                if (previousValue != null)
-                {
-                    previousValue.CollectionChanged -= FixupRoutines;
-                }
+                var previousValue = _routines;
                 _routines = value;
-                var newValue = value as FixupCollection<Routine>;
-                if (newValue != null)
-                {
-                    newValue.CollectionChanged += FixupRoutines;
-                }
+                FixupRoutines(previousValue);
             }
         }
     }
-    private ICollection<Routine> _routines;
+    private Routine _routines;
 
     #endregion
     #region Association Fixup
@@ -249,6 +232,22 @@ public partial class Exercise
         if (ExerciseGoal != null)
         {
             ExerciseGoal.Exercise = this;
+        }
+    }
+
+    private void FixupRoutines(Routine previousValue)
+    {
+        if (previousValue != null && previousValue.Exercise.Contains(this))
+        {
+            previousValue.Exercise.Remove(this);
+        }
+
+        if (Routines != null)
+        {
+            if (!Routines.Exercise.Contains(this))
+            {
+                Routines.Exercise.Add(this);
+            }
         }
     }
 
@@ -291,28 +290,6 @@ public partial class Exercise
                 if (ReferenceEquals(item.ExerciseBase, this))
                 {
                     item.ExerciseBase = null;
-                }
-            }
-        }
-    }
-
-    private void FixupRoutines(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.NewItems != null)
-        {
-            foreach (Routine item in e.NewItems)
-            {
-                item.Exercise = this;
-            }
-        }
-
-        if (e.OldItems != null)
-        {
-            foreach (Routine item in e.OldItems)
-            {
-                if (ReferenceEquals(item.Exercise, this))
-                {
-                    item.Exercise = null;
                 }
             }
         }
@@ -1248,20 +1225,37 @@ public partial class Routine
     }
     private LimitBreaker _limitBreaker;
 
-    public virtual Exercise Exercise
+    public virtual ICollection<Exercise> Exercise
     {
-        get { return _exercise; }
+        get
+        {
+            if (_exercise == null)
+            {
+                var newCollection = new FixupCollection<Exercise>();
+                newCollection.CollectionChanged += FixupExercise;
+                _exercise = newCollection;
+            }
+            return _exercise;
+        }
         set
         {
             if (!ReferenceEquals(_exercise, value))
             {
-                var previousValue = _exercise;
+                var previousValue = _exercise as FixupCollection<Exercise>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupExercise;
+                }
                 _exercise = value;
-                FixupExercise(previousValue);
+                var newValue = value as FixupCollection<Exercise>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupExercise;
+                }
             }
         }
     }
-    private Exercise _exercise;
+    private ICollection<Exercise> _exercise;
 
     #endregion
     #region Association Fixup
@@ -1278,22 +1272,6 @@ public partial class Routine
             if (!LimitBreaker.Routines.Contains(this))
             {
                 LimitBreaker.Routines.Add(this);
-            }
-        }
-    }
-
-    private void FixupExercise(Exercise previousValue)
-    {
-        if (previousValue != null && previousValue.Routines.Contains(this))
-        {
-            previousValue.Routines.Remove(this);
-        }
-
-        if (Exercise != null)
-        {
-            if (!Exercise.Routines.Contains(this))
-            {
-                Exercise.Routines.Add(this);
             }
         }
     }
@@ -1315,6 +1293,28 @@ public partial class Routine
                 if (ReferenceEquals(item.Routine, this))
                 {
                     item.Routine = null;
+                }
+            }
+        }
+    }
+
+    private void FixupExercise(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (Exercise item in e.NewItems)
+            {
+                item.Routines = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (Exercise item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Routines, this))
+                {
+                    item.Routines = null;
                 }
             }
         }
