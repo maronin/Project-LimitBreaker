@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/01/2013 11:03:30
+-- Date Created: 02/01/2013 16:03:54
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -55,9 +55,6 @@ IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalLimitBreaker]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalExercise]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalExercise];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ExerciseRoutine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Routines] DROP CONSTRAINT [FK_ExerciseRoutine];
 GO
 
 -- --------------------------------------------------
@@ -118,8 +115,7 @@ CREATE TABLE [dbo].[Exercises] (
     [distance] bit  NOT NULL,
     [time] bit  NOT NULL,
     [enabled] bit  NOT NULL,
-    [id] int IDENTITY(1,1) NOT NULL,
-    [muscleGroups] nvarchar(max)  NOT NULL
+    [id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
@@ -128,7 +124,7 @@ CREATE TABLE [dbo].[ScheduledExercises] (
     [startTime] datetime  NOT NULL,
     [needEmailNotification] bit  NOT NULL,
     [id] int IDENTITY(1,1) NOT NULL,
-    [ExerciseBase_id] int  NOT NULL,
+    [Exercise_id] int  NOT NULL,
     [LimitBreakers_id] int  NOT NULL
 );
 GO
@@ -140,7 +136,7 @@ CREATE TABLE [dbo].[LoggedExercises] (
     [note] nvarchar(max)  NULL,
     [id] bigint IDENTITY(1,1) NOT NULL,
     [LimitBreaker_id] int  NOT NULL,
-    [ExerciseBase_id] int  NOT NULL
+    [Exercise_id] int  NOT NULL
 );
 GO
 
@@ -251,24 +247,10 @@ CREATE TABLE [dbo].[ExerciseExps] (
 );
 GO
 
--- Creating table 'MuscleGroups'
-CREATE TABLE [dbo].[MuscleGroups] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(max)  NOT NULL
-);
-GO
-
 -- Creating table 'ExerciseRoutine'
 CREATE TABLE [dbo].[ExerciseRoutine] (
     [Exercises_id] int  NOT NULL,
     [Routines_id] int  NOT NULL
-);
-GO
-
--- Creating table 'MuscleGroupExercise'
-CREATE TABLE [dbo].[MuscleGroupExercise] (
-    [MuscleGroups_Id] int  NOT NULL,
-    [Exercises_id] int  NOT NULL
 );
 GO
 
@@ -354,22 +336,10 @@ ADD CONSTRAINT [PK_ExerciseExps]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'MuscleGroups'
-ALTER TABLE [dbo].[MuscleGroups]
-ADD CONSTRAINT [PK_MuscleGroups]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Exercises_id], [Routines_id] in table 'ExerciseRoutine'
 ALTER TABLE [dbo].[ExerciseRoutine]
 ADD CONSTRAINT [PK_ExerciseRoutine]
     PRIMARY KEY NONCLUSTERED ([Exercises_id], [Routines_id] ASC);
-GO
-
--- Creating primary key on [MuscleGroups_Id], [Exercises_id] in table 'MuscleGroupExercise'
-ALTER TABLE [dbo].[MuscleGroupExercise]
-ADD CONSTRAINT [PK_MuscleGroupExercise]
-    PRIMARY KEY NONCLUSTERED ([MuscleGroups_Id], [Exercises_id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -390,10 +360,10 @@ ON [dbo].[SetAttributes]
     ([LoggedExercise_id]);
 GO
 
--- Creating foreign key on [ExerciseBase_id] in table 'ScheduledExercises'
+-- Creating foreign key on [Exercise_id] in table 'ScheduledExercises'
 ALTER TABLE [dbo].[ScheduledExercises]
 ADD CONSTRAINT [FK_ScheduledExerciseExercise]
-    FOREIGN KEY ([ExerciseBase_id])
+    FOREIGN KEY ([Exercise_id])
     REFERENCES [dbo].[Exercises]
         ([id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -401,7 +371,7 @@ ADD CONSTRAINT [FK_ScheduledExerciseExercise]
 -- Creating non-clustered index for FOREIGN KEY 'FK_ScheduledExerciseExercise'
 CREATE INDEX [IX_FK_ScheduledExerciseExercise]
 ON [dbo].[ScheduledExercises]
-    ([ExerciseBase_id]);
+    ([Exercise_id]);
 GO
 
 -- Creating foreign key on [Routine_id] in table 'ScheduledRoutines'
@@ -488,10 +458,10 @@ ON [dbo].[LoggedExercises]
     ([LimitBreaker_id]);
 GO
 
--- Creating foreign key on [ExerciseBase_id] in table 'LoggedExercises'
+-- Creating foreign key on [Exercise_id] in table 'LoggedExercises'
 ALTER TABLE [dbo].[LoggedExercises]
 ADD CONSTRAINT [FK_ExerciseLoggedExercise]
-    FOREIGN KEY ([ExerciseBase_id])
+    FOREIGN KEY ([Exercise_id])
     REFERENCES [dbo].[Exercises]
         ([id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -499,7 +469,7 @@ ADD CONSTRAINT [FK_ExerciseLoggedExercise]
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExerciseLoggedExercise'
 CREATE INDEX [IX_FK_ExerciseLoggedExercise]
 ON [dbo].[LoggedExercises]
-    ([ExerciseBase_id]);
+    ([Exercise_id]);
 GO
 
 -- Creating foreign key on [Exercise_id] in table 'ExerciseExps'
@@ -579,29 +549,6 @@ ADD CONSTRAINT [FK_ExerciseRoutine_Routine]
 CREATE INDEX [IX_FK_ExerciseRoutine_Routine]
 ON [dbo].[ExerciseRoutine]
     ([Routines_id]);
-GO
-
--- Creating foreign key on [MuscleGroups_Id] in table 'MuscleGroupExercise'
-ALTER TABLE [dbo].[MuscleGroupExercise]
-ADD CONSTRAINT [FK_MuscleGroupExercise_MuscleGroup]
-    FOREIGN KEY ([MuscleGroups_Id])
-    REFERENCES [dbo].[MuscleGroups]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Exercises_id] in table 'MuscleGroupExercise'
-ALTER TABLE [dbo].[MuscleGroupExercise]
-ADD CONSTRAINT [FK_MuscleGroupExercise_Exercise]
-    FOREIGN KEY ([Exercises_id])
-    REFERENCES [dbo].[Exercises]
-        ([id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_MuscleGroupExercise_Exercise'
-CREATE INDEX [IX_FK_MuscleGroupExercise_Exercise]
-ON [dbo].[MuscleGroupExercise]
-    ([Exercises_id]);
 GO
 
 -- --------------------------------------------------
