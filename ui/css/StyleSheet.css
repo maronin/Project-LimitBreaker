@@ -9,10 +9,10 @@
     border: 1px solid #C0C0C0;
     position: absolute;
     top: 2%;
-    left: 20%;
+    left: 10%;
     margin: auto auto 0px auto;
     padding: 15px;
-    width: 59%;
+    width: 80%;
     vertical-align: middle;
     font-size: 24px;
     text-align: center;
@@ -130,7 +130,7 @@ newExerciseForm, tr
 
 newExerciseForm, tr, td
 {
-     border-style: none;
+    border-style: none;
     width: 200px;
 }
 
@@ -161,34 +161,64 @@ newExerciseForm, tr, td
 {
     text-align: center;
 }
+#week
+{
+    width:100%;
+}
+
+#week tr
+{
+    
+}
+
+#week tr td
+{
+    text-align: center;
+    width: 13.6%;
+    color: #FFFFFF;
+    font-weight: bolder;
+}
+
 .calendar
 {
     background-color: #eeeeee;
-    border: 2px outset #cccccc;
+    border: 1px outset #cccccc;
     padding: 1em;
     margin: 1em;
+    width: 90%;
 }
+
+.DaysOfWeek
+{
+    border: 1px solid #999999;
+    padding: 0.25em;
+    background-color: #aa0000;
+    width:97.5%;
+}
+
 .calendarMonthSelector
 {
     border: 1px solid #999999;
     padding: 0.25em;
     background-color: #aa0000;
+    width:97.5%;
 }
 .calendarMonthSelector a
 {
     color: white;
     font-weight: bold;
+
 }
 .calendarDay
 {
     border: 1px solid #999999;
-    margin: 0.2em;
+    margin: 0em;
     background-color: white;
     font-size: smaller;
     padding: 0.1em;
-    width: 200px;
+    width: 13.6%;
     float: left;
-    height: 150px;
+    height: 125px;
     overflow-y: scroll;
 }
 .event
@@ -203,5 +233,45 @@ newExerciseForm, tr, td
 }
 .alternate
 {
-    
+}
+
+#scheduleChoice
+{
+}
+#CalImage
+{
+
+}
+
+.calendarzz
+{
+    display: none;
+    z-index: 10;
+    position: absolute;
+    float:inherit;
+    top: 0;
+}
+
+#CalBlock
+{
+    position: relative;
+}
+
+#CalImage2
+{    height: 20px;
+    width: 20px;
+}
+
+.calendarzz2
+{
+    display: none;
+    z-index: 10;
+    position: absolute;
+    float:inherit;
+    top: 0;
+}
+
+#CalBlock2
+{
+    position: relative;
 }

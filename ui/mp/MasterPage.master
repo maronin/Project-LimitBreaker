@@ -5,6 +5,33 @@
 <head runat="server">
     <title>Project LimitBreaker</title>
     <link href="../css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+    <link href="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/css/redmond/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../Areas/Datepicker/Styles/DatePickerStyles.css" rel="stylesheet" type="text/css" />
+    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script> 
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#CalImage').click(function () {
+                $('#CalBlock').slideToggle("slow");
+            });
+        });
+
+        $(document).ready(function () {
+            $('#CalImage2').click(function () {
+                $('#CalBlock2').slideToggle("slow");
+            });
+        });
+
+        $(document).ready(function () {
+            // set up our datepicker  
+            $("#simple-date").datepicker();
+        }); 
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
