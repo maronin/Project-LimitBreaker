@@ -152,15 +152,4 @@ public class ScheduleManager
 
         }
     }
-
-    public Statistics getStatisticsByUser(Int32 lb)
-    {
-        using (var context = new Layer2Container())
-        {
-            context.ContextOptions.LazyLoadingEnabled = false;
-
-            return context.Statistics.FirstOrDefault(x => x.LimitBreaker.id == lb);
-
-        }
-    }
 }
