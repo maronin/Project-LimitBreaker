@@ -15,6 +15,7 @@ public class ExperienceManager
 		//
 	}
 
+    //database retrieval and setting functions
     public bool createNewExerciseExp(string exerciseName, double baseExp, double weightMod, double repMod, double distanceMod, double timeMod)
     {
         bool rc = false;
@@ -153,28 +154,65 @@ public class ExperienceManager
         return rc;
     }
 
-    public int calculateLoggedExerciseExperience(string exerciseName, List<SetAttributes> setValues)
+    //non-database related experience functions
+    public int calculateLoggedExerciseExperience(string exerciseName, List<SetAttributes> setAttributesSet)
     {
-        int resultExp = 0;
         ExerciseExp exerciseExp = getExerciseExpByExerciseName(exerciseName);
+        int resultExp = (int)exerciseExp.baseExperience;
 
-        //use modifiers in exerciseExp and the values in setValues to calculate the exp and store it in resultExp
-        //eg exerciseExp.timeModifer * setValues.set1.time
-
-        return resultExp;
-    }
-
-    public int calculateLoggedRoutineExperience(int routineId)
-    {
-        int resultExp = 0;
-        routineManager rm = new routineManager();
-        List<LoggedExercise> loggedExerciseSet = rm.getLoggedExercisesInRoutineById(routineId);
-
-        foreach (LoggedExercise le in loggedExerciseSet)
+        foreach (SetAttributes sa in setAttributesSet)
         {
-            resultExp += calculateLoggedExerciseExperience(le.ExerciseBase.name, le.SetAttributes.ToList());
+            resultExp += (int)(exerciseExp.distanceModifier * sa.distance + exerciseExp.repModifier * sa.reps + exerciseExp.timeModifier * sa.time + exerciseExp.weightModifier * sa.weight);
         }
 
         return resultExp;
     }
+
+    public int calculateLoggedRoutineExperience(int routineId)  //can also just pass in a  List<Exercise> exerciseSet
+    {
+        int resultExp = 0;
+        /*
+        routineManager rm = new routineManager();
+        List<Exercise> exerciseSet = rm.getExercisesInRoutineById(routineId);
+
+        foreach (Exercise exer in exerciseSet)
+        {
+            resultExp += calculateLoggedExerciseExperience(exer.name, exer.LoggedExercise.SetAttributes.ToList());
+        }
+        */
+        return resultExp;
+    }
+
+    public int getRequiredExperienceForLevel(int level)
+    {
+        LevelFormula lvlForm = getLevelFormulaValues();
+        return (int)Math.Pow((lvlForm.baseRequired * level), lvlForm.expModifier);
+    }
+
+    public bool rewardExperienceToUser(LimitBreaker user, int expGained) //returns true if the user levels up
+    {
+        bool leveled = false;
+        int reqExp = getRequiredExperienceForLevel(user.Statistics.level);
+
+        user.Statistics.experience += expGained;
+
+        if (user.Statistics.experience >= reqExp)
+        {
+            user.Statistics.level += 1;
+            user.Statistics.experience -= reqExp;
+            leveled = true;
+        }
+
+        //Not sure if code below will work
+        using (var context = new Layer2Container()) 
+        {
+            LimitBreaker saveUser = user;
+            context.SaveChanges();
+        }
+
+        return leveled;
+    }
+
+    // Probably gonna have to make a function that uses the returned value from either 
+    // calculateLoggedRoutineExperience() or calculateLoggedExerciseExperience() and gives it to the user that logged it
 }
