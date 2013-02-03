@@ -35,4 +35,8 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
     {
         Response.Redirect("~/login.aspx");
     }
+    protected void Button10_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/User/manageExerciseGoals.aspx");
+    }
 }

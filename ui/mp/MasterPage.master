@@ -31,6 +31,8 @@
                     Enabled="true" OnClick="Button8_Click" />
 
                 <asp:Button ID="Button9" runat="server" Text="Login" CssClass="button" OnClick="Button9_Click" />
+                <asp:Button ID="Button10" runat="server" Text="Manage Exercise Goals" CssClass="button"
+                    Enabled="true" onclick="Button10_Click" />
                 <br />
 
             </div>
