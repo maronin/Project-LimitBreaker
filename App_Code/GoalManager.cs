@@ -22,4 +22,12 @@ public class GoalManager
             return context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName).ToList();
         }
     }
+
+    public ExerciseGoal getExerciseGoalById(int id)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.ExerciseGoals.Where(s => s.id == id).FirstOrDefault();
+        }
+    }
 }

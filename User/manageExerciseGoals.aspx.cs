@@ -7,16 +7,23 @@ using System.Web.UI.WebControls;
 
 public partial class User_manageExerciseGoals : System.Web.UI.Page
 {
+    string userName;
+    GoalManager goalMngr;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
+        userName = User.Identity.Name;
+        goalMngr = new GoalManager();
+        
         if (!Page.IsPostBack)
         {
             viewGoalsBtn.Enabled = false;
             addGoalBtn.Enabled = true;
-            //query for the ExerciseGoal set from the logged in user, set exerciseGoalMultiView.ActiveViewIndex = 1;  then populate that view with all of the users goals
-            //if the user has no goals then set exerciseGoalMultiView.ActiveViewIndex = 0;
+
+            if (goalMngr.getAllExerciseGoalsFromUser(userName).Count < 1)
+                exerciseGoalMultiView.ActiveViewIndex = 0;
+            else
+                exerciseGoalMultiView.ActiveViewIndex = 1;
         }
     }
 
@@ -24,8 +31,11 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     {
         viewGoalsBtn.Enabled = false;
         addGoalBtn.Enabled = true;
-        //if the user has no goals then set exerciseGoalMultiView.ActiveViewIndex = 0;
-        //else then set exerciseGoalMultiView.ActiveViewIndex = 1;
+
+        if (goalMngr.getAllExerciseGoalsFromUser(userName).Count < 1)
+            exerciseGoalMultiView.ActiveViewIndex = 0;
+        else
+            exerciseGoalMultiView.ActiveViewIndex = 1;
     }
 
     protected void addGoalBtn_Click(object sender, EventArgs e)
