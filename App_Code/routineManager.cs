@@ -40,8 +40,8 @@ public class routineManager
             return rc;
         }
     }
-
-    // 1st step
+    
+    // return the routine created
     public Routine createNewRoutine(String routineName, int userID, ICollection<Exercise> exerciseList)
     {
         using (var context = new Layer2Container())
@@ -81,6 +81,38 @@ public class routineManager
 
                 wrtr.Close();
             }
+
+            return rc;
+        }
+    }
+
+    public ICollection<Exercise> getExerciseFromRoutine(int routineID)
+    {
+        using (var context = new Layer2Container())
+        {
+            ICollection<Exercise> rc = new List<Exercise>();
+            try
+            {         
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                if (rtn != null)
+                {
+                    foreach (Exercise ex in rtn.Exercises)
+                    {
+                        rc.Add(ex);
+                    }
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+            
 
             return rc;
         }
