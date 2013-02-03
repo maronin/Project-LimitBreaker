@@ -55,7 +55,7 @@ public class routineManager
                 {
                     rc.name = routineName.Trim();
                     rc.LimitBreaker = lb;
-                    rc.lastModified = DateTime.Now;                   
+                    rc.lastModified = DateTime.Now;
                     foreach (Exercise ex in exerciseList)
                     {
 #if DEBUG
@@ -66,7 +66,7 @@ public class routineManager
                         rc.Exercises.Add(exc);
                         exc = new Exercise();
                     }
-                    
+
                     context.Routines.AddObject(rc);
                     context.SaveChanges();
                 }

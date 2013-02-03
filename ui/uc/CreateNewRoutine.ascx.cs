@@ -54,7 +54,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
                 lbSelected.Items.Add(li);
                 btnConfirm.Enabled = lbSelected.Items.Count != 1 ? true : false;
                 exerciseItem = sysManager.getExercise(li.Text);
-                if(exerciseItem != null)
+                if (exerciseItem != null)
                     AddExercise(exerciseItem);
             }
         }
@@ -93,7 +93,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         if (exercises != null)
         {
             if (exercises.Contains(exerciseItem) == false)
-                exercises.Add(exerciseItem);                
+                exercises.Add(exerciseItem);
         }
     }
 

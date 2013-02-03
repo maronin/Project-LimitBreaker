@@ -23,10 +23,7 @@
     //credit to: Mudassar Khan 2012, url: http://www.aspsnippets.com/Articles/Validate-Multiple-Validation-Groups-with-one-Button-in-ASPNet.aspx 
     function Validate() {
         var isValid = false;
-        isValid = Page_ClientValidate('GoalValues');
-        if (isValid) {
-            isValid = Page_ClientValidate('RtnName');
-        }
+        isValid = Page_ClientValidate('RtnName');
         return isValid;
     }
 </script>
