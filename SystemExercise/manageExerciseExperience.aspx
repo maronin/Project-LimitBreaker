@@ -36,6 +36,10 @@
     </div>
     <br />
     <div>
+        
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+        
         <asp:MultiView ID="functionalityMultiView" runat="server">
             <asp:View ID="exerciseExpView" runat="server">
                 <uc1:viewExercise ID="viewExerciseExp" runat="server" />
@@ -329,5 +333,7 @@
                 </div>
             </asp:View>
         </asp:MultiView>
+        </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 </asp:Content>
