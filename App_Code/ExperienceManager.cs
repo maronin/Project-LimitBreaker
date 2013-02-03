@@ -213,6 +213,10 @@ public class ExperienceManager
         return leveled;
     }
 
+
+
+
     // Probably gonna have to make a function that uses the returned value from either 
     // calculateLoggedRoutineExperience() or calculateLoggedExerciseExperience() and gives it to the user that logged it
+    // ^^^or when log exercise functionality for the system is done just call those methods in there
 }
