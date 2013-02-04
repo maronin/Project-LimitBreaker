@@ -29,6 +29,12 @@ public class scheduledItem
         get;
         set;
     }
+    public virtual bool isExericse
+    {
+        get;
+        set;
+    }
+
 
 
 }
