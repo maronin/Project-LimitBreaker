@@ -177,21 +177,6 @@ public partial class Exercise
     }
     private ExerciseExp _exerciseExp;
 
-    public virtual ExerciseGoal ExerciseGoal
-    {
-        get { return _exerciseGoal; }
-        set
-        {
-            if (!ReferenceEquals(_exerciseGoal, value))
-            {
-                var previousValue = _exerciseGoal;
-                _exerciseGoal = value;
-                FixupExerciseGoal(previousValue);
-            }
-        }
-    }
-    private ExerciseGoal _exerciseGoal;
-
     public virtual ICollection<Routine> Routines
     {
         get
@@ -224,6 +209,38 @@ public partial class Exercise
     }
     private ICollection<Routine> _routines;
 
+    public virtual ICollection<ExerciseGoal> ExerciseGoals
+    {
+        get
+        {
+            if (_exerciseGoals == null)
+            {
+                var newCollection = new FixupCollection<ExerciseGoal>();
+                newCollection.CollectionChanged += FixupExerciseGoals;
+                _exerciseGoals = newCollection;
+            }
+            return _exerciseGoals;
+        }
+        set
+        {
+            if (!ReferenceEquals(_exerciseGoals, value))
+            {
+                var previousValue = _exerciseGoals as FixupCollection<ExerciseGoal>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupExerciseGoals;
+                }
+                _exerciseGoals = value;
+                var newValue = value as FixupCollection<ExerciseGoal>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupExerciseGoals;
+                }
+            }
+        }
+    }
+    private ICollection<ExerciseGoal> _exerciseGoals;
+
     #endregion
 
     #region Association Fixup
@@ -238,19 +255,6 @@ public partial class Exercise
         if (ExerciseExp != null)
         {
             ExerciseExp.Exercise = this;
-        }
-    }
-
-    private void FixupExerciseGoal(ExerciseGoal previousValue)
-    {
-        if (previousValue != null && ReferenceEquals(previousValue.Exercise, this))
-        {
-            previousValue.Exercise = null;
-        }
-
-        if (ExerciseGoal != null)
-        {
-            ExerciseGoal.Exercise = this;
         }
     }
 
@@ -318,6 +322,28 @@ public partial class Exercise
                 if (item.Exercises.Contains(this))
                 {
                     item.Exercises.Remove(this);
+                }
+            }
+        }
+    }
+
+    private void FixupExerciseGoals(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (ExerciseGoal item in e.NewItems)
+            {
+                item.Exercise = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (ExerciseGoal item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Exercise, this))
+                {
+                    item.Exercise = null;
                 }
             }
         }
@@ -439,6 +465,12 @@ public partial class ExerciseGoal
         set;
     }
 
+    public virtual bool achieved
+    {
+        get;
+        set;
+    }
+
     #endregion
 
     #region Navigation Properties
@@ -495,14 +527,17 @@ public partial class ExerciseGoal
 
     private void FixupExercise(Exercise previousValue)
     {
-        if (previousValue != null && ReferenceEquals(previousValue.ExerciseGoal, this))
+        if (previousValue != null && previousValue.ExerciseGoals.Contains(this))
         {
-            previousValue.ExerciseGoal = null;
+            previousValue.ExerciseGoals.Remove(this);
         }
 
         if (Exercise != null)
         {
-            Exercise.ExerciseGoal = this;
+            if (!Exercise.ExerciseGoals.Contains(this))
+            {
+                Exercise.ExerciseGoals.Add(this);
+            }
         }
     }
 
