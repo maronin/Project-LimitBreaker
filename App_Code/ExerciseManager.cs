@@ -23,6 +23,14 @@ public class ExerciseManager
         }
     }
 
+    public Exercise getExerciseById(int ID)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.Exercises.Where(e => e.id == ID).FirstOrDefault();
+        }
+    }
+
     public bool deleteExerciseById(int id)
     {
         bool result = true;
@@ -52,6 +60,8 @@ public class ExerciseManager
         return result;
     }
 
+    //BIG FUCKING ISSUE WITH THIS FUNCTION ON LINE 68!! This is a note for future reference.
+    //The logic fault is that if you clear a LoggedExercise's refernece to an exercise and the exercise still exists, then wtf?! Solution: deleting an exercise is NOT allowed, only disabling
     public bool deleteExerciseByName(string name)
     {
         bool result = true;
