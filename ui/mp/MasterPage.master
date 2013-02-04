@@ -48,7 +48,7 @@
                 <asp:Button ID="Button4" runat="server" Text="Analyze Performance" CssClass="button"
                     Enabled="False" />
                 <asp:Button ID="Button5" runat="server" Text="Record Exercises" CssClass="button"
-                    Enabled="False" />
+                    Enabled="False" /><br />
                 <asp:Button ID="Button6" runat="server" Text="Manage User Accounts"
                     CssClass="button" OnClick="Button6_Click" />
                 <asp:Button ID="btnWorkOutSchedule" runat="server"
@@ -56,7 +56,6 @@
                     Enabled="True" OnClick="btnWorkOutSchedule_Click" />
                 <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
                     Enabled="true" OnClick="Button8_Click" />
-
                 <asp:Button ID="Button9" runat="server" Text="Login" CssClass="button" OnClick="Button9_Click" />
                 <br />
 
