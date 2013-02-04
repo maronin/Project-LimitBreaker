@@ -10,23 +10,44 @@ public partial class User_createUser : System.Web.UI.Page
     UserManager manager = new UserManager();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        /* This shit is broken. Figure out why later, for now doing it the dumb way
+        DropDownList birthday=((DropDownList)LoginView1.FindControl("birthday"));
+        ListItem day;
+        for (int i = 0; i < 31; i++)
+        {
+            day = new ListItem(i+1.ToString(), i+1.ToString(), true);
+            birthday.Items.Add(day);
+        }
+        */
     }
     protected void Create_Click(object sender, EventArgs e)
     {
         String userName=((TextBox)LoginView1.FindControl("userName")).Text;
         String password=((TextBox)LoginView1.FindControl("password")).Text;
         String email=((TextBox)LoginView1.FindControl("email")).Text;
-        String gender=((RadioButtonList)LoginView1.FindControl("gender")).SelectedValue;
+        String gender = ((RadioButtonList)LoginView1.FindControl("genderList")).SelectedValue;
+        String weight = ((TextBox)LoginView1.FindControl("weight")).Text;
+
         String tempFoot=((TextBox)LoginView1.FindControl("heightFoot")).Text;
         String tempInch=((TextBox)LoginView1.FindControl("heightInch")).Text;
 
-        System.Web.Security.MembershipCreateStatus status;
-        System.Web.Security.Membership.CreateUser(userName, password, email, "none", "none", true, out status);
-        System.Web.Security.Roles.AddUserToRole(userName, "user");
+        String birthdayDay=((DropDownList)LoginView1.FindControl("birthdayDay")).SelectedValue;
+        String birthdayMonth=((DropDownList)LoginView1.FindControl("birthdayMonth")).SelectedValue;
+        String birthdayYear = ((TextBox)LoginView1.FindControl("birthdayYear")).Text;
 
-        Double height=manager.convertHeightToMetric(Convert.ToDouble(tempFoot), Convert.ToDouble(tempInch));
+        DateTime birthday = new DateTime(Convert.ToInt32(birthdayYear), Convert.ToInt32(birthdayMonth), Convert.ToInt32(birthdayDay));
+        Double height = manager.convertHeightToMetric(Convert.ToDouble(tempFoot), Convert.ToDouble(tempInch));
 
-        manager.createNewLimitBreaker(userName, email, gender,
+        if (manager.createNewLimitBreaker(userName, email, gender, birthday, Convert.ToInt32(weight), height))
+        {
+            System.Web.Security.MembershipCreateStatus status;
+            System.Web.Security.Membership.CreateUser(userName, password, email, "none", "none", true, out status);
+            System.Web.Security.Roles.AddUserToRole(userName, "user");
+        }
+        else
+        {
+
+        }
+        
     }
 }

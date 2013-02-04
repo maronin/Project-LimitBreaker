@@ -15,7 +15,7 @@ public class UserManager
         _context = System.Web.HttpContext.Current.ApplicationInstance;
     }
 
-    public bool createNewLimitBreaker(String username, String email, String gender, Int16 age, Double weight, Double height)
+    public bool createNewLimitBreaker(String username, String email, String gender, DateTime birthday, Double weight, Double height)
     {
         bool rc = false;
 
@@ -31,8 +31,10 @@ public class UserManager
             {
                 newLimitBreaker.username = username;
                 newLimitBreaker.gender = gender;
-                newLimitBreaker.age = age;
+                newLimitBreaker.dateOfBirth = birthday;
                 newLimitBreaker.email = email;
+                newLimitBreaker.verified = false;
+                newLimitBreaker.deactivated = false;
 
                 if (createNewStats(weight, height))
                 {
