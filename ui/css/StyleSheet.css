@@ -9,10 +9,10 @@
     border: 1px solid #C0C0C0;
     position: absolute;
     top: 2%;
-    left: 20%;
+    left: 10%;
     margin: auto auto 0px auto;
     padding: 15px;
-    width: 59%;
+    width: 80%;
     vertical-align: middle;
     font-size: 24px;
     text-align: center;
@@ -21,6 +21,7 @@
     border-bottom-right-radius: 50px 50px;
     border-bottom-left-radius: 50px 50px;
     background-image: url('../images/bgSuttle.jpg');
+    min-height: 500px;
 }
 
 #header
@@ -130,7 +131,7 @@ newExerciseForm, tr
 
 newExerciseForm, tr, td
 {
-     border-style: none;
+    border-style: none;
     width: 200px;
 }
 
@@ -161,18 +162,45 @@ newExerciseForm, tr, td
 {
     text-align: center;
 }
+#week
+{
+    width: 100%;
+}
+
+#week tr
+{
+}
+
+#week tr td
+{
+    text-align: left;
+    width: 13.6%;
+    color: #FFFFFF;
+    font-weight: bolder;
+}
 .calendar
 {
     background-color: #eeeeee;
-    border: 2px outset #cccccc;
+    border: 1px outset #cccccc;
     padding: 1em;
     margin: 1em;
+    width: 90%;
 }
+
+.DaysOfWeek
+{
+    border: 1px solid #999999;
+    padding: 0.25em;
+    background-color: #aa0000;
+    width: 97.5%;
+}
+
 .calendarMonthSelector
 {
     border: 1px solid #999999;
     padding: 0.25em;
     background-color: #aa0000;
+    width: 97.5%;
 }
 .calendarMonthSelector a
 {
@@ -182,13 +210,13 @@ newExerciseForm, tr, td
 .calendarDay
 {
     border: 1px solid #999999;
-    margin: 0.2em;
+    margin: 0em;
     background-color: white;
     font-size: smaller;
     padding: 0.1em;
-    width: 200px;
+    width: 13.6%;
     float: left;
-    height: 150px;
+    height: 125px;
     overflow-y: scroll;
 }
 .event
@@ -203,5 +231,86 @@ newExerciseForm, tr, td
 }
 .alternate
 {
-    
+}
+
+#scheduleChoice
+{
+}
+#CalImage
+{
+}
+
+.calendarzz
+{
+    display: block;
+    z-index: 10;
+    position: absolute;
+    float: inherit;
+    top: 0;
+}
+
+#CalBlock
+{
+    position: relative;
+}
+
+#CalImage2
+{
+    height: 20px;
+    width: 20px;
+}
+
+.calendarzz2
+{
+    display: block;
+    z-index: 10;
+    position: absolute;
+    float: inherit;
+    top: 0;
+}
+
+#CalBlock2
+{
+    position: relative;
+}
+
+.date
+{
+    font-style: normal;
+    text-decoration: none;
+    font-family: 'Arial Black';
+    color: #C0C0C0;
+    font-weight: lighter;
+    margin-left: 4px;
+}
+
+.events
+{
+    margin-left: 5px;
+    display: block;
+}
+
+.scheduleTable tr td
+{
+    width: 250px;
+    vertical-align: top;
+}
+
+.loadingCalendar
+{
+    position: absolute;
+
+    width: 50%;
+    left:25%;
+    text-align: center;
+    top: 60%;
+    background: rgb(54, 25, 25); /* Fall-back for browsers that don't
+                               support rgba */
+    background: rgba(128, 128, 128, .5);
+    color: #000000;
+
+}
+.loadingCalendar h1
+{
+    z-index: 5;
 }
