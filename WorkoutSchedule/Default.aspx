@@ -165,7 +165,7 @@
                                             <asp:Calendar ID="calDateExercise" runat="server" BackColor="White" BorderColor="#999999"
                                                 CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
                                                 ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_exercise"
-                                                Width="200px">
+                                                Width="200px" OnVisibleMonthChanged="calDateExercise_VisibleMonthChanged">
                                                 <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
                                                 <NextPrevStyle VerticalAlign="Bottom" />
                                                 <OtherMonthDayStyle ForeColor="#808080" />
@@ -284,4 +284,12 @@
             </asp:MultiView>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div class="loadingCalendar">
+                <h1>
+                    Loading Calendar...</h1>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 </asp:Content>
