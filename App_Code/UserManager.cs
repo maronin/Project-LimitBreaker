@@ -15,17 +15,22 @@ public class UserManager
         _context = System.Web.HttpContext.Current.ApplicationInstance;
     }
 
-    public bool createNewLimitBreaker(String username, String email, String gender, DateTime birthday, Double weight, Double height)
+    //rc status: 1 failure due to servers, 2 name already taken, 0 success
+    public int createNewLimitBreaker(String username, String email, String gender, DateTime birthday, Double weight, Double height)
     {
-        bool rc = false;
+        int rc=1;
 
         using (var context = new Layer2Container())
         {
             LimitBreaker newLimitBreaker = new LimitBreaker();
             try
             {
-                if ((context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username).username == username))
-                    rc = false;
+                if ((context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username).username == username) ||
+                    (context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.email == email).email == email))
+                {
+                    rc = 2;
+                    return rc;
+                }
             }
             catch (NullReferenceException e)
             {
@@ -36,18 +41,19 @@ public class UserManager
                 newLimitBreaker.verified = false;
                 newLimitBreaker.deactivated = false;
 
-                if (createNewStats(weight, height))
+                context.LimitBreakers.AddObject(newLimitBreaker);
+
+                if (createNewStats(weight, height, newLimitBreaker))
                 {
-                    context.LimitBreakers.AddObject(newLimitBreaker);
-                    context.SaveChanges();
-                    rc = true;
+                    rc = 0;
                 }
+
             }
             return rc;
         }
     }
 
-    public bool createNewStats(Double weight, Double height)
+    public bool createNewStats(Double weight, Double height, LimitBreaker user)
     {
         bool rc = false;
         using (var context = new Layer2Container())
@@ -61,6 +67,12 @@ public class UserManager
             stats.rmr = 0;
             stats.bmi = 0;
             stats.vo2MAX = 0;
+
+            stats.LimitBreaker = user;
+
+            context.Statistics.AddObject(stats);
+            context.SaveChanges();
+            rc = true;
         }
         return rc;
     }
