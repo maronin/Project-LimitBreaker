@@ -30,25 +30,25 @@
                     <table id="week">
                         <tr>
                             <td>
-                            Sunday
+                                Sun
                             </td>
                             <td>
-                            Monday
+                                Mon
                             </td>
                             <td>
-                            Tuesday
+                                Tue
                             </td>
                             <td>
-                            Wednesday
+                                Wed
                             </td>
                             <td>
-                            Thursday
+                                Thu
                             </td>
                             <td>
-                            Friday
+                                Fri
                             </td>
                             <td>
-                            Saturday
+                                Sat
                             </td>
                         </tr>
                     </table>
@@ -63,12 +63,12 @@
                 <asp:Repeater ID="rpt_calendar" runat="server" OnItemDataBound="rpt_calendar_ItemDataBound"
                     OnItemCommand="ItemCommand">
                     <ItemTemplate>
+                        <!-- onMouseOver ="this.style.backgroundImage='url(http://www.yellowcalx.com/wp-content/uploads/2012/04/yellow.png)'" onMouseOut ="this.style.backgroundImage='url(http://www.takenseriouslyamusing.com/wp-content/uploads/2012/08/Blue.png)'" -->
                         <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto">
-                            <asp:LinkButton ID="lnk_dayLink" runat="server" CommandName="ButtonEvent" CommandArgument="<%# Container.DataItem %>"
-                                Text="<%#Container.DataItem %>" />
-                            <asp:Literal ID="ltl_dayEvents" runat="server" />
+                            <asp:LinkButton ID="lnk_dayLink" runat="server" CommandName="ButtonEvent" CssClass="date"
+                                CommandArgument="<%# Container.DataItem %>" Text="<%#Container.DataItem %>" />
                             <br />
-                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                            <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
                         </asp:Panel>
                     </ItemTemplate>
                 </asp:Repeater>
@@ -77,165 +77,193 @@
                 <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
             </asp:Panel>
         </asp:View>
-        <!-- add an item view -->
+        <!------------------------------------------------------------------------------ add an item view -------------------------------------------------------------------------------------->
         <asp:View ID="add_item" runat="server">
             <asp:MultiView ID="addItemView" runat="server">
                 <asp:View ID="choiceView" runat="server">
                     <h3>
                         Add a routine or exercise</h3>
                     <div id="scheduleChoice">
-                        <asp:Button ID="addRoutine" runat="server" Text="Routine" OnClick="addRoutine_Click" Enabled="False" />
-                        <asp:Button ID="addExercise" runat="server" Text="Exercise" OnClick="addExercise_Click" />
+                        <asp:Button ID="addRoutine" runat="server" Text="Routine" OnClick="addRoutine_Click"
+                            CssClass="button" />
+                        <asp:Button ID="addExercise" runat="server" Text="Exercise" OnClick="addExercise_Click"
+                            CssClass="button" />
                     </div>
                 </asp:View>
+                <!---------------------------------------------------------------------------- Schedule Exercise  --------------------------------------------------------------------------------------->
                 <asp:View ID="addExerciseView" runat="server">
                     <h3>
                         Schedule a new Exercise!</h3>
                     <br />
-                    <!--<asp:Label ID="lblTest" runat="server" Text=""></asp:Label> -->
-                    <!-- <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" 
-                        SelectMethod="getUsers" TypeName="ScheduleManager"></asp:ObjectDataSource>
-                    <asp:DropDownList ID="ddlUserE" runat="server" DataSourceID="ObjectDataSource2" 
-                        DataTextField="userName" DataValueField="id">
-                    </asp:DropDownList> -->
-                    Step 1. Select an exercise:
-                    <asp:DropDownList ID="dllExercises" runat="server" DataSourceID="ObjectDataSource3"
-                        DataTextField="name" DataValueField="id">
-                    </asp:DropDownList>
-                    <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
-                        TypeName="ExerciseManager"></asp:ObjectDataSource>
-                    <br />
-                    Step 2. Select Start Time:
-                    <asp:DropDownList ID="dllHours_exercise" runat="server">
-                        <asp:ListItem>1</asp:ListItem>
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                        <asp:ListItem>7</asp:ListItem>
-                        <asp:ListItem>8</asp:ListItem>
-                        <asp:ListItem>9</asp:ListItem>
-                        <asp:ListItem>10</asp:ListItem>
-                        <asp:ListItem>11</asp:ListItem>
-                        <asp:ListItem>12</asp:ListItem>
-                    </asp:DropDownList>
-                    :
-                    <asp:DropDownList ID="ddlMinutes_exercise" runat="server">
-                        <asp:ListItem Value="00"></asp:ListItem>
-                        <asp:ListItem Value="05"></asp:ListItem>
-                        <asp:ListItem Value="10"></asp:ListItem>
-                        <asp:ListItem Value="15"></asp:ListItem>
-                        <asp:ListItem Value="20"></asp:ListItem>
-                        <asp:ListItem Value="25"></asp:ListItem>
-                        <asp:ListItem Value="30"></asp:ListItem>
-                        <asp:ListItem Value="35"></asp:ListItem>
-                        <asp:ListItem Value="40"></asp:ListItem>
-                        <asp:ListItem Value="45"></asp:ListItem>
-                        <asp:ListItem Value="50"></asp:ListItem>
-                        <asp:ListItem Value="55"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="ddlAmPm_exericse" runat="server">
-                        <asp:ListItem>AM</asp:ListItem>
-                        <asp:ListItem>PM</asp:ListItem>
-                    </asp:DropDownList>
-                    <br />
-                    Step 3. Select Start Date:
-                    <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="True"></asp:TextBox>
-                    <img id="CalImage2" src="../ui/images/calendar_icon.png" onclick="slideToggle()" />
-                    <div id="CalBlock2" class="calendarzz">
-                        <asp:Calendar ID="calDateExercise" runat="server" BackColor="White" BorderColor="#999999"
-                            CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
-                            ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_exercise"
-                            Width="200px">
-                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                            <NextPrevStyle VerticalAlign="Bottom" />
-                            <OtherMonthDayStyle ForeColor="#808080" />
-                            <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                            <SelectorStyle BackColor="#CCCCCC" />
-                            <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                            <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                            <WeekendDayStyle BackColor="#FFFFCC" />
-                        </asp:Calendar>
-                    </div>
-                    <br />
-                    <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click" />
+                    <table class="scheduleTable">
+                        <tr>
+                            <td>
+                                Step 1. Select an exercise:
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="dllExercises" runat="server" DataSourceID="ObjectDataSource3"
+                                    DataTextField="name" DataValueField="id">
+                                </asp:DropDownList>
+                            </td>
+                            <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
+                                TypeName="ExerciseManager"></asp:ObjectDataSource>
+                        </tr>
+                        <tr>
+                            <td>
+                                Step 2. Select Start Time:
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="dllHours_exercise" runat="server">
+                                    <asp:ListItem>1</asp:ListItem>
+                                    <asp:ListItem>2</asp:ListItem>
+                                    <asp:ListItem>3</asp:ListItem>
+                                    <asp:ListItem>4</asp:ListItem>
+                                    <asp:ListItem>5</asp:ListItem>
+                                    <asp:ListItem>6</asp:ListItem>
+                                    <asp:ListItem>7</asp:ListItem>
+                                    <asp:ListItem>8</asp:ListItem>
+                                    <asp:ListItem>9</asp:ListItem>
+                                    <asp:ListItem>10</asp:ListItem>
+                                    <asp:ListItem>11</asp:ListItem>
+                                    <asp:ListItem>12</asp:ListItem>
+                                </asp:DropDownList>
+                                :
+                                <asp:DropDownList ID="ddlMinutes_exercise" runat="server">
+                                    <asp:ListItem Value="00"></asp:ListItem>
+                                    <asp:ListItem Value="05"></asp:ListItem>
+                                    <asp:ListItem Value="10"></asp:ListItem>
+                                    <asp:ListItem Value="15"></asp:ListItem>
+                                    <asp:ListItem Value="20"></asp:ListItem>
+                                    <asp:ListItem Value="25"></asp:ListItem>
+                                    <asp:ListItem Value="30"></asp:ListItem>
+                                    <asp:ListItem Value="35"></asp:ListItem>
+                                    <asp:ListItem Value="40"></asp:ListItem>
+                                    <asp:ListItem Value="45"></asp:ListItem>
+                                    <asp:ListItem Value="50"></asp:ListItem>
+                                    <asp:ListItem Value="55"></asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:DropDownList ID="ddlAmPm_exericse" runat="server">
+                                    <asp:ListItem>AM</asp:ListItem>
+                                    <asp:ListItem>PM</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Step 3. Select Start Date:
+                            </td>
+                            <td>
+                                <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="True"></asp:TextBox>
+                                <img id="CalImage2" src="../ui/images/calendar_icon.png" onclick="slideToggle()" />
+                                <div id="CalBlock2" class="calendarzz">
+                                    <asp:Calendar ID="calDateExercise" runat="server" BackColor="White" BorderColor="#999999"
+                                        CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
+                                        ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_exercise"
+                                        Width="200px">
+                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                                        <NextPrevStyle VerticalAlign="Bottom" />
+                                        <OtherMonthDayStyle ForeColor="#808080" />
+                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                        <SelectorStyle BackColor="#CCCCCC" />
+                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                        <WeekendDayStyle BackColor="#FFFFCC" />
+                                    </asp:Calendar>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
+                        CssClass="button" />
                     <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
                 </asp:View>
                 <asp:View ID="View1" runat="server">
                 </asp:View>
+                <!---------------------------------------------------------------------------- Schedule Routine  --------------------------------------------------------------------------------------->
                 <asp:View ID="addRoutineView" runat="server">
                     <h3>
                         Schedule a new Routine!</h3>
-                    <!-- <asp:ObjectDataSource ID="ObjectDataSource5" runat="server" 
-                        SelectMethod="getUsers" TypeName="ScheduleManager"></asp:ObjectDataSource>
-                    <asp:DropDownList ID="ddlUserR" runat="server" DataSourceID="ObjectDataSource5" 
-                        DataTextField="userName" DataValueField="id">
-                    </asp:DropDownList> -->
-                    Step 1. Select a routine:
-                    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="viewRoutines"
-                        TypeName="routineManager"></asp:ObjectDataSource>
-                    <asp:DropDownList ID="ddlRoutines" runat="server" DataSourceID="ObjectDataSource1"
-                        DataTextField="name" DataValueField="id">
-                    </asp:DropDownList>
-                    <br />
-                    Step 2. Select Start Date:
-                    <!-- <input type="text" id="datepicker" name="datepicker"/> -->
-                    <asp:TextBox ID="tbDate_routine" runat="server" Enabled="False"></asp:TextBox>
-                    <img id="CalImage" src="../ui/images/calendar_icon.png" onclick="slideToggle()" />
-                    <div id="CalBlock" class="calendarzz">
-                        <asp:Calendar ID="calDate" runat="server" BackColor="White" BorderColor="#999999"
-                            CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
-                            ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_routine"
-                            Width="200px">
-                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                            <NextPrevStyle VerticalAlign="Bottom" />
-                            <OtherMonthDayStyle ForeColor="#808080" />
-                            <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                            <SelectorStyle BackColor="#CCCCCC" />
-                            <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                            <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                            <WeekendDayStyle BackColor="#FFFFCC" />
-                        </asp:Calendar>
-                    </div>
-                    <br />
-                    Step 3. Select Start Time:
-                    <asp:DropDownList ID="ddlHours_routine" runat="server">
-                        <asp:ListItem>1</asp:ListItem>
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                        <asp:ListItem>7</asp:ListItem>
-                        <asp:ListItem>8</asp:ListItem>
-                        <asp:ListItem>9</asp:ListItem>
-                        <asp:ListItem>10</asp:ListItem>
-                        <asp:ListItem>11</asp:ListItem>
-                        <asp:ListItem>12</asp:ListItem>
-                    </asp:DropDownList>
-                    :
-                    <asp:DropDownList ID="ddlMinutes_routine" runat="server">
-                        <asp:ListItem Value="00"></asp:ListItem>
-                        <asp:ListItem Value="05"></asp:ListItem>
-                        <asp:ListItem Value="10"></asp:ListItem>
-                        <asp:ListItem Value="15"></asp:ListItem>
-                        <asp:ListItem Value="20"></asp:ListItem>
-                        <asp:ListItem Value="25"></asp:ListItem>
-                        <asp:ListItem Value="30"></asp:ListItem>
-                        <asp:ListItem Value="35"></asp:ListItem>
-                        <asp:ListItem Value="40"></asp:ListItem>
-                        <asp:ListItem Value="45"></asp:ListItem>
-                        <asp:ListItem Value="50"></asp:ListItem>
-                        <asp:ListItem Value="55"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="ddlAmPm_routine" runat="server">
-                        <asp:ListItem>AM</asp:ListItem>
-                        <asp:ListItem>PM</asp:ListItem>
-                    </asp:DropDownList>
-                    <br />
-                    <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click" />
-                    <asp:Label ID="test" runat="server" Text="Label"></asp:Label>
+                    <table class="scheduleTable">
+                        <tr>
+                            <td>
+                                Step 1. Select a routine:
+                            </td>
+                            <td>
+                                <asp:ObjectDataSource ID="viewRoutines" runat="server" SelectMethod="viewRoutines"
+                                    TypeName="routineManager"></asp:ObjectDataSource>
+                                <asp:DropDownList ID="ddlRoutines" runat="server" DataSourceID="viewRoutines" DataTextField="name"
+                                    DataValueField="id">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Step 2. Select Start Time:
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="ddlHours_routine" runat="server">
+                                    <asp:ListItem>1</asp:ListItem>
+                                    <asp:ListItem>2</asp:ListItem>
+                                    <asp:ListItem>3</asp:ListItem>
+                                    <asp:ListItem>4</asp:ListItem>
+                                    <asp:ListItem>5</asp:ListItem>
+                                    <asp:ListItem>6</asp:ListItem>
+                                    <asp:ListItem>7</asp:ListItem>
+                                    <asp:ListItem>8</asp:ListItem>
+                                    <asp:ListItem>9</asp:ListItem>
+                                    <asp:ListItem>10</asp:ListItem>
+                                    <asp:ListItem>11</asp:ListItem>
+                                    <asp:ListItem>12</asp:ListItem>
+                                </asp:DropDownList>
+                                :
+                                <asp:DropDownList ID="ddlMinutes_routine" runat="server">
+                                    <asp:ListItem Value="00"></asp:ListItem>
+                                    <asp:ListItem Value="05"></asp:ListItem>
+                                    <asp:ListItem Value="10"></asp:ListItem>
+                                    <asp:ListItem Value="15"></asp:ListItem>
+                                    <asp:ListItem Value="20"></asp:ListItem>
+                                    <asp:ListItem Value="25"></asp:ListItem>
+                                    <asp:ListItem Value="30"></asp:ListItem>
+                                    <asp:ListItem Value="35"></asp:ListItem>
+                                    <asp:ListItem Value="40"></asp:ListItem>
+                                    <asp:ListItem Value="45"></asp:ListItem>
+                                    <asp:ListItem Value="50"></asp:ListItem>
+                                    <asp:ListItem Value="55"></asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:DropDownList ID="ddlAmPm_routine" runat="server">
+                                    <asp:ListItem>AM</asp:ListItem>
+                                    <asp:ListItem>PM</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Step 3. Select Start Date:
+                            </td>
+                            <td>
+                                <asp:TextBox ID="tbDate_routine" runat="server" EnableTheming="True" ReadOnly="True"></asp:TextBox>
+                                <img id="CalImage" src="../ui/images/calendar_icon.png" onclick="slideToggle()" />
+                                <div id="CalBlock" class="calendarzz">
+                                    <asp:Calendar ID="calDateRoutine" runat="server" BackColor="White" BorderColor="#999999"
+                                        CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
+                                        ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_routine"
+                                        Width="200px">
+                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                                        <NextPrevStyle VerticalAlign="Bottom" />
+                                        <OtherMonthDayStyle ForeColor="#808080" />
+                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                        <SelectorStyle BackColor="#CCCCCC" />
+                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                        <WeekendDayStyle BackColor="#FFFFCC" />
+                                    </asp:Calendar>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
+                        CssClass="button" />
+                    <asp:Label ID="lblResult_Routine" runat="server" Text=""></asp:Label>
                 </asp:View>
             </asp:MultiView>
         </asp:View>

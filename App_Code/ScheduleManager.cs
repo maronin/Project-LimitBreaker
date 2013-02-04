@@ -31,7 +31,8 @@ public class ScheduleManager
                            {
                                itemName = r.Routine.name,
                                startTime = r.startTime,
-                               user = r.LimitBreaker
+                               user = r.LimitBreaker,
+                               isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
                             orderby e.startTime
@@ -39,7 +40,8 @@ public class ScheduleManager
                             {
                                 itemName = e.Exercise.name,
                                 startTime = e.startTime,
-                                user = e.LimitBreakers
+                                user = e.LimitBreakers,
+                                isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
 

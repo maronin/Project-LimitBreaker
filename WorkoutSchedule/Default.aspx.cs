@@ -6,10 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Globalization;
 using System.Text;
+using System.Drawing;
 public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 {
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
+    bool atlernatingColor = true;
     //routineManager routineManage = new routineManager();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -68,13 +70,25 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         lnk_dayLink.Text = sb.ToString();
         lnk_dayLink.CommandArgument = dt.ToString();
         //Check to see if we have any dates matching today
-        Label lbl = (Label)e.Item.FindControl("Label1");
+        Label lbl = (Label)e.Item.FindControl("lbl_dayEvents");
 
         List<ScheduledRoutine> routine;
         List<scheduledItem> items;
 
         items = scheduleManager.getScheduledItems();
+        if (atlernatingColor)
+        {
+            //pnl_calendarDay.BackColor = Color.Azure;
+            atlernatingColor = false;
+        }
+        else
+        {
+            //pnl_calendarDay.BackColor = Color.LightCyan;
+            atlernatingColor = true;
 
+        }
+
+        lnk_dayLink.CssClass = "date";
 
         routine = scheduleManager.getRoutines();
 
@@ -82,8 +96,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             if (item.startTime.ToString("MMMM dd, yyyy") == dt.ToString("MMMM dd, yyyy"))
             {
-                lbl.Text = lbl.Text + "<b>" + item.itemName + "</b>" + " " + item.startTime.ToString("hh:mm tt") + "<br/>";
-
+                lbl.Font.Size = 12;
+                lbl.Text = lbl.Text + "<b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/>";
+                if (item.isExericse)
+                    lbl.ForeColor = Color.DarkViolet;
+                else
+                    lbl.ForeColor = Color.Red;
             }
         }
 
@@ -101,6 +119,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         StringBuilder sb = new StringBuilder();
         sb.Append(" ");
         lblEmpty.Text = sb.ToString();
+        pnl_calendarDay.BackColor = Color.Ivory;
     }
 
     protected void lnk_loadCalendar_Click(object sender, EventArgs e)
@@ -190,19 +209,16 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void btnScheduleRoutine_Click(object sender, EventArgs e)
     {
         if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_routine.Text), Convert.ToInt32(1), false))
-            lblResult_Exercise.Text = "Success!";
+            lblResult_Routine.Text = "Success!";
         else
-            lblResult_Exercise.Text = "Failure!";
+            lblResult_Routine.Text = "Failure!";
     
     }
 
     //Routine
     protected void calendar_selectionChanged_routine(object sender, EventArgs e)
     {
-
-        tbDate_routine.Text = calDateExercise.SelectedDate.ToString("d");
-        test.Text = calDateExercise.SelectedDate.ToString("d") + " " + ddlHours_routine.SelectedValue + ":" + ddlMinutes_routine.SelectedValue + ":00 " + ddlAmPm_routine.SelectedValue;
-        tbDate_exercise.Text = calDateExercise.SelectedDate.ToString("d") + " " + ddlHours_routine.SelectedItem.Text + ":" + ddlMinutes_routine.SelectedItem.Text + ":00 " + ddlAmPm_routine.SelectedItem.Text;
+        tbDate_routine.Text = calDateRoutine.SelectedDate.ToString("d") + " " + ddlHours_routine.SelectedItem.Text + ":" + ddlMinutes_routine.SelectedItem.Text + ":00 " + ddlAmPm_routine.SelectedItem.Text;
 
     }
 
@@ -210,9 +226,6 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     //Exericse
     protected void calendar_selectionChanged_exercise(object sender, EventArgs e)
     {
-        tbDate_routine.Text = calDateExercise.SelectedDate.ToString("d");
-        test.Text = calDateExercise.SelectedDate.ToString("d") + " " + dllHours_exercise.SelectedItem.Text + ":" + ddlMinutes_exercise.SelectedValue + ":00 " + ddlAmPm_exericse.SelectedValue;
-
         tbDate_exercise.Text = calDateExercise.SelectedDate.ToString("d") + " " + dllHours_exercise.SelectedItem.Text + ":" + ddlMinutes_exercise.SelectedItem.Text + ":00 " + ddlAmPm_exericse.SelectedItem.Text;
      
     }
