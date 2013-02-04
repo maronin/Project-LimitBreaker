@@ -181,6 +181,9 @@
                             </table>
                             <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
                                 CssClass="button" />
+                            <br />
+                            <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
+                                CssClass="button" />
                             <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
                         </asp:View>
                         <asp:View ID="View1" runat="server">
@@ -268,6 +271,9 @@
                                 </tr>
                             </table>
                             <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
+                                CssClass="button" />
+                            <br />
+                            <asp:Button ID="btnGoBack2" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
                                 CssClass="button" />
                             <asp:Label ID="lblResult_Routine" runat="server" Text=""></asp:Label>
                         </asp:View>
