@@ -1,52 +1,4 @@
-<<<<<<< HEAD
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ui_mp_MasterPage" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Project LimitBreaker</title>
-    <link href="../css/StyleSheet.css" rel="stylesheet" type="text/css" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div id="main">
-            <h1>Project LimitBreaker</h1>
-            <div id="menu">
-                <asp:Button ID="btnManageUserRoutines" runat="server" Text="Manage User Routines" CssClass="button" OnClick="btnManageUserRoutines_Click" />
-                <asp:Button ID="btnManageSysExercise" runat="server" Text="Manage System Exercises"
-                    CssClass="button" OnClick="btnManageSysExercise_Click" />
-                <asp:Button ID="Button3" runat="server" Text="Suggest Custom Exercises" CssClass="button"
-                    Enabled="False" />
-                <asp:Button ID="Button4" runat="server" Text="Analyze Performance" CssClass="button"
-                    Enabled="False" />
-                <asp:Button ID="Button5" runat="server" Text="Record Exercises" CssClass="button"
-                    Enabled="False" />
-                <asp:Button ID="Button6" runat="server" Text="Manage User Accounts"
-                    CssClass="button" OnClick="Button6_Click" />
-                <asp:Button ID="btnWorkOutSchedule" runat="server"
-                    Text="Manage Workout Schedule" CssClass="button"
-                    Enabled="True" OnClick="btnWorkOutSchedule_Click" />
-                <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
-                    Enabled="true" OnClick="Button8_Click" />
-
-                <asp:Button ID="Button9" runat="server" Text="Login" CssClass="button" OnClick="Button9_Click" />
-                <asp:Button ID="Button10" runat="server" Text="Manage Exercise Goals" CssClass="button"
-                    Enabled="true" onclick="Button10_Click" />
-                <br />
-
-            </div>
-            <div id="content">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-        </div>
-    </form>
-</body>
-</html>
-=======
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ui_mp_MasterPage" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ui_mp_MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -132,6 +84,8 @@
                 <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
                     Enabled="true" OnClick="Button8_Click" />
                 <asp:Button ID="Button9" runat="server" Text="Login" CssClass="button" OnClick="Button9_Click" />
+                <asp:Button ID="Button1" runat="server" Text="Manage Exercise Goals" CssClass="button"
+                    Enabled="true" onclick="Button10_Click" />
                 <br />
 
             </div>
@@ -143,4 +97,3 @@
     </form>
 </body>
 </html>
->>>>>>> e283949b5faf69f5bbf4720dd0f26013d9c607ee
