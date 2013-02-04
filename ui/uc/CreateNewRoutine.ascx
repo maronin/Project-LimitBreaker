@@ -80,9 +80,7 @@
                 </td>
                 <td>
                     <asp:Label ID="Label4" runat="server" Font-Size="Medium" Text="Selected Exercises"></asp:Label>
-                    <asp:ListBox ID="lbSelected" runat="server" Width="100%" AutoPostBack="True">
-                        <asp:ListItem>Selected Items</asp:ListItem>
-                    </asp:ListBox>
+                    <asp:ListBox ID="lbSelected" runat="server" Width="100%" AutoPostBack="True"></asp:ListBox>
                 </td>
             </tr>
             <tr>
