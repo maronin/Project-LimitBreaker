@@ -40,7 +40,7 @@ public class routineManager
             return rc;
         }
     }
-    
+
     // return the routine created
     public Routine createNewRoutine(String routineName, int userID, ICollection<Exercise> exerciseList)
     {
@@ -91,8 +91,9 @@ public class routineManager
         using (var context = new Layer2Container())
         {
             ICollection<Exercise> rc = new List<Exercise>();
+
             try
-            {         
+            {
                 Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
                 if (rtn != null)
                 {
@@ -112,7 +113,51 @@ public class routineManager
 
                 wrtr.Close();
             }
-            
+
+
+            return rc;
+        }
+    }
+
+    public bool deleteRoutine(int routineID)
+    {
+        using (var context = new Layer2Container())
+        {
+            bool rc = false;
+            try
+            {
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                Exercise exc = new Exercise();
+                if (rtn != null)
+                {
+                    ICollection<Exercise> exerciseList = rtn.Exercises;
+                    foreach (Exercise ex in exerciseList.ToList())
+                    {
+
+                        //exc = context.Exercises.Where(x => x.id == ex.id).FirstOrDefault();
+                        if (ex.Routines.Contains(rtn))
+                        {
+                            rtn.Exercises.Remove(ex);
+                        }
+                        exc = new Exercise();
+
+                    }
+                    context.Routines.DeleteObject(rtn);
+                    context.SaveChanges();
+                    rc = true;
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
 
             return rc;
         }

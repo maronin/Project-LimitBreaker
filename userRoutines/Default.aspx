@@ -27,13 +27,5 @@
         <h4>Log Routine Data</h4>
         <h4>Modify Logged Routine Data</h4>
     </div>
-    <div id="testContent">
-        <h4>View Details (test purposes)</h4>
-        <p>
-            User:
-            <asp:LoginName ID="LoginName1" runat="server" Visible="False" />
-        </p>
-        <asp:DetailsView ID="dvRoutineDetails" runat="server" Height="50px" CellPadding="5"></asp:DetailsView>
-    </div>
 </asp:Content>
 
