@@ -12,9 +12,11 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
     bool atlernatingColor = true;
+    static bool addNewItem = false;
     //routineManager routineManage = new routineManager();
     protected void Page_Load(object sender, EventArgs e)
     {
+        Page.MaintainScrollPositionOnPostBack = true;
         if (!IsPostBack)
         {
             multiViewCalendar.ActiveViewIndex = 0;
@@ -172,7 +174,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             rpt_calendar.DataBind();
 
         }
- 
+
     }
 
     protected void ItemCommand(Object Sender, RepeaterCommandEventArgs e)
@@ -183,16 +185,16 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             multiViewCalendar.ActiveViewIndex = 1;
             addItemView.ActiveViewIndex = 0;
         }
-/*
- * Unfinished, when user clicks on any of the dates
-        else
-        {
-            lblTest.Text = ((LinkButton)e.CommandSource).Text;
-            multiViewCalendar.ActiveViewIndex = 1;
-            addItemView.ActiveViewIndex = 0;
-        }
-  */
- }
+        /*
+         * Unfinished, when user clicks on any of the dates
+                else
+                {
+                    lblTest.Text = ((LinkButton)e.CommandSource).Text;
+                    multiViewCalendar.ActiveViewIndex = 1;
+                    addItemView.ActiveViewIndex = 0;
+                }
+          */
+    }
 
 
     protected void addExercise_Click(object sender, EventArgs e)
@@ -209,10 +211,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void btnScheduleRoutine_Click(object sender, EventArgs e)
     {
         if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_routine.Text), Convert.ToInt32(1), false))
+        {
+            addNewItem = true;
             lblResult_Routine.Text = "Success!";
+        }
         else
             lblResult_Routine.Text = "Failure!";
-    
+
     }
 
     //Routine
@@ -227,7 +232,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void calendar_selectionChanged_exercise(object sender, EventArgs e)
     {
         tbDate_exercise.Text = calDateExercise.SelectedDate.ToString("d") + " " + dllHours_exercise.SelectedItem.Text + ":" + ddlMinutes_exercise.SelectedItem.Text + ":00 " + ddlAmPm_exericse.SelectedItem.Text;
-     
+
+    }
+
+    protected void calDateExercise_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
+    {
+
     }
 
 
@@ -242,14 +252,38 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
         if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text), Convert.ToInt32(1), false))
+        {
+            addNewItem = true;
             lblResult_Exercise.Text = "Success!";
-       else
+        }
+        else
             lblResult_Exercise.Text = "Failure!";
-    
+
     }
     protected void goBack_Click(object sender, EventArgs e)
     {
+        //if a new item has been added, reset all the fields, refresh the calendar and go back to the calendar
+        if (addNewItem)
+        {
+            addNewItem = false;
+            ddlMinutes_exercise.SelectedIndex = 0;
+            dllHours_exercise.SelectedIndex = 0;
+            ddlAmPm_exericse.SelectedIndex = 0;
+            ddlMinutes_routine.SelectedIndex = 0;
+            ddlHours_routine.SelectedIndex = 0;
+            ddlAmPm_routine.SelectedIndex = 0;
+            tbDate_exercise.Text = "";
+            tbDate_routine.Text = "";
+            lblResult_Exercise.Text = "";
+            lblResult_Routine.Text = "";
+            Response.Redirect("~/WorkoutSchedule/default.aspx");
+
+        }
+
         multiViewCalendar.ActiveViewIndex = 0;
         addItemView.ActiveViewIndex = 0;
+
+
+
     }
 }

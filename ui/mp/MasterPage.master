@@ -15,27 +15,54 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
     <script type="text/javascript">
-        $(document).ready(function () {
+        
+        //exericse
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
             $('#CalImage').click(function () {
-                $('#CalBlock').slideToggle("slow");
+                $('#CalBlock').slideToggle("fast");
+                
             });
         });
-
-        $(document).ready(function () {
+        //routine
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
             $('#CalImage2').click(function () {
-                $('#CalBlock2').slideToggle("slow");
+                $('#CalBlock2').slideToggle("fast");
+                
             });
         });
 
         $(document).ready(function () {
             // set up our datepicker  
             $("#simple-date").datepicker();
-        }); 
+        });
+
+        function EndRequestHandler(sender, args) {
+            if (args.get_error() == undefined)
+                ;
+            else
+                alert("There was an error" + args.get_error().message);
+        }
+        function load() {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+                $('#CalImage').click(function () {
+                    $('#CalBlock').slideToggle("slow");
+                });
+            });
+
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+                $('#CalImage2').click(function () {
+                    $('#CalBlock2').slideToggle("slow");
+                });
+            });
+        }
+
+
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="load()">
     <form id="form1" runat="server">
         <div id="main">
             <h1>Project LimitBreaker</h1>

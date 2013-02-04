@@ -21,7 +21,7 @@
     border-bottom-right-radius: 50px 50px;
     border-bottom-left-radius: 50px 50px;
     background-image: url('../images/bgSuttle.jpg');
-    min-height:500px;
+    min-height: 500px;
 }
 
 #header
@@ -131,7 +131,7 @@ newExerciseForm, tr
 
 newExerciseForm, tr, td
 {
-     border-style: none;
+    border-style: none;
     width: 200px;
 }
 
@@ -242,7 +242,7 @@ newExerciseForm, tr, td
 
 .calendarzz
 {
-    display: none;
+    display: block;
     z-index: 10;
     position: absolute;
     float: inherit;
@@ -262,7 +262,7 @@ newExerciseForm, tr, td
 
 .calendarzz2
 {
-    display: none;
+    display: block;
     z-index: 10;
     position: absolute;
     float: inherit;
@@ -294,4 +294,23 @@ newExerciseForm, tr, td
 {
     width: 250px;
     vertical-align: top;
+}
+
+.loadingCalendar
+{
+    position: absolute;
+
+    width: 50%;
+    left:25%;
+    text-align: center;
+    top: 60%;
+    background: rgb(54, 25, 25); /* Fall-back for browsers that don't
+                               support rgba */
+    background: rgba(128, 128, 128, .5);
+    color: #000000;
+
+}
+.loadingCalendar h1
+{
+    z-index: 5;
 }
