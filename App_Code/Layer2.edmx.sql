@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/01/2013 16:35:07
+-- Date Created: 02/04/2013 11:00:58
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -168,6 +168,7 @@ CREATE TABLE [dbo].[ExerciseGoals] (
     [distance] float  NOT NULL,
     [time] int  NOT NULL,
     [reps] int  NOT NULL,
+    [achieved] bit  NOT NULL,
     [LimitBreaker_id] int  NOT NULL,
     [Exercise_id] int  NOT NULL
 );
@@ -524,20 +525,6 @@ ON [dbo].[ExerciseGoals]
     ([LimitBreaker_id]);
 GO
 
--- Creating foreign key on [Exercise_id] in table 'ExerciseGoals'
-ALTER TABLE [dbo].[ExerciseGoals]
-ADD CONSTRAINT [FK_ExerciseGoalExercise]
-    FOREIGN KEY ([Exercise_id])
-    REFERENCES [dbo].[Exercises]
-        ([id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ExerciseGoalExercise'
-CREATE INDEX [IX_FK_ExerciseGoalExercise]
-ON [dbo].[ExerciseGoals]
-    ([Exercise_id]);
-GO
-
 -- Creating foreign key on [Exercises_id] in table 'ExerciseRoutine'
 ALTER TABLE [dbo].[ExerciseRoutine]
 ADD CONSTRAINT [FK_ExerciseRoutine_Exercise]
@@ -559,6 +546,20 @@ ADD CONSTRAINT [FK_ExerciseRoutine_Routine]
 CREATE INDEX [IX_FK_ExerciseRoutine_Routine]
 ON [dbo].[ExerciseRoutine]
     ([Routines_id]);
+GO
+
+-- Creating foreign key on [Exercise_id] in table 'ExerciseGoals'
+ALTER TABLE [dbo].[ExerciseGoals]
+ADD CONSTRAINT [FK_ExerciseExerciseGoal]
+    FOREIGN KEY ([Exercise_id])
+    REFERENCES [dbo].[Exercises]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ExerciseExerciseGoal'
+CREATE INDEX [IX_FK_ExerciseExerciseGoal]
+ON [dbo].[ExerciseGoals]
+    ([Exercise_id]);
 GO
 
 -- --------------------------------------------------
