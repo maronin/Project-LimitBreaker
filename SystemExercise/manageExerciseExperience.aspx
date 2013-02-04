@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="manageExerciseExperience.aspx.cs" Inherits="systemExercise_manageExerciseExperience" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercise" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -36,8 +38,12 @@
     </div>
     <br />
     <div>
+        
         <asp:MultiView ID="functionalityMultiView" runat="server">
-            <asp:View ID="exerciseExpView" runat="server">
+        <asp:View ID="exerciseExpView" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            
                 <uc1:viewExercise ID="viewExerciseExp" runat="server" />
                 <hr />
                 <asp:MultiView ID="manageExperienceMultiView" runat="server">
@@ -54,6 +60,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="baseTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="baseTxtBox" Width="175" Minimum="0" Step="100">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -69,6 +77,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="timeTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender2" runat="server" TargetControlID="timeTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -84,6 +94,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="weightTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender3" runat="server" TargetControlID="weightTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -99,6 +111,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="repTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender4" runat="server" TargetControlID="repTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -114,6 +128,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="distanceTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender5" runat="server" TargetControlID="distanceTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -144,6 +160,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="addBaseTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender6" runat="server" TargetControlID="addBaseTxtBox" Width="175" Minimum="0" Step="100">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -159,6 +177,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="addTimeTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender7" runat="server" TargetControlID="addTimeTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -174,6 +194,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="addWeightTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender8" runat="server" TargetControlID="addWeightTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -189,6 +211,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="addRepTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender9" runat="server" TargetControlID="addRepTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)"
@@ -204,6 +228,8 @@
                                     </td>
                                     <td class="style9">
                                         <asp:TextBox ID="addDistanceTxtBox" runat="server"></asp:TextBox>
+                                        <asp:NumericUpDownExtender ID="NumericUpDownExtender10" runat="server" TargetControlID="addDistanceTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                                     </td>
                                     <td class="style10">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server"
@@ -221,8 +247,14 @@
                         </div>
                     </asp:View>
                 </asp:MultiView>
-            </asp:View>
-            <asp:View ID="userExpView" runat="server">
+            
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        </asp:View>
+        <asp:View ID="userExpView" runat="server">
+            <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+            
                 <div>
                     <h4>
                         Modify Inactive User Experience Point Atrophy</h4>
@@ -233,6 +265,8 @@
                             </td>
                             <td class="style9">
                                 <asp:TextBox ID="inactiveTimeTxtBox" runat="server"></asp:TextBox>
+                                <asp:NumericUpDownExtender ID="NumericUpDownExtender11" runat="server" TargetControlID="inactiveTimeTxtBox" Width="175" Minimum="0" >
+                                        </asp:NumericUpDownExtender>
                             </td>
                             <td class="style10">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*Required"
@@ -248,6 +282,8 @@
                             </td>
                             <td class="style9">
                                 <asp:TextBox ID="expLossTxtBox" runat="server"></asp:TextBox>
+                                <asp:NumericUpDownExtender ID="NumericUpDownExtender12" runat="server" TargetControlID="expLossTxtBox" Width="175" Minimum="0" Step="500">
+                                        </asp:NumericUpDownExtender>
                             </td>
                             <td class="style10">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Required"
@@ -276,6 +312,8 @@
                             </td>
                             <td class ="style9">
                                 <asp:TextBox ID="maxLvlTxtBox" runat="server"></asp:TextBox>
+                                <asp:NumericUpDownExtender ID="NumericUpDownExtender13" runat="server" TargetControlID="maxLvlTxtBox" Width="175" Minimum="0" Step="50">
+                                        </asp:NumericUpDownExtender>
                             </td>
                             <td class="style10">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*Required"
@@ -293,6 +331,8 @@
                             </td>
                             <td class="style9">
                                 <asp:TextBox ID="baseReqTxtBox" runat="server"></asp:TextBox>
+                                <asp:NumericUpDownExtender ID="NumericUpDownExtender14" runat="server" TargetControlID="baseReqTxtBox" Width="175" Minimum="0" Step="500">
+                                        </asp:NumericUpDownExtender>
                             </td>
                             <td class="style10">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*Required"
@@ -310,6 +350,8 @@
                             </td>
                             <td class="style9">
                                 <asp:TextBox ID="expModTxtBox" runat="server"></asp:TextBox>
+                                <asp:NumericUpDownExtender ID="NumericUpDownExtender15" runat="server" TargetControlID="expModTxtBox" Width="175" Minimum="0" Step="0.1">
+                                        </asp:NumericUpDownExtender>
                             </td>
                             <td class="style10">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*Required"
@@ -327,7 +369,11 @@
                         onclick="saveLvlFormulaBtn_Click" ValidationGroup="lvlFormula" />
                     <asp:Label ID="saveLvlFormulaResultLbl" runat="server" Text=""></asp:Label>
                 </div>
+            
+            </ContentTemplate>
+            </asp:UpdatePanel>
             </asp:View>
         </asp:MultiView>
+        
     </div>
 </asp:Content>

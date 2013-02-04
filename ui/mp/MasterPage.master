@@ -5,10 +5,64 @@
 <head runat="server">
     <title>Project LimitBreaker</title>
     <link href="../css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+    <link href="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/css/redmond/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../Areas/Datepicker/Styles/DatePickerStyles.css" rel="stylesheet" type="text/css" />
+    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script> 
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script type="text/javascript">
+        
+        //exericse
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+            $('#CalImage').click(function () {
+                $('#CalBlock').slideToggle("fast");
+                
+            });
+        });
+        //routine
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+            $('#CalImage2').click(function () {
+                $('#CalBlock2').slideToggle("fast");
+                
+            });
+        });
+
+        $(document).ready(function () {
+            // set up our datepicker  
+            $("#simple-date").datepicker();
+        });
+
+        function EndRequestHandler(sender, args) {
+            if (args.get_error() == undefined)
+                ;
+            else
+                alert("There was an error" + args.get_error().message);
+        }
+        function load() {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+                $('#CalImage').click(function () {
+                    $('#CalBlock').slideToggle("slow");
+                });
+            });
+
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+                $('#CalImage2').click(function () {
+                    $('#CalBlock2').slideToggle("slow");
+                });
+            });
+        }
+
+
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="load()">
     <form id="form1" runat="server">
         <div id="main">
             <h1>Project LimitBreaker</h1>
@@ -17,11 +71,11 @@
                 <asp:Button ID="btnManageSysExercise" runat="server" Text="Manage System Exercises"
                     CssClass="button" OnClick="btnManageSysExercise_Click" />
                 <asp:Button ID="Button3" runat="server" Text="Suggest Custom Exercises" CssClass="button"
-                    Enabled="False" />
+                    Enabled="False" Visible="false"/>
                 <asp:Button ID="Button4" runat="server" Text="Analyze Performance" CssClass="button"
                     Enabled="False" />
                 <asp:Button ID="Button5" runat="server" Text="Record Exercises" CssClass="button"
-                    Enabled="False" />
+                    Enabled="False" /><br />
                 <asp:Button ID="Button6" runat="server" Text="Manage User Accounts"
                     CssClass="button" OnClick="Button6_Click" />
                 <asp:Button ID="btnWorkOutSchedule" runat="server"
@@ -29,7 +83,6 @@
                     Enabled="True" OnClick="btnWorkOutSchedule_Click" />
                 <asp:Button ID="Button8" runat="server" Text="Manage Expereince Points" CssClass="button"
                     Enabled="true" OnClick="Button8_Click" />
-
                 <asp:Button ID="Button9" runat="server" Text="Login" CssClass="button" OnClick="Button9_Click" />
                 <br />
 
