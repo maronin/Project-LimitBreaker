@@ -20,62 +20,68 @@
     <asp:MultiView ID="multiViewCalendar" runat="server">
         <asp:View ID="view_calendar" runat="server">
             <asp:LinkButton ID="lnk_add_item" runat="server" Text="Add Item" OnClick="lnk_add_item_Click" />
-            <asp:Panel ID="pnl_calendar" runat="server" CssClass="calendar">
-                <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
-                    <asp:DropDownList ID="ddl_month" runat="server" />
-                    <asp:DropDownList ID="ddl_year" runat="server" />
-                    <asp:LinkButton ID="lnk_loadCalendar" runat="server" Text="Go" OnClick="lnk_loadCalendar_Click" />
-                </asp:Panel>
-                <asp:Panel ID="pnl_days" runat="server" CssClass="DaysOfWeek">
-                    <table id="week">
-                        <tr>
-                            <td>
-                                Sun
-                            </td>
-                            <td>
-                                Mon
-                            </td>
-                            <td>
-                                Tue
-                            </td>
-                            <td>
-                                Wed
-                            </td>
-                            <td>
-                                Thu
-                            </td>
-                            <td>
-                                Fri
-                            </td>
-                            <td>
-                                Sat
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-                <asp:Repeater ID="rpt_emptyDates" runat="server" OnItemDataBound="rpt_emptyDates_ItemDataBound">
-                    <ItemTemplate>
-                        <asp:Panel ID="pnl_emptyDate" runat="server" CssClass="calendarDay" ScrollBars="Auto">
-                            <asp:Label ID="lblEmpty" runat="server" Text=""></asp:Label>
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:Panel ID="pnl_calendar" runat="server" CssClass="calendar">
+                        <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
+                            <asp:DropDownList ID="ddl_month" runat="server" />
+                            <asp:DropDownList ID="ddl_year" runat="server" />
+                            <asp:LinkButton ID="lnk_loadCalendar" runat="server" Text="Go" OnClick="lnk_loadCalendar_Click" />
                         </asp:Panel>
-                    </ItemTemplate>
-                </asp:Repeater>
-                <asp:Repeater ID="rpt_calendar" runat="server" OnItemDataBound="rpt_calendar_ItemDataBound"
-                    OnItemCommand="ItemCommand">
-                    <ItemTemplate>
-                        <!-- onMouseOver ="this.style.backgroundImage='url(http://www.yellowcalx.com/wp-content/uploads/2012/04/yellow.png)'" onMouseOut ="this.style.backgroundImage='url(http://www.takenseriouslyamusing.com/wp-content/uploads/2012/08/Blue.png)'" -->
-                        <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto">
-                            <asp:LinkButton ID="lnk_dayLink" runat="server" CommandName="ButtonEvent" CssClass="date"
-                                CommandArgument="<%# Container.DataItem %>" Text="<%#Container.DataItem %>" />
-                            <br />
-                            <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
+                        <asp:Panel ID="pnl_days" runat="server" CssClass="DaysOfWeek">
+                            <table id="week">
+                                <tr>
+                                    <td>
+                                        Sun
+                                    </td>
+                                    <td>
+                                        Mon
+                                    </td>
+                                    <td>
+                                        Tue
+                                    </td>
+                                    <td>
+                                        Wed
+                                    </td>
+                                    <td>
+                                        Thu
+                                    </td>
+                                    <td>
+                                        Fri
+                                    </td>
+                                    <td>
+                                        Sat
+                                    </td>
+                                </tr>
+                            </table>
                         </asp:Panel>
-                    </ItemTemplate>
-                </asp:Repeater>
-                <div style="clear: both; height: 0; overflow: hidden">
-                    &nbsp;</div>
-                <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
-            </asp:Panel>
+                        <asp:Repeater ID="rpt_emptyDates" runat="server" OnItemDataBound="rpt_emptyDates_ItemDataBound">
+                            <ItemTemplate>
+                                <asp:Panel ID="pnl_emptyDate" runat="server" CssClass="calendarDay" ScrollBars="Auto">
+                                    <asp:Label ID="lblEmpty" runat="server" Text=""></asp:Label>
+                                </asp:Panel>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:Repeater ID="rpt_calendar" runat="server" OnItemDataBound="rpt_calendar_ItemDataBound"
+                            OnItemCommand="ItemCommand">
+                            <ItemTemplate>
+                                <!-- onMouseOver ="this.style.backgroundImage='url(http://www.yellowcalx.com/wp-content/uploads/2012/04/yellow.png)'" onMouseOut ="this.style.backgroundImage='url(http://www.takenseriouslyamusing.com/wp-content/uploads/2012/08/Blue.png)'" -->
+                                <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto">
+                                    <asp:LinkButton ID="lnk_dayLink" runat="server" CommandName="ButtonEvent" CssClass="date"
+                                        CommandArgument="<%# Container.DataItem %>" Text="<%#Container.DataItem %>" />
+                                    <br />
+                                    <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
+                                </asp:Panel>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <div style="clear: both; height: 0; overflow: hidden">
+                            &nbsp;</div>
+                        <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
+                    </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </asp:View>
         <!------------------------------------------------------------------------------ add an item view -------------------------------------------------------------------------------------->
         <asp:View ID="add_item" runat="server">
@@ -88,6 +94,7 @@
                             CssClass="button" />
                         <asp:Button ID="addExercise" runat="server" Text="Exercise" OnClick="addExercise_Click"
                             CssClass="button" />
+                        <asp:Button ID="goBack" runat="server" Text="Back" OnClick="goBack_Click" CssClass="button" />
                     </div>
                 </asp:View>
                 <!---------------------------------------------------------------------------- Schedule Exercise  --------------------------------------------------------------------------------------->

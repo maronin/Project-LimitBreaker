@@ -131,7 +131,7 @@ newExerciseForm, tr
 
 newExerciseForm, tr, td
 {
-    border-style: none;
+     border-style: none;
     width: 200px;
 }
 
@@ -178,7 +178,6 @@ newExerciseForm, tr, td
     color: #FFFFFF;
     font-weight: bolder;
 }
-
 .calendar
 {
     background-color: #eeeeee;

@@ -247,4 +247,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             lblResult_Exercise.Text = "Failure!";
     
     }
+    protected void goBack_Click(object sender, EventArgs e)
+    {
+        multiViewCalendar.ActiveViewIndex = 0;
+        addItemView.ActiveViewIndex = 0;
+    }
 }
