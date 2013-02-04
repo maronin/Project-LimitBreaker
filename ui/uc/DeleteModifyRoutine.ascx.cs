@@ -25,9 +25,13 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         {
             GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
             GridView1.DataBind();
-            btnDelete.Visible = true;
-            btnDelete.Enabled = true;
+            Panel1.Visible = true;
+            Panel1.Enabled = true;
             //Response.Write(rbl.SelectedIndex + " item: " + rbl.SelectedItem);
+
+            // to get the id of the button so that enter = submit
+            tbRoutineName.Attributes.Add("onKeyPress",
+                 "doClick('" + btnConfirm.ClientID + "',event)");
         }
 
     }
@@ -35,12 +39,21 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
     {
         e.ExceptionHandled = true;
     }
+
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "del")
         {
-            Response.Write("command argument: " + e.CommandArgument.ToString() + "<br/>");
+            //Response.Write("item: "+ e.CommandArgument.ToString());
+            int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+            int exerciseID = Convert.ToInt32(e.CommandArgument.ToString());
+            Routine rtn = routManager.removeExerciseFromRoutine(routineID, exerciseID);
 
+            if (rtn != null)
+            {
+                GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+                GridView1.DataBind();
+            }
         }
     }
     protected void btnDelete_Click(object sender, EventArgs e)
@@ -71,4 +84,33 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
             Response.Redirect(Request.RawUrl);
         }
     }
+    protected void btnConfirm_Click(object sender, EventArgs e)
+    {
+        int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+        Routine rtn = routManager.changeRoutineName(routineID, tbRoutineName.Text);
+        int index = rbl.SelectedIndex;
+        if (rtn != null)
+        {
+            rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
+            rbl.DataSource = routManager.viewRoutines().ToList();
+            rbl.DataTextField = "name";
+            rbl.DataValueField = "id";
+            rbl.DataBind();
+            rbl.SelectedIndex = index;
+        }
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+        int exerciseID = sysManager.getExerciseID(lbExerciseList.SelectedItem.Text);
+        Routine rtn = routManager.addExerciseToRoutine(routineID, exerciseID);
+
+        if (rtn != null)
+        {
+            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+            GridView1.DataBind();
+        }
+    }
+
 }

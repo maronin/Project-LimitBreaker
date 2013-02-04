@@ -20,12 +20,6 @@
             }
         }
     }
-    //credit to: Mudassar Khan 2012, url: http://www.aspsnippets.com/Articles/Validate-Multiple-Validation-Groups-with-one-Button-in-ASPNet.aspx 
-    function Validate() {
-        var isValid = false;
-        isValid = Page_ClientValidate('RtnName');
-        return isValid;
-    }
 </script>
 <style type="text/css">
     .auto-style1 {
@@ -95,17 +89,17 @@
                 <td>
                     <asp:Label ID="Label1" runat="server" Text="Routine Name" Font-Size="Medium"></asp:Label>
                     <br />
-                    <asp:TextBox ID="tbRoutineName" runat="server" ValidationGroup="RtnName"></asp:TextBox>
+                    <asp:TextBox ID="tbRoutineName" runat="server" ValidationGroup="RtnName" Width="100%"></asp:TextBox>
                 </td>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9 ]+" ValidationGroup="RtnName" Display="Dynamic"></asp:RegularExpressionValidator>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbRoutineName" Display="Dynamic" ErrorMessage="Name is needed" ForeColor="Red" ValidationGroup="RtnName"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9 ]+" ValidationGroup="RtnName" Display="Dynamic" Font-Size="Medium"></asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbRoutineName" Display="Dynamic" ErrorMessage="Name is needed" ForeColor="Red" ValidationGroup="RtnName" Font-Size="Medium"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClientClick="return Validate()" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" />
+                    <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" />
                 </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>

@@ -162,4 +162,135 @@ public class routineManager
             return rc;
         }
     }
+
+    // return true if the routine contains the exercise
+    public bool containsExercise(int routineID, int exerciseId)
+    {
+        using (var context = new Layer2Container())
+        {
+            bool rc = false;
+            try
+            {
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                Exercise exc = context.Exercises.Where(x => x.id == exerciseId).FirstOrDefault();
+                if (rtn.Exercises.Contains(exc))
+                    rc = true;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+
+            return rc;
+        }
+    }
+
+    public Routine addExerciseToRoutine(int routineID, int exerciseID)
+    {
+        using (var context = new Layer2Container())
+        {
+            Routine rc = new Routine();
+            try
+            {
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                Exercise exc = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
+                if (rtn != null && exc != null && containsExercise(routineID, exerciseID) != true)
+                {
+                    rtn.Exercises.Add(exc);
+                    context.Routines.ApplyCurrentValues(rtn);
+                    context.SaveChanges();
+                }
+                rc = rtn;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+
+            return rc;
+        }
+    }
+
+    public Routine removeExerciseFromRoutine(int routineID, int exerciseID)
+    {
+
+        using (var context = new Layer2Container())
+        {
+            Routine rc = new Routine();
+            try
+            {
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                Exercise exc = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
+                if (rtn != null && exc != null && containsExercise(routineID, exerciseID) == true)
+                {
+                    rtn.Exercises.Remove(exc);
+                    exc.Routines.Remove(rtn);
+                    context.Exercises.ApplyCurrentValues(exc);
+                    context.Routines.ApplyCurrentValues(rtn);
+                    context.SaveChanges();
+                }
+                rc = rtn;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+
+            return rc;
+        }
+
+    }
+
+    public Routine changeRoutineName(int routineID, string name)
+    {
+        using (var context = new Layer2Container())
+        {
+            Routine rc = new Routine();
+            try
+            {
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                if (rtn != null && rtn.name != name.Trim())
+                {
+                    rtn.name = name.Trim();
+                    context.Routines.ApplyCurrentValues(rtn);
+                    context.SaveChanges();
+                }
+                rc = rtn;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+
+            return rc;
+        }
+    }
 }
