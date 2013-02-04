@@ -52,7 +52,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
             if (!lbSelected.Items.Contains(li))
             {
                 lbSelected.Items.Add(li);
-                btnConfirm.Enabled = lbSelected.Items.Count != 1 ? true : false;
+                btnConfirm.Enabled = lbSelected.Items.Count != 0 ? true : false;
                 exerciseItem = sysManager.getExercise(li.Text);
                 if (exerciseItem != null)
                     AddExercise(exerciseItem);
@@ -67,7 +67,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     }
     protected void btnRemove_Click(object sender, EventArgs e)
     {
-        if (lbSelected.SelectedIndex > 0)
+        if (lbSelected.SelectedIndex > -1)
         {
             Exercise exerciseItem = new Exercise();
             exercises = Session["exercises"] != null ? (List<Exercise>)Session["exercises"] : null;
@@ -102,9 +102,9 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         ICollection<Exercise> rc = new List<Exercise>();
         Exercise ex = new Exercise();
 
-        if (lb.Items.Count > 1)
+        if (lb.Items.Count > 0)
         {
-            for (int i = 1; i < lb.Items.Count; i++)
+            for (int i = 0; i < lb.Items.Count; i++)
             {
                 ex = sysManager.getExercise(lb.Items[i].ToString());
                 if (ex != null)
@@ -120,7 +120,6 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         Session.Clear();
         ddlMuscleGroups.SelectedIndex = 0;
         lbSelected.Items.Clear();
-        lbSelected.Items.Insert(0, "Selected Items");
         tbRoutineName.Text = "";
     }
 
