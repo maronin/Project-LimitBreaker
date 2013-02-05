@@ -64,14 +64,14 @@ public class ScheduleManager
             if (lb != null)
             {
                 Routine routine = context.Routines.Where(e => e.id == routineID).FirstOrDefault();
-                List<ScheduledExercise> schExercises = new List<ScheduledExercise>();
-                ScheduledExercise schExercise = context.ScheduledExercises.Where(e => e.id == routineID).FirstOrDefault();
+               // List<ScheduledRoutine> schRoutines = new List<ScheduledRoutine>();
+              //  ScheduledRoutine schRoutine = context.ScheduledRoutines.Where(e => e.id == routineID).FirstOrDefault();
                 //check if the item is already scheduled for that day and time
-                if ((schExercise != null && context.ScheduledExercises.FirstOrDefault(e => e.Exercise.id == routineID).startTime == start))
-                    rc = false;
+               // if ((schRoutine != null && context.ScheduledExercises.FirstOrDefault(e => e.Exercise.id == routineID).startTime == start))
+                //    rc = false;
 
-                else
-                {
+             //   else
+              //  {
                     newScheduledRoutine.Routine = routine;
                     newScheduledRoutine.startTime = start;
                     newScheduledRoutine.LimitBreaker = lb;
@@ -79,7 +79,7 @@ public class ScheduleManager
                     context.ScheduledRoutines.AddObject(newScheduledRoutine);
                     context.SaveChanges();
                     rc = true;
-                }
+             //   }
 
             }
             //}
@@ -110,11 +110,11 @@ public class ScheduleManager
                 List<ScheduledExercise> schExercises = new List<ScheduledExercise>();
                 ScheduledExercise schExercise = context.ScheduledExercises.Where(e => e.id == exerciseID).FirstOrDefault();
                 //check if the item is already scheduled for that day and time
-               if ((schExercise != null && context.ScheduledExercises.FirstOrDefault(e => e.Exercise.id == exerciseID).startTime == start))
-                        rc = false;
+               //if ((schExercise != null && context.ScheduledExercises.FirstOrDefault(e => e.Exercise.id == exerciseID).startTime == start))
+                   //     rc = false;
               
-                else
-                {
+               // else
+               // {
                     newScheduledExercise.Exercise = exercise;
                     newScheduledExercise.startTime = start;
                     newScheduledExercise.LimitBreakers = lb;
@@ -122,7 +122,7 @@ public class ScheduleManager
                     context.ScheduledExercises.AddObject(newScheduledExercise);
                     context.SaveChanges();
                     rc = true;
-                }
+              //  }
                 
             }
             //}
