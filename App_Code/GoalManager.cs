@@ -15,19 +15,39 @@ public class GoalManager
 		//
 	}
 
-    public List<ExerciseGoal> getAllExerciseGoalsFromUser(string userName)
+    public List<ExerciseGoal> getUnachievedExerciseGoalsFromUser(string userName, int orderBy)
     {
         using (var context = new Layer2Container())
         {
-            return context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName).ToList();
+            List<ExerciseGoal> goalSet;
+
+            switch (orderBy)
+            {
+                case 0:
+                    goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false).OrderBy(o => o.Exercise.name).ToList();
+                    break;
+                case 1:
+                    goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false).OrderBy(o => o.id).ToList();
+                    break;
+                default:
+                    goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false).ToList();
+                    break;
+            }
+
+            foreach (ExerciseGoal eg in goalSet)
+            {
+                context.LoadProperty(eg, "Exercise");
+            }
+
+            return goalSet;
         }
     }
 
-    public ExerciseGoal getExerciseGoalById(int id)
+    public ExerciseGoal getExerciseGoalByExerciseName(string name)
     {
         using (var context = new Layer2Container())
         {
-            return context.ExerciseGoals.Where(s => s.id == id).FirstOrDefault();
+            return context.ExerciseGoals.Where(s => s.Exercise.name == name).FirstOrDefault();
         }
     }
 }

@@ -20,10 +20,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             viewGoalsBtn.Enabled = false;
             addGoalBtn.Enabled = true;
 
-            if (goalMngr.getAllExerciseGoalsFromUser(userName).Count < 1)
+            if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
                 exerciseGoalMultiView.ActiveViewIndex = 0;
             else
+            {
                 exerciseGoalMultiView.ActiveViewIndex = 1;
+                loadExerciseGoals();
+            }
         }
     }
 
@@ -32,10 +35,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         viewGoalsBtn.Enabled = false;
         addGoalBtn.Enabled = true;
 
-        if (goalMngr.getAllExerciseGoalsFromUser(userName).Count < 1)
+        if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
             exerciseGoalMultiView.ActiveViewIndex = 0;
         else
+        {
             exerciseGoalMultiView.ActiveViewIndex = 1;
+            loadExerciseGoals();
+        }
     }
 
     protected void addGoalBtn_Click(object sender, EventArgs e)
@@ -43,5 +49,21 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         viewGoalsBtn.Enabled = true;
         addGoalBtn.Enabled = false;
         exerciseGoalMultiView.ActiveViewIndex = 2;
+    }
+
+    protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        loadExerciseGoals();
+    }
+
+    public void loadExerciseGoals()
+    {
+        List<ExerciseGoal> goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
+        userGoalsListBox.Items.Clear();
+
+        foreach (ExerciseGoal ex in goalSet)
+        {
+            userGoalsListBox.Items.Add(ex.Exercise.name);
+        }
     }
 }
