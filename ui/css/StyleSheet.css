@@ -4,25 +4,7 @@
 }
 
 
-#main
-{
-    border: 1px solid #C0C0C0;
-    position: absolute;
-    top: 2%;
-    left: 10%;
-    margin: auto auto 0px auto;
-    padding: 15px;
-    width: 80%;
-    vertical-align: middle;
-    font-size: 24px;
-    text-align: center;
-    border-top-left-radius: 50px 50px;
-    border-top-right-radius: 50px 50px;
-    border-bottom-right-radius: 50px 50px;
-    border-bottom-left-radius: 50px 50px;
-    background-image: url('../images/bgSuttle.jpg');
-    min-height: 500px;
-}
+
 
 #header
 {
