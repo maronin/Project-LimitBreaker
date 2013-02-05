@@ -98,12 +98,16 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             if (item.startTime.ToString("MMMM dd, yyyy") == dt.ToString("MMMM dd, yyyy"))
             {
-                lbl.Font.Size = 12;
-                lbl.Text = lbl.Text + "<b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/>";
                 if (item.isExericse)
-                    lbl.ForeColor = Color.DarkViolet;
+                {
+                    lbl.Font.Size = 12;
+                    lbl.Text = lbl.Text + "<span style=\"color: DarkViolet\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
+                }
                 else
-                    lbl.ForeColor = Color.Red;
+                {
+                    lbl.Font.Size = 12;
+                    lbl.Text = lbl.Text + "<span style=\"color: Red\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
+                }
             }
         }
 
@@ -210,7 +214,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleRoutine_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_routine.Text), Convert.ToInt32(1), false))
+        if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue),
+            Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/
+            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(1), false))
         {
             addNewItem = true;
             lblResult_Routine.Text = "Success!";
@@ -219,7 +225,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             lblResult_Routine.Text = "Failure!";
 
     }
-
+    /*
     //Routine
     protected void calendar_selectionChanged_routine(object sender, EventArgs e)
     {
@@ -238,7 +244,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void calDateExercise_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
     {
 
-    }
+    }*/
 
 
 
@@ -251,7 +257,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text), Convert.ToInt32(1), false))
+        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(1), false))
         {
             addNewItem = true;
             lblResult_Exercise.Text = "Success!";
@@ -267,8 +273,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             addNewItem = false;
             ddlMinutes_exercise.SelectedIndex = 0;
-            dllHours_exercise.SelectedIndex = 0;
-            ddlAmPm_exericse.SelectedIndex = 0;
+            ddlHours_exercise.SelectedIndex = 0;
+            ddlAmPm_exercise.SelectedIndex = 0;
             ddlMinutes_routine.SelectedIndex = 0;
             ddlHours_routine.SelectedIndex = 0;
             ddlAmPm_routine.SelectedIndex = 0;

@@ -236,44 +236,6 @@ newExerciseForm, tr, td
 #scheduleChoice
 {
 }
-#CalImage
-{
-}
-
-.calendarzz
-{
-    display: block;
-    z-index: 10;
-    position: absolute;
-    float: inherit;
-    top: 0;
-}
-
-#CalBlock
-{
-    position: relative;
-}
-
-#CalImage2
-{
-    height: 20px;
-    width: 20px;
-}
-
-.calendarzz2
-{
-    display: block;
-    z-index: 10;
-    position: absolute;
-    float: inherit;
-    top: 0;
-}
-
-#CalBlock2
-{
-    position: relative;
-}
-
 .date
 {
     font-style: normal;
