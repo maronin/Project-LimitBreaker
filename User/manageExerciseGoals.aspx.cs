@@ -9,7 +9,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 {
     string userName;
     GoalManager goalMngr;
-
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         userName = User.Identity.Name;
@@ -26,6 +26,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             {
                 exerciseGoalMultiView.ActiveViewIndex = 1;
                 loadExerciseGoals();
+
             }
         }
     }
@@ -56,6 +57,11 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         loadExerciseGoals();
     }
 
+    protected void userGoalsListBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+    }
+
     public void loadExerciseGoals()
     {
         List<ExerciseGoal> goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
@@ -65,5 +71,20 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         {
             userGoalsListBox.Items.Add(ex.Exercise.name);
         }
+
+        userGoalsListBox.SelectedIndex = 0;
+        loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+    }
+
+    public void loadSelectedGoalsAttributes(string exerciseName)
+    {
+        singleGoalAttributesMultiView.ActiveViewIndex = 0;
+        ExerciseGoal eg = goalMngr.getExerciseGoalByExerciseNameAndUserName(exerciseName, userName);
+
+        exerciseNameLbl.Text = exerciseName;
+        goalTimeLbl.Text = eg.time.ToString();
+        goalDistancelbl.Text = eg.distance.ToString();
+        goalWeightLbl.Text = eg.weight.ToString();
+        goalRepsLbl.Text = eg.reps.ToString();
     }
 }

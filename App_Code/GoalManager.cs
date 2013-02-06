@@ -43,11 +43,11 @@ public class GoalManager
         }
     }
 
-    public ExerciseGoal getExerciseGoalByExerciseName(string name)
+    public ExerciseGoal getExerciseGoalByExerciseNameAndUserName(string name, string userName)
     {
         using (var context = new Layer2Container())
         {
-            return context.ExerciseGoals.Where(s => s.Exercise.name == name).FirstOrDefault();
+            return context.ExerciseGoals.Where(s => s.Exercise.name == name && s.LimitBreaker.username == userName).FirstOrDefault();
         }
     }
 }

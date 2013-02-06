@@ -135,44 +135,54 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
                 if (exercise.time)
                 {
+                    NumericUpDownExtender2.Enabled = true;
                     timeTxtBox.Enabled = true;
                     timeTxtBox.Text = selectedExercise.timeModifier.ToString();
+                    
                 }
                 else
                 {
+                    NumericUpDownExtender2.Enabled = false;
                     timeTxtBox.Enabled = false;
                     timeTxtBox.Text = "0";
+                    
                 }
 
                 if (exercise.weight)
                 {
+                    NumericUpDownExtender3.Enabled = true;
                     weightTxtBox.Enabled = true;
                     weightTxtBox.Text = selectedExercise.weightModifier.ToString();
                 }
                 else
                 {
+                    NumericUpDownExtender3.Enabled = false;
                     weightTxtBox.Enabled = false;
                     weightTxtBox.Text = "0";
                 }
 
                 if (exercise.rep)
                 {
+                    NumericUpDownExtender4.Enabled = true;
                     repTxtBox.Enabled = true;
                     repTxtBox.Text = selectedExercise.repModifier.ToString();
                 }
                 else
                 {
+                    NumericUpDownExtender4.Enabled = false;
                     repTxtBox.Enabled = false;
                     repTxtBox.Text = "0";
                 }
 
                 if (exercise.distance)
                 {
+                    NumericUpDownExtender5.Enabled = true;
                     distanceTxtBox.Enabled = true;
                     distanceTxtBox.Text = selectedExercise.distanceModifier.ToString();
                 }
                 else
                 {
+                    NumericUpDownExtender5.Enabled = false;
                     distanceTxtBox.Enabled = false;
                     distanceTxtBox.Text = "0";
                 }
@@ -190,24 +200,48 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
                 addDistanceTxtBox.Text = "0";
 
                 if (exercise.time)
+                {
+                    NumericUpDownExtender7.Enabled = true;
                     addTimeTxtBox.Enabled = true;
+                }
                 else
+                {
+                    NumericUpDownExtender7.Enabled = false;
                     addTimeTxtBox.Enabled = false;
+                }
 
                 if (exercise.weight)
+                {
+                    NumericUpDownExtender8.Enabled = true;
                     addWeightTxtBox.Enabled = true;
+                }
                 else
+                {
+                    NumericUpDownExtender8.Enabled = false;
                     addWeightTxtBox.Enabled = false;
+                }
 
                 if (exercise.rep)
+                {
+                    NumericUpDownExtender9.Enabled = true;
                     addRepTxtBox.Enabled = true;
+                }
                 else
+                {
+                    NumericUpDownExtender9.Enabled = false;
                     addRepTxtBox.Enabled = false;
+                }
 
                 if (exercise.distance)
+                {
+                    NumericUpDownExtender10.Enabled = true;
                     addDistanceTxtBox.Enabled = true;
+                }
                 else
+                {
+                    NumericUpDownExtender10.Enabled = false;
                     addDistanceTxtBox.Enabled = false;
+                }
             }
         }
 

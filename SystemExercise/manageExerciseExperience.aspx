@@ -6,25 +6,25 @@
 <%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercise" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
-        .style2
-        {
-            width: 296px;
-        }
         .style9
         {
             width: 175px;
+            height:30px;
         }
         .style10
         {
             width: 700px;
+            height:30px;
         }
         .style11
         {
             width: 250px;
+            height:30px;
         }
         .style12
         {
             width: 255px;
+            height:30px;
         }
     </style>
 </asp:Content>
