@@ -4,25 +4,7 @@
 }
 
 
-#main
-{
-    border: 1px solid #C0C0C0;
-    position: absolute;
-    top: 2%;
-    left: 10%;
-    margin: auto auto 0px auto;
-    padding: 15px;
-    width: 80%;
-    vertical-align: middle;
-    font-size: 24px;
-    text-align: center;
-    border-top-left-radius: 50px 50px;
-    border-top-right-radius: 50px 50px;
-    border-bottom-right-radius: 50px 50px;
-    border-bottom-left-radius: 50px 50px;
-    background-image: url('../images/bgSuttle.jpg');
-    min-height: 500px;
-}
+
 
 #header
 {
@@ -218,6 +200,13 @@ newExerciseForm, tr, td
     float: left;
     height: 125px;
     overflow-y: scroll;
+scrollbar-face-color: #000000;
+scrollbar-shadow-color: #2D2C4D;
+scrollbar-highlight-color:#7D7E94;
+scrollbar-3dlight-color: #7D7E94;
+scrollbar-darkshadow-color: #2D2C4D;
+scrollbar-track-color: #7D7E94;
+scrollbar-arrow-color: #C1C1D1;
 }
 .event
 {
@@ -236,44 +225,6 @@ newExerciseForm, tr, td
 #scheduleChoice
 {
 }
-#CalImage
-{
-}
-
-.calendarzz
-{
-    display: block;
-    z-index: 10;
-    position: absolute;
-    float: inherit;
-    top: 0;
-}
-
-#CalBlock
-{
-    position: relative;
-}
-
-#CalImage2
-{
-    height: 20px;
-    width: 20px;
-}
-
-.calendarzz2
-{
-    display: block;
-    z-index: 10;
-    position: absolute;
-    float: inherit;
-    top: 0;
-}
-
-#CalBlock2
-{
-    position: relative;
-}
-
 .date
 {
     font-style: normal;

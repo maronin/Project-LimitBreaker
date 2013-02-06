@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="WorkoutSchedule_Default4" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
         #CalImage
@@ -119,7 +121,7 @@
                                         Step 2. Select Start Time:
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="dllHours_exercise" runat="server">
+                                        <asp:DropDownList ID="ddlHours_exercise" runat="server">
                                             <asp:ListItem>1</asp:ListItem>
                                             <asp:ListItem>2</asp:ListItem>
                                             <asp:ListItem>3</asp:ListItem>
@@ -148,7 +150,7 @@
                                             <asp:ListItem Value="50"></asp:ListItem>
                                             <asp:ListItem Value="55"></asp:ListItem>
                                         </asp:DropDownList>
-                                        <asp:DropDownList ID="ddlAmPm_exericse" runat="server">
+                                        <asp:DropDownList ID="ddlAmPm_exercise" runat="server">
                                             <asp:ListItem>AM</asp:ListItem>
                                             <asp:ListItem>PM</asp:ListItem>
                                         </asp:DropDownList>
@@ -159,28 +161,21 @@
                                         Step 3. Select Start Date:
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="True"></asp:TextBox>
-                                        <img id="CalImage2" src="../ui/images/calendar_icon.png" onclick="slideToggle()" />
-                                        <div id="CalBlock2" class="calendarzz">
-                                            <asp:Calendar ID="calDateExercise" runat="server" BackColor="White" BorderColor="#999999"
-                                                CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
-                                                ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_exercise"
-                                                Width="200px" OnVisibleMonthChanged="calDateExercise_VisibleMonthChanged">
-                                                <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                                                <NextPrevStyle VerticalAlign="Bottom" />
-                                                <OtherMonthDayStyle ForeColor="#808080" />
-                                                <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                                                <SelectorStyle BackColor="#CCCCCC" />
-                                                <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                                                <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                                <WeekendDayStyle BackColor="#FFFFCC" />
-                                            </asp:Calendar>
-                                        </div>
+                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderExercise" runat="server" TargetControlID="tbDate_exercise" FilterType="Custom" ValidChars='()1234567890-/'>
+                                        </asp:FilteredTextBoxExtender>
+                                        <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"></asp:TextBox>
+                                        <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
+                                        </asp:CalendarExtender>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidatorExercise" runat="server" 
+                                            ErrorMessage="Invalid Date" ControlToValidate="tbDate_exercise" 
+                                            Font-Size="Medium" ForeColor="Red" 
+                                            ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))" 
+                                            ValidationGroup="ScheduleExercise"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                             </table>
                             <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
-                                CssClass="button" />
+                                CssClass="button" ValidationGroup="ScheduleExercise" />
                             <br />
                             <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
                                 CssClass="button" />
@@ -249,29 +244,22 @@
                                     <td>
                                         Step 3. Select Start Date:
                                     </td>
-                                    <td>
-                                        <asp:TextBox ID="tbDate_routine" runat="server" EnableTheming="True" ReadOnly="True"></asp:TextBox>
-                                        <img id="CalImage" src="../ui/images/calendar_icon.png" onclick="slideToggle()" />
-                                        <div id="CalBlock" class="calendarzz">
-                                            <asp:Calendar ID="calDateRoutine" runat="server" BackColor="White" BorderColor="#999999"
-                                                CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
-                                                ForeColor="Black" Height="180px" OnSelectionChanged="calendar_selectionChanged_routine"
-                                                Width="200px">
-                                                <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                                                <NextPrevStyle VerticalAlign="Bottom" />
-                                                <OtherMonthDayStyle ForeColor="#808080" />
-                                                <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                                                <SelectorStyle BackColor="#CCCCCC" />
-                                                <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                                                <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                                <WeekendDayStyle BackColor="#FFFFCC" />
-                                            </asp:Calendar>
-                                        </div>
+                                    <td>   
+                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderRoutine" runat="server" TargetControlID="tbDate_routine" FilterType="Custom" ValidChars='()1234567890-/'>
+                                        </asp:FilteredTextBoxExtender>
+                                        <asp:TextBox ID="tbDate_routine" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"></asp:TextBox>
+                                        <asp:CalendarExtender ID="CalendarExtenderRoutine" runat="server" TargetControlID="tbDate_routine">
+                                        </asp:CalendarExtender>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidatorRoutine" runat="server" 
+                                            ErrorMessage="Invalid Date" ControlToValidate="tbDate_routine" 
+                                            Font-Size="Medium" ForeColor="Red" 
+                                            ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))" 
+                                            ValidationGroup="ScheduleRoutine"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                             </table>
                             <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
-                                CssClass="button" />
+                                CssClass="button" ValidationGroup="ScheduleRoutine" />
                             <br />
                             <asp:Button ID="btnGoBack2" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
                                 CssClass="button" />
