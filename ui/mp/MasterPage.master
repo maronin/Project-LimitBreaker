@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ui_mp_MasterPage" %>
+﻿﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ui_mp_MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,10 +95,11 @@
                         <li>
                             <asp:LinkButton ID="lnkLogin" runat="server" OnClick="btnLogin">Login</asp:LinkButton>
                         </li>
-<%--                        <li>
-                            <asp:LinkButton ID="LinkButton5" runat="server">LinkButton</asp:LinkButton>
+
+                         <li>
+                            <asp:LinkButton ID="lnkGoals" runat="server" OnClick="manageGoals_Click">Manage Goals</asp:LinkButton>
                         </li>
-                        <li>
+<%--                        <li>
                             <asp:LinkButton ID="LinkButton6" runat="server">LinkButton</asp:LinkButton>
                         </li>--%>
                     </ul>
