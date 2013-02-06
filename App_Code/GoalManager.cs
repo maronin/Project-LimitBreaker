@@ -84,4 +84,20 @@ public class GoalManager
 
         return rc;
     }
+
+    public string getExerciseNameWithinGoal(string userName, string exerciseName)
+    {
+        using (var context = new Layer2Container())
+        {
+            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+
+            if (eg != null)
+            {
+                Exercise ex = eg.Exercise;
+                return ex.name;
+            }
+            else
+                return ""; 
+        }
+    }
 }

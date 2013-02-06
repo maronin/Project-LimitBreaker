@@ -27,15 +27,14 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             {
                 exerciseGoalMultiView.ActiveViewIndex = 2;
                 loadExerciseGoals();
-
             }
         }
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
-        showAddGoal();
         addGoalResultLbl.Text = "";
+        showAddGoal();
     }
 
     protected void viewGoalsBtn_Click(object sender, EventArgs e)
@@ -57,8 +56,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         viewGoalsBtn.Enabled = true;
         addGoalBtn.Enabled = false;
         exerciseGoalMultiView.ActiveViewIndex = 0;
-        showAddGoal();
         addGoalResultLbl.Text = "";
+        showAddGoal();
     }
 
     protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,6 +127,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 {
                     goalTimeTxtBox.Enabled = true;
                     NumericUpDownExtender1.Enabled = true;
+                    goalTimeTxtBox.Text = "0";
                 }
                 else
                 {
@@ -140,6 +140,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 {
                     goalWeightTxtBox.Enabled = true;
                     NumericUpDownExtender2.Enabled = true;
+                    goalWeightTxtBox.Text = "0";
                 }
                 else
                 {
@@ -152,6 +153,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 {
                     goalDistanceTxtBox.Enabled = true;
                     NumericUpDownExtender3.Enabled = true;
+                    goalDistanceTxtBox.Text = "0";
                 }
                 else
                 {
@@ -164,6 +166,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 {
                     goalRepsTxtBox.Enabled = true;
                     NumericUpDownExtender4.Enabled = true;
+                    goalRepsTxtBox.Text = "0";
                 }
 
                 else
@@ -172,11 +175,20 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                     NumericUpDownExtender4.Enabled = false;
                     goalRepsTxtBox.Text = "0";
                 }
+
+
+                if (goalMngr.getExerciseNameWithinGoal(userName, exercise.name) == exercise.name)
+                {
+                    saveNewGoalBtn.Enabled = false;
+                    addGoalResultLbl.Text = "You already have a Goal for this exercise.  You can modify it in the \"View Exercise Goals\" page.";
+                }
+                else
+                    saveNewGoalBtn.Enabled = true;
             }
 
             catch (Exception ex)
             {
-                addGoalResultLbl.Text = "Something went wrong with the parsing of the form: " + ex.Message;
+                addGoalResultLbl.Text = "Something went wrong with the creating of the form: " + ex.Message + ex.StackTrace;
             }
         }
         else

@@ -46,7 +46,13 @@
                             </asp:NumericUpDownExtender>
                         </td>
                         <td class="style1">
-                            <!-- validators -->
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalTimeTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
                     
@@ -60,7 +66,13 @@
                             </asp:NumericUpDownExtender>
                         </td>
                         <td class="style1">
-                            <!-- validators -->
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalWeightTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
 
@@ -74,7 +86,13 @@
                             </asp:NumericUpDownExtender>
                         </td>
                         <td class="style1">
-                            <!-- validators -->
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalDistanceTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
 
@@ -88,13 +106,19 @@
                             </asp:NumericUpDownExtender>
                         </td>
                         <td class="style1">
-                            <!-- validators -->
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalRepsTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
                 </table>
                 <br />
                 <asp:Button ID="saveNewGoalBtn" runat="server" Text="Save" 
-                    onclick="saveNewGoalBtn_Click" />
+                    onclick="saveNewGoalBtn_Click" ValidationGroup="addGoal" />
                 <asp:Label ID="addGoalResultLbl" runat="server" Text=""></asp:Label>
 
             </asp:Panel>
