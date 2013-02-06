@@ -17,7 +17,7 @@ body {
 	
 }
 #page {
-	width: 80%;
+	width: 1240px;
 	left:10%;
 	margin: 0 auto;
 	padding: 156px 0 0;
@@ -81,7 +81,7 @@ img {
 #navigation {
 	background: url(../images/bg-navigation.png);
 	height: 49px;
-	width: 80%;
+	width: 1240px;
 	margin: 0 auto;
 	position: relative;
 	top: 0;
@@ -101,7 +101,7 @@ img {
 	font-size: 12px;
 	font-weight: bold;
 	line-height: 47px;
-	width: 205px;
+	width: 165px;
 	border-color: transparent;
 	border-style: none solid;
 	border-width: 1px;
@@ -426,11 +426,12 @@ ul.list li h5 + img {
 	margin: 6px 0 14px;
 }
 /*------------------------------ FOOTER ------------------------------*/
-#footer {
-	width: 100%;
-	border-top: 5px solid #c3c3c3;
-	position: absolute;
-	left: 0;
+#footer
+{
+    width: 100%;
+    border-top: 5px solid #c3c3c3;
+    position: absolute;
+    left: 0;
 }
 #footer .background {
 	border-top: 1px solid #b6051c;

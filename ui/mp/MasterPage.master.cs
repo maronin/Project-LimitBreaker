@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -74,7 +74,9 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
     protected void manageGoals_Click(object sender, EventArgs e)
     {
         selectedOption[6] = true;
-        selectedOption[1] = selectedOption[2] = selectedOption[3] = selectedOption[4] = selectedOption[0] = selectedOption[5] = false;
+        selectedOption[1] = selectedOption[2] = selectedOption[3] = selectedOption[4] = selectedOption[5] = selectedOption[0] = false;
         Response.Redirect("~/User/manageExerciseGoals.aspx");
     }
+
+
 }
