@@ -50,4 +50,38 @@ public class GoalManager
             return context.ExerciseGoals.Where(s => s.Exercise.name == name && s.LimitBreaker.username == userName).FirstOrDefault();
         }
     }
+
+    public bool addNewExerciseGoal(int weight, int distance, int time, int reps, string userName, string exerciseName)
+    {
+        bool rc = false;
+
+        using (var context = new Layer2Container())
+        {
+            try
+            {
+                ExerciseGoal newExerciseGoal = new ExerciseGoal();
+                Exercise exercise = context.Exercises.Where(s => s.name == exerciseName).FirstOrDefault();
+                LimitBreaker user = context.LimitBreakers.Where(s => s.username == userName).FirstOrDefault();
+
+                newExerciseGoal.LimitBreaker = user;
+                newExerciseGoal.Exercise = exercise;
+                newExerciseGoal.weight = weight;
+                newExerciseGoal.distance = distance;
+                newExerciseGoal.time = time;
+                newExerciseGoal.reps = reps;
+
+                context.ExerciseGoals.AddObject(newExerciseGoal);
+                context.SaveChanges();
+
+                rc = true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        return rc;
+    }
 }

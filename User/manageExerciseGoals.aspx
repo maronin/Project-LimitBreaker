@@ -1,7 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="manageExerciseGoals.aspx.cs" Inherits="User_manageExerciseGoals" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercise" TagPrefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .style1
+        {
+            height:30px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -27,7 +34,69 @@
             <hr />
 
             <asp:Panel ID="addGoalPanel" runat="server">
-                
+                <h4>Add your target goals for the selected exercise:</h4>
+                <table>
+                    <tr>
+                        <td class="style1">
+                            Goal Time:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalTimeTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="goalTimeTxtBox" Width="175" Minimum="0" Step="10">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <!-- validators -->
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="style1">
+                            Goal Weight:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalWeightTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender2" runat="server" TargetControlID="goalWeightTxtBox" Width="175" Minimum="0" Step="5">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <!-- validators -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="style1">
+                            Goal Distance:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalDistanceTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender3" runat="server" TargetControlID="goalDistanceTxtBox" Width="175" Minimum="0" Step="5">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <!-- validators -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="style1">
+                            Goal Reps:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalRepsTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender4" runat="server" TargetControlID="goalRepsTxtBox" Width="175" Minimum="0" Step="1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <!-- validators -->
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <asp:Button ID="saveNewGoalBtn" runat="server" Text="Save" 
+                    onclick="saveNewGoalBtn_Click" />
+                <asp:Label ID="addGoalResultLbl" runat="server" Text=""></asp:Label>
+
             </asp:Panel>
 
         </ContentTemplate>

@@ -59,7 +59,7 @@
                                         Base Experience Value:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="baseTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="baseTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="baseTxtBox" Width="175" Minimum="0" Step="100">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -76,7 +76,7 @@
                                         Time Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="timeTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="timeTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender2" runat="server" TargetControlID="timeTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -93,7 +93,7 @@
                                         Weight Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="weightTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="weightTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender3" runat="server" TargetControlID="weightTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -110,7 +110,7 @@
                                         Rep Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="repTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="repTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender4" runat="server" TargetControlID="repTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -127,7 +127,7 @@
                                         Distance Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="distanceTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="distanceTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender5" runat="server" TargetControlID="distanceTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -159,7 +159,7 @@
                                         Base Experience Value:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="addBaseTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="addBaseTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender6" runat="server" TargetControlID="addBaseTxtBox" Width="175" Minimum="0" Step="100">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -176,7 +176,7 @@
                                         Time Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="addTimeTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="addTimeTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender7" runat="server" TargetControlID="addTimeTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -193,7 +193,7 @@
                                         Weight Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="addWeightTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="addWeightTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender8" runat="server" TargetControlID="addWeightTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -210,7 +210,7 @@
                                         Rep Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="addRepTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="addRepTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender9" runat="server" TargetControlID="addRepTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
@@ -227,7 +227,7 @@
                                         Distance Modifier:
                                     </td>
                                     <td class="style9">
-                                        <asp:TextBox ID="addDistanceTxtBox" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="addDistanceTxtBox" runat="server" style="text-align:center"></asp:TextBox>
                                         <asp:NumericUpDownExtender ID="NumericUpDownExtender10" runat="server" TargetControlID="addDistanceTxtBox" Width="175" Minimum="0" Step="0.1">
                                         </asp:NumericUpDownExtender>
                                     </td>
