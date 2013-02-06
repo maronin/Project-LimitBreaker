@@ -75,7 +75,10 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         try
         {
             if (goalMngr.addNewExerciseGoal(Convert.ToInt32(goalWeightTxtBox.Text), Convert.ToInt32(goalDistanceTxtBox.Text), Convert.ToInt32(goalTimeTxtBox.Text), Convert.ToInt32(goalRepsTxtBox.Text), userName, viewExercises.ddlValue))
+            {
                 addGoalResultLbl.Text = "You have successfully added a new exercise goal!";
+                saveNewGoalBtn.Enabled = false;
+            }
             else
                 addGoalResultLbl.Text = "Something went wrong with making a new exercise goal...";
         }
