@@ -106,20 +106,6 @@
             </div>
         </div>
         <div id="contents">
-            <div id="adbox">
-                <div>
-                    <img src="images/helicopter.jpg" alt="Img" height="390" width="632">
-                    <h1>
-                        Rent a Helicopter</h1>
-                    <h4>
-                        You can remove any link to our website from this website template, you're free to
-                        use this website template without linking back to us.</h4>
-                    <p>
-                        This is just a place holder, so you can see what the site would look like. This
-                        is just a place holder, so you can see what the site would look like.
-                    </p>
-                </div>
-            </div>
             <div id="main">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
@@ -153,32 +139,27 @@
                     </ul>
                     </form>--%>
                     <div class="section">
-                        <h3>
+<%--                        <h3>
                             Contact Details</h3>
                         <ul>
                             <li><span>Location</span><strong>:</strong>
                                 <p>
-                                    This is just a place holder, so you can see what the site would look like
-                                </p>
-                            </li>
-                            <li><span>Phone</span><strong>:</strong>
-                                <p>
-                                    (987) 654 321 000; (123) 000 456 789; 123 000 456 789
+                                    
                                 </p>
                             </li>
                             <li><span>Email</span><strong>:</strong>
                                 <p>
-                                    This is just a place holder
+                                    
                                 </p>
                             </li>
                             <li><span>Social</span><a href="http://freewebsitetemplates.com/go/twitter/" target="_blank"
                                 class="twitter"></a><a href="http://freewebsitetemplates.com/go/facebook/" target="_blank"
                                     class="facebook"></a><a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank"
                                         class="googleplus"></a> </li>
-                        </ul>
+                        </ul>--%>
                     </div>
                     <p id="footnote">
-                        © Copyright 2023. All rights reserved.
+                        © Copyright 2013. All rights reserved.
                     </p>
                 </div>
             </div>
