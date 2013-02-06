@@ -25,23 +25,36 @@
                     <td class="auto-style1">
                         <asp:TextBox ID="userName" runat="server"></asp:TextBox></td>
                     <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="userName" ForeColor="Red">Username required</asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="userName" ForeColor="Red" ValidationExpression="^[a-zA-Z][a-zA-Z0-9._\-]{3,32}$">Invalid username</asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="userName" ForeColor="Red" ValidationGroup="createUser">Username required</asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="userName" ForeColor="Red" ValidationExpression="^[a-zA-Z][a-zA-Z0-9._\-]{3,32}$" ValidationGroup="createUser">Invalid username</asp:RegularExpressionValidator>
                 </tr>
                 <tr>
                     <td>Password:</td>
                     <td class="auto-style1">
                         <asp:TextBox ID="password" runat="server" EnableViewState="True" TextMode="Password"></asp:TextBox></td>
                     <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="password" ForeColor="Red">Password required</asp:RequiredFieldValidator></td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="password" ForeColor="Red" ValidationGroup="createUser">Password required</asp:RequiredFieldValidator></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password:</td>
+                    <td class="auto-style1">
+                        <asp:TextBox ID="cPassword" runat="server" TextMode="Password"></asp:TextBox></td>
+                    <td>
+
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="password" ControlToValidate="cPassword" ErrorMessage="Paasswords must match" ForeColor="Red" ValidationGroup="createUser"></asp:CompareValidator>
+
+                    </td>
+                    <td>
+
+                    </td>
                 </tr>
                 <tr>
                     <td>Email:</td>
                     <td class="auto-style1">
                         <asp:TextBox ID="email" runat="server"></asp:TextBox></td>
                     <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ControlToValidate="email">Email required</asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="email" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">Invalid email</asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ControlToValidate="email" ValidationGroup="createUser">Email required</asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="email" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="createUser">Invalid email</asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
@@ -49,8 +62,8 @@
                     <td class="auto-style1">
                         <asp:TextBox ID="weight" runat="server"></asp:TextBox></td>
                     <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="weight" ForeColor="Red">Weight required</asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="weight" ForeColor="Red" ValidationExpression="^\d{2,3}$">Invalid weight</asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="weight" ForeColor="Red" ValidationGroup="createUser">Weight required</asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="weight" ForeColor="Red" ValidationExpression="^\d{2,3}$" ValidationGroup="createUser">Invalid weight</asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
@@ -141,8 +154,8 @@
                         Year
                         <asp:TextBox ID="birthdayYear" runat="server" ControlToValidate="birthdayYear" TextMode="SingleLine"></asp:TextBox>
                         <br />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Birthday required" ControlToValidate="birthdayYear" ForeColor="Red"></asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="birthdayYear" ErrorMessage="Invalid birthday year" ForeColor="Red" ValidationExpression="^(19|20)\d{2}$"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Birthday required" ControlToValidate="birthdayYear" ForeColor="Red" ValidationGroup="createUser"></asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="birthdayYear" ErrorMessage="Invalid birthday year" ForeColor="Red" ValidationExpression="^(19|20)\d{2}$" ValidationGroup="createUser"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
@@ -154,7 +167,7 @@
                 </tr>
             </table>
             <asp:Button ID="Create" runat="server" Text="Create New User"
-                OnClick="Create_Click" />
+                OnClick="Create_Click" ValidationGroup="createUser" />
             <asp:Label ID="creationStatus" runat="server" ForeColor="Red" Visible="False"></asp:Label>
         </AnonymousTemplate>
         <LoggedInTemplate>
