@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="manageExerciseGoals.aspx.cs" Inherits="User_manageExerciseGoals" %>
+<%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercise" TagPrefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
 <hr />
     <div style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="viewGoalsBtn" runat="server" Text="View Exercise Goals" 
@@ -16,8 +16,23 @@
 <br />
 
 <div>
-    <!--add an update panel when the add ne exercise goal issue is tackled-->
     <asp:MultiView ID="exerciseGoalMultiView" runat="server">
+
+        <asp:View ID="addGoalView" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            
+            <h4>Add A New Goal</h4>
+            <uc1:viewExercise ID="viewExercises" runat="server" />
+            <hr />
+
+            <asp:Panel ID="addGoalPanel" runat="server">
+                
+            </asp:Panel>
+
+        </ContentTemplate>
+        </asp:UpdatePanel>
+        </asp:View>
 
         <asp:View ID="noGoalsView" runat="server">
 
@@ -27,6 +42,8 @@
         </asp:View>
 
         <asp:View ID="manageGoalsView" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
         <h4>Your Current Exercise Goals</h4>
         <div style="float: left; padding: 10px;">
             Order Goals By:
@@ -88,13 +105,8 @@
         </table>
 
         </div> 
-
-        </asp:View>
-
-        <asp:View ID="addGoalView" runat="server">
-
-        <h4>Add A New Goal</h4>
-
+        </ContentTemplate>
+        </asp:UpdatePanel>
         </asp:View>
 
     </asp:MultiView>

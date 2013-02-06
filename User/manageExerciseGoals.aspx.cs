@@ -14,6 +14,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     {
         userName = User.Identity.Name;
         goalMngr = new GoalManager();
+        viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         
         if (!Page.IsPostBack)
         {
@@ -21,14 +22,19 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             addGoalBtn.Enabled = true;
 
             if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
-                exerciseGoalMultiView.ActiveViewIndex = 0;
+                exerciseGoalMultiView.ActiveViewIndex = 1;
             else
             {
-                exerciseGoalMultiView.ActiveViewIndex = 1;
+                exerciseGoalMultiView.ActiveViewIndex = 2;
                 loadExerciseGoals();
 
             }
         }
+    }
+
+    private void viewExercises_userControlEventHappened(object sender, EventArgs e)
+    {
+        showAddGoal();
     }
 
     protected void viewGoalsBtn_Click(object sender, EventArgs e)
@@ -37,10 +43,10 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         addGoalBtn.Enabled = true;
 
         if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
-            exerciseGoalMultiView.ActiveViewIndex = 0;
+            exerciseGoalMultiView.ActiveViewIndex = 1;
         else
         {
-            exerciseGoalMultiView.ActiveViewIndex = 1;
+            exerciseGoalMultiView.ActiveViewIndex = 2;
             loadExerciseGoals();
         }
     }
@@ -49,7 +55,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     {
         viewGoalsBtn.Enabled = true;
         addGoalBtn.Enabled = false;
-        exerciseGoalMultiView.ActiveViewIndex = 2;
+        exerciseGoalMultiView.ActiveViewIndex = 0;
+        showAddGoal();
     }
 
     protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,5 +93,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         goalDistancelbl.Text = eg.distance.ToString();
         goalWeightLbl.Text = eg.weight.ToString();
         goalRepsLbl.Text = eg.reps.ToString();
+    }
+
+    public void showAddGoal()
+    {
+        if (viewExercises.ddlCount > 0)
+            addGoalPanel.Visible = true;
+        else
+            addGoalPanel.Visible = false;
     }
 }
