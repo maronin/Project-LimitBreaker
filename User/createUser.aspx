@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="createUser.aspx.cs" Inherits="User_createUser" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
         .style1
@@ -14,6 +16,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
             <table>
@@ -45,7 +48,8 @@
 
                     </td>
                     <td>
-
+                        
+                        <asp:PasswordStrength ID="PasswordStrength1" runat="server" TargetControlID="password"></asp:PasswordStrength>
                     </td>
                 </tr>
                 <tr>
