@@ -51,7 +51,7 @@ public class GoalManager
         }
     }
 
-    public bool addNewExerciseGoal(int weight, int distance, int time, int reps, string userName, string exerciseName)
+    public bool addNewExerciseGoal(int weight, double distance, int time, int reps, string userName, string exerciseName)
     {
         bool rc = false;
 

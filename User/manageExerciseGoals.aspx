@@ -38,11 +38,11 @@
                 <table>
                     <tr>
                         <td class="style1">
-                            Goal Time:
+                            Goal Time (Minutes):
                         </td>
                         <td class="style1">
                             <asp:TextBox ID="goalTimeTxtBox" runat="server" style="text-align:center"></asp:TextBox>
-                            <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="goalTimeTxtBox" Width="175" Minimum="0" Step="10">
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="goalTimeTxtBox" Width="175" Minimum="0" Step="1">
                             </asp:NumericUpDownExtender>
                         </td>
                         <td class="style1">
@@ -58,7 +58,7 @@
                     
                     <tr>
                         <td class="style1">
-                            Goal Weight:
+                            Goal Weight (lbs):
                         </td>
                         <td class="style1">
                             <asp:TextBox ID="goalWeightTxtBox" runat="server" style="text-align:center"></asp:TextBox>
@@ -78,11 +78,11 @@
 
                     <tr>
                         <td class="style1">
-                            Goal Distance:
+                            Goal Distance (km):
                         </td>
                         <td class="style1">
                             <asp:TextBox ID="goalDistanceTxtBox" runat="server" style="text-align:center"></asp:TextBox>
-                            <asp:NumericUpDownExtender ID="NumericUpDownExtender3" runat="server" TargetControlID="goalDistanceTxtBox" Width="175" Minimum="0" Step="5">
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender3" runat="server" TargetControlID="goalDistanceTxtBox" Width="175" Minimum="0" Step="0.1">
                             </asp:NumericUpDownExtender>
                         </td>
                         <td class="style1">
@@ -90,9 +90,9 @@
                                 ErrorMessage="*Required" ControlToValidate="goalDistanceTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
                                 ControlToValidate="goalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
-                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
+                                ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
 
