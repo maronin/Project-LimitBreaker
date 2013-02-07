@@ -1,11 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="manageExerciseGoals.aspx.cs" Inherits="User_manageExerciseGoals" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercise" TagPrefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .style1
+        {
+            height:30px;
+        }
+    </style>
 </asp:Content>
 
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
 <hr />
     <div style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="viewGoalsBtn" runat="server" Text="View Exercise Goals" 
@@ -16,8 +23,109 @@
 <br />
 
 <div>
-    <!--add an update panel when the add ne exercise goal issue is tackled-->
     <asp:MultiView ID="exerciseGoalMultiView" runat="server">
+
+        <asp:View ID="addGoalView" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            
+            <h4>Add A New Goal</h4>
+            <uc1:viewExercise ID="viewExercises" runat="server" />
+            <hr />
+
+            <asp:Panel ID="addGoalPanel" runat="server">
+                <h4>Add your target goals for the selected exercise:</h4>
+                <table>
+                    <tr>
+                        <td class="style1">
+                            Goal Time (Minutes):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalTimeTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="goalTimeTxtBox" Width="175" Minimum="0" Step="1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalTimeTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="style1">
+                            Goal Weight (lbs):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalWeightTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender2" runat="server" TargetControlID="goalWeightTxtBox" Width="175" Minimum="0" Step="5">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalWeightTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="style1">
+                            Goal Distance (km):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalDistanceTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender3" runat="server" TargetControlID="goalDistanceTxtBox" Width="175" Minimum="0" Step="0.1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalDistanceTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
+                                ControlToValidate="goalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="style1">
+                            Goal Reps:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="goalRepsTxtBox" runat="server" style="text-align:center"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender4" runat="server" TargetControlID="goalRepsTxtBox" Width="175" Minimum="0" Step="1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="goalRepsTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="goalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <asp:Button ID="saveNewGoalBtn" runat="server" Text="Save" 
+                    onclick="saveNewGoalBtn_Click" ValidationGroup="addGoal" />
+                <asp:Label ID="addGoalResultLbl" runat="server" Text=""></asp:Label>
+
+            </asp:Panel>
+
+        </ContentTemplate>
+        </asp:UpdatePanel>
+        </asp:View>
 
         <asp:View ID="noGoalsView" runat="server">
 
@@ -27,6 +135,8 @@
         </asp:View>
 
         <asp:View ID="manageGoalsView" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
         <h4>Your Current Exercise Goals</h4>
         <div style="float: left; padding: 10px;">
             Order Goals By:
@@ -88,13 +198,8 @@
         </table>
 
         </div> 
-
-        </asp:View>
-
-        <asp:View ID="addGoalView" runat="server">
-
-        <h4>Add A New Goal</h4>
-
+        </ContentTemplate>
+        </asp:UpdatePanel>
         </asp:View>
 
     </asp:MultiView>
