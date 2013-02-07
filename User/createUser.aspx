@@ -156,10 +156,9 @@
                             <asp:ListItem>31</asp:ListItem>
                         </asp:DropDownList>
                         Year
-                        <asp:TextBox ID="birthdayYear" runat="server" ControlToValidate="birthdayYear" TextMode="SingleLine"></asp:TextBox>
+                        <asp:DropDownList ID="birthdayYear" runat="server">
+                        </asp:DropDownList>
                         <br />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Birthday required" ControlToValidate="birthdayYear" ForeColor="Red" ValidationGroup="createUser"></asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="birthdayYear" ErrorMessage="Invalid birthday year" ForeColor="Red" ValidationExpression="^(19|20)\d{2}$" ValidationGroup="createUser"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
