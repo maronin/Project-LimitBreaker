@@ -35,6 +35,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
         addGoalResultLbl.Text = "";
+        deleteGoalResultLbl.Text = "";
+        modifyGoalResultlbl.Text = "";
         showAddGoal();
     }
 
@@ -42,6 +44,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     {
         viewGoalsBtn.Enabled = false;
         addGoalBtn.Enabled = true;
+        deleteGoalResultLbl.Text = "";
+        modifyGoalResultlbl.Text = "";
 
         if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
             exerciseGoalMultiView.ActiveViewIndex = 1;
@@ -64,6 +68,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
     {
         loadExerciseGoals();
+        deleteGoalResultLbl.Text = "";
+        modifyGoalResultlbl.Text = "";
     }
 
     protected void userGoalsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -96,10 +102,11 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         {
             singleGoalAttributesMultiView.ActiveViewIndex = 1;
             updateGoalbtn.Text = "Cancel";
+            saveModifyGoalBtn.Visible = true;
             ExerciseGoal eg = goalMngr.getExerciseGoalByExerciseNameAndUserName(userGoalsListBox.SelectedValue, userName);
 
             exerciseNameLbl.Text = userGoalsListBox.SelectedValue;
-            modGoalTimeTxtBox.Text = eg.time.ToString();
+            modGoalTimeTxtBox.Text = (eg.time/60).ToString();
             modGoalDistanceTxtBox.Text = eg.distance.ToString();
             modGoalWeightTxtBox.Text = eg.weight.ToString();
             modGoalRepsTxtBox.Text = eg.reps.ToString();
@@ -109,10 +116,29 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         {
             singleGoalAttributesMultiView.ActiveViewIndex = 0;
             updateGoalbtn.Text = "Update";
+            saveModifyGoalBtn.Visible = false;
         }
     }
 
     protected void deleteGoalBtn_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (goalMngr.deleteExerciseGoalByExerciseNameAndUserName(userName, userGoalsListBox.SelectedValue))
+                deleteGoalResultLbl.Text = "The goal has been successfully deleted!";
+            else
+                deleteGoalResultLbl.Text = "Something went wrong with deleting the goal, and it has not been deleted...";
+        }
+
+        catch (Exception ex)
+        {
+            deleteGoalResultLbl.Text = "Something went wrong with deleting the goal, and it has not been deleted: " + ex.Message;
+        }
+        
+        loadExerciseGoals();
+    }
+
+    protected void saveModifyGoalBtn_Click(object sender, EventArgs e)
     {
 
     }
@@ -128,8 +154,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             userGoalsListBox.Items.Add(ex.Exercise.name);
         }
 
-        userGoalsListBox.SelectedIndex = 0;
-        loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+        if (userGoalsListBox.Items.Count > 0)
+        {
+            userGoalsListBox.SelectedIndex = 0;
+            loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+        }
+        else
+            exerciseGoalMultiView.ActiveViewIndex = 1;
     }
 
     public void loadSelectedGoalsAttributes(string exerciseName)
@@ -138,7 +169,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         ExerciseGoal eg = goalMngr.getExerciseGoalByExerciseNameAndUserName(exerciseName, userName);
 
         exerciseNameLbl.Text = exerciseName;
-        goalTimeLbl.Text = eg.time.ToString();
+        goalTimeLbl.Text = (eg.time/60).ToString();
         goalDistancelbl.Text = eg.distance.ToString();
         goalWeightLbl.Text = eg.weight.ToString();
         goalRepsLbl.Text = eg.reps.ToString();
