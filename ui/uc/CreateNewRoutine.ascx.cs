@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 {
-    public string userID { get; set; }
+    public int userID { get; set; }
 
     SystemExerciseManager sysManager;
     routineManager routManager;
@@ -30,10 +31,13 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
             // full refresh of page will abandon current session
             Session.Abandon();
             rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-            rbl.DataSource = routManager.viewRoutines().ToList();
-            rbl.DataTextField = "name";
-            rbl.DataValueField = "id";
-            rbl.DataBind();
+            if (userID != null)
+            {
+                rbl.DataSource = routManager.getUsersRoutines(userID).ToList();
+                rbl.DataTextField = "name";
+                rbl.DataValueField = "id";
+                rbl.DataBind();
+            }
 
             // to get the id of the button so that enter = submit
             tbRoutineName.Attributes.Add("onKeyPress",
@@ -128,10 +132,9 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         exercises = Session["exercises"] != null ? (List<Exercise>)Session["exercises"] : null;
         Routine rt = new Routine();
         ICollection<Exercise> exerciseList = convertListBox(lbSelected);
-
         // user id to be changed later so that function createNewRoutine makes a routine for specified user
-        if (exerciseList != null)
-            rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1, exerciseList);
+        if (exerciseList != null && Convert.ToInt32(userID) != -1)
+            rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), userID, exerciseList);
 
         clearAll();
 

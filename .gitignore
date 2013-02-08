@@ -1,2 +1,5 @@
 *.suo
 vwd.webinfo
+ASPNETDB.MDF 
+*.log
+aspnetdb_log.ldf
