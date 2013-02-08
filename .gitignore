@@ -2,4 +2,6 @@
 vwd.webinfo
 ASPNETDB.MDF 
 *.log
+ASPNETDB.MDF
 aspnetdb_log.ldf
+
