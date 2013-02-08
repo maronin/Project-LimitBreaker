@@ -8,17 +8,15 @@ using System.Web.UI.WebControls;
 
 public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 {
-    public string userID { get; set; }
+    public int userID { get; set; }
 
     SystemExerciseManager sysManager;
     routineManager routManager;
     List<Exercise> exercises;
     RadioButtonList rbl;
-    String currentUser;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        currentUser = System.Web.HttpContext.Current.User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "";
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
 
@@ -33,10 +31,13 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
             // full refresh of page will abandon current session
             Session.Abandon();
             rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-            rbl.DataSource = routManager.viewRoutines().ToList();
-            rbl.DataTextField = "name";
-            rbl.DataValueField = "id";
-            rbl.DataBind();
+            if (userID != null)
+            {
+                rbl.DataSource = routManager.getUsersRoutines(userID).ToList();
+                rbl.DataTextField = "name";
+                rbl.DataValueField = "id";
+                rbl.DataBind();
+            }
 
             // to get the id of the button so that enter = submit
             tbRoutineName.Attributes.Add("onKeyPress",
@@ -131,9 +132,8 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         exercises = Session["exercises"] != null ? (List<Exercise>)Session["exercises"] : null;
         Routine rt = new Routine();
         ICollection<Exercise> exerciseList = convertListBox(lbSelected);
-        int userID = routManager.getUserID(currentUser);
         // user id to be changed later so that function createNewRoutine makes a routine for specified user
-        if (exerciseList != null && userID != -1)
+        if (exerciseList != null && Convert.ToInt32(userID) != -1)
             rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), userID, exerciseList);
 
         clearAll();

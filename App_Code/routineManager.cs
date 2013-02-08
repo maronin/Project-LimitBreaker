@@ -30,6 +30,21 @@ public class routineManager
         }
     }
 
+    public ICollection<Routine> getUsersRoutines(int userID)
+    {
+        using (var context = new Layer2Container())
+        {
+            ICollection<Routine> rc;
+            //LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
+            //if (lb != null)
+                rc = context.Routines.Where(x => x.LimitBreaker.id == userID).ToList();
+            //else
+                //rc = null;
+
+            return rc;
+        }
+    }
+
     // Return a single routine object based on routine ID parameter
     public Routine getRoutine(int routineID)
     {
