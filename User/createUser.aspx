@@ -4,14 +4,19 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
-        .style1
-        {
-            width: 312px;
-        }
-
+        
         .auto-style1
         {
             width: 455px;
+        }
+        .style2
+        {
+            height: 26px;
+        }
+        .style3
+        {
+            width: 455px;
+            height: 26px;
         }
     </style>
 </asp:Content>
@@ -32,11 +37,17 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="userName" ForeColor="Red" ValidationExpression="^[a-zA-Z][a-zA-Z0-9._\-]{3,32}$" ValidationGroup="createUser">Invalid username</asp:RegularExpressionValidator>
                 </tr>
                 <tr>
-                    <td>Password:</td>
-                    <td class="auto-style1">
+                    <td class="style2">Password:</td>
+                    <td class="style3">
                         <asp:TextBox ID="password" runat="server" EnableViewState="True" TextMode="Password"></asp:TextBox></td>
-                    <td>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="password" ForeColor="Red" ValidationGroup="createUser">Password required</asp:RequiredFieldValidator></td>
+                    <td class="style2">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                            ControlToValidate="password" ForeColor="Red" ValidationGroup="createUser" 
+                            Display="Dynamic">Password required</asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                            ErrorMessage="Please enter a longer password. Min 5 characters" ForeColor="Red"
+                            ValidationExpression="^[a-zA-Z0-9]{5,}$" Display="Dynamic" 
+                            ControlToValidate="password" ValidationGroup="createUser" ></asp:RegularExpressionValidator></td>
                 </tr>
                 <tr>
                     <td>Confirm Password:</td>
