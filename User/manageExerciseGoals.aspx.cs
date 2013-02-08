@@ -31,6 +31,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         }
     }
 
+    //page event functions
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
         addGoalResultLbl.Text = "";
@@ -89,6 +90,34 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         }
     }
 
+    protected void updateGoalbtn_Click(object sender, EventArgs e)
+    {
+        if (singleGoalAttributesMultiView.ActiveViewIndex == 0)
+        {
+            singleGoalAttributesMultiView.ActiveViewIndex = 1;
+            updateGoalbtn.Text = "Cancel";
+            ExerciseGoal eg = goalMngr.getExerciseGoalByExerciseNameAndUserName(userGoalsListBox.SelectedValue, userName);
+
+            exerciseNameLbl.Text = userGoalsListBox.SelectedValue;
+            modGoalTimeTxtBox.Text = eg.time.ToString();
+            modGoalDistanceTxtBox.Text = eg.distance.ToString();
+            modGoalWeightTxtBox.Text = eg.weight.ToString();
+            modGoalRepsTxtBox.Text = eg.reps.ToString();
+        }
+
+        else
+        {
+            singleGoalAttributesMultiView.ActiveViewIndex = 0;
+            updateGoalbtn.Text = "Update";
+        }
+    }
+
+    protected void deleteGoalBtn_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    //page data loading functions
     public void loadExerciseGoals()
     {
         List<ExerciseGoal> goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));

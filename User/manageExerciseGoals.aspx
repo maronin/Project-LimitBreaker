@@ -151,50 +151,101 @@
                 onselectedindexchanged="userGoalsListBox_SelectedIndexChanged"></asp:ListBox>
         </div> 
         
-        <div style="float: left; padding: 10px">
+        <div style="padding: 10px; width: 30%; margin: 0px auto 0px auto">
         <table>
             <tr>
-                <td>
+                <td class="style1">
+                    Exercise Name:
+                </td>
+                <td class="style1">
                     <asp:Label ID="exerciseNameLbl" runat="server" Text=""></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="timelbl" runat="server" Text="Time"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="distanceLbl" runat="server" Text="Distance"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="weightlbl" runat="server" Text="Weight"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="repLbl" runat="server" Text="Reps"></asp:Label>
                 </td>
             </tr>
 
             <asp:MultiView ID="singleGoalAttributesMultiView" runat="server">
                 <asp:View ID="viewGoalView" runat="server">   
                     <tr>
-                        <td>
+                        <td class="style1">
+                            Goal Time (Minutes):
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalTimeLbl" runat="server" Text=""></asp:Label>
                         </td>
-                        <td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            Goal Distance (km):
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalDistancelbl" runat="server" Text=""></asp:Label>
                         </td>
-                        <td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            Goal Weight (lbs):
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalWeightLbl" runat="server" Text=""></asp:Label>
                         </td>
-                        <td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            Goal Reps:
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalRepsLbl" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
+           
                 </asp:View>
 
                 <asp:View ID="updaetGoalView" runat="server">
-                    
+                    <tr>
+                        <td class="style1">
+                            Goal Time (Minutes):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalTimeTxtBox" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            Goal Distance (km):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalDistanceTxtBox" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            Goal Weight (lbs):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalWeightTxtBox" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            Goal Reps:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalRepsTxtBox" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
                 </asp:View>
             </asp:MultiView>
+
+            <tr>
+                <td class="style1">
+                    <asp:Button ID="updateGoalbtn" runat="server" Text="Update" 
+                        onclick="updateGoalbtn_Click" />
+                </td>
+                <td class="style1">
+                    <asp:Button ID="deleteGoalBtn" runat="server" Text="Delete" OnClientClick="return confirm('Doing this will irreversibly remove your goal from the system. Are you sure?');"
+                        onclick="deleteGoalBtn_Click" />
+                </td>
+            </tr>
+
         </table>
 
         </div> 
