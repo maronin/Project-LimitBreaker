@@ -92,7 +92,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         List<ScheduledRoutine> routine;
         List<scheduledItem> items;
 
-        items = scheduleManager.getScheduledItems(userID);
+        items = scheduleManager.getScheduledItemsByDay(userID, dt);
         if (atlernatingColor)
         {
             //pnl_calendarDay.BackColor = Color.Azure;

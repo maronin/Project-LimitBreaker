@@ -171,14 +171,19 @@
                                                 </asp:FilteredTextBoxExtender>
                                                 <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="False"
                                                     AutoCompleteType="Disabled"></asp:TextBox>
-                                                <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
-                                                </asp:CalendarExtender>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorExercise" runat="server"
+
+                                                                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidatorExercise" runat="server"
                                                     ErrorMessage="Invalid Date" ControlToValidate="tbDate_exercise" Font-Size="Medium"
                                                     ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                                    ValidationGroup="ScheduleExercise"></asp:RegularExpressionValidator>
+                                                    ValidationGroup="ScheduleExercise" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                                ForeColor="Red" ControlToValidate="tbDate_exercise" ValidationGroup="ScheduleExercise" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
+                                                </asp:CalendarExtender>
                                             </td>
                                         </tr>
+
+
                                     </table>
                                     <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
                                         CssClass="button" ValidationGroup="ScheduleExercise" />
@@ -199,8 +204,7 @@
                                                 Step 1. Select a routine:
                                             </td>
                                             <td>
-                                                <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name"
-                                                    DataValueField="id">
+                                                <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id">
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>
@@ -253,12 +257,15 @@
                                                     FilterType="Custom" ValidChars='()1234567890-/'>
                                                 </asp:FilteredTextBoxExtender>
                                                 <asp:TextBox ID="tbDate_routine" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"></asp:TextBox>
-                                                <asp:CalendarExtender ID="CalendarExtenderRoutine" runat="server" TargetControlID="tbDate_routine">
-                                                </asp:CalendarExtender>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorRoutine" runat="server"
+                                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorRoutine" runat="server"
                                                     ErrorMessage="Invalid Date" ControlToValidate="tbDate_routine" Font-Size="Medium"
                                                     ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                                    ValidationGroup="ScheduleRoutine"></asp:RegularExpressionValidator>
+                                                    ValidationGroup="ScheduleRoutine" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                        ForeColor="Red" ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
+                                                        ControlToValidate="tbDate_routine" ValidationGroup="ScheduleRoutine" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <asp:CalendarExtender ID="CalendarExtenderRoutine" runat="server" TargetControlID="tbDate_routine">
+                                                </asp:CalendarExtender>
+
                                             </td>
                                         </tr>
                                     </table>

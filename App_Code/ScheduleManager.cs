@@ -21,44 +21,14 @@ public class ScheduleManager
         }
     }
 
-    public List<scheduledItem> getScheduledItems(int userID)
-    {
-        using (var context = new Layer2Container())
-        {
-            var routines = from r in context.ScheduledRoutines
-                           orderby r.startTime
-                           where r.LimitBreaker.id == userID
-                           select new scheduledItem
-                           {
-                               itemName = r.Routine.name,
-                               startTime = r.startTime,
-                               user = r.LimitBreaker,
-                               isExericse = false
-                           };
-            var exercises = from e in context.ScheduledExercises
-                            orderby e.startTime
-                            where e.LimitBreakers.id == userID
-                            select new scheduledItem
-                            {
-                                itemName = e.Exercise.name,
-                                startTime = e.startTime,
-                                user = e.LimitBreakers,
-                                isExericse = true
-                            };
-            var items = routines.Concat(exercises).ToList();
-
-            return items.ToList();
-        }
-    }
-
-    public List<scheduledItem> getScheduledItemsByDay(int userID, DateTime day)
+    public List<scheduledItem> getScheduledItemsByDay(Int32 userID, DateTime day)
     {
         using (var context = new Layer2Container())
         {
             var ruleDate = Convert.ToDateTime(day).Date;
             var routines = from r in context.ScheduledRoutines
                            orderby r.startTime
-                           where (r.LimitBreaker.id == userID && r.startTime.Day == ruleDate.Day)
+                           where (r.LimitBreaker.id == userID && r.startTime.Day == day.Day)
                            select new scheduledItem
                            {
                                itemName = r.Routine.name,
@@ -68,7 +38,7 @@ public class ScheduleManager
                            };
             var exercises = from e in context.ScheduledExercises
                             orderby e.startTime
-                            where (e.LimitBreakers.id == userID && e.startTime.Day == ruleDate.Day)
+                            where (e.LimitBreakers.id == userID && e.startTime.Day == day.Day)
                             select new scheduledItem
                             {
                                 itemName = e.Exercise.name,
@@ -86,39 +56,29 @@ public class ScheduleManager
     public bool scheduleNewRoutine(Int32 routineID, DateTime start, Int32 userID, bool notification)
     {
         bool rc = false;
-
         using (var context = new Layer2Container())
         {
-
-            ScheduledRoutine newScheduledRoutine = new ScheduledRoutine();
-            //try
-            //{
             LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
-
             if (lb != null)
             {
-                
                 List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
-                DateTime routineStartTime = context.ScheduledRoutines.FirstOrDefault(e => e.Routine.id == routineID).startTime;
-                scheduledItemsForThatDay = getScheduledItemsByDay(userID, start.Date);
-                  /*    foreach (var item in scheduledItemsForThatDay)
-                      {                
-                          if (item != null && start.AddHours(-1) >= item.startTime && start.AddHours(1) <= item.startTime)
-                          {                   
-                              return false;
-                          }
-                      }*/
-              //List<ScheduledRoutine> schRoutines = new List<ScheduledRoutine>();
-              //ScheduledRoutine schRoutine = context.ScheduledRoutines.Where(e => e.id == routineID).FirstOrDefault();
-                //check if the item is already scheduled for that day and time
-                    Routine routine = context.Routines.Where(e => e.id == routineID).FirstOrDefault();
-                    newScheduledRoutine.Routine = routine;
-                    newScheduledRoutine.startTime = start;
-                    newScheduledRoutine.LimitBreaker = lb;
-                    newScheduledRoutine.needEmailNotification = notification;
-                    context.ScheduledRoutines.AddObject(newScheduledRoutine);
-                    context.SaveChanges();
-                    rc = true;
+                ScheduledRoutine newScheduledRoutine = new ScheduledRoutine();
+                scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
+                foreach (var item in scheduledItemsForThatDay)
+                {
+                    if (item != null && start.AddHours(-1) <= item.startTime && start.AddHours(1) >= item.startTime)
+                    {
+                        return false;
+                    }
+                }
+                Routine routine = context.Routines.Where(e => e.id == routineID).FirstOrDefault();
+                newScheduledRoutine.Routine = routine;
+                newScheduledRoutine.startTime = start;
+                newScheduledRoutine.LimitBreaker = lb;
+                newScheduledRoutine.needEmailNotification = notification;
+                context.ScheduledRoutines.AddObject(newScheduledRoutine);
+                context.SaveChanges();
+                rc = true;
             }
             return rc;
         }
@@ -131,38 +91,29 @@ public class ScheduleManager
         using (var context = new Layer2Container())
         {
 
-            ScheduledExercise newScheduledExercise = new ScheduledExercise();
-            //try
-            //{
-            LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
 
+            LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
             if (lb != null)
             {
+                List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
+                ScheduledExercise newScheduledExercise = new ScheduledExercise();
+                scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
+                foreach (var item in scheduledItemsForThatDay)
+                {
+                    if (item != null && start.AddHours(-1) <= item.startTime && start.AddHours(1) >= item.startTime)
+                    {
+                        return false;
+                    }
+                }
                 Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
-                List<ScheduledExercise> schExercises = new List<ScheduledExercise>();
-                ScheduledExercise schExercise = context.ScheduledExercises.Where(e => e.id == exerciseID).FirstOrDefault();
-                //check if the item is already scheduled for that day and time
-               //if ((schExercise != null && context.ScheduledExercises.FirstOrDefault(e => e.Exercise.id == exerciseID).startTime == start))
-                   //     rc = false;
-              
-               // else
-               // {
-                    newScheduledExercise.Exercise = exercise;
-                    newScheduledExercise.startTime = start;
-                    newScheduledExercise.LimitBreakers = lb;
-                    newScheduledExercise.needEmailNotification = notification;
-                    context.ScheduledExercises.AddObject(newScheduledExercise);
-                    context.SaveChanges();
-                    rc = true;
-              //  }
-                
+                newScheduledExercise.Exercise = exercise;
+                newScheduledExercise.startTime = start;
+                newScheduledExercise.LimitBreakers = lb;
+                newScheduledExercise.needEmailNotification = notification;
+                context.ScheduledExercises.AddObject(newScheduledExercise);
+                context.SaveChanges();
+                rc = true;
             }
-            //}
-            /* catch (NullReferenceException e)
-             {
-
-                 rc = false;
-             }*/
             return rc;
         }
     }
