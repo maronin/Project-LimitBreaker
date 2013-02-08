@@ -11,23 +11,57 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 {
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
+    routineManager routineManager = new routineManager();
     bool atlernatingColor = true;
     static bool addNewItem = false;
-    //routineManager routineManage = new routineManager();
+    String currentUser;
+    bool authenticated;
+    UserManager userManager = new UserManager();
+    static int userID;
     protected void Page_Load(object sender, EventArgs e)
     {
         Page.MaintainScrollPositionOnPostBack = true;
+        authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+        currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
+        userID = userManager.getUserID(currentUser);
+
+        DropDownList ddlRoutines = (DropDownList)LoginView1.FindControl("ddlRoutines");
+
+        if (ddlRoutines.Items.Count == 0)
+        {
+            lnkNotHaveRoutines.Visible = true;
+            ddlRoutines.Visible = false;
+        }
+        else
+        {
+            lnkNotHaveRoutines.Visible = false;
+            ddlRoutines.Visible = true;
+        }
+
+
         if (!IsPostBack)
         {
-            multiViewCalendar.ActiveViewIndex = 0;
-            loadMonths();
-            loadYears();
-            loadCalendar();
+
+            if (authenticated && userID != -1)
+            {
+
+                MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
+                multiViewCalendar.ActiveViewIndex = 0;
+
+                loadMonths();
+                loadYears();
+                loadCalendar();
+                populateUserRoutines();
+                exercises.ForeColor = Color.DarkViolet;
+                routines.ForeColor = Color.Red;
+            }
         }
     }
 
     protected void loadMonths()
     {
+        ddl_month.ClearSelection();
+        ddl_month.Items.Clear();
         for (int i = 1; i <= 12; i++)
         {
             ListItem li = new ListItem();
@@ -43,6 +77,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     }
     protected void loadYears()
     {
+        ddl_year.ClearSelection();
+        ddl_year.Items.Clear();
         int yearsBack = 3;
         int yearsForward = 3;
         for (int i = DateTime.Now.AddYears(-yearsBack).Year; i <= DateTime.Now.AddYears(yearsForward).Year; i++)
@@ -77,7 +113,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         List<ScheduledRoutine> routine;
         List<scheduledItem> items;
 
-        items = scheduleManager.getScheduledItems();
+        items = scheduleManager.getScheduledItemsByDay(userID, dt);
         if (atlernatingColor)
         {
             //pnl_calendarDay.BackColor = Color.Azure;
@@ -132,11 +168,55 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         loadCalendar();
     }
+
+    protected void nextMonth(object sender, EventArgs e)
+    {
+        Int16 m = Convert.ToInt16(ddl_month.SelectedIndex);
+        if (m < 11)
+            ddl_month.SelectedIndex = m + 1;
+
+        else
+        {
+            Int16 y = Convert.ToInt16(ddl_year.SelectedIndex);
+            ddl_year.SelectedIndex = y + 1;
+            ddl_month.SelectedIndex = 0;
+            
+        }
+
+
+        loadCalendar();
+    }
+
+    protected void prevMonth(object sender, EventArgs e)
+    {
+        Int16 m = Convert.ToInt16(ddl_month.SelectedIndex);
+        if (m > 0)
+            ddl_month.SelectedIndex = m - 1;
+
+        else
+        {
+            Int16 y = Convert.ToInt16(ddl_year.SelectedIndex);
+            ddl_year.SelectedIndex = y - 1;
+            ddl_month.SelectedIndex = 11;
+        }
+
+
+        loadCalendar();
+    }
+
+    protected void today(object sender, EventArgs e)
+    {
+        DateTime today = DateTime.Today;
+      
+        loadMonths();
+        loadYears();
+        loadCalendar();
+    }
+
     protected void loadCalendar()
     {
         Int16 m = Convert.ToInt16(ddl_month.SelectedItem.Value);
         Int16 y = Convert.ToInt16(ddl_year.SelectedItem.Value);
-
         List<DateTime> dates = new List<DateTime>();
         List<String> empty = new List<String>();
         DateTime dateValue = new DateTime(Convert.ToInt32(ddl_year.SelectedValue), Convert.ToInt32(ddl_month.SelectedValue), 1);
@@ -215,14 +295,14 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void btnScheduleRoutine_Click(object sender, EventArgs e)
     {
         if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue),
-            Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/
-            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(1), false))
+            Convert.ToDateTime(
+            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
-            lblResult_Routine.Text = "Success!";
+            lblResult_Routine.Text = "Successfuly scheduled your routine!";
         }
         else
-            lblResult_Routine.Text = "Failure!";
+            lblResult_Routine.Text = "Scheduled items can't be within 1 hour of each other! Please choose a different time or date";
 
     }
     /*
@@ -257,13 +337,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(1), false))
+        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
-            lblResult_Exercise.Text = "Success!";
+            lblResult_Exercise.Text = "Successfuly scheduled your routine!";
         }
         else
-            lblResult_Exercise.Text = "Failure!";
+            lblResult_Exercise.Text = "Scheduled items can't be within 1 hour of each other! Please choose a different time or date";
 
     }
     protected void goBack_Click(object sender, EventArgs e)
@@ -291,5 +371,16 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
 
 
+    }
+
+    protected void populateUserRoutines()
+    {
+        ddlRoutines.DataSource = routineManager.getUsersRoutines(userID);
+        ddlRoutines.DataBind();
+    }
+
+    protected void changeToRoutine(object sender, EventArgs e)
+    {
+        Response.Redirect("~/userRoutines/Default.aspx");
     }
 }
