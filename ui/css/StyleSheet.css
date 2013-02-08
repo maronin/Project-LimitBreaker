@@ -144,6 +144,34 @@ newExerciseForm, tr, td
 {
     text-align: center;
 }
+.buttonGo
+{
+    text-decoration: none;
+    color: #000000;
+    font-size: large;
+}
+
+.PrevMonth
+{
+    float: left;
+    text-align: left;
+    z-index: 0
+}
+
+.today
+{
+   margin:0 auto;
+   width: 0;
+   z-index: -1
+}
+
+.NextMonth
+{
+    text-align: right;
+    float: right;
+    z-index: 10;
+}
+
 #week
 {
     width: 100%;

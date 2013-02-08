@@ -58,6 +58,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void loadMonths()
     {
+        ddl_month.ClearSelection();
+        ddl_month.Items.Clear();
         for (int i = 1; i <= 12; i++)
         {
             ListItem li = new ListItem();
@@ -73,6 +75,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     }
     protected void loadYears()
     {
+        ddl_year.ClearSelection();
+        ddl_year.Items.Clear();
         int yearsBack = 3;
         int yearsForward = 3;
         for (int i = DateTime.Now.AddYears(-yearsBack).Year; i <= DateTime.Now.AddYears(yearsForward).Year; i++)
@@ -162,11 +166,55 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         loadCalendar();
     }
+
+    protected void nextMonth(object sender, EventArgs e)
+    {
+        Int16 m = Convert.ToInt16(ddl_month.SelectedIndex);
+        if (m < 11)
+            ddl_month.SelectedIndex = m + 1;
+
+        else
+        {
+            Int16 y = Convert.ToInt16(ddl_year.SelectedIndex);
+            ddl_year.SelectedIndex = y + 1;
+            ddl_month.SelectedIndex = 0;
+            
+        }
+
+
+        loadCalendar();
+    }
+
+    protected void prevMonth(object sender, EventArgs e)
+    {
+        Int16 m = Convert.ToInt16(ddl_month.SelectedIndex);
+        if (m > 0)
+            ddl_month.SelectedIndex = m - 1;
+
+        else
+        {
+            Int16 y = Convert.ToInt16(ddl_year.SelectedIndex);
+            ddl_year.SelectedIndex = y - 1;
+            ddl_month.SelectedIndex = 11;
+        }
+
+
+        loadCalendar();
+    }
+
+    protected void today(object sender, EventArgs e)
+    {
+        DateTime today = DateTime.Today;
+      
+        loadMonths();
+        loadYears();
+        loadCalendar();
+    }
+
     protected void loadCalendar()
     {
         Int16 m = Convert.ToInt16(ddl_month.SelectedItem.Value);
         Int16 y = Convert.ToInt16(ddl_year.SelectedItem.Value);
-
         List<DateTime> dates = new List<DateTime>();
         List<String> empty = new List<String>();
         DateTime dateValue = new DateTime(Convert.ToInt32(ddl_year.SelectedValue), Convert.ToInt32(ddl_month.SelectedValue), 1);
