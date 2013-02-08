@@ -13,16 +13,28 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     ExerciseManager exerciseManager = new ExerciseManager();
     bool atlernatingColor = true;
     static bool addNewItem = false;
-    //routineManager routineManage = new routineManager();
+    String currentUser;
+    bool authenticated;
+    UserManager userManager = new UserManager();
+    static int userID;
     protected void Page_Load(object sender, EventArgs e)
     {
         Page.MaintainScrollPositionOnPostBack = true;
+        authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+        currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
+        userID = userManager.getUserID(currentUser);
         if (!IsPostBack)
         {
+
+            if (authenticated && userID != -1) 
+            {
+            MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
             multiViewCalendar.ActiveViewIndex = 0;
+            
             loadMonths();
             loadYears();
             loadCalendar();
+            }
         }
     }
 
@@ -77,7 +89,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         List<ScheduledRoutine> routine;
         List<scheduledItem> items;
 
-        items = scheduleManager.getScheduledItems();
+        items = scheduleManager.getScheduledItems(userID);
         if (atlernatingColor)
         {
             //pnl_calendarDay.BackColor = Color.Azure;
@@ -216,7 +228,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue),
             Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/
-            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(1), false))
+            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
             lblResult_Routine.Text = "Success!";
@@ -257,7 +269,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(1), false))
+        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
             lblResult_Exercise.Text = "Success!";

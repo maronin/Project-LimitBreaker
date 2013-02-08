@@ -21,12 +21,13 @@ public class ScheduleManager
         }
     }
 
-    public List<scheduledItem> getScheduledItems()
+    public List<scheduledItem> getScheduledItems(int userID)
     {
         using (var context = new Layer2Container())
         {
             var routines = from r in context.ScheduledRoutines
                            orderby r.startTime
+                           where r.LimitBreaker.id == userID
                            select new scheduledItem
                            {
                                itemName = r.Routine.name,
@@ -36,6 +37,7 @@ public class ScheduleManager
                            };
             var exercises = from e in context.ScheduledExercises
                             orderby e.startTime
+                            where e.LimitBreakers.id == userID
                             select new scheduledItem
                             {
                                 itemName = e.Exercise.name,
