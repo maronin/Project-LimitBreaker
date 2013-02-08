@@ -127,21 +127,16 @@ public class routineManager
             try
             {
                 Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
-                Exercise exc = new Exercise();
+                ICollection<ScheduledRoutine> srList = rtn.ScheduledRoutines;
                 if (rtn != null)
                 {
-                    ICollection<Exercise> exerciseList = rtn.Exercises;
-                    foreach (Exercise ex in exerciseList.ToList())
-                    {
+                    // clear dependencies
+                    rtn.Exercises.Clear();
+                    
+                    foreach (ScheduledRoutine sr in srList.ToList())
+                        context.ScheduledRoutines.DeleteObject(sr);
+                    rtn.ScheduledRoutines.Clear();
 
-                        //exc = context.Exercises.Where(x => x.id == ex.id).FirstOrDefault();
-                        if (ex.Routines.Contains(rtn))
-                        {
-                            rtn.Exercises.Remove(ex);
-                        }
-                        exc = new Exercise();
-
-                    }
                     context.Routines.DeleteObject(rtn);
                     context.SaveChanges();
                     rc = true;
@@ -289,6 +284,18 @@ public class routineManager
                 wrtr.Close();
             }
 
+
+            return rc;
+        }
+    }
+
+    public int getUserID(string username)
+    {
+        using (var context = new Layer2Container())
+        {
+            int rc = -1;
+
+            rc = context.LimitBreakers.Where(x => x.username == username.Trim()).Select(x => x.id).FirstOrDefault();
 
             return rc;
         }

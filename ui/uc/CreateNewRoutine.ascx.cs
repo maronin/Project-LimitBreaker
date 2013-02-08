@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,9 +14,11 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     routineManager routManager;
     List<Exercise> exercises;
     RadioButtonList rbl;
+    String currentUser;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        currentUser = System.Web.HttpContext.Current.User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "";
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
 
@@ -128,10 +131,10 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         exercises = Session["exercises"] != null ? (List<Exercise>)Session["exercises"] : null;
         Routine rt = new Routine();
         ICollection<Exercise> exerciseList = convertListBox(lbSelected);
-
+        int userID = routManager.getUserID(currentUser);
         // user id to be changed later so that function createNewRoutine makes a routine for specified user
-        if (exerciseList != null)
-            rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), 1, exerciseList);
+        if (exerciseList != null && userID != -1)
+            rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), userID, exerciseList);
 
         clearAll();
 

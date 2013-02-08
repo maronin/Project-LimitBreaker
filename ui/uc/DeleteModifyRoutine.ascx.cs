@@ -56,34 +56,7 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
             }
         }
     }
-    protected void btnDelete_Click(object sender, EventArgs e)
-    {
-        bool rc = false;
-        if (rbl != null && rbl.SelectedIndex > -1)
-        {
-            try
-            {
 
-                rc = routManager.deleteRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
-            }
-            catch (NullReferenceException ex)
-            {
-                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
-                // write off the execeptions to my error.log file
-                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
-
-                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + ex);
-
-                wrtr.Close();
-            }
-        }
-
-        if (rc)
-        {
-            // redirect page to itself (refresh)
-            Response.Redirect(Request.RawUrl);
-        }
-    }
     protected void btnConfirm_Click(object sender, EventArgs e)
     {
         int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
@@ -113,4 +86,32 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         }
     }
 
+    protected void okButton_Click(object sender, EventArgs e)
+    {
+        bool rc = false;
+        if (rbl != null && rbl.SelectedIndex > -1)
+        {
+            try
+            {
+
+                rc = routManager.deleteRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + ex);
+
+                wrtr.Close();
+            }
+        }
+
+        if (rc)
+        {
+            // redirect page to itself (refresh)
+            Response.Redirect(Request.RawUrl);
+        }
+    }
 }
