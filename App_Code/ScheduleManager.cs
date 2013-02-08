@@ -63,7 +63,9 @@ public class ScheduleManager
             {
                 List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
                 ScheduledRoutine newScheduledRoutine = new ScheduledRoutine();
-                scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
+
+                //This part is for validating if the exercise can be scheduled for a certain time
+                /*scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
                 foreach (var item in scheduledItemsForThatDay)
                 {
                     if (item != null && start.AddHours(-1) <= item.startTime && start.AddHours(1) >= item.startTime)
@@ -71,6 +73,8 @@ public class ScheduleManager
                         return false;
                     }
                 }
+                */
+
                 Routine routine = context.Routines.Where(e => e.id == routineID).FirstOrDefault();
                 newScheduledRoutine.Routine = routine;
                 newScheduledRoutine.startTime = start;
@@ -97,7 +101,9 @@ public class ScheduleManager
             {
                 List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
                 ScheduledExercise newScheduledExercise = new ScheduledExercise();
-                scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
+
+                //This part is for validating if the exercise can be scheduled for a certain time
+                /* scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
                 foreach (var item in scheduledItemsForThatDay)
                 {
                     if (item != null && start.AddHours(-1) <= item.startTime && start.AddHours(1) >= item.startTime)
@@ -105,6 +111,7 @@ public class ScheduleManager
                         return false;
                     }
                 }
+                */
                 Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
                 newScheduledExercise.Exercise = exercise;
                 newScheduledExercise.startTime = start;

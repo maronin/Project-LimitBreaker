@@ -31,6 +31,11 @@
                     <asp:MultiView ID="multiViewCalendar" runat="server">
                         <asp:View ID="view_calendar" runat="server">
                             <asp:LinkButton ID="lnk_add_item" runat="server" Text="Add Item" OnClick="lnk_add_item_Click" />
+                            <br />
+                            <br />
+                            <asp:Label ID="exercises" runat="server" Text="Exercises" Font-Bold="True" ></asp:Label>
+                            <br />
+                            <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" ></asp:Label>
                             <asp:Panel ID="pnl_calendar" runat="server" CssClass="calendar">
                                 <asp:DropDownList ID="ddl_month" runat="server" />
                                 <asp:DropDownList ID="ddl_year" runat="server" />

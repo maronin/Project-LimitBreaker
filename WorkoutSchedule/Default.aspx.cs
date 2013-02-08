@@ -52,6 +52,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 loadYears();
                 loadCalendar();
                 populateUserRoutines();
+                exercises.ForeColor = Color.DarkViolet;
+                routines.ForeColor = Color.Red;
             }
         }
     }
