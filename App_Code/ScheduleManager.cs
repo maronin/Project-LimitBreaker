@@ -51,6 +51,38 @@ public class ScheduleManager
         }
     }
 
+    public List<scheduledItem> getScheduledItemsByDay(int userID, DateTime day)
+    {
+        using (var context = new Layer2Container())
+        {
+            var ruleDate = Convert.ToDateTime(day).Date;
+            var routines = from r in context.ScheduledRoutines
+                           orderby r.startTime
+                           where (r.LimitBreaker.id == userID && r.startTime.Day == ruleDate.Day)
+                           select new scheduledItem
+                           {
+                               itemName = r.Routine.name,
+                               startTime = r.startTime,
+                               user = r.LimitBreaker,
+                               isExericse = false
+                           };
+            var exercises = from e in context.ScheduledExercises
+                            orderby e.startTime
+                            where (e.LimitBreakers.id == userID && e.startTime.Day == ruleDate.Day)
+                            select new scheduledItem
+                            {
+                                itemName = e.Exercise.name,
+                                startTime = e.startTime,
+                                user = e.LimitBreakers,
+                                isExericse = true
+                            };
+            var items = routines.Concat(exercises).ToList();
+
+            return items.ToList();
+        }
+    }
+
+
     public bool scheduleNewRoutine(Int32 routineID, DateTime start, Int32 userID, bool notification)
     {
         bool rc = false;
@@ -65,15 +97,21 @@ public class ScheduleManager
 
             if (lb != null)
             {
-                Routine routine = context.Routines.Where(e => e.id == routineID).FirstOrDefault();
-               // List<ScheduledRoutine> schRoutines = new List<ScheduledRoutine>();
-              //  ScheduledRoutine schRoutine = context.ScheduledRoutines.Where(e => e.id == routineID).FirstOrDefault();
+                
+                List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
+                DateTime routineStartTime = context.ScheduledRoutines.FirstOrDefault(e => e.Routine.id == routineID).startTime;
+                scheduledItemsForThatDay = getScheduledItemsByDay(userID, start.Date);
+                  /*    foreach (var item in scheduledItemsForThatDay)
+                      {                
+                          if (item != null && start.AddHours(-1) >= item.startTime && start.AddHours(1) <= item.startTime)
+                          {                   
+                              return false;
+                          }
+                      }*/
+              //List<ScheduledRoutine> schRoutines = new List<ScheduledRoutine>();
+              //ScheduledRoutine schRoutine = context.ScheduledRoutines.Where(e => e.id == routineID).FirstOrDefault();
                 //check if the item is already scheduled for that day and time
-               // if ((schRoutine != null && context.ScheduledExercises.FirstOrDefault(e => e.Exercise.id == routineID).startTime == start))
-                //    rc = false;
-
-             //   else
-              //  {
+                    Routine routine = context.Routines.Where(e => e.id == routineID).FirstOrDefault();
                     newScheduledRoutine.Routine = routine;
                     newScheduledRoutine.startTime = start;
                     newScheduledRoutine.LimitBreaker = lb;
@@ -81,15 +119,7 @@ public class ScheduleManager
                     context.ScheduledRoutines.AddObject(newScheduledRoutine);
                     context.SaveChanges();
                     rc = true;
-             //   }
-
             }
-            //}
-            /* catch (NullReferenceException e)
-             {
-
-                 rc = false;
-             }*/
             return rc;
         }
     }

@@ -230,7 +230,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void btnScheduleRoutine_Click(object sender, EventArgs e)
     {
         if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue),
-            Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/
+            Convert.ToDateTime(
             tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
