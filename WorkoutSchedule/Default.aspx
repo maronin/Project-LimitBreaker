@@ -199,9 +199,7 @@
                                                 Step 1. Select a routine:
                                             </td>
                                             <td>
-                                                <asp:ObjectDataSource ID="viewRoutines" runat="server" SelectMethod="viewRoutines"
-                                                    TypeName="routineManager"></asp:ObjectDataSource>
-                                                <asp:DropDownList ID="ddlRoutines" runat="server" DataSourceID="viewRoutines" DataTextField="name"
+                                                <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name"
                                                     DataValueField="id">
                                                 </asp:DropDownList>
                                             </td>

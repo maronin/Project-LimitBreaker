@@ -11,6 +11,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 {
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
+    routineManager routineManager = new routineManager();
     bool atlernatingColor = true;
     static bool addNewItem = false;
     String currentUser;
@@ -28,12 +29,14 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
             if (authenticated && userID != -1) 
             {
+                
             MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
             multiViewCalendar.ActiveViewIndex = 0;
             
             loadMonths();
             loadYears();
             loadCalendar();
+            populateUserRoutines();
             }
         }
     }
@@ -303,5 +306,11 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
 
 
+    }
+
+    protected void populateUserRoutines()
+    {
+        ddlRoutines.DataSource = routineManager.getUsersRoutines(userID);
+        ddlRoutines.DataBind();
     }
 }
