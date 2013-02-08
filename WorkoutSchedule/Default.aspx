@@ -206,6 +206,7 @@
                                             <td>
                                                 <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id">
                                                 </asp:DropDownList>
+                                                <asp:LinkButton ID="lnkNotHaveRoutines" runat="server" Visible="False"  OnClick="changeToRoutine">Click here to add a new routine</asp:LinkButton>
                                             </td>
                                         </tr>
                                         <tr>
