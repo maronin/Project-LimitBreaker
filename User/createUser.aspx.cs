@@ -4,21 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
+
 //User name rules fo the regex on the aspx file: Usernames must be at least 3 characters long, starting with a letter, be alphanumeric and may contain . _ or -
 public partial class User_createUser : System.Web.UI.Page
 {
     UserManager manager = new UserManager();
     protected void Page_Load(object sender, EventArgs e)
     {
-        /* This shit is broken. Figure out why later, for now doing it the dumb way
-        DropDownList birthday=((DropDownList)LoginView1.FindControl("birthday"));
-        ListItem day;
-        for (int i = 0; i < 31; i++)
+        if (User.Identity.Name=="")
         {
-            day = new ListItem(i+1.ToString(), i+1.ToString(), true);
-            birthday.Items.Add(day);
+            DropDownList birthday = ((DropDownList)LoginView1.FindControl("birthdayYear"));
+            ListItem year;
+            int endYear = DateTime.Now.Year - 4;
+            for (int i = endYear; i > endYear - 100; i--)
+            {
+                String tempYear = Convert.ToString(i);
+                year = new ListItem(tempYear, tempYear);
+                birthday.Items.Add(year);
+            }
         }
-        */
     }
     protected void Create_Click(object sender, EventArgs e)
     {
@@ -36,7 +41,7 @@ public partial class User_createUser : System.Web.UI.Page
 
             String birthdayDay = ((DropDownList)LoginView1.FindControl("birthdayDay")).SelectedValue;
             String birthdayMonth = ((DropDownList)LoginView1.FindControl("birthdayMonth")).SelectedValue;
-            String birthdayYear = ((TextBox)LoginView1.FindControl("birthdayYear")).Text;
+            String birthdayYear = ((DropDownList)LoginView1.FindControl("birthdayYear")).SelectedValue;
 
             DateTime birthday = new DateTime(Convert.ToInt32(birthdayYear), Convert.ToInt32(birthdayMonth), Convert.ToInt32(birthdayDay));
             Double height = manager.convertHeightToMetric(Convert.ToDouble(tempFoot), tempInch);

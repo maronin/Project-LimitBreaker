@@ -14,7 +14,7 @@ body {
 }
 .background {
 	background: url(../images/bg-pattern-red.jpg) repeat left top;
-	
+	height: 300px;
 }
 #page {
 	width: 1240px;
@@ -115,19 +115,20 @@ img {
 	border-color: #afafaf;
 }
 /*------------------------------ CONTENTS ------------------------------*/
-#contents {
-	background: #fff url(../images/bg-content-bottom.png) no-repeat left bottom;
-	display: inline-block;
-	width: 100%;
-	margin-bottom: 30px;
-	padding: 23px 0 0;
-	-webkit-border-bottom-right-radius: 1px;
-	-webkit-border-bottom-left-radius: 1px;
-	-moz-border-radius-bottomright: 1px;
-	-moz-border-radius-bottomleft: 1px;
-	border-bottom-right-radius: 1px;
-	border-bottom-left-radius: 1px;
-		min-height:500px;
+#contents
+{
+    background: #FFFFFF none no-repeat left bottom;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 23px 0 0;
+    -webkit-border-bottom-right-radius: 1px;
+    -webkit-border-bottom-left-radius: 1px;
+    -moz-border-radius-bottomright: 1px;
+    -moz-border-radius-bottomleft: 1px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 1px;
+    min-height: 500px;
 }
 #contents h1, #contents h2, #contents h4, #contents h5, #contents h6 {
 	color: #2e3a54;
