@@ -109,7 +109,7 @@
         <div id="header">
             <div class="background">
                 <h1 id="logo">
-                    <a href="index.html">Project LimitBreakerrr</a>
+                    <asp:LinkButton ID="lnkHome" runat="server" onclick="lnkHome_Click">Project LimitBreaker</asp:LinkButton>
                 </h1>
                 <div id="navigation">
                     <ul>

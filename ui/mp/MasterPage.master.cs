@@ -69,5 +69,8 @@ public partial class ui_mp_MasterPage : System.Web.UI.MasterPage
         Response.Redirect("~/User/manageExerciseGoals.aspx");
     }
 
-
+    protected void lnkHome_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/default.aspx");
+    }
 }
