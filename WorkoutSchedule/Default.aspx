@@ -33,19 +33,21 @@
                             <asp:LinkButton ID="lnk_add_item" runat="server" Text="Add Item" OnClick="lnk_add_item_Click" />
                             <br />
                             <br />
-                            <asp:Label ID="exercises" runat="server" Text="Exercises" Font-Bold="True" ></asp:Label>
+                            <asp:Label ID="exercises" runat="server" Text="Exercises" Font-Bold="True"></asp:Label>
                             <br />
-                            <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" ></asp:Label>
+                            <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True"></asp:Label>
                             <asp:Panel ID="pnl_calendar" runat="server" CssClass="calendar">
                                 <asp:DropDownList ID="ddl_month" runat="server" />
                                 <asp:DropDownList ID="ddl_year" runat="server" />
-                                <asp:LinkButton ID="lnk_loadCalendar" runat="server" Text="Go" OnClick="lnk_loadCalendar_Click" CssClass="buttonGo" />
+                                <asp:LinkButton ID="lnk_loadCalendar" runat="server" Text="Go" OnClick="lnk_loadCalendar_Click"
+                                    CssClass="buttonGo" />
                                 <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
-
                                     <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"><<</asp:LinkButton>
-                                                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth">>></asp:LinkButton>
-                                    <div class="today"><asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton></div>
-
+                                    <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth">>></asp:LinkButton>
+                                    <div class="today">
+                                        <asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton>
+                                        <br />
+                                        <asp:Label ID="lblToday" runat="server" Text=""></asp:Label></div>
                                 </asp:Panel>
                                 <asp:Panel ID="pnl_days" runat="server" CssClass="DaysOfWeek">
                                     <table id="week">

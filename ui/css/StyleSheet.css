@@ -6,13 +6,12 @@
 
 #login
 {
-    padding: 10px;
+    padding: 10px 0px 0px 0px;
     top: 0px;
     position: absolute;
     float: right;
     z-index: 10;
     right: 0%;
-
 }
 
 #header
@@ -169,9 +168,9 @@ newExerciseForm, tr, td
 
 .today
 {
-    margin: 0 auto;
-    width: 0;
-    z-index: -1;
+margin: 0 auto;
+text-align: center;
+z-index: -1;
 }
 
 .NextMonth
@@ -221,7 +220,7 @@ newExerciseForm, tr, td
     background-color: #aa0000;
     width: 97.5%;
 }
-.calendarMonthSelector a
+.calendarMonthSelector a, span
 {
     color: white;
     font-weight: bold;

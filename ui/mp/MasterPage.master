@@ -88,7 +88,8 @@
                                 ForeColor="White">*</asp:RequiredFieldValidator>
                             <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" ForeColor="White">Password:</asp:Label>
                             <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
-                            <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="ctl00$Login1" />
+                            <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" 
+                                ValidationGroup="ctl00$Login1" Height="25px" Width="65px" />
                             <%--Note: The Literal Control is used here to display an error message that a log in control throws into the FailureText. By Default it is disabled--%>
                             <br />
                             <span style="color: #FFFFFF; float: right;">

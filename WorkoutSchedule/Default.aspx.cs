@@ -30,17 +30,18 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (authenticated && userID != -1)
         {
             DropDownList ddlRoutines = (DropDownList)LoginView1.FindControl("ddlRoutines");
-            if (ddlRoutines.Items.Count == 0)
-            {
-                lnkNotHaveRoutines.Visible = true;
-                ddlRoutines.Visible = false;
-            }
-            else
-            {
-                lnkNotHaveRoutines.Visible = false;
-                ddlRoutines.Visible = true;
-            }
+                if (ddlRoutines.Items.Count == 0)
+                {
+                    lnkNotHaveRoutines.Visible = true;
+                    ddlRoutines.Visible = false;
+                }
+                else
+                {
+                    lnkNotHaveRoutines.Visible = false;
+                    ddlRoutines.Visible = true;
+                }
 
+            
             if (!IsPostBack)
             {
                 MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
@@ -256,6 +257,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             rpt_calendar.DataBind();
 
         }
+        lblToday.Text = ddl_month.SelectedItem.Text + " " + ddl_year.Text;
 
     }
 
