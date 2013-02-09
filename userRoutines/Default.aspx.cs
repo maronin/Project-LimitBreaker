@@ -13,6 +13,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     bool authenticated;
     ui_uc_CreateNewRoutine cnr;
     ui_uc_DeleteModifyRoutine dmr;
+    ui_uc_ucCreateRoutineLog crl;
     MultiView mvRoutines;
     Panel pnlButtons;
     Button btnBack;
@@ -25,6 +26,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
         cnr = LoginView1.FindControl("CreateNewRoutine") as ui_uc_CreateNewRoutine;
         dmr = LoginView1.FindControl("DeleteModifyRoutine") as ui_uc_DeleteModifyRoutine;
+        crl = LoginView1.FindControl("ucCreateRoutineLog") as ui_uc_ucCreateRoutineLog;
         mvRoutines = LoginView1.FindControl("mvRoutine") as MultiView;
         pnlButtons = LoginView1.FindControl("pnlButtons") as Panel;
         btnBack = LoginView1.FindControl("btnBack") as Button;
@@ -43,6 +45,10 @@ public partial class userRoutines_Default : System.Web.UI.Page
         if (authenticated && dmr != null)
         {
             dmr.userID = manager.getUserID(currentUser);
+        }
+        if (authenticated && crl != null)
+        {
+            crl.userID = manager.getUserID(currentUser);
         }
         
     }
