@@ -173,6 +173,12 @@ text-align: center;
 z-index: -1;
 }
 
+.today span
+{
+    color: white;
+    font-weight: bold;
+}
+
 .NextMonth
 {
     text-align: right;
@@ -220,7 +226,12 @@ z-index: -1;
     background-color: #aa0000;
     width: 97.5%;
 }
-.calendarMonthSelector a, span
+.calendarMonthSelector a
+{
+    color: white;
+    font-weight: bold;
+}
+.calendarMonthSelector a span
 {
     color: white;
     font-weight: bold;

@@ -135,8 +135,7 @@
         </asp:View>
 
         <asp:View ID="manageGoalsView" runat="server">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+        
         <h4>Your Current Exercise Goals</h4>
         <div style="float: left; padding: 10px;">
             Order Goals By:
@@ -151,55 +150,172 @@
                 onselectedindexchanged="userGoalsListBox_SelectedIndexChanged"></asp:ListBox>
         </div> 
         
-        <div style="float: left; padding: 10px">
+        <div style="padding: 10px; width: 60%; margin: 0px auto 0px auto">
         <table>
             <tr>
-                <td>
+                <td class="style1">
+                    Exercise Name:
+                </td>
+                <td class="style1">
                     <asp:Label ID="exerciseNameLbl" runat="server" Text=""></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="timelbl" runat="server" Text="Time"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="distanceLbl" runat="server" Text="Distance"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="weightlbl" runat="server" Text="Weight"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="repLbl" runat="server" Text="Reps"></asp:Label>
                 </td>
             </tr>
 
             <asp:MultiView ID="singleGoalAttributesMultiView" runat="server">
-                <asp:View ID="viewGoalView" runat="server">   
+                <asp:View ID="viewGoalView" runat="server">
+                    <asp:Panel ID="goalTimePanel" runat="server">
                     <tr>
-                        <td>
+                        <td class="style1">
+                            Goal Time (Minutes):
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalTimeLbl" runat="server" Text=""></asp:Label>
                         </td>
-                        <td>
+                    </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="goalDistancePanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Distance (km):
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalDistancelbl" runat="server" Text=""></asp:Label>
                         </td>
-                        <td>
+                    </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="goalWeightPanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Weight (lbs):
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalWeightLbl" runat="server" Text=""></asp:Label>
                         </td>
-                        <td>
+                    </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="goalRepsPanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Reps:
+                        </td>
+                        <td class="style1">
                             <asp:Label ID="goalRepsLbl" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
+                    </asp:Panel>
+           
                 </asp:View>
 
-                <asp:View ID="updaetGoalView" runat="server">
+                <asp:View ID="updateGoalView" runat="server">
+                    <asp:Panel ID="modGoalTimePanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Time (Minutes):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalTimeTxtBox" runat="server"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender5" runat="server" TargetControlID="modGoalTimeTxtBox" Width="175" Minimum="0" Step="1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="modGoalTimeTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="modGoalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="modGoalDistancePanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Distance (km):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalDistanceTxtBox" runat="server"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender6" runat="server" TargetControlID="modGoalDistanceTxtBox" Width="175" Minimum="0" Step="0.1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="modGoalDistanceTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
+                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
+                                ControlToValidate="modGoalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="modGoalWeightPanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Weight (lbs):
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalWeightTxtBox" runat="server"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender7" runat="server" TargetControlID="modGoalWeightTxtBox" Width="175" Minimum="0" Step="5">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="modGoalWeightTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="modGoalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="modGoalRepsPanel" runat="server">
+                    <tr>
+                        <td class="style1">
+                            Goal Reps:
+                        </td>
+                        <td class="style1">
+                            <asp:TextBox ID="modGoalRepsTxtBox" runat="server"></asp:TextBox>
+                            <asp:NumericUpDownExtender ID="NumericUpDownExtender8" runat="server" TargetControlID="modGoalRepsTxtBox" Width="175" Minimum="0" Step="1">
+                            </asp:NumericUpDownExtender>
+                        </td>
+                        <td class="style1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
+                                ErrorMessage="*Required" ControlToValidate="modGoalRepsTxtBox" Display="Dynamic" 
+                                ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" 
+                                ErrorMessage="*Entered values must be a whole number" 
+                                ControlToValidate="modGoalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
+                                ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    </asp:Panel>
                     
                 </asp:View>
             </asp:MultiView>
-        </table>
 
+            <tr>
+                <td class="style1">
+                    <asp:Button ID="updateGoalbtn" runat="server" Text="Update" 
+                        onclick="updateGoalbtn_Click" />
+                </td>
+                <td class="style1">
+                    <asp:Button ID="deleteGoalBtn" runat="server" Text="Delete" OnClientClick="return confirm('Doing this will irreversibly remove your goal from the system. Are you sure?');"
+                        onclick="deleteGoalBtn_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style1">
+                    <asp:Button ID="saveModifyGoalBtn" runat="server" Text="Save" Visible="false" 
+                        onclick="saveModifyGoalBtn_Click" ValidationGroup="modifyGoal"/>
+                </td>
+            </tr>
+        </table>
+        <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
+        <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
         </div> 
-        </ContentTemplate>
-        </asp:UpdatePanel>
+        
         </asp:View>
 
     </asp:MultiView>
