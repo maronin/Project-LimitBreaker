@@ -6,26 +6,38 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        #content {
+            padding-bottom: 15px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <h4>List of Routines</h4>
-    <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="rblRoutines_SelectedIndexChanged" Font-Size="Medium" Width="100%">
-    </asp:RadioButtonList>
-    <p>
-        <em style="font-size: medium">Note: I plan on combining several functions (e.g. View + Delete + Modify routines) in a single table so that each routine listed also has the option to be modified or deleted.</em>
-    </p>
-    <div id="routines">
-        <div id="create">
-            <uc1:CreateNewRoutine runat="server" ID="CreateNewRoutine" />
-        </div>
-        <div id="deleteModify">
-            <uc1:DeleteModifyRoutine runat="server" ID="DeleteModifyRoutine" />
-        </div>
-    </div>
-    <div id="loggedRoutines">
-        <h4>View Logged Routine Data</h4>
-        <h4>Log Routine Data</h4>
-        <h4>Modify Logged Routine Data</h4>
-    </div>
+    <asp:LoginView ID="LoginView1" runat="server">
+        <AnonymousTemplate>
+            <p>You need to log in first before you can manage your routines.</p>
+        </AnonymousTemplate>
+        <LoggedInTemplate>
+            <h4>List of Routines</h4>
+            <div id="content">
+                <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="rblRoutines_SelectedIndexChanged" Font-Size="Medium" Width="100%">
+                </asp:RadioButtonList>
+            </div>
+            <div id="routines">
+                <div id="create">
+                    <uc1:CreateNewRoutine runat="server" ID="CreateNewRoutine" />
+                </div>
+                <div id="deleteModify">
+                    <uc1:DeleteModifyRoutine runat="server" ID="DeleteModifyRoutine" />
+                </div>
+            </div>
+            <div id="loggedRoutines">
+                <h4>View Logged Routine Data</h4>
+                <h4>Log Routine Data</h4>
+                <h4>Modify Logged Routine Data</h4>
+            </div>
+        </LoggedInTemplate>
+    </asp:LoginView>
+
 </asp:Content>
 
