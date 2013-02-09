@@ -33,10 +33,6 @@
     .selectBtn {
         text-align: center;
     }
-
-    td {
-        padding-top: 10px;
-    }
 </style>
 <h4>Create New Routine</h4>
 <div id="content">

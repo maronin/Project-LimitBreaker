@@ -33,21 +33,23 @@
         </AnonymousTemplate>
         <LoggedInTemplate>
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <h4>List of Routines</h4>
+                    <div id="content">
+                        <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
+                        </asp:RadioButtonList>
+                    </div>
             <asp:Panel ID="pnlButtons" runat="server">
+                
                 <div id="buttons">
-                    <asp:Button ID="btnViewRoutines" runat="server" Text="View Routines" CssClass="button" OnClick="btnViewRoutines_Click" />
+                    <asp:Button ID="btnModifyRoutines" runat="server" Text="Modify Routines" CssClass="button" OnClick="btnModifyRoutines_Click"/>
                     <asp:Button ID="btnCreateRoutines" runat="server" Text="Create Routine" CssClass="button" OnClick="btnCreateRoutines_Click" />
                     <asp:Button ID="btnViewLogs" runat="server" Text="View Logs" CssClass="button" OnClick="btnViewLogs_Click" />
                     <asp:Button ID="btnCreateLogs" runat="server" Text="Create Logs" CssClass="button" OnClick="btnCreateLogs_Click" />
                 </div>
             </asp:Panel>
+            
             <asp:MultiView ID="mvRoutine" runat="server">
                 <asp:View ID="ViewRoutines" runat="server">
-                    <h4>List of Routines</h4>
-                    <div id="content">
-                        <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
-                        </asp:RadioButtonList>
-                    </div>
                     <div id="deleteModify">
                         <uc1:DeleteModifyRoutine runat="server" ID="DeleteModifyRoutine" />
                     </div>
@@ -59,8 +61,8 @@
                 </asp:View>
                 <asp:View ID="ViewLoggedData" runat="server">
                     <h4>List of Logged Routines</h4>
-                    <div id="Div1">
-                        <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
+                    <div id="content">
+                        <asp:RadioButtonList ID="rblLoggedRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
                         </asp:RadioButtonList>
                     </div>
                     <uc1:ucModifyDeleteRoutineLog runat="server" ID="ucModifyDeleteRoutineLog" />

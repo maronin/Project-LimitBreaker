@@ -46,7 +46,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
         }
         
     }
-    protected void btnViewRoutines_Click(object sender, EventArgs e)
+    protected void btnModifyRoutines_Click(object sender, EventArgs e)
     {
         mvRoutines.ActiveViewIndex = 0;
         pnlButtons.Visible = false;
@@ -71,9 +71,12 @@ public partial class userRoutines_Default : System.Web.UI.Page
         btnBack.Visible = true;
     }
     protected void btnBack_Click(object sender, EventArgs e)
-    {
+    {   
+        /*
         mvRoutines.ActiveViewIndex = -1;
         pnlButtons.Visible = true;
         btnBack.Visible = false;
+         * */
+        Response.Redirect(Request.RawUrl);
     }
 }
