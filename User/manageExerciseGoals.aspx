@@ -135,8 +135,7 @@
         </asp:View>
 
         <asp:View ID="manageGoalsView" runat="server">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+        
         <h4>Your Current Exercise Goals</h4>
         <div style="float: left; padding: 10px;">
             Order Goals By:
@@ -163,7 +162,8 @@
             </tr>
 
             <asp:MultiView ID="singleGoalAttributesMultiView" runat="server">
-                <asp:View ID="viewGoalView" runat="server">   
+                <asp:View ID="viewGoalView" runat="server">
+                    <asp:Panel ID="goalTimePanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Time (Minutes):
@@ -172,6 +172,8 @@
                             <asp:Label ID="goalTimeLbl" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="goalDistancePanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Distance (km):
@@ -180,6 +182,8 @@
                             <asp:Label ID="goalDistancelbl" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="goalWeightPanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Weight (lbs):
@@ -188,6 +192,8 @@
                             <asp:Label ID="goalWeightLbl" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="goalRepsPanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Reps:
@@ -196,10 +202,12 @@
                             <asp:Label ID="goalRepsLbl" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
+                    </asp:Panel>
            
                 </asp:View>
 
                 <asp:View ID="updateGoalView" runat="server">
+                    <asp:Panel ID="modGoalTimePanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Time (Minutes):
@@ -219,6 +227,8 @@
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="modGoalDistancePanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Distance (km):
@@ -238,6 +248,8 @@
                                 ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="modGoalWeightPanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Weight (lbs):
@@ -257,6 +269,8 @@
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    <asp:Panel ID="modGoalRepsPanel" runat="server">
                     <tr>
                         <td class="style1">
                             Goal Reps:
@@ -276,6 +290,8 @@
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
+                    </asp:Panel>
+                    
                 </asp:View>
             </asp:MultiView>
 
@@ -294,17 +310,12 @@
                     <asp:Button ID="saveModifyGoalBtn" runat="server" Text="Save" Visible="false" 
                         onclick="saveModifyGoalBtn_Click" ValidationGroup="modifyGoal"/>
                 </td>
-                <td class="style1">
-                    <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
-                </td>
             </tr>
-
         </table>
         <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
-
+        <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
         </div> 
-        </ContentTemplate>
-        </asp:UpdatePanel>
+        
         </asp:View>
 
     </asp:MultiView>

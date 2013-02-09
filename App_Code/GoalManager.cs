@@ -101,6 +101,22 @@ public class GoalManager
         }
     }
 
+    public Exercise getExerciseWithinGoal(string userName, string exerciseName)
+    {
+        using (var context = new Layer2Container())
+        {
+            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+
+            if (eg != null)
+            {
+                Exercise ex = eg.Exercise;
+                return ex;
+            }
+            else
+                return null;
+        }
+    }
+
     public bool modifyExerciseGoalByExerciseNameAndUserName(string userName, string exerciseName, int time, double distance, int weight, int reps)
     {
         bool rc = false;
