@@ -25,29 +25,26 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
         userID = userManager.getUserID(currentUser);
 
-        DropDownList ddlRoutines = (DropDownList)LoginView1.FindControl("ddlRoutines");
 
-        if (ddlRoutines.Items.Count == 0)
+
+        if (authenticated && userID != -1)
         {
-            lnkNotHaveRoutines.Visible = true;
-            ddlRoutines.Visible = false;
-        }
-        else
-        {
-            lnkNotHaveRoutines.Visible = false;
-            ddlRoutines.Visible = true;
-        }
-
-
-        if (!IsPostBack)
-        {
-
-            if (authenticated && userID != -1)
+            DropDownList ddlRoutines = (DropDownList)LoginView1.FindControl("ddlRoutines");
+            if (ddlRoutines.Items.Count == 0)
             {
+                lnkNotHaveRoutines.Visible = true;
+                ddlRoutines.Visible = false;
+            }
+            else
+            {
+                lnkNotHaveRoutines.Visible = false;
+                ddlRoutines.Visible = true;
+            }
 
+            if (!IsPostBack)
+            {
                 MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
                 multiViewCalendar.ActiveViewIndex = 0;
-
                 loadMonths();
                 loadYears();
                 loadCalendar();
@@ -56,6 +53,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 routines.ForeColor = Color.Red;
             }
         }
+
     }
 
     protected void loadMonths()
@@ -180,7 +178,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             Int16 y = Convert.ToInt16(ddl_year.SelectedIndex);
             ddl_year.SelectedIndex = y + 1;
             ddl_month.SelectedIndex = 0;
-            
+
         }
 
 
@@ -207,7 +205,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void today(object sender, EventArgs e)
     {
         DateTime today = DateTime.Today;
-      
+
         loadMonths();
         loadYears();
         loadCalendar();
