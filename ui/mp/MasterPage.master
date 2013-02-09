@@ -128,9 +128,6 @@
                             <asp:LinkButton ID="lnkUser" runat="server" OnClick="btnCreateUser">Create User</asp:LinkButton>
                         </li>
                         <li>
-                            <asp:LinkButton ID="lnkLogin" runat="server" OnClick="btnLogin">Login</asp:LinkButton>
-                        </li>
-                        <li>
                             <asp:LinkButton ID="lnkGoals" runat="server" OnClick="manageGoals_Click">Manage Goals</asp:LinkButton>
                         </li>
                         <%--                        <li>
