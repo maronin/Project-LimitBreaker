@@ -34,6 +34,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 {
                     lnkNotHaveRoutines.Visible = true;
                     ddlRoutines.Visible = false;
+                    tbDate_routine.Enabled = false;
                 }
                 else
                 {

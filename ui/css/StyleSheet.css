@@ -178,7 +178,6 @@ z-index: -1;
     color: white;
     font-weight: bold;
 }
-
 .NextMonth
 {
     text-align: right;
@@ -227,11 +226,6 @@ z-index: -1;
     width: 97.5%;
 }
 .calendarMonthSelector a
-{
-    color: white;
-    font-weight: bold;
-}
-.calendarMonthSelector a span
 {
     color: white;
     font-weight: bold;
