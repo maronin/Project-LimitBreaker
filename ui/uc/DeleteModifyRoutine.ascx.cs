@@ -8,6 +8,7 @@ using System.IO;
 
 public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
 {
+    public int userID { get; set; }
     RadioButtonList rbl;
     SystemExerciseManager sysManager;
     routineManager routManager;
@@ -65,7 +66,7 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         if (rtn != null)
         {
             rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-            rbl.DataSource = routManager.viewRoutines().ToList();
+            rbl.DataSource = routManager.getUsersRoutines(userID).ToList();
             rbl.DataTextField = "name";
             rbl.DataValueField = "id";
             rbl.DataBind();

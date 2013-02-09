@@ -100,7 +100,7 @@
                     <td>&nbsp;</td>
                 </tr>
             </table>
-            <asp:ScriptManager runat="server"></asp:ScriptManager>
+
         </ContentTemplate>
     </asp:UpdatePanel>
 </div>
