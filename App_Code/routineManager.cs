@@ -316,7 +316,7 @@ public class routineManager
         }
     }
 
-    public LoggedExercise createLoggedExercise(int userID, int exerciseID, int sets, DateTime logTime, string note)
+    public LoggedExercise createLoggedExerciseRoutine(int userID, int exerciseID, int routineID, int sets, DateTime logTime, string note)
     {
         using (var context = new Layer2Container())
         {
@@ -325,11 +325,14 @@ public class routineManager
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
                 Exercise ex = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+
                 if (lb != null && ex != null)
                 {
                     
                     rc.LimitBreaker = lb;
                     rc.Exercise = ex;
+                    rc.Routine = rtn;
                     rc.sets = sets;
                     rc.timeLogged = logTime;
                     rc.note = note.Trim();
@@ -409,7 +412,7 @@ public class routineManager
                         le.SetAttributes.Clear();
                         context.LoggedExercises.DeleteObject(le);
                     }                    
-                    context.SaveChanges();
+                    //context.SaveChanges();
                 }
                 rc = true;
             }
@@ -442,7 +445,8 @@ public class routineManager
                 
                 if (rtn != null && lb != null)
                 {
-                    rc = lb.LoggedExercises.Where(x => x.Exercise.Routines.Contains(rtn)).ToList();
+                    //rc = lb.LoggedExercises.Where(x => x.Exercise.Routines.Contains(rtn)).ToList();
+                    rc = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == rtn.id).ToList();
                 }
             }
             catch (NullReferenceException e)

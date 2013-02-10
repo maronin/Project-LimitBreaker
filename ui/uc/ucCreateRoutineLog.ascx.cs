@@ -13,13 +13,14 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
     SystemExerciseManager sysManager;
     routineManager routManager;
     int exerciseID;
+    int routineID;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
         rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-
+        
 
         if (Session["exerciseID"] != null)
         {
@@ -35,6 +36,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         {
             GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
             GridView1.DataBind();
+            routineID = Convert.ToInt32(rbl.SelectedItem.Value);
             //Panel1.Visible = true;
             //Panel1.Enabled = true;
             //Response.Write(rbl.SelectedIndex + " item: " + rbl.SelectedItem);
@@ -75,8 +77,8 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         float distance = (float)Convert.ToDouble(tbDistance.Text.ToString());
         int time = Convert.ToInt32(tbTime.Text.ToString());
         int rep = Convert.ToInt32(tbRep.Text.ToString());
-
-        LoggedExercise le = routManager.createLoggedExercise(userID, exerciseID, sets, logTime, note);
+        
+        LoggedExercise le = routManager.createLoggedExerciseRoutine(userID, exerciseID, routineID, sets, logTime, note);
         if (le != null)
         {
             int loggedExerciseID = Convert.ToInt32(le.id.ToString());

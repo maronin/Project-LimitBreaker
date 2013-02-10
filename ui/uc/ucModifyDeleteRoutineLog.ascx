@@ -34,8 +34,8 @@
             <SortedDescendingCellStyle BackColor="#EAEAD3" />
             <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
-        <h4>Delete Logs</h4>
-        <asp:Button ID="btnDeleteAll" runat="server" Text="Delete All Logs" />
+        <h4>Delete All Logs Within Routine</h4>
+        <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs" />
         <asp:ModalPopupExtender ID="mdeDeleteLoggedExercises" runat="server" TargetControlID="btnDeleteAll" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
         <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" Style="display: none;">
             <p>Are you sure you want to delete all your logged exercises so far?</p>
