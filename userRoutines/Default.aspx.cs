@@ -14,6 +14,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     ui_uc_CreateNewRoutine cnr;
     ui_uc_DeleteModifyRoutine dmr;
     ui_uc_ucCreateRoutineLog crl;
+    ui_uc_ucModifyDeleteRoutineLog mdrl;
     MultiView mvRoutines;
     Panel pnlButtons;
     Button btnBack;
@@ -24,18 +25,25 @@ public partial class userRoutines_Default : System.Web.UI.Page
         manager = new routineManager();
         authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
-        cnr = LoginView1.FindControl("CreateNewRoutine") as ui_uc_CreateNewRoutine;
-        dmr = LoginView1.FindControl("DeleteModifyRoutine") as ui_uc_DeleteModifyRoutine;
-        crl = LoginView1.FindControl("ucCreateRoutineLog") as ui_uc_ucCreateRoutineLog;
-        mvRoutines = LoginView1.FindControl("mvRoutine") as MultiView;
-        pnlButtons = LoginView1.FindControl("pnlButtons") as Panel;
-        btnBack = LoginView1.FindControl("btnBack") as Button;
-        rblRoutines = LoginView1.FindControl("rblRoutines") as RadioButtonList;
+        if (authenticated)
+        {
+            cnr = LoginView1.FindControl("CreateNewRoutine") as ui_uc_CreateNewRoutine;
+            dmr = LoginView1.FindControl("DeleteModifyRoutine") as ui_uc_DeleteModifyRoutine;
+            crl = LoginView1.FindControl("ucCreateRoutineLog") as ui_uc_ucCreateRoutineLog;
+            mdrl = LoginView1.FindControl("ucModifyDeleteRoutineLog") as ui_uc_ucModifyDeleteRoutineLog;
+            mvRoutines = LoginView1.FindControl("mvRoutine") as MultiView;
+            pnlButtons = LoginView1.FindControl("pnlButtons") as Panel;
+            btnBack = LoginView1.FindControl("btnBack") as Button;
+            rblRoutines = LoginView1.FindControl("rblRoutines") as RadioButtonList;
 
+        }
         if (!IsPostBack)
         {
-            pnlButtons.Visible = true;
-            btnBack.Visible = false;
+            if (authenticated)
+            {
+                pnlButtons.Visible = true;
+                btnBack.Visible = false;
+            }
         }
 
         if (authenticated && cnr != null)
@@ -50,7 +58,11 @@ public partial class userRoutines_Default : System.Web.UI.Page
         {
             crl.userID = manager.getUserID(currentUser);
         }
-        
+        if (authenticated && mdrl != null)
+        {
+            mdrl.userID = manager.getUserID(currentUser);
+        }
+
     }
     protected void btnModifyRoutines_Click(object sender, EventArgs e)
     {
@@ -77,7 +89,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
         btnBack.Visible = true;
     }
     protected void btnBack_Click(object sender, EventArgs e)
-    {   
+    {
         /*
         mvRoutines.ActiveViewIndex = -1;
         pnlButtons.Visible = true;

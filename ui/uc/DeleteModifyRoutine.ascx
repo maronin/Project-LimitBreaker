@@ -102,7 +102,7 @@
             <asp:Panel ID="Panel1" runat="server" Enabled="False" Visible="False">
 
 
-                <asp:Button ID="btnDelete" runat="server" CssClass="deleteBtn" Text="Delete Routine" />
+                <asp:Button ID="btnDelete" runat="server" CssClass="deleteBtn" Text="Delete Routine"/>
                 <asp:ModalPopupExtender ID="mdeDeleteRoutine" runat="server" TargetControlID="btnDelete" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
                 <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" style="display:none;">
                     <p>Are you sure you want to delete the routine?</p>
