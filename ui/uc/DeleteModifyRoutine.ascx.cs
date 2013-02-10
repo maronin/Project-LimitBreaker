@@ -108,8 +108,7 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
                 wrtr.Close();
             }
         }
-
-        if (rc)
+        if (rc )
         {
             // redirect page to itself (refresh)
             Response.Redirect(Request.RawUrl);

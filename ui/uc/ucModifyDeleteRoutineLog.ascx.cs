@@ -11,7 +11,7 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
     routineManager routManager;
     RadioButtonList rbl;
     SystemExerciseManager sysManager;
-
+    int routineID;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,17 +20,20 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
         rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
         if (rbl != null && rbl.SelectedIndex > -1)
         {
-            GridView1.DataSource = routManager.getLoggedExercises(userID, Convert.ToInt32(rbl.SelectedItem.Value));
+            routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+            GridView1.DataSource = routManager.getLoggedExercises(userID, routineID);
             GridView1.DataBind();
         }
     }
     protected void okButton_Click(object sender, EventArgs e)
     {
-        bool rc = routManager.deleteLoggedExercises(userID);
+        bool rc = routManager.deleteLoggedExercises(userID, routineID);
         if (rc)
         {
+            GridView1.DataSource = routManager.getLoggedExercises(userID, routineID);
+            GridView1.DataBind();
             // redirect page to itself (refresh)
-            Response.Redirect(Request.RawUrl);
+            //Response.Redirect(Request.RawUrl);
         }
     }
 }

@@ -392,7 +392,7 @@ public class routineManager
         }
     }
 
-    public bool deleteLoggedExercises(int userID)
+    public bool deleteLoggedExercises(int userID, int routineID)
     {
         using (var context = new Layer2Container())
         {
@@ -400,7 +400,7 @@ public class routineManager
             try
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
-                List<LoggedExercise> lelist = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).ToList();
+                List<LoggedExercise> lelist = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == routineID).ToList();
                 if (lb != null)
                 {
                     foreach (LoggedExercise le in lelist)
@@ -412,7 +412,7 @@ public class routineManager
                         le.SetAttributes.Clear();
                         context.LoggedExercises.DeleteObject(le);
                     }                    
-                    //context.SaveChanges();
+                    context.SaveChanges();
                 }
                 rc = true;
             }
