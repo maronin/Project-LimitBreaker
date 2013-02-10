@@ -94,6 +94,12 @@ public partial class Exercise
         set;
     }
 
+    public virtual string description
+    {
+        get;
+        set;
+    }
+
     #endregion
 
     #region Navigation Properties
@@ -1103,6 +1109,21 @@ public partial class LoggedExercise
     }
     private Exercise _exercise;
 
+    public virtual Routine Routine
+    {
+        get { return _routine; }
+        set
+        {
+            if (!ReferenceEquals(_routine, value))
+            {
+                var previousValue = _routine;
+                _routine = value;
+                FixupRoutine(previousValue);
+            }
+        }
+    }
+    private Routine _routine;
+
     #endregion
 
     #region Association Fixup
@@ -1135,6 +1156,22 @@ public partial class LoggedExercise
             if (!Exercise.LoggedExercise.Contains(this))
             {
                 Exercise.LoggedExercise.Add(this);
+            }
+        }
+    }
+
+    private void FixupRoutine(Routine previousValue)
+    {
+        if (previousValue != null && previousValue.LoggedExercises.Contains(this))
+        {
+            previousValue.LoggedExercises.Remove(this);
+        }
+
+        if (Routine != null)
+        {
+            if (!Routine.LoggedExercises.Contains(this))
+            {
+                Routine.LoggedExercises.Add(this);
             }
         }
     }
@@ -1339,6 +1376,38 @@ public partial class Routine
     }
     private ICollection<Exercise> _exercises;
 
+    public virtual ICollection<LoggedExercise> LoggedExercises
+    {
+        get
+        {
+            if (_loggedExercises == null)
+            {
+                var newCollection = new FixupCollection<LoggedExercise>();
+                newCollection.CollectionChanged += FixupLoggedExercises;
+                _loggedExercises = newCollection;
+            }
+            return _loggedExercises;
+        }
+        set
+        {
+            if (!ReferenceEquals(_loggedExercises, value))
+            {
+                var previousValue = _loggedExercises as FixupCollection<LoggedExercise>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupLoggedExercises;
+                }
+                _loggedExercises = value;
+                var newValue = value as FixupCollection<LoggedExercise>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupLoggedExercises;
+                }
+            }
+        }
+    }
+    private ICollection<LoggedExercise> _loggedExercises;
+
     #endregion
 
     #region Association Fixup
@@ -1401,6 +1470,28 @@ public partial class Routine
                 if (item.Routines.Contains(this))
                 {
                     item.Routines.Remove(this);
+                }
+            }
+        }
+    }
+
+    private void FixupLoggedExercises(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (LoggedExercise item in e.NewItems)
+            {
+                item.Routine = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (LoggedExercise item in e.OldItems)
+            {
+                if (ReferenceEquals(item.Routine, this))
+                {
+                    item.Routine = null;
                 }
             }
         }

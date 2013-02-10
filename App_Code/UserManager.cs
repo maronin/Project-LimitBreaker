@@ -81,6 +81,19 @@ public class UserManager
     {
         return foot * 30.48 + inches * 2.54;
     }
+
+    public int getUserID(string username)
+    {
+        using (var context = new Layer2Container())
+        {
+            int rc = -1;
+
+            rc = context.LimitBreakers.Where(x => x.username == username.Trim()).Select(x => x.id).FirstOrDefault();
+
+            return rc;
+        }
+    }
+
     public Statistics getStats(String username)
     {
         using (var context = new Layer2Container())
