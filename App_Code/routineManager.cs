@@ -37,9 +37,9 @@ public class routineManager
             ICollection<Routine> rc;
             //LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
             //if (lb != null)
-                rc = context.Routines.Where(x => x.LimitBreaker.id == userID).ToList();
+            rc = context.Routines.Where(x => x.LimitBreaker.id == userID).ToList();
             //else
-                //rc = null;
+            //rc = null;
 
             return rc;
         }
@@ -147,7 +147,7 @@ public class routineManager
                 {
                     // clear dependencies
                     rtn.Exercises.Clear();
-                    
+
                     foreach (ScheduledRoutine sr in srList.ToList())
                         context.ScheduledRoutines.DeleteObject(sr);
                     rtn.ScheduledRoutines.Clear();
@@ -311,6 +311,155 @@ public class routineManager
             int rc = -1;
 
             rc = context.LimitBreakers.Where(x => x.username == username.Trim()).Select(x => x.id).FirstOrDefault();
+
+            return rc;
+        }
+    }
+
+    public LoggedExercise createLoggedExerciseRoutine(int userID, int exerciseID, int routineID, int sets, DateTime logTime, string note)
+    {
+        using (var context = new Layer2Container())
+        {
+            LoggedExercise rc = new LoggedExercise();
+            try
+            {
+                LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
+                Exercise ex = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+
+                if (lb != null && ex != null)
+                {
+                    
+                    rc.LimitBreaker = lb;
+                    rc.Exercise = ex;
+                    rc.Routine = rtn;
+                    rc.sets = sets;
+                    rc.timeLogged = logTime;
+                    rc.note = note.Trim();
+
+                    context.LoggedExercises.AddObject(rc);
+                    context.SaveChanges();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+            return rc;
+        }
+    }
+
+    public SetAttributes createSetAttributes(int loggedExerciseID, int weight, float distance, int time, int rep)
+    {
+        using (var context = new Layer2Container())
+        {
+            SetAttributes rc = new SetAttributes();
+            try
+            {
+                LoggedExercise le = context.LoggedExercises.Where(x => x.id == loggedExerciseID).FirstOrDefault();
+
+                if (le != null)
+                {
+                    rc.LoggedExercise = le;
+                    rc.weight = weight;
+                    rc.distance = distance;
+                    rc.time = time;
+                    rc.reps = rep;
+
+                    context.SetAttributes.AddObject(rc);
+                    context.SaveChanges();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+            return rc;
+        }
+    }
+
+    public bool deleteLoggedExercises(int userID, int routineID)
+    {
+        using (var context = new Layer2Container())
+        {
+            bool rc = false;
+            try
+            {
+                LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
+                List<LoggedExercise> lelist = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == routineID).ToList();
+                if (lb != null)
+                {
+                    foreach (LoggedExercise le in lelist)
+                    {
+                        foreach (SetAttributes sa in le.SetAttributes.ToList())
+                        {
+                            context.SetAttributes.DeleteObject(sa);
+                        }
+                        le.SetAttributes.Clear();
+                        context.LoggedExercises.DeleteObject(le);
+                    }                    
+                    context.SaveChanges();
+                }
+                rc = true;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+
+            return rc;
+        }
+    }
+
+    public ICollection<LoggedExercise> getLoggedExercises(int userID, int routineID)
+    {
+        using (var context = new Layer2Container())
+        {
+            ICollection<LoggedExercise> rc = new List<LoggedExercise>();
+
+            try
+            {
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
+                
+                if (rtn != null && lb != null)
+                {
+                    //rc = lb.LoggedExercises.Where(x => x.Exercise.Routines.Contains(rtn)).ToList();
+                    rc = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == rtn.id).ToList();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
 
             return rc;
         }
