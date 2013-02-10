@@ -73,7 +73,7 @@
                             <asp:Label ID="Label4" runat="server" Text="Distance"></asp:Label>
                             <br />
                             <asp:TextBox ID="tbDistance" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbDistance" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbDistance" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]([\.][0-9]{1,3})?$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
                         </td>
                         <td>
                             <asp:Label ID="Label2" runat="server" Text="Time Logged"></asp:Label>
@@ -114,7 +114,6 @@
                 <asp:Button ID="btnLog" runat="server" Text="Save" OnClick="btnLog_Click" ValidationGroup="SaveLog"/>
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
-                Info Stuf
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>

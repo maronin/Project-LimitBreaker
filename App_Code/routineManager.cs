@@ -325,9 +325,9 @@ public class routineManager
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
                 Exercise ex = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
-
                 if (lb != null && ex != null)
                 {
+                    
                     rc.LimitBreaker = lb;
                     rc.Exercise = ex;
                     rc.sets = sets;
@@ -335,7 +335,7 @@ public class routineManager
                     rc.note = note.Trim();
 
                     context.LoggedExercises.AddObject(rc);
-                    //context.SaveChanges();
+                    context.SaveChanges();
                 }
             }
             catch (NullReferenceException e)
@@ -353,26 +353,25 @@ public class routineManager
         }
     }
 
-    public SetAttributes createSetAttributes()
+    public SetAttributes createSetAttributes(int loggedExerciseID, int weight, float distance, int time, int rep)
     {
         using (var context = new Layer2Container())
         {
             SetAttributes rc = new SetAttributes();
             try
             {
-                LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
-                Exercise ex = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
+                LoggedExercise le = context.LoggedExercises.Where(x => x.id == loggedExerciseID).FirstOrDefault();
 
-                if (lb != null && ex != null)
+                if (le != null)
                 {
-                    rc.LimitBreaker = lb;
-                    rc.Exercise = ex;
-                    rc.sets = sets;
-                    rc.timeLogged = logTime;
-                    rc.note = note.Trim();
+                    rc.LoggedExercise = le;
+                    rc.weight = weight;
+                    rc.distance = distance;
+                    rc.time = time;
+                    rc.reps = rep;
 
-                    context.LoggedExercises.AddObject(rc);
-                    //context.SaveChanges();
+                    context.SetAttributes.AddObject(rc);
+                    context.SaveChanges();
                 }
             }
             catch (NullReferenceException e)

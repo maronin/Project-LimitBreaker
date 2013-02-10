@@ -19,9 +19,16 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
         rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
+
+
+        if (Session["exerciseID"] != null)
+        {
+            exerciseID = (int)Session["exerciseID"];
+        }
+
         if (!IsPostBack)
         {
-
+            Session.Abandon();
             init();
         }
         if (rbl != null && rbl.SelectedIndex > -1)
@@ -49,6 +56,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         if (e.CommandName == "log")
         {
             exerciseID = Convert.ToInt32(e.CommandArgument.ToString());
+            Session["exerciseID"] = exerciseID;
             pnlExerciseDetails.Visible = true;
             ltlExerciseName.Text = "<h4>" + sysManager.getExerciseInfo(exerciseID).name + "</h4>";
             checkEnabled();
@@ -57,19 +65,27 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
 
     protected void btnLog_Click(object sender, EventArgs e)
     {
+        exerciseID = Session["exerciseID"] != null ? (int)Session["exerciseID"] : -1;
         //pnlExerciseDetails.Visible = false;
         pnlInfo.Visible = true;
         int sets = Convert.ToInt32(tbSets.Text.ToString());
         string note = tbNotes.Text.Trim();
         DateTime logTime = Convert.ToDateTime(tbTimeLogged.Text.ToString());
-        //DateTime logTime = DateTime.Now;
+        int weight = Convert.ToInt32(tbWeight.Text.ToString());
+        float distance = (float)Convert.ToDouble(tbDistance.Text.ToString());
+        int time = Convert.ToInt32(tbTime.Text.ToString());
+        int rep = Convert.ToInt32(tbRep.Text.ToString());
+
         LoggedExercise le = routManager.createLoggedExercise(userID, exerciseID, sets, logTime, note);
         if (le != null)
         {
-
+            int loggedExerciseID = Convert.ToInt32(le.id.ToString());
+            SetAttributes sa = routManager.createSetAttributes(loggedExerciseID, weight, distance, time, rep);
         }
 
         clearAll();
+
+        Response.Redirect(Request.RawUrl);
     }
 
     public void init()
@@ -95,6 +111,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
 
     public void checkEnabled()
     {
+        exerciseID = Session["exerciseID"] != null ? (int)Session["exerciseID"] : -1;
         Exercise ex = sysManager.getExerciseInfo(exerciseID);
 
         tbWeight.Enabled = ex.weight;
