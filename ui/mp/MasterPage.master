@@ -21,54 +21,17 @@
     <link rel="stylesheet" href="/resources/demos/style.css" />
     <link href="../css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
-
-        //exericse
-        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-            $('#CalImage').click(function () {
-                $('#CalBlock').slideToggle("fast");
-
-            });
-        });
-        //routine
-        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-            $('#CalImage2').click(function () {
-                $('#CalBlock2').slideToggle("fast");
-
-            });
-        });
-
-        $(document).ready(function () {
-            // set up our datepicker  
-            $("#simple-date").datepicker();
-        });
-
         function EndRequestHandler(sender, args) {
             if (args.get_error() == undefined)
                 ;
             else
                 alert("There was an error" + args.get_error().message);
         }
-        function load() {
-            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-                $('#CalImage').click(function () {
-                    $('#CalBlock').slideToggle("slow");
-                });
-            });
-
-            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-                $('#CalImage2').click(function () {
-                    $('#CalBlock2').slideToggle("slow");
-                });
-            });
-        }
-
-
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="load()">
+<body>
     <form id="form1" runat="server">
     <div id="page">
         <div id="login">
