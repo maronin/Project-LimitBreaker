@@ -4,7 +4,22 @@
 }
 
 
+#login
+{
+padding: 0px 0px 0px 0px;
+top: -54px;
+float: right;
+z-index: 10;
+right: 0%;
+position: relative;
 
+}
+
+#login a
+{
+    text-decoration: underline;
+    color: rgb(204, 204, 204);
+}
 
 #header
 {
@@ -144,6 +159,39 @@ newExerciseForm, tr, td
 {
     text-align: center;
 }
+.buttonGo
+{
+    text-decoration: none;
+    color: #000000;
+    font-size: large;
+}
+
+.PrevMonth
+{
+    float: left;
+    text-align: left;
+    z-index: 0;
+}
+
+.today
+{
+margin: 0 auto;
+text-align: center;
+z-index: -1;
+}
+
+.today span
+{
+    color: white;
+    font-weight: bold;
+}
+.NextMonth
+{
+    text-align: right;
+    float: right;
+    z-index: 10;
+}
+
 #week
 {
     width: 100%;
@@ -200,13 +248,13 @@ newExerciseForm, tr, td
     float: left;
     height: 125px;
     overflow-y: scroll;
-scrollbar-face-color: #000000;
-scrollbar-shadow-color: #2D2C4D;
-scrollbar-highlight-color:#7D7E94;
-scrollbar-3dlight-color: #7D7E94;
-scrollbar-darkshadow-color: #2D2C4D;
-scrollbar-track-color: #7D7E94;
-scrollbar-arrow-color: #C1C1D1;
+    scrollbar-face-color: #000000;
+    scrollbar-shadow-color: #2D2C4D;
+    scrollbar-highlight-color: #7D7E94;
+    scrollbar-3dlight-color: #7D7E94;
+    scrollbar-darkshadow-color: #2D2C4D;
+    scrollbar-track-color: #7D7E94;
+    scrollbar-arrow-color: #C1C1D1;
 }
 .event
 {
@@ -250,16 +298,13 @@ scrollbar-arrow-color: #C1C1D1;
 .loadingCalendar
 {
     position: absolute;
-
     width: 50%;
-    left:25%;
+    left: 25%;
     text-align: center;
     top: 60%;
-    background: rgb(54, 25, 25); /* Fall-back for browsers that don't
-                               support rgba */
+    background: rgb(54, 25, 25); /* Fall-back for browsers that don't                                support rgba */
     background: rgba(128, 128, 128, .5);
     color: #000000;
-
 }
 .loadingCalendar h1
 {

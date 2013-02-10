@@ -1,9 +1,10 @@
-﻿﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="ui_mp_MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs"
+    Inherits="ui_mp_MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Project LimitBreaker</title>
+    <titleProject LimitBreaker</title>
     <link href="../css/StyleSheet.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     <link href="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/css/redmond/jquery-ui-1.8.2.custom.css"
@@ -20,62 +21,60 @@
     <link rel="stylesheet" href="/resources/demos/style.css" />
     <link href="../css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
-
-        //exericse
-        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-            $('#CalImage').click(function () {
-                $('#CalBlock').slideToggle("fast");
-
-            });
-        });
-        //routine
-        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-            $('#CalImage2').click(function () {
-                $('#CalBlock2').slideToggle("fast");
-
-            });
-        });
-
-        $(document).ready(function () {
-            // set up our datepicker  
-            $("#simple-date").datepicker();
-        });
-
         function EndRequestHandler(sender, args) {
             if (args.get_error() == undefined)
                 ;
             else
                 alert("There was an error" + args.get_error().message);
         }
-        function load() {
-            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-                $('#CalImage').click(function () {
-                    $('#CalBlock').slideToggle("slow");
-                });
-            });
-
-            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-                $('#CalImage2').click(function () {
-                    $('#CalBlock2').slideToggle("slow");
-                });
-            });
-        }
-
-
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="load()">
+<body>
     <form id="form1" runat="server">
     <div id="page">
+        <div id="login">
+            <asp:LoginView ID="LoginView1" runat="server">
+                <AnonymousTemplate>
+                    <asp:Login ID="Login1" runat="server" Orientation="Horizontal" RenderOuterTable="False"
+                        FailureText="Wrong Username or Password">
+                        <LayoutTemplate>
+                        <asp:panel runat="server" ID="submit" defaultButton="LoginButton">
+                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
+                                ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="ctl00$Login1"
+                                ForeColor="White">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" ForeColor="White">User Name:</asp:Label>
+                            <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
+                                ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="ctl00$Login1"
+                                ForeColor="White">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" ForeColor="White">Password:</asp:Label>
+                            <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
+                            <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" 
+                                ValidationGroup="ctl00$Login1" Height="25px" Width="65px" />
+                            <%--Note: The Literal Control is used here to display an error message that a log in control throws into the FailureText. By Default it is disabled--%>
+                            <br />
+                            <span style="color: #FFFFFF; float: right;">
+                                <asp:Literal ID="FailureText" runat="server" EnableViewState="False" />
+                            </span>
+                            </asp:panel>
+                        </LayoutTemplate>
+                    </asp:Login>
+                </AnonymousTemplate>
+                <LoggedInTemplate>
+                    <asp:Label ID="lblLoggedInAs" runat="server" Text="" ForeColor="White" >Logged in as:</asp:Label>
+                    <asp:LoginName ID="LoginName1" runat="server" ForeColor="#FFFF99" />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server"/>
+                </LoggedInTemplate>
+            </asp:LoginView>
+        </div>
         <div id="header">
             <div class="background">
                 <h1 id="logo">
-                    <a href="index.html">Project LimitBreaker</a>
+                    <asp:LinkButton ID="lnkHome" runat="server" onclick="lnkHome_Click">Project LimitBreaker</asp:LinkButton>
                 </h1>
-                <div id="navigation">          
+                <div id="navigation">
                     <ul>
                         <li>
                             <asp:LinkButton ID="lnkSysExercises" runat="server" OnClick="btnManageSysExercise_Click">System Exercises</asp:LinkButton>
@@ -93,13 +92,9 @@
                             <asp:LinkButton ID="lnkUser" runat="server" OnClick="btnCreateUser">Create User</asp:LinkButton>
                         </li>
                         <li>
-                            <asp:LinkButton ID="lnkLogin" runat="server" OnClick="btnLogin">Login</asp:LinkButton>
-                        </li>
-
-                         <li>
                             <asp:LinkButton ID="lnkGoals" runat="server" OnClick="manageGoals_Click">Manage Goals</asp:LinkButton>
                         </li>
-<%--                        <li>
+                        <%--                        <li>
                             <asp:LinkButton ID="LinkButton6" runat="server">LinkButton</asp:LinkButton>
                         </li>--%>
                     </ul>
@@ -115,7 +110,7 @@
         <div id="footer">
             <div class="background">
                 <div class="body">
-                   <%-- <form action="index.html" method="post" id="message" class="section">
+                    <%-- <form action="index.html" method="post" id="message" class="section">
                     <h3>
                         Send a Message</h3>
                     <ul>
@@ -140,7 +135,7 @@
                     </ul>
                     </form>--%>
                     <div class="section">
-<%--                        <h3>
+                        <%--                        <h3>
                             Contact Details</h3>
                         <ul>
                             <li><span>Location</span><strong>:</strong>

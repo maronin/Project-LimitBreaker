@@ -100,4 +100,72 @@ public class GoalManager
                 return ""; 
         }
     }
+
+    public Exercise getExerciseWithinGoal(string userName, string exerciseName)
+    {
+        using (var context = new Layer2Container())
+        {
+            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+
+            if (eg != null)
+            {
+                Exercise ex = eg.Exercise;
+                return ex;
+            }
+            else
+                return null;
+        }
+    }
+
+    public bool modifyExerciseGoalByExerciseNameAndUserName(string userName, string exerciseName, int time, double distance, int weight, int reps)
+    {
+        bool rc = false;
+
+        try
+        {
+            using (var context = new Layer2Container())
+            {
+                ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+
+                eg.time = time;
+                eg.distance = distance;
+                eg.weight = weight;
+                eg.reps = reps;
+
+                context.SaveChanges();
+                rc = true;
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+        }
+
+        return rc;
+    }
+
+    public bool deleteExerciseGoalByExerciseNameAndUserName(string userName, string exerciseName)
+    {
+        bool rc = false;
+
+        try
+        {
+            using (var context = new Layer2Container())
+            {
+                ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+
+                context.ExerciseGoals.DeleteObject(eg);
+                context.SaveChanges();
+                rc = true;
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+        }
+
+        return rc;
+    }
 }
