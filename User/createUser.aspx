@@ -45,8 +45,8 @@
                             ControlToValidate="password" ForeColor="Red" ValidationGroup="createUser" 
                             Display="Dynamic">Password required</asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
-                            ErrorMessage="Please enter a longer password. Min 5 characters" ForeColor="Red"
-                            ValidationExpression="^[a-zA-Z0-9]{5,}$" Display="Dynamic" 
+                            ErrorMessage="Please enter a password with a number that is at least 5 characters in length" ForeColor="Red"
+                            ValidationExpression="^(?=.*\d)(?=.*[a-zA-Z]).{5,}$" Display="Dynamic" 
                             ControlToValidate="password" ValidationGroup="createUser" ></asp:RegularExpressionValidator></td>
                 </tr>
                 <tr>
