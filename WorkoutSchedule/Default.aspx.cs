@@ -40,6 +40,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 {
                     lnkNotHaveRoutines.Visible = false;
                     ddlRoutines.Visible = true;
+                    tbDate_routine.Enabled = true;
                 }
 
             
