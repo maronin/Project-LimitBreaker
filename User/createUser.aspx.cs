@@ -12,7 +12,7 @@ public partial class User_createUser : System.Web.UI.Page
     UserManager manager = new UserManager();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (User.Identity.Name=="")
+        if (User.Identity.Name == "")
         {
             DropDownList birthday = ((DropDownList)LoginView1.FindControl("birthdayYear"));
             ListItem year;
@@ -52,6 +52,7 @@ public partial class User_createUser : System.Web.UI.Page
             switch (success)
             {
                 case 0:
+                    manager.updateRMR(userName);
                     System.Web.Security.MembershipCreateStatus status;
                     System.Web.Security.Membership.CreateUser(userName, password, email, "none", "none", true, out status);
                     System.Web.Security.Roles.AddUserToRole(userName, "user");
@@ -59,14 +60,14 @@ public partial class User_createUser : System.Web.UI.Page
                     Response.Redirect("profile.aspx");
                     break;
                 case 1:
-                    
-                    creationStatus.Visible=true;
-                    creationStatus.Text="It brokerz";
+
+                    creationStatus.Visible = true;
+                    creationStatus.Text = "It brokerz";
                     break;
                 case 2:
 
-                    creationStatus.Visible=true;
-                    creationStatus.Text="Username or email already exists";
+                    creationStatus.Visible = true;
+                    creationStatus.Text = "Username or email already exists";
                     break;
 
             }
@@ -75,6 +76,6 @@ public partial class User_createUser : System.Web.UI.Page
         {
             ((Label)LoginView1.FindControl("tosValidator")).Visible = true;
         }
-        
+
     }
 }

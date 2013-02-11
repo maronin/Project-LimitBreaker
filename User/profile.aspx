@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <h1>Welcome LimitBreaker</h1>
-    
+    <h2>User Profile</h2>
     <table>
         <tr>
             <td>Alias:</td>

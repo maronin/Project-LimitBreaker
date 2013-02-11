@@ -29,7 +29,7 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                rmr.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                rmr.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
             if (tempBmi > 1)
             {
@@ -37,7 +37,7 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                bmi.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                bmi.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
             if (tempVmax > 1)
             {
@@ -45,7 +45,7 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                vmax.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                vmax.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
         }
         else
