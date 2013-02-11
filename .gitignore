@@ -4,4 +4,5 @@ ASPNETDB.MDF
 *.log
 ASPNETDB.MDF
 aspnetdb_log.ldf
-
+assets/
+*.sln
