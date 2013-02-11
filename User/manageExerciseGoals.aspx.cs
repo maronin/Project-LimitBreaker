@@ -67,9 +67,9 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 
     protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
     {
-        loadExerciseGoals();
         deleteGoalResultLbl.Text = "";
         modifyGoalResultlbl.Text = "";
+        loadExerciseGoals();
     }
 
     protected void userGoalsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -177,10 +177,31 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
     }
 
+    protected void achievedRbl_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        deleteGoalResultLbl.Text = "";
+        modifyGoalResultlbl.Text = "";
+        loadExerciseGoals();
+    }
+
     //page data loading functions
     public void loadExerciseGoals()
     {
-        List<ExerciseGoal> goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
+        List<ExerciseGoal> goalSet;
+
+        if (Convert.ToInt32(achievedRbl.SelectedValue) == 0)
+        {
+            goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
+            updateGoalbtn.Visible = true;
+            deleteGoalBtn.Visible = true;
+        }
+        else
+        {
+            goalSet = goalMngr.getAchievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
+            updateGoalbtn.Visible = false;
+            deleteGoalBtn.Visible = false;
+        }
+
         userGoalsListBox.Items.Clear();
 
         foreach (ExerciseGoal ex in goalSet)
@@ -190,9 +211,15 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 
         if (userGoalsListBox.Items.Count > 0)
         {
+            noAchievedPanel.Visible = true;
             resetGoalView();
             userGoalsListBox.SelectedIndex = 0;
             loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+        }
+        else if (userGoalsListBox.Items.Count == 0 && Convert.ToInt32(achievedRbl.SelectedValue) == 1)
+        {
+            noAchievedPanel.Visible = false;
+            deleteGoalResultLbl.Text = "You do not have achieved exercise goals yet";
         }
         else
             exerciseGoalMultiView.ActiveViewIndex = 1;
@@ -303,7 +330,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                     goalRepsTxtBox.Text = "0";
                 }
 
-
+                //CHANGE THIS SO IT IS FOR UNACHIEVED EXERCISES
                 if (goalMngr.getExerciseNameWithinGoal(userName, exercise.name) == exercise.name)
                 {
                     saveNewGoalBtn.Enabled = false;

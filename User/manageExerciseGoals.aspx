@@ -145,12 +145,21 @@
                 <asp:ListItem Selected="True" Value="0">Name</asp:ListItem>
                 <asp:ListItem Value="1">ID</asp:ListItem>
             </asp:RadioButtonList>
+            
+            <asp:RadioButtonList ID="achievedRbl" runat="server" 
+                RepeatDirection="Horizontal" TextAlign="Left" AutoPostBack="True" Width="230"
+                onselectedindexchanged="achievedRbl_SelectedIndexChanged">
+                <asp:ListItem Selected="True" Value="0">Unachieved</asp:ListItem>
+                <asp:ListItem Value="1">Achieved</asp:ListItem>
+            </asp:RadioButtonList>
             <asp:ListBox ID="userGoalsListBox" runat="server" AutoPostBack="True" 
                 Height="400px" Width="230px" 
                 onselectedindexchanged="userGoalsListBox_SelectedIndexChanged"></asp:ListBox>
-        </div> 
+        </div>
+
         
         <div style="padding: 10px; width: 60%; margin: 0px auto 0px auto">
+        <asp:Panel ID="noAchievedPanel" runat="server">
         <table>
             <tr>
                 <td class="style1">
@@ -312,10 +321,12 @@
                 </td>
             </tr>
         </table>
+        </asp:Panel>
         <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
         <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
         </div> 
         
+
         </asp:View>
 
     </asp:MultiView>
