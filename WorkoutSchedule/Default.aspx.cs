@@ -127,6 +127,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
         }
 
+        if (dt.Date == DateTime.Today)
+            pnl_calendarDay.BackColor = Color.LightCoral;
+
         lnk_dayLink.CssClass = "date";
 
         routine = scheduleManager.getRoutines();
