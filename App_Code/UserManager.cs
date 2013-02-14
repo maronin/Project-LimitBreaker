@@ -141,4 +141,30 @@ public class UserManager
             context.SaveChanges();
         }
     }
+
+    public void updateBMI(String username)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+            context.LoadProperty(user, "Statistics");
+
+            user.Statistics.bmi = (user.Statistics.weight * 0.4535) / Math.Pow(user.Statistics.height / 100, 2); 
+
+            context.SaveChanges();
+        }
+    }
+
+    public void updateWeight(String username, Int32 newWeight)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+            context.LoadProperty(user, "Statistics");
+
+            user.Statistics.weight = newWeight;
+
+            context.SaveChanges();
+        }
+    }
 }

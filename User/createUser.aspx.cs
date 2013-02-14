@@ -53,6 +53,7 @@ public partial class User_createUser : System.Web.UI.Page
             {
                 case 0:
                     manager.updateRMR(userName);
+                    manager.updateBMI(userName);
                     System.Web.Security.MembershipCreateStatus status;
                     System.Web.Security.Membership.CreateUser(userName, password, email, "none", "none", true, out status);
                     System.Web.Security.Roles.AddUserToRole(userName, "user");
