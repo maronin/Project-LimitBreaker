@@ -46,7 +46,7 @@ public partial class User_createUser : System.Web.UI.Page
             DateTime birthday = new DateTime(Convert.ToInt32(birthdayYear), Convert.ToInt32(birthdayMonth), Convert.ToInt32(birthdayDay));
             Double height = manager.convertHeightToMetric(Convert.ToDouble(tempFoot), tempInch);
 
-            int success = manager.createNewLimitBreaker(userName, email, gender, birthday, Convert.ToInt32(weight), height);
+            int success = manager.createNewLimitBreaker(userName, email, gender, birthday, Convert.ToDouble(weight), height);
             Label creationStatus = ((Label)LoginView1.FindControl("creationStatus"));
 
             switch (success)
