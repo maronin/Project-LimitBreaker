@@ -9,13 +9,16 @@
             height: 20px;
             width: 20px;
         }
-        .style1
+        .rowWidth
         {
-            width: 38%;
+            vertical-align:top;
+            width: 100px;
+            height:100px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
             <p>
@@ -120,24 +123,18 @@
                                     <h3>
                                         Schedule a new Exercise!</h3>
                                     <br />
-                                    <table class="scheduleTable">
+                                    <table class="scheduleTable2">
                                         <tr>
-                                            <td>
-                                                Step 1. Select an exercise:
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="dllExercises" runat="server" DataSourceID="ObjectDataSource3"
-                                                    DataTextField="name" DataValueField="id">
+                                            <td colspan="2">
+                                            <h5>Exercise Name:</h5>
+                                                <asp:DropDownList ID="ddlExercises" runat="server" AppendDataBoundItems="True" DataSourceID="ObjectDataSource3"
+                                                    DataTextField="name" DataValueField="id" AutoPostBack="True" CssClass="select"  onselectedindexchanged="dllExercises_SelectedIndexChanged">
                                                 </asp:DropDownList>
-                                            </td>
-                                            <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
-                                                TypeName="ExerciseManager"></asp:ObjectDataSource>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Step 2. Select Start Time:
+                                                <asp:HyperLink ID="lblExerciseVideo" runat="server">[Video]</asp:HyperLink>
+
                                             </td>
                                             <td>
+                                                Time:
                                                 <asp:DropDownList ID="ddlHours_exercise" runat="server">
                                                     <asp:ListItem>1</asp:ListItem>
                                                     <asp:ListItem>2</asp:ListItem>
@@ -172,12 +169,17 @@
                                                     <asp:ListItem>PM</asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
+                                            <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
+                                                TypeName="ExerciseManager"></asp:ObjectDataSource>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                Step 3. Select Start Date:
+                                        <tr class="description">
+                                            <td colspan="2">
+                                                <h5>Description:</h5>
+                                                <br />
+                                                <asp:Label ID="lblExerciseDescription" runat="server" Text="None"></asp:Label>
                                             </td>
                                             <td>
+                                                Date
                                                 <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderExercise" runat="server"
                                                     TargetControlID="tbDate_exercise" FilterType="Custom" ValidChars='()1234567890-/'>
                                                 </asp:FilteredTextBoxExtender>
@@ -194,12 +196,34 @@
                                                 </asp:CalendarExtender>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="rowWidth">
+                                               <h5>Equipment</h5>
+                                                <br />
+                                                <asp:Label ID="lblExerciseEquipment" runat="server" Text=""></asp:Label>
+                                            </td>
+                                            <td class="rowWidth">
+                                               <h5>MuscleGroups</h5>
+                                                <br />
+                                               <asp:Label ID="lblExerciseMuscleGroups" runat="server" Text=""></asp:Label>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="1">
+                                                <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
+                                                    CssClass="button" />
+                                            </td>
+                                            <td class="rowWidth">
+                                            </td>
+                                            <td>
+                                                <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
+                                                    CssClass="button" ValidationGroup="ScheduleExercise" />
+                                            </td>
+                                        </tr>
                                     </table>
-                                    <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
-                                        CssClass="button" ValidationGroup="ScheduleExercise" />
                                     <br />
-                                    <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
-                                        CssClass="button" />
                                     <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
                                 </asp:View>
                                 <asp:View ID="View1" runat="server">

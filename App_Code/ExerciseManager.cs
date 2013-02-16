@@ -90,4 +90,16 @@ public class ExerciseManager
 
         return result;
     }
+
+    public String[] splitMuscleGroups(String muscleGroups)
+    {
+        String[] rc = new String[0];
+
+        rc = muscleGroups.Split(null);
+
+        for (int i = 0; i < rc.Length; i++)
+            rc[i] = rc[i].Trim();
+
+        return rc;
+    }
 }

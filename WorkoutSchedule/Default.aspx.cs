@@ -30,20 +30,20 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (authenticated && userID != -1)
         {
             DropDownList ddlRoutines = (DropDownList)LoginView1.FindControl("ddlRoutines");
-                if (ddlRoutines.Items.Count == 0)
-                {
-                    lnkNotHaveRoutines.Visible = true;
-                    ddlRoutines.Visible = false;
-                    tbDate_routine.Enabled = false;
-                }
-                else
-                {
-                    lnkNotHaveRoutines.Visible = false;
-                    ddlRoutines.Visible = true;
-                    tbDate_routine.Enabled = true;
-                }
+            if (ddlRoutines.Items.Count == 0)
+            {
+                lnkNotHaveRoutines.Visible = true;
+                ddlRoutines.Visible = false;
+                tbDate_routine.Enabled = false;
+            }
+            else
+            {
+                lnkNotHaveRoutines.Visible = false;
+                ddlRoutines.Visible = true;
+                tbDate_routine.Enabled = true;
+            }
 
-            
+
             if (!IsPostBack)
             {
                 MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
@@ -54,6 +54,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 populateUserRoutines();
                 exercises.ForeColor = Color.DarkViolet;
                 routines.ForeColor = Color.Red;
+                ddlExercises.Items.Insert(0, new ListItem("Select an exercise...", "NONE"));
+                ddlExercises.SelectedIndex = 0;
+                populateExerciseInfo();
+
             }
         }
 
@@ -342,7 +346,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(dllExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
+        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(ddlExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
             lblResult_Exercise.Text = "Successfuly scheduled your routine!";
@@ -388,4 +392,53 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         Response.Redirect("~/userRoutines/Default.aspx");
     }
+
+    protected void populateExerciseInfo()
+    {
+        lblExerciseEquipment.Text = "";
+        lblExerciseMuscleGroups.Text = "";
+        lblExerciseVideo.Text = "[Video]";
+        if (ddlExercises.SelectedValue != "NONE")
+        {
+            Exercise exercise = exerciseManager.getExerciseById(Convert.ToInt32(ddlExercises.SelectedValue));
+            lblExerciseEquipment.Text = exercise.equipment;
+
+            if (exercise.description == null)
+            {
+                lblExerciseDescription.Text = "None";
+            }
+            else
+            {
+                lblExerciseDescription.Text = exercise.description;
+            }
+
+
+
+            lblExerciseVideo.NavigateUrl = exercise.videoLink;
+
+
+            String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
+
+
+            foreach (var item in muscles)
+            {
+                if (item != "")
+                    lblExerciseMuscleGroups.Text += "- " + item + "<br/>";
+            }
+        }
+        else
+        {
+            lblExerciseEquipment.Text = "";
+            lblExerciseMuscleGroups.Text = "";
+            lblExerciseVideo.Text = "";
+            lblExerciseDescription.Text = "";
+        }
+    }
+
+    protected void dllExercises_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        populateExerciseInfo();
+
+    }
+
 }
