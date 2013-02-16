@@ -108,24 +108,56 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             Exercise ex = goalMngr.getExerciseWithinGoal(userName, userGoalsListBox.SelectedValue);
 
             if (ex.time)
+            {
                 modGoalTimePanel.Visible = true;
+                NumericUpDownExtender5.Minimum = 1;
+                RegularExpressionValidator5.ValidationExpression = "^[1-9][0-9]*$";
+            }
             else
+            {
                 modGoalTimePanel.Visible = false;
+                NumericUpDownExtender5.Minimum = 0;
+                RegularExpressionValidator5.ValidationExpression = "[0-9]+";
+            }
 
             if (ex.distance)
+            {
                 modGoalDistancePanel.Visible = true;
+                NumericUpDownExtender6.Minimum = 0.1;
+                RegularExpressionValidator7.ValidationExpression = "^[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$";
+            }
             else
+            {
                 modGoalDistancePanel.Visible = false;
+                NumericUpDownExtender6.Minimum = 0;
+                RegularExpressionValidator7.ValidationExpression = "[0-9]+([\\.][0-9]{1,3})?$";
+            }
 
             if (ex.weight)
+            {
                 modGoalWeightPanel.Visible = true;
+                NumericUpDownExtender7.Minimum = 1;
+                RegularExpressionValidator6.ValidationExpression = "^[1-9][0-9]*$";
+            }
             else
+            {
                 modGoalWeightPanel.Visible = false;
+                NumericUpDownExtender7.Minimum = 0;
+                RegularExpressionValidator6.ValidationExpression = "[0-9]+";
+            }
 
             if (ex.rep)
+            {
                 modGoalRepsPanel.Visible = true;
+                NumericUpDownExtender8.Minimum = 1;
+                RegularExpressionValidator8.ValidationExpression = "^[1-9][0-9]*$";
+            }
             else
+            {
                 modGoalRepsPanel.Visible = false;
+                NumericUpDownExtender8.Minimum = 0;
+                RegularExpressionValidator8.ValidationExpression = "[0-9]+";
+            }
 
             exerciseNameLbl.Text = userGoalsListBox.SelectedValue;
             modGoalTimeTxtBox.Text = (eg.time/60).ToString();
@@ -281,53 +313,69 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 {
                     goalTimeTxtBox.Enabled = true;
                     NumericUpDownExtender1.Enabled = true;
-                    goalTimeTxtBox.Text = "0";
+                    NumericUpDownExtender1.Minimum = 1;
+                    goalTimeTxtBox.Text = "1";
+                    RegularExpressionValidator1.ValidationExpression = "^[1-9][0-9]*$";
                 }
                 else
                 {
                     goalTimeTxtBox.Enabled = false;
                     NumericUpDownExtender1.Enabled = false;
+                    NumericUpDownExtender1.Minimum = 0;
                     goalTimeTxtBox.Text = "0";
+                    RegularExpressionValidator1.ValidationExpression = "[0-9]+";
                 }
 
                 if (exercise.weight)
                 {
                     goalWeightTxtBox.Enabled = true;
                     NumericUpDownExtender2.Enabled = true;
-                    goalWeightTxtBox.Text = "0";
+                    NumericUpDownExtender2.Minimum = 1;
+                    goalWeightTxtBox.Text = "1";
+                    RegularExpressionValidator2.ValidationExpression = "^[1-9][0-9]*$";
                 }
                 else
                 {
                     goalWeightTxtBox.Enabled = false;
                     NumericUpDownExtender2.Enabled = false;
+                    NumericUpDownExtender2.Minimum = 0;
                     goalWeightTxtBox.Text = "0";
+                    RegularExpressionValidator2.ValidationExpression = "[0-9]+";
                 }
 
                 if (exercise.distance)
                 {
                     goalDistanceTxtBox.Enabled = true;
                     NumericUpDownExtender3.Enabled = true;
-                    goalDistanceTxtBox.Text = "0";
+                    NumericUpDownExtender3.Minimum = 0.1;
+                    goalDistanceTxtBox.Text = "0.1";
+                    RegularExpressionValidator3.ValidationExpression = "^[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$";
                 }
                 else
                 {
                     goalDistanceTxtBox.Enabled = false;
                     NumericUpDownExtender3.Enabled = false;
+                    NumericUpDownExtender3.Minimum = 0;
                     goalDistanceTxtBox.Text = "0";
+                    RegularExpressionValidator3.ValidationExpression = "[0-9]+([\\.][0-9]{1,3})?$";
                 }
 
                 if (exercise.rep)
                 {
                     goalRepsTxtBox.Enabled = true;
                     NumericUpDownExtender4.Enabled = true;
-                    goalRepsTxtBox.Text = "0";
+                    NumericUpDownExtender4.Minimum = 1;
+                    goalRepsTxtBox.Text = "1";
+                    RegularExpressionValidator4.ValidationExpression = "^[1-9][0-9]*$";
                 }
 
                 else
                 {
                     goalRepsTxtBox.Enabled = false;
                     NumericUpDownExtender4.Enabled = false;
+                    NumericUpDownExtender4.Minimum = 0;
                     goalRepsTxtBox.Text = "0";
+                    RegularExpressionValidator4.ValidationExpression = "[0-9]+";
                 }
 
                 //CHANGE THIS SO IT IS FOR UNACHIEVED EXERCISES

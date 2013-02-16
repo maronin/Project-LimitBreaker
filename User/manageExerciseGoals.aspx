@@ -50,7 +50,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalTimeTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="goalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -70,7 +70,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalWeightTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="goalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -90,7 +90,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalDistanceTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
-                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
+                                ErrorMessage="*Entered values must be a non 0 double or int (up to 3 decimal places)" 
                                 ControlToValidate="goalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -110,7 +110,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalRepsTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="goalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -231,7 +231,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalTimeTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="modGoalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -252,7 +252,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalDistanceTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
-                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
+                                ErrorMessage="*Entered values must be a non 0 double or int (up to 3 decimal places)" 
                                 ControlToValidate="modGoalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -273,7 +273,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalWeightTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="modGoalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -294,7 +294,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalRepsTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="modGoalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
