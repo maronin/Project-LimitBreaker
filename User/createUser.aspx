@@ -78,7 +78,7 @@
                         <asp:TextBox ID="weight" runat="server"></asp:TextBox></td>
                     <td>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="weight" ForeColor="Red" ValidationGroup="createUser">Weight required</asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="weight" ForeColor="Red" ValidationExpression="^\d{2,3}$" ValidationGroup="createUser">Invalid weight</asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="weight" ForeColor="Red" ValidationExpression="^[0-9]*([\.][0-9]{1,3})?$" ValidationGroup="createUser">Invalid weight</asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
