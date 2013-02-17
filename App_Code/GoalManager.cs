@@ -89,7 +89,7 @@ public class GoalManager
     {
         using (var context = new Layer2Container())
         {
-            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName && s.achieved == false).FirstOrDefault();
 
             if (eg != null)
             {

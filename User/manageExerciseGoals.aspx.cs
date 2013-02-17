@@ -378,7 +378,6 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                     RegularExpressionValidator4.ValidationExpression = "[0-9]+";
                 }
 
-                //CHANGE THIS SO IT IS FOR UNACHIEVED EXERCISES
                 if (goalMngr.getExerciseNameWithinGoal(userName, exercise.name) == exercise.name)
                 {
                     saveNewGoalBtn.Enabled = false;
