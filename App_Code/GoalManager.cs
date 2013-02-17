@@ -89,7 +89,7 @@ public class GoalManager
     {
         using (var context = new Layer2Container())
         {
-            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName && s.achieved == false).FirstOrDefault();
 
             if (eg != null)
             {
@@ -167,5 +167,33 @@ public class GoalManager
         }
 
         return rc;
+    }
+
+    public List<ExerciseGoal> getAchievedExerciseGoalsFromUser(string userName, int orderBy)
+    {
+        using (var context = new Layer2Container())
+        {
+            List<ExerciseGoal> goalSet;
+
+            switch (orderBy)
+            {
+                case 0:
+                    goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true).OrderBy(o => o.Exercise.name).ToList();
+                    break;
+                case 1:
+                    goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true).OrderBy(o => o.id).ToList();
+                    break;
+                default:
+                    goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true).ToList();
+                    break;
+            }
+
+            foreach (ExerciseGoal eg in goalSet)
+            {
+                context.LoadProperty(eg, "Exercise");
+            }
+
+            return goalSet;
+        }
     }
 }

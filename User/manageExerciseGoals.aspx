@@ -50,7 +50,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalTimeTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="goalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -70,7 +70,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalWeightTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="goalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -90,7 +90,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalDistanceTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
-                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
+                                ErrorMessage="*Entered values must be a non 0 double or int (up to 3 decimal places)" 
                                 ControlToValidate="goalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -110,7 +110,7 @@
                                 ErrorMessage="*Required" ControlToValidate="goalRepsTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="addGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="goalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="addGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -135,7 +135,8 @@
         </asp:View>
 
         <asp:View ID="manageGoalsView" runat="server">
-        
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
         <h4>Your Current Exercise Goals</h4>
         <div style="float: left; padding: 10px;">
             Order Goals By:
@@ -145,12 +146,21 @@
                 <asp:ListItem Selected="True" Value="0">Name</asp:ListItem>
                 <asp:ListItem Value="1">ID</asp:ListItem>
             </asp:RadioButtonList>
+            
+            <asp:RadioButtonList ID="achievedRbl" runat="server" 
+                RepeatDirection="Horizontal" TextAlign="Left" AutoPostBack="True" Width="230"
+                onselectedindexchanged="achievedRbl_SelectedIndexChanged">
+                <asp:ListItem Selected="True" Value="0">Unachieved</asp:ListItem>
+                <asp:ListItem Value="1">Achieved</asp:ListItem>
+            </asp:RadioButtonList>
             <asp:ListBox ID="userGoalsListBox" runat="server" AutoPostBack="True" 
                 Height="400px" Width="230px" 
                 onselectedindexchanged="userGoalsListBox_SelectedIndexChanged"></asp:ListBox>
-        </div> 
+        </div>
+
         
         <div style="padding: 10px; width: 60%; margin: 0px auto 0px auto">
+        <asp:Panel ID="noAchievedPanel" runat="server">
         <table>
             <tr>
                 <td class="style1">
@@ -222,7 +232,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalTimeTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="modGoalTimeTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -243,7 +253,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalDistanceTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" 
-                                ErrorMessage="*Entered values must be a double or int (up to 3 decimal places)" 
+                                ErrorMessage="*Entered values must be a non 0 double or int (up to 3 decimal places)" 
                                 ControlToValidate="modGoalDistanceTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+([\.][0-9]{1,3})?$" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -264,7 +274,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalWeightTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="modGoalWeightTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -285,7 +295,7 @@
                                 ErrorMessage="*Required" ControlToValidate="modGoalRepsTxtBox" Display="Dynamic" 
                                 ForeColor="Red" ValidationGroup="modifyGoal"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" 
-                                ErrorMessage="*Entered values must be a whole number" 
+                                ErrorMessage="*Entered values must be a non 0 whole number" 
                                 ControlToValidate="modGoalRepsTxtBox" Display="Dynamic" ForeColor="Red" 
                                 ValidationExpression="[0-9]+" ValidationGroup="modifyGoal"></asp:RegularExpressionValidator>
                         </td>
@@ -312,12 +322,15 @@
                 </td>
             </tr>
         </table>
+        </asp:Panel>
         <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
         <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
         </div> 
         
+        </ContentTemplate>
+        </asp:UpdatePanel>
         </asp:View>
-
+        
     </asp:MultiView>
     
 </div>
