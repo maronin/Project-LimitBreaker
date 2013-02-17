@@ -135,7 +135,8 @@
         </asp:View>
 
         <asp:View ID="manageGoalsView" runat="server">
-        
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
         <h4>Your Current Exercise Goals</h4>
         <div style="float: left; padding: 10px;">
             Order Goals By:
@@ -326,9 +327,10 @@
         <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
         </div> 
         
-
+        </ContentTemplate>
+        </asp:UpdatePanel>
         </asp:View>
-
+        
     </asp:MultiView>
     
 </div>
