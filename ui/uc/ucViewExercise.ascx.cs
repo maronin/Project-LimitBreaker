@@ -22,6 +22,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         exerciseAutoComplete.SourceList = manager.getExerciseNamesAC();
+        
         if (!IsPostBack)
         {
             populateExiseList();
@@ -61,6 +62,8 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     protected void MuscleGroupDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
+        
+
         //lblResult.Text = "";
         populateExiseList();
         OnUserControlEvent();
@@ -106,6 +109,8 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
           lblExerciseMuscleGroups.Text = "";
           lblExerciseVideo.Text = "";
           lblExerciseDescription.Text = "";
+          ExerciseDDL.Items.Insert(0, new ListItem("No Exercises", "NONE"));
+          ExerciseDDL.SelectedIndex = 0;
     }
 
     public string ddlValue
@@ -131,24 +136,20 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     protected void populateExiseList()
     {
-        ExerciseDDL.DataSource = manager.getExercisesByMuscleGroup(ddlMuscleGroups.SelectedValue.Trim());
-        ExerciseDDL.DataBind();
-        /*
+   
         List<Exercise> foundExercises = manager.getExercisesByMuscleGroup(ddlMuscleGroups.SelectedValue.Trim());
         ExerciseDDL.Items.Clear();
         exerciseSearchBox.Text = "";
         if (foundExercises.Count != 0)
         {
-            foreach (Exercise name in foundExercises)
-            {
-                ExerciseDDL.Items.Add(name.name);
-            }
+            ExerciseDDL.DataSource = foundExercises;
+            ExerciseDDL.DataBind();
             exceriseNotFound.Visible = false;
             populateExerciseInfo();
         }
         else
             exerciesNotFound();
-        */
+        
     }
 
     protected void populateExerciseInfo()
