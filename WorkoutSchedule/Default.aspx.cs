@@ -344,7 +344,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(12, Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
+        if (scheduleManager.scheduleNewExercise(viewExercises.ddlSelectedValue, Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
             lblResult_Exercise.Text = "Successfuly scheduled your routine!";
