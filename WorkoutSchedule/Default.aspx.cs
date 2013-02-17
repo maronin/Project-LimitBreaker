@@ -18,14 +18,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     bool authenticated;
     UserManager userManager = new UserManager();
     static int userID;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         Page.MaintainScrollPositionOnPostBack = true;
         authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
         userID = userManager.getUserID(currentUser);
-
-
 
         if (authenticated && userID != -1)
         {
@@ -54,9 +53,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 populateUserRoutines();
                 exercises.ForeColor = Color.DarkViolet;
                 routines.ForeColor = Color.Red;
-                ddlExercises.Items.Insert(0, new ListItem("Select an exercise...", "NONE"));
-                ddlExercises.SelectedIndex = 0;
-                populateExerciseInfo();
+                //populateExerciseInfo();
 
             }
         }
@@ -293,11 +290,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void addExercise_Click(object sender, EventArgs e)
     {
         addItemView.ActiveViewIndex = 1;
+
     }
 
     protected void addRoutine_Click(object sender, EventArgs e)
     {
-        addItemView.ActiveViewIndex = 3;
+        addItemView.ActiveViewIndex = 2;
 
     }
 
@@ -346,7 +344,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(Convert.ToInt32(ddlExercises.SelectedValue), Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
+        if (scheduleManager.scheduleNewExercise(12, Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
         {
             addNewItem = true;
             lblResult_Exercise.Text = "Successfuly scheduled your routine!";
@@ -357,8 +355,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     }
     protected void goBack_Click(object sender, EventArgs e)
     {
+
         //if a new item has been added, reset all the fields, refresh the calendar and go back to the calendar
-        if (addNewItem)
+       if (addNewItem)
         {
             addNewItem = false;
             ddlMinutes_exercise.SelectedIndex = 0;
@@ -371,13 +370,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             tbDate_routine.Text = "";
             lblResult_Exercise.Text = "";
             lblResult_Routine.Text = "";
-            Response.Redirect("~/WorkoutSchedule/default.aspx");
+            
 
         }
-
-        multiViewCalendar.ActiveViewIndex = 0;
-        addItemView.ActiveViewIndex = 0;
-
+       Response.Redirect("~/WorkoutSchedule/default.aspx");
+       multiViewCalendar.ActiveViewIndex = 0;
+       addItemView.ActiveViewIndex = 0;
 
 
     }
@@ -393,7 +391,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         Response.Redirect("~/userRoutines/Default.aspx");
     }
 
-    protected void populateExerciseInfo()
+    /*protected void populateExerciseInfo()
     {
         lblExerciseEquipment.Text = "";
         lblExerciseMuscleGroups.Text = "";
@@ -434,11 +432,11 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             lblExerciseDescription.Text = "";
         }
     }
+    */
+   // protected void dllExercises_SelectedIndexChanged(object sender, EventArgs e)
+   // {
+   //     populateExerciseInfo();
 
-    protected void dllExercises_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        populateExerciseInfo();
-
-    }
+  //  }
 
 }

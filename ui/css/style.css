@@ -691,9 +691,9 @@ ul.list li h5 + img
 .select
 {
     color: rgb(0, 0, 0);
-    width: 170px;
+    width: 160px;
     margin-left: 150px;
-    margin-top: -5px;
+    margin-top: 0px;
 }
 .select option
 {

@@ -168,15 +168,21 @@ public class SystemExerciseManager
     {
         using (var context = new Layer2Container())
         {
+            if (muscleGroup == "ALL")
+            {
+                return context.Exercises.OrderBy(o => o.id).ToList();
+            }
+            else { 
             //context.ContextOptions.LazyLoadingEnabled = false;
             var query = (from exercise in context.Exercises
                          where exercise.muscleGroups.Contains(muscleGroup)
                          && exercise.enabled == true
                          select exercise);
 
-
-            //context.LoadProperty(query, "MuscleGroups");
             return query.OrderBy(exercise => exercise.name).ToList();
+            }
+            //context.LoadProperty(query, "MuscleGroups");
+            
         }
     }
 

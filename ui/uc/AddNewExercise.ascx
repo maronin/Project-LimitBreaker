@@ -57,7 +57,7 @@
                     CssClass="cblStyle">
                     <asp:ListItem>Chest</asp:ListItem>
                     <asp:ListItem>Back</asp:ListItem>
-                    <asp:ListItem>Shoulder</asp:ListItem>
+                    <asp:ListItem>Shoulders</asp:ListItem>
                     <asp:ListItem>Arms</asp:ListItem>
                     <asp:ListItem>Legs</asp:ListItem>
                     <asp:ListItem>Cardio</asp:ListItem>

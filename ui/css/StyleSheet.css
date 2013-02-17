@@ -308,3 +308,10 @@ p
     width: 240px;
     vertical-align: top;
 }
+
+.rowWidth
+{
+    vertical-align:top;
+    width: 100px;
+    height:100px;
+}
