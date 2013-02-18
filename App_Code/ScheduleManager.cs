@@ -34,6 +34,7 @@ public class ScheduleManager
                                itemName = r.Routine.name,
                                startTime = r.startTime,
                                user = r.LimitBreaker,
+                               id = r.id,
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -44,6 +45,40 @@ public class ScheduleManager
                                 itemName = e.Exercise.name,
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
+                                id = e.id,
+                                isExericse = true
+                            };
+            var items = routines.Concat(exercises).ToList();
+
+            return items.ToList();
+        }
+    }
+
+    public List<scheduledItem> getScheduledItemsByDayOfTheYear(Int32 userID, DateTime day)
+    {
+        using (var context = new Layer2Container())
+        {
+            var ruleDate = Convert.ToDateTime(day).Date;
+            var routines = from r in context.ScheduledRoutines
+                           orderby r.startTime
+                           where (r.LimitBreaker.id == userID && r.startTime.Day == day.Day)
+                           select new scheduledItem
+                           {
+                               itemName = r.Routine.name,
+                               startTime = r.startTime,
+                               user = r.LimitBreaker,
+                               id = r.id,
+                               isExericse = false
+                           };
+            var exercises = from e in context.ScheduledExercises
+                            orderby e.startTime
+                            where (e.LimitBreakers.id == userID && e.startTime.Day == day.Day)
+                            select new scheduledItem
+                            {
+                                itemName = e.Exercise.name,
+                                startTime = e.startTime,
+                                user = e.LimitBreakers,
+                                id = e.id,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
@@ -144,4 +179,47 @@ public class ScheduleManager
 
         }
     }
+
+    public void removeScheduledItem(Int32 itemID, bool isExercise)
+    {
+        /*
+        using (var context = new Layer2Container())
+        {
+            //Routine rc = new Routine();
+            
+            if (isExercise) { 
+                ScheduledExercise rc = new ScheduledExercise();
+            }
+            
+            
+            try
+            {
+                ScheduledExercise se = context.ScheduledExercises.Where(e => e.id == itemID).FirstOrDefault();
+
+                //Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                //Exercise exc = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
+                if (se != null)
+                {
+                    rtn.Exercises.Remove(exc);
+                    exc.Routines.Remove(rtn);
+                    context.Exercises.ApplyCurrentValues(exc);
+                    context.Routines.ApplyCurrentValues(rtn);
+                    context.SaveChanges();
+                }
+                rc = rtn;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+         */
+    }
+        
+
 }

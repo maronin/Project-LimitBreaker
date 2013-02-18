@@ -35,6 +35,7 @@
                     <asp:MultiView ID="multiViewCalendar" runat="server">
                         <asp:View ID="view_calendar" runat="server">
                             <asp:LinkButton ID="lnk_add_item" runat="server" Text="Add Item" OnClick="lnk_add_item_Click" />
+                            
                             <br />
                             <br />
                             <asp:Label ID="exercises" runat="server" Text="Exercises" Font-Bold="True"></asp:Label>
@@ -274,7 +275,32 @@
                                 </asp:View>
                             </asp:MultiView>
                         </asp:View>
-                        <asp:View ID="View3" runat="server">
+                        <asp:View ID="removeItemView" runat="server">
+                            <h3>Remove Items</h3>
+                            <asp:Label ID="lblTest" runat="server" Text=""></asp:Label>
+             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" CssClass="gv">
+                <AlternatingRowStyle BackColor="White" />
+                <Columns>
+                    <asp:BoundField DataField="itemName" HeaderText="Scheduled Item" SortExpression="name"></asp:BoundField>
+                    <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="equipment" />
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CommandName="del" CommandArgument='<%# Eval("id") %>'>Remove</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <FooterStyle BackColor="#CCCC99" />
+                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                <RowStyle BackColor="#F7F7DE" />
+                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                <SortedAscendingHeaderStyle BackColor="#848384" />
+                <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                <SortedDescendingHeaderStyle BackColor="#575357" />
+            </asp:GridView>
+
+                            <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
                         </asp:View>
                     </asp:MultiView>
                 </ContentTemplate>

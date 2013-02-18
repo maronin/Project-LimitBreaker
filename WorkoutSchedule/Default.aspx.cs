@@ -287,15 +287,18 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             multiViewCalendar.ActiveViewIndex = 1;
             addItemView.ActiveViewIndex = 0;
         }
-        /*
-         * Unfinished, when user clicks on any of the dates
-                else
-                {
-                    lblTest.Text = ((LinkButton)e.CommandSource).Text;
-                    multiViewCalendar.ActiveViewIndex = 1;
-                    addItemView.ActiveViewIndex = 0;
-                }
-          */
+         else
+        {
+           // multiViewCalendar.ActiveViewIndex = 1;
+            //addItemView.ActiveViewIndex = 0;
+
+            List<scheduledItem> items;
+            items = scheduleManager.getScheduledItemsByDayOfTheYear(userID, Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue));
+            GridView1.DataSource = items;
+            GridView1.DataBind();
+            multiViewCalendar.ActiveViewIndex = 2;
+        }
+          
     }
 
 
@@ -450,5 +453,30 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
    //     populateExerciseInfo();
 
   //  }
+
+    protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        e.ExceptionHandled = true;
+    }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "del")
+        {
+           
+            lblTest.Text = "item: ";
+            Response.Write("item: "+ e.CommandArgument.ToString());
+            //int itemID = Convert.ToInt32(rbl.SelectedItem.Value);
+            int itemID = Convert.ToInt32(e.CommandArgument.ToString());
+            scheduleManager.removeScheduledItem(itemID, true);
+            //Routine rtn = routManager.removeExerciseFromRoutine(routineID, exerciseID);
+
+           // if (rtn != null)
+           // {
+           //     GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+           //     GridView1.DataBind();
+           // }
+        }
+    }
 
 }
