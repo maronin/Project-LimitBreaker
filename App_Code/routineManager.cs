@@ -159,7 +159,13 @@ public class routineManager
             }
             catch (NullReferenceException e)
             {
-                rc = false;
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
             }
 
 
