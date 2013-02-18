@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucViewExercise.ascx.cs"
     Inherits="ui_uc_ucViewExercise" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<asp:Panel ID="Panel1" runat="server">
+
 
     <label for="_Default">
         Search for an exercise via name:
@@ -30,6 +30,7 @@
     </asp:DropDownList>
     <br />
     <br />
+        <asp:Panel ID="viewExercisePanel" runat="server">
     <table class="scheduleTable2">
         <tr>
             <td colspan="2">
@@ -42,8 +43,7 @@
                     CssClass="select" DataTextField="name" DataValueField="id">
                 </asp:DropDownList>
                 <asp:HyperLink ID="lblExerciseVideo" runat="server">[Video]</asp:HyperLink>
-                <asp:Label ID="exceriseNotFound" runat="server" ForeColor="Red" Text="No exercise found"
-                    Visible="False"></asp:Label>
+
             </td>
             <td>
                 &nbsp;
@@ -79,4 +79,8 @@
             </td>
         </tr>
     </table>
+
+    </asp:Panel>
+                    <asp:Label ID="exceriseNotFound" runat="server" ForeColor="Red" Text="No exercise found"
+                    Visible="False"></asp:Label>
   </asp:Panel>

@@ -19,8 +19,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             functionalityMultiView.ActiveViewIndex = 0;
             mngExerciseExpBtn.Enabled = false;
             mngUserExpBtn.Enabled = true;
-            loadExerciseExpFields();
-            loadUserExpFields();
+
         }
     }
 
@@ -128,7 +127,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             manageExperienceMultiView.ActiveViewIndex = 1;
             ExerciseExp selectedExercise = expMngr.getExerciseExpByExerciseName(viewExerciseExp.ddlValue);
             Exercise exercise = manager.getExercise(viewExerciseExp.ddlValue);
-
+            viewExerciseExp.ddle = true;
             try
             {
                 baseTxtBox.Text = selectedExercise.baseExperience.ToString();
@@ -192,7 +191,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             {
                 //noExpLbl.Text = ex.Message + Environment.NewLine + ex.StackTrace;
                 manageExperienceMultiView.ActiveViewIndex = 2;
-
+                
                 addBaseTxtBox.Text = "0";
                 addTimeTxtBox.Text = "0";
                 addWeightTxtBox.Text = "0";
@@ -247,6 +246,8 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
         else
         {
+            //DropDownList ddle = new DropDownList();
+            viewExerciseExp.ddle = false;
             manageExperienceMultiView.ActiveViewIndex = 0;
         }
 

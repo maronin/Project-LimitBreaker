@@ -28,6 +28,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
             populateExiseList();
             populateExerciseInfo();
         }
+
     }
 
     protected void exerciseSearchButton_Click(object sender, EventArgs e)
@@ -62,8 +63,6 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     protected void MuscleGroupDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
-
         //lblResult.Text = "";
         populateExiseList();
         OnUserControlEvent();
@@ -109,8 +108,8 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
           lblExerciseMuscleGroups.Text = "";
           lblExerciseVideo.Text = "";
           lblExerciseDescription.Text = "";
-          ExerciseDDL.Items.Insert(0, new ListItem("No Exercises", "NONE"));
-          ExerciseDDL.SelectedIndex = 0;
+          //ExerciseDDL.Items.Insert(0, new ListItem("No Exercises", "NONE"));
+          //ExerciseDDL.SelectedIndex = 0;
     }
 
     public string ddlValue
@@ -128,6 +127,11 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         get { return ExerciseDDL.Items.Count; }
     }
 
+    public bool ddle
+    {
+        set {
+            viewExercisePanel.Visible = value; }
+    }
 
     protected void dllExercises_SelectedIndexChanged(object sender, EventArgs e)
     {
