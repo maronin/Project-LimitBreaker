@@ -54,6 +54,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
             exceriseNotFound.Visible = false;
             ExerciseDDL_SelectedIndexChanged(sender, e);
             ExerciseDDL.Visible = true;
+            viewExercisePanel.Visible = true;
         }
         else
             exerciesNotFound();
@@ -108,6 +109,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
           lblExerciseMuscleGroups.Text = "";
           lblExerciseVideo.Text = "";
           lblExerciseDescription.Text = "";
+          viewExercisePanel.Visible = false;
           //ExerciseDDL.Items.Insert(0, new ListItem("No Exercises", "NONE"));
           //ExerciseDDL.SelectedIndex = 0;
     }
@@ -149,6 +151,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
             ExerciseDDL.DataSource = foundExercises;
             ExerciseDDL.DataBind();
             exceriseNotFound.Visible = false;
+            viewExercisePanel.Visible = true;
             populateExerciseInfo();
         }
         else

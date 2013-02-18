@@ -83,4 +83,6 @@
     </asp:Panel>
                     <asp:Label ID="exceriseNotFound" runat="server" ForeColor="Red" Text="No exercise found"
                     Visible="False"></asp:Label>
+                    <br />
+                    <br />
   </asp:Panel>

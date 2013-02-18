@@ -125,6 +125,7 @@
                                         Schedule a new Exercise!</h3>
                                     <br />
                                     <uc1:viewExercises ID="viewExercises" runat="server"/>
+                                    <asp:Panel ID="TimeSelectPanel" runat="server">
                                     Time:
                                     <asp:DropDownList ID="ddlHours_exercise" runat="server">
                                         <asp:ListItem>1</asp:ListItem>
@@ -181,6 +182,7 @@
                                     <br />
                                     <br />
                                     <hr />
+                                    </asp:Panel>
                                     <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
                                         CssClass="button" />
                                     <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"

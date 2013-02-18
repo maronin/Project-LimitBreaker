@@ -42,7 +42,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 tbDate_routine.Enabled = true;
             }
 
-
+            viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
             if (!IsPostBack)
             {
                 MultiView multiViewCalendar = (MultiView)LoginView1.FindControl("multiViewCalendar");
@@ -56,8 +56,20 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 //populateExerciseInfo();
 
             }
+
         }
 
+    }
+    private void viewExercises_userControlEventHappened(object sender, EventArgs e)
+    {
+            if (viewExercises.ddlCount == 0)
+            {
+                TimeSelectPanel.Visible = false;
+            }
+            else
+            {
+                TimeSelectPanel.Visible = true;
+            }
     }
 
     protected void loadMonths()
