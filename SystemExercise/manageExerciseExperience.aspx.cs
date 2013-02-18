@@ -16,9 +16,9 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
         if (!Page.IsPostBack)
         {
-            functionalityMultiView.ActiveViewIndex = 0;
-            mngExerciseExpBtn.Enabled = false;
-            mngUserExpBtn.Enabled = true;
+            functionalityMultiView.ActiveViewIndex = 1;
+            mngExerciseExpBtn.Enabled = true;
+            mngUserExpBtn.Enabled = false;
 
         }
     }
@@ -70,6 +70,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         mngExerciseExpBtn.Enabled = false;
         mngUserExpBtn.Enabled = true;
         functionalityMultiView.ActiveViewIndex = 0;
+        loadExerciseExpFields();
     }
 
     protected void mngUserExpBtn_Click(object sender, EventArgs e)
