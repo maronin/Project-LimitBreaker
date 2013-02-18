@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
 /// <summary>
 /// Summary description for ScheduleManager
 /// </summary>
@@ -180,33 +181,43 @@ public class ScheduleManager
         }
     }
 
-    public void removeScheduledItem(Int32 itemID, bool isExercise)
+    public bool deletecheduledItem(Int32 itemID, bool isExercise, Int32 userID)
     {
-        /*
+        bool result = false;
         using (var context = new Layer2Container())
         {
             //Routine rc = new Routine();
-            
-            if (isExercise) { 
-                ScheduledExercise rc = new ScheduledExercise();
-            }
-            
-            
             try
             {
-                ScheduledExercise se = context.ScheduledExercises.Where(e => e.id == itemID).FirstOrDefault();
-
-                //Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
-                //Exercise exc = context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault();
-                if (se != null)
+                if (isExercise)
                 {
-                    rtn.Exercises.Remove(exc);
-                    exc.Routines.Remove(rtn);
-                    context.Exercises.ApplyCurrentValues(exc);
-                    context.Routines.ApplyCurrentValues(rtn);
-                    context.SaveChanges();
+                    ScheduledExercise rc = context.ScheduledExercises.Where(e => e.id == itemID).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        context.ScheduledExercises.DeleteObject(rc);
+                        context.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
                 }
-                rc = rtn;
+                else
+                {
+                    ScheduledRoutine rc = context.ScheduledRoutines.Where(e => e.id == itemID).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        context.ScheduledRoutines.DeleteObject(rc);
+                        context.SaveChanges();
+                        result = true;
+
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
             }
             catch (NullReferenceException e)
             {
@@ -218,8 +229,9 @@ public class ScheduleManager
 
                 wrtr.Close();
             }
-         */
-    }
-        
 
+        }
+
+        return result;
+    }
 }
