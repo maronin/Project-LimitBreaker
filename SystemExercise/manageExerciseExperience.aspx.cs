@@ -16,11 +16,10 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
         if (!Page.IsPostBack)
         {
-            functionalityMultiView.ActiveViewIndex = 0;
-            mngExerciseExpBtn.Enabled = false;
-            mngUserExpBtn.Enabled = true;
-            loadExerciseExpFields();
-            loadUserExpFields();
+            functionalityMultiView.ActiveViewIndex = 1;
+            mngExerciseExpBtn.Enabled = true;
+            mngUserExpBtn.Enabled = false;
+
         }
     }
 
@@ -71,6 +70,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         mngExerciseExpBtn.Enabled = false;
         mngUserExpBtn.Enabled = true;
         functionalityMultiView.ActiveViewIndex = 0;
+        loadExerciseExpFields();
     }
 
     protected void mngUserExpBtn_Click(object sender, EventArgs e)
@@ -128,7 +128,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             manageExperienceMultiView.ActiveViewIndex = 1;
             ExerciseExp selectedExercise = expMngr.getExerciseExpByExerciseName(viewExerciseExp.ddlValue);
             Exercise exercise = manager.getExercise(viewExerciseExp.ddlValue);
-
+            viewExerciseExp.ddle = true;
             try
             {
                 baseTxtBox.Text = selectedExercise.baseExperience.ToString();
@@ -192,7 +192,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             {
                 //noExpLbl.Text = ex.Message + Environment.NewLine + ex.StackTrace;
                 manageExperienceMultiView.ActiveViewIndex = 2;
-
+                
                 addBaseTxtBox.Text = "0";
                 addTimeTxtBox.Text = "0";
                 addWeightTxtBox.Text = "0";
@@ -247,6 +247,8 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
         else
         {
+            //DropDownList ddle = new DropDownList();
+            viewExerciseExp.ddle = false;
             manageExperienceMultiView.ActiveViewIndex = 0;
         }
 

@@ -35,6 +35,10 @@ public class scheduledItem
         set;
     }
 
-
+    public virtual Int32 id
+    {
+        get;
+        set;
+    }
 
 }

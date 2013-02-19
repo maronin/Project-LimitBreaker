@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="WorkoutSchedule_Default4" %>
 
+<%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercises" TagPrefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -9,9 +10,11 @@
             height: 20px;
             width: 20px;
         }
-        .style1
+        .rowWidth
         {
-            width: 38%;
+            vertical-align: top;
+            width: 100px;
+            height: 100px;
         }
     </style>
 </asp:Content>
@@ -24,13 +27,15 @@
         <LoggedInTemplate>
             <h1>
                 Schedule Calendar</h1>
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="Server">
             </asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
+                    <!-----------------------------------------------------------------Multiview Calendar ------------------------------------------------------------------------>
                     <asp:MultiView ID="multiViewCalendar" runat="server">
                         <asp:View ID="view_calendar" runat="server">
                             <asp:LinkButton ID="lnk_add_item" runat="server" Text="Add Item" OnClick="lnk_add_item_Click" />
+                            <asp:LinkButton ID="lnk_remove_item" runat="server" Text="Remove Item" OnClick="lnk_remove_item_Click" />
                             <br />
                             <br />
                             <asp:Label ID="exercises" runat="server" Text="Exercises" Font-Bold="True"></asp:Label>
@@ -100,8 +105,8 @@
                                 <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
                             </asp:Panel>
                         </asp:View>
-                        <!------------------------------------------------------------------------------ add an item view -------------------------------------------------------------------------------------->
                         <asp:View ID="add_item" runat="server">
+                            <!------------------------------------------------------------------------------------------------------- MultiView Add Item ----------------------------------------------------------------------------------->
                             <asp:MultiView ID="addItemView" runat="server">
                                 <asp:View ID="choiceView" runat="server">
                                     <h3>
@@ -115,94 +120,76 @@
                                         <asp:Button ID="goBack" runat="server" Text="Back" OnClick="goBack_Click" CssClass="button" />
                                     </div>
                                 </asp:View>
-                                <!---------------------------------------------------------------------------- Schedule Exercise  --------------------------------------------------------------------------------------->
+                                <!---------------------------------------------------------------------------- Schedule Exercise view[0] --------------------------------------------------------------------------------------->
                                 <asp:View ID="addExerciseView" runat="server">
                                     <h3>
                                         Schedule a new Exercise!</h3>
                                     <br />
-                                    <table class="scheduleTable">
-                                        <tr>
-                                            <td>
-                                                Step 1. Select an exercise:
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="dllExercises" runat="server" DataSourceID="ObjectDataSource3"
-                                                    DataTextField="name" DataValueField="id">
-                                                </asp:DropDownList>
-                                            </td>
-                                            <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
-                                                TypeName="ExerciseManager"></asp:ObjectDataSource>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Step 2. Select Start Time:
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="ddlHours_exercise" runat="server">
-                                                    <asp:ListItem>1</asp:ListItem>
-                                                    <asp:ListItem>2</asp:ListItem>
-                                                    <asp:ListItem>3</asp:ListItem>
-                                                    <asp:ListItem>4</asp:ListItem>
-                                                    <asp:ListItem>5</asp:ListItem>
-                                                    <asp:ListItem>6</asp:ListItem>
-                                                    <asp:ListItem>7</asp:ListItem>
-                                                    <asp:ListItem>8</asp:ListItem>
-                                                    <asp:ListItem>9</asp:ListItem>
-                                                    <asp:ListItem>10</asp:ListItem>
-                                                    <asp:ListItem>11</asp:ListItem>
-                                                    <asp:ListItem>12</asp:ListItem>
-                                                </asp:DropDownList>
-                                                :
-                                                <asp:DropDownList ID="ddlMinutes_exercise" runat="server">
-                                                    <asp:ListItem Value="00"></asp:ListItem>
-                                                    <asp:ListItem Value="05"></asp:ListItem>
-                                                    <asp:ListItem Value="10"></asp:ListItem>
-                                                    <asp:ListItem Value="15"></asp:ListItem>
-                                                    <asp:ListItem Value="20"></asp:ListItem>
-                                                    <asp:ListItem Value="25"></asp:ListItem>
-                                                    <asp:ListItem Value="30"></asp:ListItem>
-                                                    <asp:ListItem Value="35"></asp:ListItem>
-                                                    <asp:ListItem Value="40"></asp:ListItem>
-                                                    <asp:ListItem Value="45"></asp:ListItem>
-                                                    <asp:ListItem Value="50"></asp:ListItem>
-                                                    <asp:ListItem Value="55"></asp:ListItem>
-                                                </asp:DropDownList>
-                                                <asp:DropDownList ID="ddlAmPm_exercise" runat="server">
-                                                    <asp:ListItem>AM</asp:ListItem>
-                                                    <asp:ListItem>PM</asp:ListItem>
-                                                </asp:DropDownList>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Step 3. Select Start Date:
-                                            </td>
-                                            <td>
-                                                <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderExercise" runat="server"
-                                                    TargetControlID="tbDate_exercise" FilterType="Custom" ValidChars='()1234567890-/'>
-                                                </asp:FilteredTextBoxExtender>
-                                                <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="False"
-                                                    AutoCompleteType="Disabled"></asp:TextBox>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorExercise" runat="server"
-                                                    ErrorMessage="Invalid Date" ControlToValidate="tbDate_exercise" Font-Size="Medium"
-                                                    ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                                    ValidationGroup="ScheduleExercise" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
-                                                    ForeColor="Red" ControlToValidate="tbDate_exercise" ValidationGroup="ScheduleExercise"
-                                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                                                <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
-                                                </asp:CalendarExtender>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <uc1:viewExercises ID="viewExercises" runat="server" />
+                                    <asp:Panel ID="TimeSelectPanel" runat="server">
+                                        Time:
+                                        <asp:DropDownList ID="ddlHours_exercise" runat="server">
+                                            <asp:ListItem>1</asp:ListItem>
+                                            <asp:ListItem>2</asp:ListItem>
+                                            <asp:ListItem>3</asp:ListItem>
+                                            <asp:ListItem>4</asp:ListItem>
+                                            <asp:ListItem>5</asp:ListItem>
+                                            <asp:ListItem>6</asp:ListItem>
+                                            <asp:ListItem>7</asp:ListItem>
+                                            <asp:ListItem>8</asp:ListItem>
+                                            <asp:ListItem>9</asp:ListItem>
+                                            <asp:ListItem>10</asp:ListItem>
+                                            <asp:ListItem>11</asp:ListItem>
+                                            <asp:ListItem>12</asp:ListItem>
+                                        </asp:DropDownList>
+                                        :
+                                        <asp:DropDownList ID="ddlMinutes_exercise" runat="server">
+                                            <asp:ListItem Value="00"></asp:ListItem>
+                                            <asp:ListItem Value="05"></asp:ListItem>
+                                            <asp:ListItem Value="10"></asp:ListItem>
+                                            <asp:ListItem Value="15"></asp:ListItem>
+                                            <asp:ListItem Value="20"></asp:ListItem>
+                                            <asp:ListItem Value="25"></asp:ListItem>
+                                            <asp:ListItem Value="30"></asp:ListItem>
+                                            <asp:ListItem Value="35"></asp:ListItem>
+                                            <asp:ListItem Value="40"></asp:ListItem>
+                                            <asp:ListItem Value="45"></asp:ListItem>
+                                            <asp:ListItem Value="50"></asp:ListItem>
+                                            <asp:ListItem Value="55"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlAmPm_exercise" runat="server">
+                                            <asp:ListItem>AM</asp:ListItem>
+                                            <asp:ListItem>PM</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <br />
+                                        Date
+                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderExercise" runat="server"
+                                            TargetControlID="tbDate_exercise" FilterType="Custom" ValidChars='()1234567890-/'>
+                                        </asp:FilteredTextBoxExtender>
+                                        <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="False"
+                                            AutoCompleteType="Disabled"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidatorExercise" runat="server"
+                                            ErrorMessage="Invalid Date" ControlToValidate="tbDate_exercise" Font-Size="Medium"
+                                            ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                            ValidationGroup="ScheduleExercise" Display="Dynamic"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                            ForeColor="Red" ControlToValidate="tbDate_exercise" ValidationGroup="ScheduleExercise"
+                                            Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
+                                        </asp:CalendarExtender>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <hr />
+                                    </asp:Panel>
+                                    <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
+                                        CssClass="button" />
                                     <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
                                         CssClass="button" ValidationGroup="ScheduleExercise" />
                                     <br />
-                                    <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
-                                        CssClass="button" />
                                     <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
-                                </asp:View>
-                                <asp:View ID="View1" runat="server">
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Routine  --------------------------------------------------------------------------------------->
                                 <asp:View ID="addRoutineView" runat="server">
@@ -288,7 +275,51 @@
                                 </asp:View>
                             </asp:MultiView>
                         </asp:View>
-                        <asp:View ID="View3" runat="server">
+                        <asp:View ID="removeItemView" runat="server">
+                            <h3>
+                                Remove Items</h3>
+                                Select a date to view scheduled items for that date:
+                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="tbRemoveDate"
+                                FilterType="Custom" ValidChars='()1234567890-/'>
+                            </asp:FilteredTextBoxExtender>
+                            <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" 
+                                AutoCompleteType="Disabled" AutoPostBack="True" 
+                                ontextchanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
+                                ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                    ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                                    ControlToValidate="tbRemoveDate" ValidationGroup="RemoveItem" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:CalendarExtender ID="calendarRemoveItem" runat="server" TargetControlID="tbRemoveDate">
+                            </asp:CalendarExtender>
+                            <asp:Label ID="lblTest" runat="server" Text=""></asp:Label>
+                            <asp:Label ID="lblTest2" runat="server" Text=""></asp:Label>
+                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand"
+                                OnRowDeleted="GridView1_RowDeleted" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None"
+                                BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" CssClass="gv">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:BoundField DataField="itemName" HeaderText="Scheduled Item" SortExpression="itemName">
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="startTime" />
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="LinkButton1" runat="server" CommandName="del" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Remove</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                                <FooterStyle BackColor="#CCCC99" />
+                                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                                <RowStyle BackColor="#F7F7DE" />
+                                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                                <SortedAscendingHeaderStyle BackColor="#848384" />
+                                <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                                <SortedDescendingHeaderStyle BackColor="#575357" />
+                            </asp:GridView>
+                            <asp:Label ID="lblRemoveResult" runat="server" Text="There are no items scheduled for this day!" ForeColor="Red" Visible="False"></asp:Label>
+                            <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
                         </asp:View>
                     </asp:MultiView>
                 </ContentTemplate>
@@ -297,7 +328,7 @@
                 <ProgressTemplate>
                     <div class="loadingCalendar">
                         <h1>
-                            Loading Calendar...</h1>
+                            Loading...</h1>
                     </div>
                 </ProgressTemplate>
             </asp:UpdateProgress>

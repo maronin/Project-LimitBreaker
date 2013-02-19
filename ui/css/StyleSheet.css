@@ -6,13 +6,12 @@
 
 #login
 {
-padding: 0px 0px 0px 0px;
-top: -54px;
-float: right;
-z-index: 10;
-right: 0%;
-position: relative;
-
+    padding: 0px 0px 0px 0px;
+    top: -54px;
+    float: right;
+    z-index: 10;
+    right: 0%;
+    position: relative;
 }
 
 #login a
@@ -117,20 +116,6 @@ p
     font-size: medium;
 }
 
-#newExerciseForm
-{
-}
-newExerciseForm, tr
-{
-    border-style: none;
-    width: 300px;
-}
-
-newExerciseForm, tr, td
-{
-    border-style: none;
-    width: 200px;
-}
 
 .tbStyle
 {
@@ -175,9 +160,9 @@ newExerciseForm, tr, td
 
 .today
 {
-margin: 0 auto;
-text-align: center;
-z-index: -1;
+    margin: 0 auto;
+    text-align: center;
+    z-index: -1;
 }
 
 .today span
@@ -309,4 +294,24 @@ z-index: -1;
 .loadingCalendar h1
 {
     z-index: 5;
+}
+
+.scheduleTable2
+{
+
+}
+
+.description
+{
+    height: 100px;
+
+    width: 240px;
+    vertical-align: top;
+}
+
+.rowWidth
+{
+    vertical-align:top;
+    width: 100px;
+    height:100px;
 }

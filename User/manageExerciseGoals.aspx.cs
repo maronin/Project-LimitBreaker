@@ -300,7 +300,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 
     public void showAddGoal()
     {
-        if (viewExercises.ddlCount > 0)
+        if (viewExercises.ddlCount != 0)
         {
             try
             {
@@ -393,7 +393,11 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             }
         }
         else
+        {
             addGoalPanel.Visible = false;
+
+            viewExercises.ddle = false;
+        }
     }
 
     public void resetGoalView()
