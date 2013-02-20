@@ -29,7 +29,7 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                rmr.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                rmr.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
             if (tempBmi > 1)
             {
@@ -37,20 +37,20 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                bmi.Text = "<a href=\"update.aspx\">Update Stats</a>";
-            }
-            if (tempVmax > 1)
-            {
-                vmax.Text = Convert.ToString(Math.Round(tempVmax, 2));
-            }
-            else
-            {
-                vmax.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                bmi.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
         }
         else
         {
             Response.Redirect("../login.aspx");
         }
+    }
+    protected void updateWeight_Click(object sender, EventArgs e)
+    {
+        String username = Membership.GetUser().UserName;
+        manager.updateWeight(username, Convert.ToInt32(newWeight.Text));
+        manager.updateRMR(username);
+        manager.updateBMI(username);
+        Response.Redirect("profile.aspx");
     }
 }
