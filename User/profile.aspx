@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="profile.aspx.cs" Inherits="User_profile" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
         .auto-style1
         {
@@ -8,7 +8,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h1>Welcome LimitBreaker</h1>
     <h2>User Profile</h2>
     <table>
@@ -24,29 +24,39 @@
         </tr>
         <tr>
             <td>Total Experience</td>
-            <td><asp:Label ID="exp" runat="server" Text=""></asp:Label></td>
+            <td>
+                <asp:Label ID="exp" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
             <td class="auto-style1">Weight</td>
-            <td class="auto-style1"><asp:Label ID="weight" runat="server" Text=""></asp:Label></td>
+            <td class="auto-style1">
+                <asp:Label ID="weight" runat="server" Text=""></asp:Label></td>
             <td class="auto-style1">
                 <asp:TextBox ID="newWeight" runat="server" ValidationGroup="profileUpdate"></asp:TextBox></td>
             <td class="auto-style1">
-                <asp:Button ID="updateWeight" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateWeight_Click"/></td>
-            <td class="auto-style1"><asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newWeight" ForeColor="Red" ValidationExpression="^\d{2,3}$" ValidationGroup="profileUpdate">Invalid weight</asp:RegularExpressionValidator></td>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newWeight" ForeColor="Red" ValidationExpression="^[1-9]{2,3}([.][0-9]+)?$" ValidationGroup="profileUpdate">Invalid weight</asp:RegularExpressionValidator></td>
         </tr>
         <tr>
             <td>Height</td>
-            <td><asp:Label ID="height" runat="server" Text=""></asp:Label></td>
+            <td>
+                <asp:Label ID="height" runat="server" Text=""></asp:Label></td>
+            <td class="auto-style1">
+                <asp:TextBox ID="newHeight" runat="server" ValidationGroup="profileUpdate"></asp:TextBox></td>
+            <td class="auto-style1">
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newHeight" ForeColor="Red" ValidationExpression="^[1-9]{2,3}([.][0-9]+)?$" ValidationGroup="profileUpdate">Invalid height</asp:RegularExpressionValidator></td>
         </tr>
         <tr>
             <td>Resting Metabolic Rate</td>
-            <td><asp:Label ID="rmr" runat="server" Text=""></asp:Label></td>
+            <td>
+                <asp:Label ID="rmr" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
             <td>Body Mass Index</td>
-            <td><asp:Label ID="bmi" runat="server" Text=""></asp:Label></td>
+            <td>
+                <asp:Label ID="bmi" runat="server" Text=""></asp:Label></td>
         </tr>
+        <tr><td>          
+                <asp:Button ID="updateStats" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateStats_Click" /></td></tr>
     </table>
 
 </asp:Content>
