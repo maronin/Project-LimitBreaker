@@ -176,6 +176,7 @@ public partial class _Default : System.Web.UI.Page
             tbExerciseName.Text = foundExercise.name;
             tbVideoLink.Text = foundExercise.videoLink;
             tbEquipment.Text = foundExercise.equipment;
+            tbModifyDescription.Text = foundExercise.description;
         }
     }
 
@@ -199,7 +200,7 @@ public partial class _Default : System.Web.UI.Page
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.modifyExercise(manager.getExerciseID(ExerciseDDL.SelectedValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time) && tbExerciseName.Text != "")
+        if (manager.modifyExercise(manager.getExerciseID(ExerciseDDL.SelectedValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text) && tbExerciseName.Text != "")
         {
             lblResult.ForeColor = System.Drawing.Color.Green;
             lblResult.Text = "Modified Succesfully!";
