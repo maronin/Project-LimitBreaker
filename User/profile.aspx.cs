@@ -18,7 +18,7 @@ public partial class User_profile : System.Web.UI.Page
             alias.Text = username;
             level.Text = Convert.ToString(userStats.level);
             exp.Text = Convert.ToString(Math.Round(userStats.experience, 2));
-            weight.Text = Convert.ToString(Math.Round(userStats.weight, 2)) + " lb";
+            weight.Text = Convert.ToString(Math.Round(userStats.weight, 2)) + " kg";
             height.Text = Convert.ToString(Math.Round(userStats.height, 2)) + " cm";
             double tempRmr = userStats.rmr;
             double tempBmi = userStats.bmi;
@@ -29,7 +29,7 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                rmr.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                rmr.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
             if (tempBmi > 1)
             {
@@ -37,20 +37,21 @@ public partial class User_profile : System.Web.UI.Page
             }
             else
             {
-                bmi.Text = "<a href=\"update.aspx\">Update Stats</a>";
-            }
-            if (tempVmax > 1)
-            {
-                vmax.Text = Convert.ToString(Math.Round(tempVmax, 2));
-            }
-            else
-            {
-                vmax.Text = "<a href=\"update.aspx\">Update Stats</a>";
+                bmi.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
         }
         else
         {
             Response.Redirect("../login.aspx");
         }
+    }
+    protected void updateStats_Click(object sender, EventArgs e)
+    {
+        String username = Membership.GetUser().UserName;
+        manager.updateWeight(username, Convert.ToDouble(newWeight.Text));
+        manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
+        manager.updateRMR(username);
+        manager.updateBMI(username);
+        Response.Redirect("profile.aspx");
     }
 }

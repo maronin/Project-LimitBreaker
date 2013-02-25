@@ -4,15 +4,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
-        
         .auto-style1
         {
             width: 455px;
         }
+
         .style2
         {
             height: 26px;
         }
+
         .style3
         {
             width: 455px;
@@ -41,13 +42,13 @@
                     <td class="style3">
                         <asp:TextBox ID="password" runat="server" EnableViewState="True" TextMode="Password"></asp:TextBox></td>
                     <td class="style2">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                            ControlToValidate="password" ForeColor="Red" ValidationGroup="createUser" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                            ControlToValidate="password" ForeColor="Red" ValidationGroup="createUser"
                             Display="Dynamic">Password required</asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                             ErrorMessage="Please enter a password with a number that is at least 5 characters in length" ForeColor="Red"
-                            ValidationExpression="^(?=.*\d)(?=.*[a-zA-Z]).{5,}$" Display="Dynamic" 
-                            ControlToValidate="password" ValidationGroup="createUser" ></asp:RegularExpressionValidator></td>
+                            ValidationExpression="^(?=.*\d)(?=.*[a-zA-Z]).{5,}$" Display="Dynamic"
+                            ControlToValidate="password" ValidationGroup="createUser"></asp:RegularExpressionValidator></td>
                 </tr>
                 <tr>
                     <td>Confirm Password:</td>
@@ -59,7 +60,7 @@
 
                     </td>
                     <td>
-                        
+
                         <asp:PasswordStrength ID="PasswordStrength1" runat="server" TargetControlID="password"></asp:PasswordStrength>
                     </td>
                 </tr>
@@ -73,39 +74,23 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Weight(lbs):</td>
+                    <td>Weight(kg):</td>
                     <td class="auto-style1">
                         <asp:TextBox ID="weight" runat="server"></asp:TextBox></td>
                     <td>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="weight" ForeColor="Red" ValidationGroup="createUser">Weight required</asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="weight" ForeColor="Red" ValidationExpression="^[0-9]*([\.][0-9]{1,3})?$" ValidationGroup="createUser">Invalid weight</asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="weight" ForeColor="Red" ValidationExpression="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$" ValidationGroup="createUser">Invalid weight</asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
-                    <td>Height:</td>
-                    <td class="auto-style1">Ft.<asp:DropDownList ID="heightFoot" runat="server">
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                        <asp:ListItem>7</asp:ListItem>
-                        <asp:ListItem>8</asp:ListItem>
-                        </asp:DropDownList>
-                    In<asp:DropDownList ID="heightInch" runat="server">
-                            <asp:ListItem>0</asp:ListItem>
-                            <asp:ListItem>1</asp:ListItem>
-                            <asp:ListItem>2</asp:ListItem>
-                            <asp:ListItem>3</asp:ListItem>
-                            <asp:ListItem>4</asp:ListItem>
-                            <asp:ListItem>5</asp:ListItem>
-                            <asp:ListItem>6</asp:ListItem>
-                            <asp:ListItem>7</asp:ListItem>
-                            <asp:ListItem>8</asp:ListItem>
-                            <asp:ListItem>9</asp:ListItem>
-                            <asp:ListItem>10</asp:ListItem>
-                            <asp:ListItem>11</asp:ListItem>
-                        </asp:DropDownList>
+                    <td>Height(cm):</td>
+                    <td class="auto-style1">
+                        <asp:TextBox ID="height" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="height" ForeColor="Red" ValidationGroup="createUser">Height required</asp:RequiredFieldValidator><br />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="height" ForeColor="Red" ValidationExpression="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$" ValidationGroup="createUser">Invalid height</asp:RegularExpressionValidator>
+                    </td>
                 </tr>
                 <tr>
                     <td>Gender:</td>

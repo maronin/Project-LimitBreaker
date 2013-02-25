@@ -18,7 +18,7 @@ public class UserManager
     //rc status: 1 failure due to servers, 2 name already taken, 0 success
     public int createNewLimitBreaker(String username, String email, String gender, DateTime birthday, Double weight, Double height)
     {
-        int rc=1;
+        int rc = 1;
 
         using (var context = new Layer2Container())
         {
@@ -103,6 +103,81 @@ public class UserManager
                          select user.Statistics);
             //context.LoadProperty(query, "Statistics");
             return query.FirstOrDefault();
+        }
+    }
+
+    public LimitBreaker getLimitBreaker(String username)
+    {
+        using (var context = new Layer2Container())
+        {
+            var query = (from user in context.LimitBreakers
+                         where user.username == username
+                         select user);
+            //context.LoadProperty(query, "Statistics");
+            return query.FirstOrDefault();
+        }
+    }
+    public void updateRMR(String username)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+            context.LoadProperty(user, "Statistics"); ;
+
+            if (user.gender == "Male")
+            {
+                user.Statistics.rmr = user.Statistics.weight * 10 +
+                      user.Statistics.height * 6.25 -
+                      (DateTime.Now.Year - user.dateOfBirth.Year) * 6.76 +
+                      66;
+            }
+            else
+            {
+                user.Statistics.rmr = user.Statistics.weight * 9.56 +
+                      user.Statistics.height * 1.85 -
+                      (DateTime.Now.Year - user.dateOfBirth.Year) * 4.68 +
+                      655;
+            }
+            context.SaveChanges();
+        }
+    }
+
+    public void updateBMI(String username)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+            context.LoadProperty(user, "Statistics");
+
+            user.Statistics.bmi = (user.Statistics.weight) / Math.Pow(user.Statistics.height / 100, 2); 
+
+            context.SaveChanges();
+        }
+    }
+
+    public void updateWeight(String username, Double newWeight)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+            context.LoadProperty(user, "Statistics");
+
+            user.Statistics.weight = newWeight;
+
+            context.SaveChanges();
+        }
+    }
+
+    public void updateHeight(String username, Double newHeight)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+            context.LoadProperty(user, "Statistics");
+
+            user.Statistics.height = newHeight;
+
+            context.SaveChanges();
         }
     }
 }

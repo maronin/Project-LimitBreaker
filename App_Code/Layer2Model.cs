@@ -1025,12 +1025,6 @@ public partial class LoggedExercise
         set;
     }
 
-    public virtual System.DateTime timeLogged
-    {
-        get;
-        set;
-    }
-
     public virtual string note
     {
         get;
@@ -1038,6 +1032,12 @@ public partial class LoggedExercise
     }
 
     public virtual long id
+    {
+        get;
+        set;
+    }
+
+    public virtual System.DateTime timeLogged
     {
         get;
         set;
@@ -1719,6 +1719,12 @@ public partial class SetAttributes
     }
 
     public virtual Nullable<int> reps
+    {
+        get;
+        set;
+    }
+
+    public virtual System.DateTime timeLogged
     {
         get;
         set;
