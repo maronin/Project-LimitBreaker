@@ -34,7 +34,7 @@
             <td class="auto-style1">
                 <asp:TextBox ID="newWeight" runat="server" ValidationGroup="profileUpdate"></asp:TextBox></td>
             <td class="auto-style1">
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newWeight" ForeColor="Red" ValidationExpression="^[1-9]{2,3}([.][0-9]+)?$" ValidationGroup="profileUpdate">Invalid weight</asp:RegularExpressionValidator></td>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newWeight" ForeColor="Red" ValidationExpression="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$" ValidationGroup="profileUpdate">Invalid weight</asp:RegularExpressionValidator></td>
         </tr>
         <tr>
             <td>Height</td>
@@ -43,7 +43,7 @@
             <td class="auto-style1">
                 <asp:TextBox ID="newHeight" runat="server" ValidationGroup="profileUpdate"></asp:TextBox></td>
             <td class="auto-style1">
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newHeight" ForeColor="Red" ValidationExpression="^[1-9]{2,3}([.][0-9]+)?$" ValidationGroup="profileUpdate">Invalid height</asp:RegularExpressionValidator></td>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="newHeight" ForeColor="Red" ValidationExpression="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$" ValidationGroup="profileUpdate">Invalid height</asp:RegularExpressionValidator></td>
         </tr>
         <tr>
             <td>Resting Metabolic Rate</td>
