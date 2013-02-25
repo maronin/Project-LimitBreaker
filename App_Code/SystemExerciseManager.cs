@@ -117,7 +117,7 @@ public class SystemExerciseManager
         return rc;
     }
 
-    public bool createNewExercise(string exerciseName, string muscleGroups, string equipment, string videoLink, bool rep, bool weight, bool distance, bool time, bool enabled)
+    public bool createNewExercise(string exerciseName, string muscleGroups, string equipment, string videoLink, bool rep, bool weight, bool distance, bool time, bool enabled, string desc)
     {
         bool rc = false;
 
@@ -140,6 +140,7 @@ public class SystemExerciseManager
                 newExercise.distance = distance;
                 newExercise.time = time;
                 newExercise.enabled = enabled;
+                newExercise.description = desc;
 
                 context.Exercises.AddObject(newExercise);
                 context.SaveChanges();

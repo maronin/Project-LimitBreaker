@@ -13,7 +13,7 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
         manager = new SystemExerciseManager();     
     }
     protected void btnCreateExercise_Click(object sender, EventArgs e)
-    {
+    {   
         lblResult.Text = "";
         bool rep = false, wieght = false, time = false, distance = false, enabled = false;
         string muscleGroups = "";

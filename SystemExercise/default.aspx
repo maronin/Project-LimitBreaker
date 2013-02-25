@@ -204,6 +204,14 @@
                 </tr>
                 <tr>
                     <td>
+                        <p>Description:</p>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbModifyDescription" runat="server" Height="144px" CssClass="tbStyle" TextMode="MultiLine"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <p>
                             Video Link:
                         </p>

@@ -8,7 +8,7 @@
         color: Red;
     }
     .style2
-    {
+    {   
         height: 54px;
     }
     .style3
