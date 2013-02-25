@@ -2,6 +2,7 @@
     CodeFile="default.aspx.cs" Inherits="_Default" %>
 
 <%@ Register Src="~/ui/uc/AddNewExercise.ascx" TagName="addExercise" TagPrefix="uc1" %>
+<%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercise" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
         .style1
@@ -41,77 +42,17 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
     <div>
         <h4>
             Add system exercises</h4>
         <uc1:addExercise ID="courses" runat="server" />
         <asp:ScriptManager ID="ScriptManager1" runat="Server">
         </asp:ScriptManager>
-        <label for="_Default">
-            Search for an exercise via name:
-        </label>
-        <asp:TextBox runat="server" ID="exerciseSearchBox" ClientIDMode="Static" AutoPostBack="False"
-            ValidationGroup="Search" />
-        <juice:Autocomplete ID="exerciseAutoComplete" runat="server" TargetControlID="exerciseSearchBox" />
-        <asp:Button ID="exerciseSearchButton" runat="server" Text="Search" OnClick="exerciseSearchButton_Click"
-            ValidationGroup="Search" />
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="exerciseSearchBox"
-            ErrorMessage="No symbols" ForeColor="Red" ValidationExpression="^[a-zA-Z0-9 ]+$"
-            Display="Dynamic" ValidationGroup="Search"></asp:RegularExpressionValidator>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="exerciseSearchBox"
-            Display="Dynamic" ErrorMessage="Need a name" ForeColor="Red" ValidationGroup="Search"></asp:RequiredFieldValidator>
-        <br />
-        Search via muscle groups:
-        <asp:RadioButtonList ID="MuscleGroupRBL" runat="server" OnSelectedIndexChanged="MuscleGroupRBL_SelectedIndexChanged"
-            AutoPostBack="True">
-            <asp:ListItem>Chest</asp:ListItem>
-            <asp:ListItem>Back</asp:ListItem>
-            <asp:ListItem>Shoulders</asp:ListItem>
-            <asp:ListItem>Arms</asp:ListItem>
-            <asp:ListItem>Legs</asp:ListItem>
-            <asp:ListItem>Cardio</asp:ListItem>
-        </asp:RadioButtonList>
-        <asp:DropDownList ID="ExerciseDDL" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ExerciseDDL_SelectedIndexChanged">
-        </asp:DropDownList>
-        <asp:Label ID="exceriseNotFound" runat="server" ForeColor="Red" Text="No exercise found"
-            Visible="False"></asp:Label>
-        <br />
-        <table>
-            <tr>
-                <td>
-                    Exercise Name
-                </td>
-                <td>
-                    Exercise Equipment
-                </td>
-                <td class="style2">
-                    Exercise Video
-                </td>
-                <td>
-                    Exercise Attributes
-                </td>
-                <td>
-                    Enabled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="exerciseName" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="exerciseEquipment" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-                <td class="style2">
-                    <asp:Label ID="exerciseVideo" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="exerciseAttributes" runat="server" Visible="False"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="exerciseEnabled" runat="server" Visible="False"></asp:Label>
-                </td>
-            </tr>
-        </table>
+        
+        <uc1:viewExercise ID="viewExercises" runat="server" />
+
         <br />
     </div>
     <div>
@@ -190,10 +131,6 @@
                     </td>
                     <td class="style1">
                         <asp:TextBox ID="tbEquipment" runat="server" Height="144px" CssClass="tbStyle" TextMode="MultiLine"></asp:TextBox>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
-                    ControlToValidate="tbEquipment" ErrorMessage="*Please enter a proper name" 
-                    ValidationExpression="^[A-Za-z]{1,}$" ForeColor="Red" 
-                    ValidationGroup="AddExercise" Display="Dynamic"></asp:RegularExpressionValidator>
                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                             ControlToValidate="tbEquipment" ErrorMessage="*Please enter equipment needed" 
                             ForeColor="Red" ValidationGroup="ModifyExercise" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -223,6 +160,10 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                             ControlToValidate="tbVideoLink" ErrorMessage="*Please enter a video link" 
                             ForeColor="Red" ValidationGroup="ModifyExercise"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Improper video link format"
+                            ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" 
+                            ValidationGroup="ModifyExercise" 
+                            ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
@@ -249,4 +190,6 @@
             <asp:Label ID="lblDeletionResult" runat="server"></asp:Label>
         </div>
     </asp:Panel>
+    </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

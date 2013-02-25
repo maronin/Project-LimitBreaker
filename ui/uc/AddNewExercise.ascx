@@ -120,6 +120,14 @@
         </tr>
         <tr>
             <td>
+                <p>Description:</p>
+            </td>
+            <td>
+                <asp:TextBox ID="tbDescription" runat="server" Height="144px" CssClass="tbStyle" TextMode="MultiLine"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <p>
                     Video Link:
                 </p>
@@ -131,6 +139,10 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Please enter a video link"
                     ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" SetFocusOnError="True"
                     ValidationGroup="AddExercise"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Improper video link format"
+                    ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" 
+                    ValidationGroup="AddExercise" 
+                    ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?"></asp:RegularExpressionValidator>
             </td>
         </tr>
     </table>

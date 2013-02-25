@@ -11,74 +11,17 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        exerciseAutoComplete.SourceList = manager.getExerciseNamesAC();
+        viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         rblEnaber.Visible = false;
         Panel1.Visible = false;
     }
-    protected void exerciseSearchButton_Click(object sender, EventArgs e)
+
+    private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
-        lblResult.Text = "";
-        List<Exercise> foundExercises = manager.getExercisesByName(exerciseSearchBox.Text.Trim());
-        ExerciseDDL.Items.Clear();
-        if (foundExercises.Count != 0)
-        {
-            foreach (Exercise name in foundExercises)
-            {
-                ExerciseDDL.Items.Add(name.name);
-                if (name.enabled)
-                    rblEnaber.Items[0].Selected = true;
-                else
-                    rblEnaber.Items[1].Selected = false;
-            }
-            exceriseNotFound.Visible = false;
-            ExerciseDDL_SelectedIndexChanged(sender, e);
-            rblEnaber.Visible = true;
-            ExerciseDDL.Visible = true;
-        }
-        else
-            exerciesNotFound();
+        if (viewExercises.exists)
+            populateForm();
     }
-    protected void MuscleGroupRBL_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        lblResult.Text = "";
-        List<Exercise> foundExercises = manager.getExercisesByMuscleGroup(MuscleGroupRBL.SelectedValue.Trim());
-        ExerciseDDL.Items.Clear();
-        exerciseSearchBox.Text="";
-        if (foundExercises.Count != 0)
-        {
-            foreach (Exercise name in foundExercises)
-            {
-                ExerciseDDL.Items.Add(name.name);
-            }
-            exceriseNotFound.Visible = false;
-            ExerciseDDL_SelectedIndexChanged(sender, e);
-        }
-        else
-            exerciesNotFound();
-    }
-    protected void ExerciseDDL_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        Exercise exercise = manager.getExercise(ExerciseDDL.SelectedValue);
-        exerciseName.Visible = true;
-        exerciseName.Text = exercise.name;
-        exerciseEquipment.Visible = true;
-        exerciseEquipment.Text = exercise.equipment;
-        exerciseVideo.Visible = true;
-        exerciseVideo.Text = exercise.videoLink;
-        exerciseAttributes.Visible = true;
-        exerciseAttributes.Text = "";
-        if (exercise.weight)
-            exerciseAttributes.Text += "Weight\n";
-        if (exercise.rep)
-            exerciseAttributes.Text += "Reps\n";
-        if (exercise.time)
-            exerciseAttributes.Text += "Time\n";
-        if (exercise.distance)
-            exerciseAttributes.Text += "Distance\n";
-        exerciseEnabled.Visible = true;
-        exerciseEnabled.Text = exercise.enabled.ToString();
-        populateForm();
-    }
+
     protected void rblEnaber_SelectedIndexChanged(object sender, EventArgs e)
     {
         disableManager enabler = new disableManager();
@@ -86,14 +29,12 @@ public partial class _Default : System.Web.UI.Page
         {
             if (Convert.ToInt32(rblEnaber.SelectedValue) == 1)
             {
-                enabler.enableExerciseByName(ExerciseDDL.SelectedValue);
-                exerciseEnabled.Text = "True";
+                enabler.enableExerciseByName(viewExercises.ddlValue);
             }
 
             else if (Convert.ToInt32(rblEnaber.SelectedValue) == 0)
             {
-                enabler.disableExerciseByName(ExerciseDDL.SelectedValue);
-                exerciseEnabled.Text = "False";
+                enabler.disableExerciseByName(viewExercises.ddlValue);
             }
 
             populateForm();
@@ -102,15 +43,6 @@ public partial class _Default : System.Web.UI.Page
         {
 
         }
-    }
-    protected void exerciesNotFound()
-    {
-        exerciseName.Visible = false;
-        exerciseEquipment.Visible = false;
-        exerciseVideo.Visible = false;
-        exerciseAttributes.Visible = false;
-        exerciseEnabled.Visible = false;
-        exceriseNotFound.Visible = true;
     }
 
 
@@ -128,7 +60,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void populateForm()
     {
-        Exercise foundExercise = manager.getExerciseInfo(manager.getExerciseID(ExerciseDDL.SelectedValue));
+        Exercise foundExercise = manager.getExerciseInfo(manager.getExerciseID(viewExercises.ddlValue));
         String[] muscleGroups;
         initBoxes();
 
@@ -200,7 +132,7 @@ public partial class _Default : System.Web.UI.Page
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.modifyExercise(manager.getExerciseID(ExerciseDDL.SelectedValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text) && tbExerciseName.Text != "")
+        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text) && tbExerciseName.Text != "")
         {
             lblResult.ForeColor = System.Drawing.Color.Green;
             lblResult.Text = "Modified Succesfully!";
@@ -225,7 +157,7 @@ public partial class _Default : System.Web.UI.Page
 
         try
         {
-            bool result = deleter.deleteExerciseByName(ExerciseDDL.SelectedValue);
+            bool result = deleter.deleteExerciseByName(viewExercises.ddlValue);
 
             if (result)
             {
