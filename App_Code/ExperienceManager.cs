@@ -168,18 +168,16 @@ public class ExperienceManager
         return resultExp;
     }
 
-    public int calculateLoggedRoutineExperience(int routineId)  //can also just pass in a  List<Exercise> exerciseSet
+    public int calculateLoggedRoutineExperience(List<Exercise> exerciseSet, string userName)
     {
         int resultExp = 0;
-        /*
-        routineManager rm = new routineManager();
-        List<Exercise> exerciseSet = rm.getExercisesInRoutineById(routineId);
+        LoggedExerciseManager setMngr = new LoggedExerciseManager();
 
         foreach (Exercise exer in exerciseSet)
         {
-            resultExp += calculateLoggedExerciseExperience(exer.name, exer.LoggedExercise.SetAttributes.ToList());
+            resultExp += calculateLoggedExerciseExperience(exer.name, setMngr.getSetAttributesFromLoggedExerciseFromUser(userName, exer.name));
         }
-        */
+
         return resultExp;
     }
 
@@ -212,8 +210,6 @@ public class ExperienceManager
 
         return leveled;
     }
-
-
 
 
     // Probably gonna have to make a function that uses the returned value from either 

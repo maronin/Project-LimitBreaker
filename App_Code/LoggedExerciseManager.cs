@@ -15,5 +15,11 @@ public class LoggedExerciseManager
         _context = System.Web.HttpContext.Current.ApplicationInstance;
 	}
 
-    
+    public List<SetAttributes> getSetAttributesFromLoggedExerciseFromUser(string userName, string exerciseName)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.LoggedExercises.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault().SetAttributes.ToList();
+        }
+    }
 }
