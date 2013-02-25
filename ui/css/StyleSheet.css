@@ -257,13 +257,14 @@ p
 
 #scheduleChoice
 {
+    
 }
 .date
 {
     font-style: normal;
     text-decoration: none;
     font-family: 'Arial Black';
-    color: #C0C0C0;
+    color: #000000;
     font-weight: lighter;
     margin-left: 4px;
 }

@@ -146,7 +146,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         }
 
         if (dt.Date == DateTime.Today)
-            pnl_calendarDay.BackColor = Color.LightCoral;
+            pnl_calendarDay.BackColor = Color.Gainsboro;
 
         lnk_dayLink.CssClass = "date";
 
@@ -488,11 +488,11 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             if (scheduleManager.deletecheduledItem(Convert.ToInt32(commandArgs[0]), Convert.ToBoolean(commandArgs[1]), userID)){
                 populateRemoveItems();
 
-                lblTest.Text = "Removed your item!";
+                lblResultModify.Text = "Removed your item!";
             }
                 
             else
-                lblTest.Text = "Somthing went worng!";
+                lblResultModify.Text = "Somthing went worng!";
             //Response.Redirect(commandArgs[1]);
         }
 
@@ -532,6 +532,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     }
     protected void tbRemoveDate_TextChanged(object sender, EventArgs e)
     {
+        lblResultModify.Text = "";
         pnlModifyItem.Visible = false;
         GridViewScheduledItems.Visible = true; 
         populateRemoveItems();
@@ -542,13 +543,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         
         if (scheduleManager.modifyScheduledItem(Convert.ToInt32(modifyItemID), Convert.ToInt32(ddlExercisesModify.SelectedValue), modifyExercise, Convert.ToDateTime(Convert.ToDateTime(tbDateModify.Text + " " + ddlHoursModify.Text + ":" + ddlMinutesModify.Text + ":00 " + ddlAmPmModify.Text))))
         {
-            lblTest.Text = "YAY";
+            lblResultModify.Text = "Succesfully modified scheduled item";
 
         }
 
         else
         {
-            lblTest.Text = "Nay";
+            lblResultModify.Text = "Somthing went wrong";
         }
 
 
