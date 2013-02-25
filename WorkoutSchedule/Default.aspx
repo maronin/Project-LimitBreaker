@@ -295,7 +295,7 @@
                             <asp:GridView ID="GridViewScheduledItems" runat="server" AutoGenerateColumns="False"
                                 OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" BackColor="White"
                                 BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
-                                GridLines="Vertical" CssClass="gv">
+                                GridLines="Vertical" CssClass="gv" AllowPaging="False">
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
                                     <asp:BoundField DataField="itemName" HeaderText="Scheduled Item" SortExpression="itemName">
@@ -325,7 +325,7 @@
 
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">
                                 <h4>Modify Item</h4>
-                                Change Item to:
+                                Change item to:
                                 <asp:DropDownList ID="ddlExercisesModify" runat="server" DataTextField="name" DataValueField="id"
                                     Visible="False">
                                 </asp:DropDownList>
@@ -370,11 +370,11 @@
                                     FilterType="Custom" ValidChars='()1234567890-/'>
                                 </asp:FilteredTextBoxExtender>
                                 <asp:TextBox ID="tbDateModify" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
-                                    AutoPostBack="True" ValidationGroup="ModifyItem"></asp:TextBox>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Invalid Date"
+                                    AutoPostBack="True" ValidationGroup="ModifyItem" OnTextChanged="tbDateModify_textChanged"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="modifyDateValidator" runat="server" ErrorMessage="Invalid Date"
                                     ControlToValidate="tbDateModify" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                     ValidationGroup="ModifyItem" Display="Dynamic"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidator4" runat="server"
+                                <asp:RequiredFieldValidator ForeColor="Red" ID="modifyDateRequired" runat="server"
                                     ErrorMessage="*" ControlToValidate="tbDateModify" ValidationGroup="ModifyItem"
                                     Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:CalendarExtender ID="calendarModify" runat="server" TargetControlID="tbDateModify">
@@ -382,9 +382,19 @@
                                 
                                 
                             </asp:Panel>
-                            <asp:Button ID="btnModify" runat="server" Text="Modify" CssClass="button" OnClick="btnModify_Click" />
+                            <br />
+                            <br />
+                            <asp:Button ID="btnBackToCalendar" runat="server" Text="Back to Calendar" OnClick="goBack_Click" CssClass="button"/>
+                            <asp:Button ID="btnModify" runat="server" Text="Modify" CssClass="button" OnClick="btnModify_Click" ValidationGroup="ModifyItem" Visible="False" />
+                            <br />
                             <asp:Label ID="lblResultModify" runat="server" Text=""></asp:Label>
-                            <asp:Label ID="lblTest2" runat="server" Text=""></asp:Label>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                             <br />
+                            <br />
                         </asp:View>
                     </asp:MultiView>
                 </ContentTemplate>

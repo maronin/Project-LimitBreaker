@@ -498,19 +498,22 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
         if (e.CommandName == "modify")
         {
-            GridViewScheduledItems.Visible = false;
             pnlModifyItem.Visible = true;
+            btnModify.Visible = true;
             ddlExercisesModify.Visible = true;
-
             if (Convert.ToBoolean(commandArgs[1]))
             {
+                Exercise exercise = exerciseManager.getExerciseById(Convert.ToInt32(commandArgs[0]));
                 ddlExercisesModify.DataSource = exerciseManager.getExercises();
                 ddlExercisesModify.DataBind();
+
             }
             else
             {
+                Routine routine = routineManager.getRoutine(Convert.ToInt32(commandArgs[0]));
                 ddlExercisesModify.DataSource = routineManager.getUsersRoutines(userID);
                 ddlExercisesModify.DataBind();
+
             }
             modifyExercise = Convert.ToBoolean(commandArgs[1]);
             modifyItemID = Convert.ToInt32(commandArgs[0]);
@@ -534,7 +537,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         lblResultModify.Text = "";
         pnlModifyItem.Visible = false;
+        btnModify.Visible = false;
         GridViewScheduledItems.Visible = true; 
+
         populateRemoveItems();
     }
 
@@ -551,9 +556,14 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             lblResultModify.Text = "Somthing went wrong";
         }
-
+        populateRemoveItems();
 
     }
 
-
+    protected void tbDateModify_textChanged(object sender, EventArgs e)
+    {
+        modifyDateRequired.Validate();
+        modifyDateValidator.Validate();
+        
+    }
 }
