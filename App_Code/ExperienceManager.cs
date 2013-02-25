@@ -201,16 +201,17 @@ public class ExperienceManager
             leveled = true;
         }
 
-        //Not sure if code below will work
+        //Not 100% sure if code below will work
         using (var context = new Layer2Container()) 
         {
-            LimitBreaker saveUser = user;
+            LimitBreaker saveUser = context.LimitBreakers.Where(s => s.username == user.username).FirstOrDefault();
+            saveUser.Statistics.experience = user.Statistics.experience;
+            saveUser.Statistics.level = user.Statistics.level;
             context.SaveChanges();
         }
 
         return leveled;
     }
-
 
     // Probably gonna have to make a function that uses the returned value from either 
     // calculateLoggedRoutineExperience() or calculateLoggedExerciseExperience() and gives it to the user that logged it
