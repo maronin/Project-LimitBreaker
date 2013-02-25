@@ -55,7 +55,7 @@
                                 ValidationGroup="ctl00$Login1" Height="25px" Width="65px" />
                             <%--Note: The Literal Control is used here to display an error message that a log in control throws into the FailureText. By Default it is disabled--%>
                             <br />
-                            <span style="color: #FFFFFF; float: right;">
+                            <span style="color: #FFFFFF; float: right; margin: -22px -218px 0px 0px;">
                                 <asp:Literal ID="FailureText" runat="server" EnableViewState="False" />
                             </span>
                             </asp:panel>
