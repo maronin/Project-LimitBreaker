@@ -234,4 +234,56 @@ public class ScheduleManager
 
         return result;
     }
+
+    public bool modifyScheduledItem(Int32 id, Int32 newItemID, bool isExercise, DateTime date)
+    {
+        bool result = false;
+        using (var context = new Layer2Container())
+        {
+            try
+            {
+                if (isExercise)
+                {
+                    ScheduledExercise rc = context.ScheduledExercises.Where(e => e.id == id).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        rc.Exercise = context.Exercises.Where(e => e.id == newItemID).FirstOrDefault();
+                        rc.startTime = date;
+                        context.ScheduledExercises.ApplyCurrentValues(rc);
+                        context.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                else
+                {
+                    ScheduledRoutine rc = context.ScheduledRoutines.Where(e => e.id == id).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        rc.Routine = context.Routines.Where(e => e.id == newItemID).FirstOrDefault();
+                        rc.startTime = date;
+                        context.ScheduledRoutines.ApplyCurrentValues(rc);
+                        context.SaveChanges();
+                        result = true;
+
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+            }
+        }
+        return result;
+    }
+
+
+
 }

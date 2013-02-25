@@ -19,6 +19,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     UserManager userManager = new UserManager();
     static int userID;
     static DateTime itemScheduledOn;
+    static bool modifyExercise;
+    static Int32 modifyItemID;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         Page.MaintainScrollPositionOnPostBack = true;
@@ -297,8 +300,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             List<scheduledItem> items;
             itemScheduledOn = Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue);
             items = scheduleManager.getScheduledItemsByDayOfTheYear(userID, itemScheduledOn);
-            GridView1.DataSource = items;
-            GridView1.DataBind();
+            GridViewScheduledItems.DataSource = items;
+            GridViewScheduledItems.DataBind();
             multiViewCalendar.ActiveViewIndex = 2;
             tbRemoveDate.Text = itemScheduledOn.ToString("M/dd/yyyy");
         }
@@ -363,7 +366,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void lnk_remove_item_Click(object sender, EventArgs e)
     {
         multiViewCalendar.ActiveViewIndex = 2;
-        
+        GridViewScheduledItems.Visible = true;
     }
 
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
@@ -463,6 +466,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
   //  }
 
+
+
+
+
     protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
     {
         e.ExceptionHandled = true;
@@ -470,11 +477,11 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ';' });
 
         if (e.CommandName == "del")
         {
-            string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ';' });
-
+            
             //lblTest.Text = commandArgs[0];
             //lblTest2.Text = commandArgs[1];
 
@@ -485,23 +492,67 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             }
                 
             else
-                lblTest.Text = "Somthing went worng :<";
+                lblTest.Text = "Somthing went worng!";
             //Response.Redirect(commandArgs[1]);
         }
+
+        if (e.CommandName == "modify")
+        {
+            GridViewScheduledItems.Visible = false;
+            pnlModifyItem.Visible = true;
+            ddlExercisesModify.Visible = true;
+
+            if (Convert.ToBoolean(commandArgs[1]))
+            {
+                ddlExercisesModify.DataSource = exerciseManager.getExercises();
+                ddlExercisesModify.DataBind();
+            }
+            else
+            {
+                ddlExercisesModify.DataSource = routineManager.getUsersRoutines(userID);
+                ddlExercisesModify.DataBind();
+            }
+            modifyExercise = Convert.ToBoolean(commandArgs[1]);
+            modifyItemID = Convert.ToInt32(commandArgs[0]);
+            
+        }
+
+
     }
     protected void populateRemoveItems()
     {
         List<scheduledItem> items;
         items = scheduleManager.getScheduledItemsByDayOfTheYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
-        GridView1.DataSource = items;
-        GridView1.DataBind();
-        if (GridView1.Rows.Count == 0)
+        GridViewScheduledItems.DataSource = items;
+        GridViewScheduledItems.DataBind();
+        if (GridViewScheduledItems.Rows.Count == 0)
             lblRemoveResult.Visible = true;
         else
             lblRemoveResult.Visible = false;
     }
     protected void tbRemoveDate_TextChanged(object sender, EventArgs e)
     {
+        pnlModifyItem.Visible = false;
+        GridViewScheduledItems.Visible = true; 
         populateRemoveItems();
     }
+
+    protected void btnModify_Click(object sender, EventArgs e)
+    {
+        
+        if (scheduleManager.modifyScheduledItem(Convert.ToInt32(modifyItemID), Convert.ToInt32(ddlExercisesModify.SelectedValue), modifyExercise, Convert.ToDateTime(Convert.ToDateTime(tbDateModify.Text + " " + ddlHoursModify.Text + ":" + ddlMinutesModify.Text + ":00 " + ddlAmPmModify.Text))))
+        {
+            lblTest.Text = "YAY";
+
+        }
+
+        else
+        {
+            lblTest.Text = "Nay";
+        }
+
+
+    }
+
+
 }
