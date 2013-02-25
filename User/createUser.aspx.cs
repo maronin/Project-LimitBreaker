@@ -34,17 +34,15 @@ public partial class User_createUser : System.Web.UI.Page
             String password = ((TextBox)LoginView1.FindControl("password")).Text;
             String email = ((TextBox)LoginView1.FindControl("email")).Text;
             String gender = ((RadioButtonList)LoginView1.FindControl("genderList")).SelectedValue;
-            String weight = ((TextBox)LoginView1.FindControl("weight")).Text;
+            Double weight = Convert.ToDouble(((TextBox)LoginView1.FindControl("weight")).Text);
 
-            String tempFoot = ((DropDownList)LoginView1.FindControl("heightFoot")).SelectedValue;
-            double tempInch = ((DropDownList)LoginView1.FindControl("heightInch")).SelectedIndex;
+            Double height = Convert.ToDouble(((TextBox)LoginView1.FindControl("height")).Text);
 
             String birthdayDay = ((DropDownList)LoginView1.FindControl("birthdayDay")).SelectedValue;
             String birthdayMonth = ((DropDownList)LoginView1.FindControl("birthdayMonth")).SelectedValue;
             String birthdayYear = ((DropDownList)LoginView1.FindControl("birthdayYear")).SelectedValue;
 
             DateTime birthday = new DateTime(Convert.ToInt32(birthdayYear), Convert.ToInt32(birthdayMonth), Convert.ToInt32(birthdayDay));
-            Double height = manager.convertHeightToMetric(Convert.ToDouble(tempFoot), tempInch);
 
             int success = manager.createNewLimitBreaker(userName, email, gender, birthday, Convert.ToDouble(weight), height);
             Label creationStatus = ((Label)LoginView1.FindControl("creationStatus"));
