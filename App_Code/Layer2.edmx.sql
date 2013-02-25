@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/10/2013 12:02:36
+-- Date Created: 02/25/2013 11:21:09
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project-LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -146,7 +146,6 @@ GO
 -- Creating table 'LoggedExercises'
 CREATE TABLE [dbo].[LoggedExercises] (
     [sets] int  NOT NULL,
-    [timeLogged] datetime  NOT NULL,
     [note] nvarchar(max)  NULL,
     [id] bigint IDENTITY(1,1) NOT NULL,
     [LimitBreaker_id] int  NOT NULL,
@@ -162,6 +161,7 @@ CREATE TABLE [dbo].[SetAttributes] (
     [distance] float  NULL,
     [time] int  NULL,
     [reps] int  NULL,
+    [timeLogged] datetime  NOT NULL,
     [LoggedExercise_id] bigint  NOT NULL
 );
 GO

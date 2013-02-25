@@ -116,7 +116,6 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="sets" Type="int" Nullable="false" />
-    <Property Name="timeLogged" Type="datetime" Nullable="false" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="LimitBreaker_id" Type="int" Nullable="false" />
@@ -132,6 +131,7 @@
     <Property Name="distance" Type="float" Nullable="true" />
     <Property Name="time" Type="int" Nullable="true" />
     <Property Name="reps" Type="int" Nullable="true" />
+    <Property Name="timeLogged" Type="datetime" Nullable="false" />
     <Property Name="LoggedExercise_id" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="ExerciseGoals">
@@ -546,7 +546,6 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="sets" Nullable="false" Type="Int32" />
-          <Property Name="timeLogged" Nullable="false" Type="DateTime" />
           <Property Name="note" Nullable="true" Type="String" />
           <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int64" />
           <NavigationProperty Name="SetAttributes" Relationship="Layer2.LoggedExerciseSetAttributes" FromRole="LoggedExercise" ToRole="SetAttributes" />
@@ -564,6 +563,7 @@
           <Property Name="time" Nullable="true" Type="Int32" />
           <Property Name="reps" Nullable="true" Type="Int32" />
           <NavigationProperty Name="LoggedExercise" Relationship="Layer2.LoggedExerciseSetAttributes" FromRole="SetAttributes" ToRole="LoggedExercise" />
+          <Property Type="DateTime" Name="timeLogged" Nullable="false" />
         </EntityType>
         <Association Name="LoggedExerciseSetAttributes">
           <End Type="Layer2.LoggedExercise" Multiplicity="1" Role="LoggedExercise" />
@@ -769,7 +769,6 @@
         <MappingFragment StoreEntitySet="LoggedExercises">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="sets" ColumnName="sets" />
-          <ScalarProperty Name="timeLogged" ColumnName="timeLogged" />
           <ScalarProperty Name="note" ColumnName="note" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -782,6 +781,7 @@
           <ScalarProperty Name="distance" ColumnName="distance" />
           <ScalarProperty Name="time" ColumnName="time" />
           <ScalarProperty Name="reps" ColumnName="reps" />
+          <ScalarProperty Name="timeLogged" ColumnName="timeLogged" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
