@@ -11,17 +11,6 @@
     <hr />
     <table>
         <tr>
-            <td>
-                <asp:ListBox ID="exerciseSet" runat="server"></asp:ListBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Set number: 
-            </td>
-            <td>
-                <asp:Label ID="set" runat="server" Text="1"></asp:Label></td>
-        </tr>
-        <tr>
             <td>Weight: 
             </td>
             <td>
@@ -50,10 +39,9 @@
         <tr>
             <td>
                 <asp:Button ID="recordSet" runat="server" Text="Add Set" /></td>
-            <td>
-                <asp:Button ID="saveAll" runat="server" Text="Save" /></td>
         </tr>
-
     </table>
+    <hr />
+    Throw in view logged stuff here
 </asp:Content>
 
