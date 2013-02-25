@@ -118,6 +118,7 @@
     <Property Name="sets" Type="int" Nullable="false" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="timeLogged" Type="datetime" Nullable="false" />
     <Property Name="LimitBreaker_id" Type="int" Nullable="false" />
     <Property Name="Exercise_id" Type="int" Nullable="false" />
     <Property Name="Routine_id" Type="int" Nullable="true" />
@@ -552,6 +553,7 @@
           <NavigationProperty Name="LimitBreaker" Relationship="Layer2.LimitBreakerLoggedExercise" FromRole="LoggedExercise" ToRole="LimitBreaker" />
           <NavigationProperty Name="Exercise" Relationship="Layer2.ExerciseLoggedExercise" FromRole="LoggedExercise" ToRole="Exercise" />
           <NavigationProperty Name="Routine" Relationship="Layer2.LoggedExerciseRoutine" FromRole="LoggedExercise" ToRole="Routine" />
+          <Property Type="DateTime" Name="timeLogged" Nullable="false" />
         </EntityType>
         <EntityType Name="SetAttributes">
           <Key>
@@ -770,6 +772,7 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="sets" ColumnName="sets" />
           <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="timeLogged" ColumnName="timeLogged" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

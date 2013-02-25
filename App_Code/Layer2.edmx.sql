@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/25/2013 11:21:09
+-- Date Created: 02/25/2013 11:27:30
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project-LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -148,6 +148,7 @@ CREATE TABLE [dbo].[LoggedExercises] (
     [sets] int  NOT NULL,
     [note] nvarchar(max)  NULL,
     [id] bigint IDENTITY(1,1) NOT NULL,
+    [timeLogged] datetime  NOT NULL,
     [LimitBreaker_id] int  NOT NULL,
     [Exercise_id] int  NOT NULL,
     [Routine_id] int  NULL
