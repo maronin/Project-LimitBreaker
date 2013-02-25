@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
 /// <summary>
 /// Summary description for ScheduleManager
 /// </summary>
@@ -34,6 +35,7 @@ public class ScheduleManager
                                itemName = r.Routine.name,
                                startTime = r.startTime,
                                user = r.LimitBreaker,
+                               id = r.id,
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -44,6 +46,40 @@ public class ScheduleManager
                                 itemName = e.Exercise.name,
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
+                                id = e.id,
+                                isExericse = true
+                            };
+            var items = routines.Concat(exercises).ToList();
+
+            return items.ToList();
+        }
+    }
+
+    public List<scheduledItem> getScheduledItemsByDayOfTheYear(Int32 userID, DateTime day)
+    {
+        using (var context = new Layer2Container())
+        {
+            var ruleDate = Convert.ToDateTime(day).Date;
+            var routines = from r in context.ScheduledRoutines
+                           orderby r.startTime
+                           where (r.LimitBreaker.id == userID && r.startTime.Day == day.Day)
+                           select new scheduledItem
+                           {
+                               itemName = r.Routine.name,
+                               startTime = r.startTime,
+                               user = r.LimitBreaker,
+                               id = r.id,
+                               isExericse = false
+                           };
+            var exercises = from e in context.ScheduledExercises
+                            orderby e.startTime
+                            where (e.LimitBreakers.id == userID && e.startTime.Day == day.Day)
+                            select new scheduledItem
+                            {
+                                itemName = e.Exercise.name,
+                                startTime = e.startTime,
+                                user = e.LimitBreakers,
+                                id = e.id,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
@@ -143,5 +179,59 @@ public class ScheduleManager
             return context.LimitBreakers.FirstOrDefault(x => x.id == userID);
 
         }
+    }
+
+    public bool deletecheduledItem(Int32 itemID, bool isExercise, Int32 userID)
+    {
+        bool result = false;
+        using (var context = new Layer2Container())
+        {
+            //Routine rc = new Routine();
+            try
+            {
+                if (isExercise)
+                {
+                    ScheduledExercise rc = context.ScheduledExercises.Where(e => e.id == itemID).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        context.ScheduledExercises.DeleteObject(rc);
+                        context.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                else
+                {
+                    ScheduledRoutine rc = context.ScheduledRoutines.Where(e => e.id == itemID).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        context.ScheduledRoutines.DeleteObject(rc);
+                        context.SaveChanges();
+                        result = true;
+
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+        }
+
+        return result;
     }
 }

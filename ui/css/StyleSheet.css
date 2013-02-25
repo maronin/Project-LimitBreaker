@@ -6,12 +6,18 @@
 
 #login
 {
-    padding: 10px 0px 0px 0px;
-    top: 0px;
-    position: absolute;
+    padding: 0px 0px 0px 0px;
+    top: -54px;
     float: right;
     z-index: 10;
     right: 0%;
+    position: relative;
+}
+
+#login a
+{
+    text-decoration: underline;
+    color: rgb(204, 204, 204);
 }
 
 #header
@@ -110,20 +116,6 @@ p
     font-size: medium;
 }
 
-#newExerciseForm
-{
-}
-newExerciseForm, tr
-{
-    border-style: none;
-    width: 300px;
-}
-
-newExerciseForm, tr, td
-{
-    border-style: none;
-    width: 200px;
-}
 
 .tbStyle
 {
@@ -168,9 +160,9 @@ newExerciseForm, tr, td
 
 .today
 {
-margin: 0 auto;
-text-align: center;
-z-index: -1;
+    margin: 0 auto;
+    text-align: center;
+    z-index: -1;
 }
 
 .today span
@@ -178,7 +170,6 @@ z-index: -1;
     color: white;
     font-weight: bold;
 }
-
 .NextMonth
 {
     text-align: right;
@@ -227,11 +218,6 @@ z-index: -1;
     width: 97.5%;
 }
 .calendarMonthSelector a
-{
-    color: white;
-    font-weight: bold;
-}
-.calendarMonthSelector a span
 {
     color: white;
     font-weight: bold;
@@ -308,4 +294,24 @@ z-index: -1;
 .loadingCalendar h1
 {
     z-index: 5;
+}
+
+.scheduleTable2
+{
+
+}
+
+.description
+{
+    height: 100px;
+
+    width: 240px;
+    vertical-align: top;
+}
+
+.rowWidth
+{
+    vertical-align:top;
+    width: 100px;
+    height:100px;
 }

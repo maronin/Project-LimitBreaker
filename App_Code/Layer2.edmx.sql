@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/04/2013 11:00:58
--- Generated from EDMX file: C:\Users\Lynart\Documents\Project LimitBreaker\App_Code\Layer2.edmx
+-- Date Created: 02/25/2013 11:27:30
+-- Generated from EDMX file: C:\Users\Lynart\Documents\Project-LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -53,14 +53,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalLimitBreaker]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalLimitBreaker];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ExerciseGoalExercise]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseGoalExercise];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ExerciseRoutine_Exercise]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ExerciseRoutine] DROP CONSTRAINT [FK_ExerciseRoutine_Exercise];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ExerciseRoutine_Routine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ExerciseRoutine] DROP CONSTRAINT [FK_ExerciseRoutine_Routine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ExerciseExerciseGoal]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ExerciseGoals] DROP CONSTRAINT [FK_ExerciseExerciseGoal];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LoggedExerciseRoutine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_LoggedExerciseRoutine];
 GO
 
 -- --------------------------------------------------
@@ -125,7 +128,8 @@ CREATE TABLE [dbo].[Exercises] (
     [time] bit  NOT NULL,
     [enabled] bit  NOT NULL,
     [id] int IDENTITY(1,1) NOT NULL,
-    [muscleGroups] nvarchar(max)  NOT NULL
+    [muscleGroups] nvarchar(max)  NOT NULL,
+    [description] nvarchar(max)  NULL
 );
 GO
 
@@ -142,11 +146,12 @@ GO
 -- Creating table 'LoggedExercises'
 CREATE TABLE [dbo].[LoggedExercises] (
     [sets] int  NOT NULL,
-    [timeLogged] datetime  NOT NULL,
     [note] nvarchar(max)  NULL,
     [id] bigint IDENTITY(1,1) NOT NULL,
+    [timeLogged] datetime  NOT NULL,
     [LimitBreaker_id] int  NOT NULL,
-    [Exercise_id] int  NOT NULL
+    [Exercise_id] int  NOT NULL,
+    [Routine_id] int  NULL
 );
 GO
 
@@ -157,6 +162,7 @@ CREATE TABLE [dbo].[SetAttributes] (
     [distance] float  NULL,
     [time] int  NULL,
     [reps] int  NULL,
+    [timeLogged] datetime  NOT NULL,
     [LoggedExercise_id] bigint  NOT NULL
 );
 GO
@@ -560,6 +566,20 @@ ADD CONSTRAINT [FK_ExerciseExerciseGoal]
 CREATE INDEX [IX_FK_ExerciseExerciseGoal]
 ON [dbo].[ExerciseGoals]
     ([Exercise_id]);
+GO
+
+-- Creating foreign key on [Routine_id] in table 'LoggedExercises'
+ALTER TABLE [dbo].[LoggedExercises]
+ADD CONSTRAINT [FK_LoggedExerciseRoutine]
+    FOREIGN KEY ([Routine_id])
+    REFERENCES [dbo].[Routines]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_LoggedExerciseRoutine'
+CREATE INDEX [IX_FK_LoggedExerciseRoutine]
+ON [dbo].[LoggedExercises]
+    ([Routine_id]);
 GO
 
 -- --------------------------------------------------

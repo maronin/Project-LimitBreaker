@@ -8,7 +8,7 @@
         color: Red;
     }
     .style2
-    {
+    {   
         height: 54px;
     }
     .style3
@@ -57,7 +57,7 @@
                     CssClass="cblStyle">
                     <asp:ListItem>Chest</asp:ListItem>
                     <asp:ListItem>Back</asp:ListItem>
-                    <asp:ListItem>Shoulder</asp:ListItem>
+                    <asp:ListItem>Shoulders</asp:ListItem>
                     <asp:ListItem>Arms</asp:ListItem>
                     <asp:ListItem>Legs</asp:ListItem>
                     <asp:ListItem>Cardio</asp:ListItem>
@@ -120,6 +120,14 @@
         </tr>
         <tr>
             <td>
+                <p>Description:</p>
+            </td>
+            <td>
+                <asp:TextBox ID="tbDescription" runat="server" Height="144px" CssClass="tbStyle" TextMode="MultiLine"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <p>
                     Video Link:
                 </p>
@@ -131,6 +139,10 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Please enter a video link"
                     ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" SetFocusOnError="True"
                     ValidationGroup="AddExercise"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Improper video link format"
+                    ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" 
+                    ValidationGroup="AddExercise" 
+                    ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?"></asp:RegularExpressionValidator>
             </td>
         </tr>
     </table>
