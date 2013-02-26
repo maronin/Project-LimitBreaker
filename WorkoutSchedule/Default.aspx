@@ -324,13 +324,13 @@
                             <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
                             <br />
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">
-                                <h4>
-                                    Modify Item</h4>
+    
                                 <h5>
                                     Description:</h5>
                                 <br />
                                 <asp:Label ID="lblDescriptionModify" runat="server" Text=""></asp:Label>
                                 <br />
+                                <asp:Panel ID="pnlEquipmentMuscle" runat="server">
                                 <h5>
                                     Muscle Groups</h5>
                                 <br />
@@ -340,6 +340,8 @@
                                     Equipment</h5>
                                 <br />
                                 <asp:Label ID="lblEquipmentModify" runat="server" Text=""></asp:Label>
+
+                                </asp:Panel>
                                 <br />
                                 <br />
                                 <table>
@@ -348,8 +350,8 @@
                                             Change item to:
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="ddlExercisesModify" runat="server" DataTextField="name" DataValueField="id"
-                                                Visible="False">
+                                            <asp:DropDownList ID="ddlModifyItems" runat="server" DataTextField="name" DataValueField="id"
+                                                Visible="False" Width="155px">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
