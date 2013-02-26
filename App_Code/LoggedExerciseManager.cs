@@ -128,7 +128,7 @@ public class LoggedExerciseManager
             rc += "<strong>Set " + i + "</strong><br /> ";
             if (set.weight > 0)
             {
-                rc += "Weight: " + set.weight + " | ";
+                rc += "Weight: " + set.weight + "kg | ";
             }
             if (set.reps > 0)
             {
@@ -136,11 +136,13 @@ public class LoggedExerciseManager
             }
             if (set.distance > 0)
             {
-                rc += "Distance: " + set.distance + " | ";
+                rc += "Distance: " + set.distance + "km | ";
             }
             if (set.time > 0)
             {
-                rc += "time: " + set.time + " | ";
+                int minutes = (Int32)set.time/60;
+                int seconds = (Int32)set.time - minutes * 60;
+                rc += "time: " + minutes + "m " + seconds + "s | ";
             }
             i++;
             rc += "<br />";
