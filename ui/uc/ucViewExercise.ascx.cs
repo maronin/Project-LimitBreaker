@@ -119,6 +119,11 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         get { return ExerciseDDL.SelectedItem.Text; }
     }
 
+    public bool exists
+    {
+        get { return ExerciseDDL.SelectedItem != null ? true : false; }
+    }
+
     public int ddlSelectedValue
     {
         get { return Convert.ToInt32(ExerciseDDL.SelectedValue); }
