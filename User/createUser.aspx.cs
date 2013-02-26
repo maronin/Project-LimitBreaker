@@ -56,6 +56,7 @@ public partial class User_createUser : System.Web.UI.Page
                     System.Web.Security.Membership.CreateUser(userName, password, email, "none", "none", true, out status);
                     System.Web.Security.Roles.AddUserToRole(userName, "user");
                     System.Web.Security.Membership.ValidateUser(userName, password);
+
                     Response.Redirect("profile.aspx");
                     break;
                 case 1:
