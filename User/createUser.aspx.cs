@@ -82,7 +82,7 @@ public partial class User_createUser : System.Web.UI.Page
     protected void sendVerification(String username, String email)
     {
         MembershipUser userInfo = Membership.GetUser(username);
-        String verifyURL = Request.Url.GetLeftPart(UriPartial.Authority) + Page.ResolveUrl("~User/verify.aspx?ID=" + userInfo.ProviderUserKey.ToString());
+        String verifyURL = Request.Url.GetLeftPart(UriPartial.Authority) + Page.ResolveUrl("~/User/verify.aspx?ID=" + userInfo.ProviderUserKey.ToString());
         MailMessage mm = new MailMessage();
         mm.To.Add(new MailAddress(email, "LimitBreaker verification"));
         mm.From = new MailAddress("lynart@limitbreaker.com");
@@ -92,7 +92,7 @@ public partial class User_createUser : System.Web.UI.Page
         SmtpClient smcl = new SmtpClient();
         smcl.Host = "smtp.gmail.com";
         smcl.Port = 587;
-        smcl.Credentials = new System.Net.NetworkCredential("vince.lee.lien@gmail.com", "wh@t3verv");
+        smcl.Credentials = new System.Net.NetworkCredential("projectlimitbreaker@gmail.com", "furaijin");
         smcl.EnableSsl = true;
         smcl.Send(mm);
     }
