@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for customBusinessObjectClasses
+/// Custom class for storing scheduled routines and exercise
 /// </summary>
 public class scheduledItem
 {

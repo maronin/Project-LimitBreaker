@@ -106,4 +106,18 @@ public class ExerciseManager
 
         return rc;
     }
+
+    public Exercise getExerciseByScheduledItem(Int32 id)
+    {
+        using (var context = new Layer2Container())
+        {
+            ScheduledExercise schExercise = context.ScheduledExercises.Where(e => e.id == id).FirstOrDefault();
+            context.LoadProperty(schExercise, "Exercise");
+            return context.Exercises.Where(e => e.id == schExercise.Exercise.id).FirstOrDefault();
+
+            
+        }
+
+    }
+
 }

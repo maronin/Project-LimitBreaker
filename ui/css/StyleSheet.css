@@ -200,6 +200,10 @@ p
     padding: 1em;
     margin: 1em;
     width: 90%;
+         -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
 }
 
 .DaysOfWeek
@@ -257,15 +261,23 @@ p
 
 #scheduleChoice
 {
+    
 }
 .date
 {
-    font-style: normal;
-    text-decoration: none;
-    font-family: 'Arial Black';
-    color: #C0C0C0;
-    font-weight: lighter;
-    margin-left: 4px;
+font-style: normal;
+text-decoration: none;
+font-family: 'Arial Black';
+color: #000000;
+font-weight: lighter;
+margin-left: -1px;
+margin-top: -1px;
+padding-left: 2px;
+padding-top: 0px;
+position: absolute;
+background-color: rgb(255, 255, 255);
+width: 22px;
+height: 18px;
 }
 
 .events
@@ -290,6 +302,10 @@ p
     background: rgb(54, 25, 25); /* Fall-back for browsers that don't                                support rgba */
     background: rgba(128, 128, 128, .5);
     color: #000000;
+   -moz-border-radius: 20px;
+   -webkit-border-radius: 20px;
+   -khtml-border-radius: 20px;
+    border-radius: 20px;
 }
 .loadingCalendar h1
 {
