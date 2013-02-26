@@ -108,8 +108,31 @@
             </div>
         </div>
         <div id="footer">
+
+            
+
             <div class="background">
+
+            
                 <div class="body">
+
+                <div class="section">
+                    <asp:HyperLink ID="support" runat="server" NavigateUrl="~/support.aspx" 
+                        ForeColor="#FFFFCC">Support & FAQ</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="aboutUsLink" runat="server" NavigateUrl="~/aboutUs.aspx" 
+                        ForeColor="#FFFFCC">About Us</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="aboutLimitBreakerLink" runat="server" 
+                        NavigateUrl="~/aboutLimitbreaker.aspx" ForeColor="#FFFFCC">About Project LimitBreaker</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="tosLink" runat="server" NavigateUrl="~/termsOfService.aspx" 
+                        ForeColor="#FFFFCC">Terms of Service</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="contactUsLink" runat="server" NavigateUrl="~/contactUs.aspx" 
+                        ForeColor="#FFFFCC">Contact Us</asp:HyperLink>
+                        
+                    </div>
                     <%-- <form action="index.html" method="post" id="message" class="section">
                     <h3>
                         Send a Message</h3>
@@ -154,6 +177,9 @@
                                         class="googleplus"></a> </li>
                         </ul>--%>
                     </div>
+                    
+                    
+
                     <p id="footnote">
                         © Copyright 2013. All rights reserved.
                     </p>
