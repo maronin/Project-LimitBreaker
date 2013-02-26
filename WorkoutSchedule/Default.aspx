@@ -324,7 +324,21 @@
                             <br />
 
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">
+                                
+                                
                                 <h4>Modify Item</h4>
+                                <h5>Description:</h5>
+                                <br />
+                                <asp:Label ID="lblDescriptionModify" runat="server" Text=""></asp:Label>
+                                <br />
+                                <h5>Muscle Groups</h5>
+                                <br />
+                                <asp:Label ID="lblMuscleGroupsModify" runat="server" Text=""></asp:Label>
+                                <br />
+                                <h5>Equipment</h5>
+                                <br />
+                                <asp:Label ID="lblEquiomentModify" runat="server" Text=""></asp:Label>
+                                <br />
                                 Change item to:
                                 <asp:DropDownList ID="ddlExercisesModify" runat="server" DataTextField="name" DataValueField="id"
                                     Visible="False">

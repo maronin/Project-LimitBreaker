@@ -284,6 +284,4 @@ public class ScheduleManager
         return result;
     }
 
-
-
 }

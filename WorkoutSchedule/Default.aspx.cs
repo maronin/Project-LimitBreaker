@@ -468,7 +468,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
 
 
-
+    HttpResponse response = System.Web.HttpContext.Current.Response;
 
     protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
     {
@@ -478,7 +478,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ';' });
-
+        modifyExercise = Convert.ToBoolean(commandArgs[1]);
+        modifyItemID = Convert.ToInt32(commandArgs[0]);
         if (e.CommandName == "del")
         {
             
@@ -503,9 +504,11 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             ddlExercisesModify.Visible = true;
             if (Convert.ToBoolean(commandArgs[1]))
             {
-                Exercise exercise = exerciseManager.getExerciseById(Convert.ToInt32(commandArgs[0]));
+                Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
                 ddlExercisesModify.DataSource = exerciseManager.getExercises();
                 ddlExercisesModify.DataBind();
+                if (exercise != null)
+                lblDescriptionModify.Text = exercise.description;
 
             }
             else
@@ -515,8 +518,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 ddlExercisesModify.DataBind();
 
             }
-            modifyExercise = Convert.ToBoolean(commandArgs[1]);
-            modifyItemID = Convert.ToInt32(commandArgs[0]);
+
             
         }
 
