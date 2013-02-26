@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Drawing;
 
 public partial class LoggedExercise_default : System.Web.UI.Page
 {
@@ -158,8 +159,17 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             distanceValue = 0;
         }
-        logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue);
-        displayLogs(exerciseID);
+        if (logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue))
+        {
+            successLbl.Visible = true;
+            displayLogs(exerciseID);
+        }
+        else
+        {
+            successLbl.Visible = true;
+            successLbl.Text = "Something went wrong!";
+            successLbl.ForeColor = Color.Red;
+        }
     }
     private int createTime(int minutes, int seconds)
     {

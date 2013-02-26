@@ -54,6 +54,8 @@
         <tr>
             <td>
                 <asp:Button ID="recordSet" runat="server" Text="Add Set" OnClick="recordSet_Click" ValidationGroup="LogExercise" /></td>
+            <td>
+                <asp:Label ID="successLbl" runat="server" Text="Exercise logged!" ForeColor="Green" Enabled="False" Visible="False"></asp:Label></td>
             
         </tr>
     </table>
