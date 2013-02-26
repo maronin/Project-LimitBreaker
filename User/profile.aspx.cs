@@ -13,7 +13,7 @@ public partial class User_profile : System.Web.UI.Page
     {
         if (User.Identity.Name != "")
         {
-            String username = Membership.GetUser().UserName;
+            String username = User.Identity.Name;
             Statistics userStats = manager.getStats(username);
             alias.Text = username;
             level.Text = Convert.ToString(userStats.level);
@@ -47,7 +47,7 @@ public partial class User_profile : System.Web.UI.Page
     }
     protected void updateStats_Click(object sender, EventArgs e)
     {
-        String username = Membership.GetUser().UserName;
+        String username = User.Identity.Name;
         manager.updateWeight(username, Convert.ToDouble(newWeight.Text));
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);
