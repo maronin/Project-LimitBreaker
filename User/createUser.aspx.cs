@@ -25,6 +25,10 @@ public partial class User_createUser : System.Web.UI.Page
                 birthday.Items.Add(year);
             }
         }
+        else
+        {
+            Response.Redirect("profile.aspx");
+        }
     }
     protected void Create_Click(object sender, EventArgs e)
     {

@@ -14,15 +14,15 @@
             <asp:RegularExpressionValidator ID="emailRegExpValid" runat="server" 
                 ControlToValidate="eAddressTextbox" ErrorMessage="Inproper email" 
                 ForeColor="Red" 
-                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="contactUs"></asp:RegularExpressionValidator>
             <br />
             <asp:RequiredFieldValidator 
                 ID="eAddressValid" runat="server" ControlToValidate="eAddressTextbox" 
-                ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                ErrorMessage="Required" ForeColor="Red" ValidationGroup="contactUs"></asp:RequiredFieldValidator>
         </td>
         <td>
             <asp:TextBox ID="eAddressTextbox" runat="server" Width="100%"  
-                style="width:100%"></asp:TextBox>
+                style="width:100%" ValidationGroup="contactUs"></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -35,7 +35,7 @@
         <td>
             <asp:TextBox ID="eMessageTextBox" runat="server" rows="1" 
                 cols="20" Height="100px" Width="100%" MaxLength="255" 
-                TextMode="MultiLine"></asp:TextBox>
+                TextMode="MultiLine" ValidationGroup="contactUs"></asp:TextBox>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </td>
     </tr>
@@ -43,7 +43,7 @@
         <td>
             <br />
             <asp:Button ID="sendEmailButton" runat="server" onclick="Button1_Click" 
-                Text="Send Email" />
+                Text="Send Email" ValidationGroup="contactUs" />
             <br />
             <asp:Label ID="confirmLabel" runat="server" ForeColor="#66FF66"></asp:Label>
         </td>
