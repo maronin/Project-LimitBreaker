@@ -71,12 +71,16 @@ public class ExerciseManager
             {
                 var exercise = context.Exercises.Where(s => s.name == name).FirstOrDefault();
 
-                //var exp = context.ExerciseExps.Where(s => s.Exercise.id == id).FirstOrDefault(); // Make it so it only works when there is a related ExerciseExp
-                //context.ExerciseExps.DeleteObject(exp);
-
                 exercise.LoggedExercise.Clear();
                 exercise.ScheduledExercises.Clear();
-                //ExerciseGoal doesn't have a navigation property
+                exercise.Routines.Clear();
+                exercise.ExerciseGoals.Clear();
+
+                var exp = context.ExerciseExps.Where(s => s.Exercise.name == name).FirstOrDefault();
+                if (exp != null)
+                {
+                    context.ExerciseExps.DeleteObject(exp);
+                }
 
                 context.Exercises.DeleteObject(exercise);
                 context.SaveChanges();
@@ -108,10 +112,12 @@ public class ExerciseManager
         using (var context = new Layer2Container())
         {
             ScheduledExercise schExercise = context.ScheduledExercises.Where(e => e.id == id).FirstOrDefault();
+            context.LoadProperty(schExercise, "Exercise");
             return context.Exercises.Where(e => e.id == schExercise.Exercise.id).FirstOrDefault();
 
             
         }
 
     }
+
 }

@@ -13,7 +13,7 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
         manager = new SystemExerciseManager();     
     }
     protected void btnCreateExercise_Click(object sender, EventArgs e)
-    {
+    {   
         lblResult.Text = "";
         bool rep = false, wieght = false, time = false, distance = false, enabled = false;
         string muscleGroups = "";
@@ -35,7 +35,7 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.createNewExercise(tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, enabled) && tbExerciseName.Text != ""){  
+        if (manager.createNewExercise(tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, enabled, tbDescription.Text) && tbExerciseName.Text != ""){  
             lblResult.ForeColor = System.Drawing.Color.Green;       
             lblResult.Text = "Added Succesfully!";
         }
@@ -53,6 +53,7 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
         tbExerciseName.Text = "";
         tbEquipment.Text = "";
         tbVideoLink.Text = "";
+        tbDescription.Text = "";
 
         cblAttributes.ClearSelection();
         cblMuscleGroups.ClearSelection();
