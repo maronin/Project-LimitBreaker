@@ -499,6 +499,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
         if (e.CommandName == "modify")
         {
+            lblMuscleGroupsModify.Text = "";
             pnlModifyItem.Visible = true;
             btnModify.Visible = true;
             ddlExercisesModify.Visible = true;
@@ -508,7 +509,22 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 ddlExercisesModify.DataSource = exerciseManager.getExercises();
                 ddlExercisesModify.DataBind();
                 if (exercise != null)
-                lblDescriptionModify.Text = exercise.description;
+                    if (exercise.description != null)
+                        lblDescriptionModify.Text = exercise.description;
+                    else
+                    {
+                        lblDescriptionModify.Text = "None";
+                    }
+                lblEquipmentModify.Text = exercise.equipment;
+
+                String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
+                foreach (var item in muscles)
+                {
+                    if (item != "")
+                        lblMuscleGroupsModify.Text += "- " + item + "<br/>";
+                }
+
+
 
             }
             else

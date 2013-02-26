@@ -230,6 +230,7 @@ img
 #contents > div:first-child
 {
     padding: 48px 30px 24px;
+    min-height: 700PX;
 }
 .time
 {

@@ -284,7 +284,7 @@
                             </asp:FilteredTextBoxExtender>
                             <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
                                 AutoPostBack="True" OnTextChanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
-                                                            <hr />
+                            <hr />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
                                 ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                 ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
@@ -304,7 +304,8 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lnkModify" runat="server" CommandName="modify" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Modify</asp:LinkButton>
-                                            <asp:LinkButton ID="lnkRemove" runat="server" CommandName="del" OnClientClick="return confirm('Doing this will irreversibly remove the scheduled item from the system. Are you sure?');" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Remove</asp:LinkButton>
+                                            <asp:LinkButton ID="lnkRemove" runat="server" CommandName="del" OnClientClick="return confirm('Doing this will irreversibly remove the scheduled item from the system. Are you sure?');"
+                                                CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Remove</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -322,92 +323,107 @@
                                 ForeColor="Red" Visible="False"></asp:Label>
                             <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
                             <br />
-
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">
-                                
-                                
-                                <h4>Modify Item</h4>
-                                <h5>Description:</h5>
+                                <h4>
+                                    Modify Item</h4>
+                                <h5>
+                                    Description:</h5>
                                 <br />
                                 <asp:Label ID="lblDescriptionModify" runat="server" Text=""></asp:Label>
                                 <br />
-                                <h5>Muscle Groups</h5>
+                                <h5>
+                                    Muscle Groups</h5>
                                 <br />
                                 <asp:Label ID="lblMuscleGroupsModify" runat="server" Text=""></asp:Label>
                                 <br />
-                                <h5>Equipment</h5>
+                                <h5>
+                                    Equipment</h5>
                                 <br />
-                                <asp:Label ID="lblEquiomentModify" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="lblEquipmentModify" runat="server" Text=""></asp:Label>
                                 <br />
-                                Change item to:
-                                <asp:DropDownList ID="ddlExercisesModify" runat="server" DataTextField="name" DataValueField="id"
-                                    Visible="False">
-                                </asp:DropDownList>
                                 <br />
-                                Select a new time: 
-                                <asp:DropDownList ID="ddlHoursModify" runat="server">
-                                    <asp:ListItem>1</asp:ListItem>
-                                    <asp:ListItem>2</asp:ListItem>
-                                    <asp:ListItem>3</asp:ListItem>
-                                    <asp:ListItem>4</asp:ListItem>
-                                    <asp:ListItem>5</asp:ListItem>
-                                    <asp:ListItem>6</asp:ListItem>
-                                    <asp:ListItem>7</asp:ListItem>
-                                    <asp:ListItem>8</asp:ListItem>
-                                    <asp:ListItem>9</asp:ListItem>
-                                    <asp:ListItem>10</asp:ListItem>
-                                    <asp:ListItem>11</asp:ListItem>
-                                    <asp:ListItem>12</asp:ListItem>
-                                </asp:DropDownList>
-                                :
-                                <asp:DropDownList ID="ddlMinutesModify" runat="server">
-                                    <asp:ListItem Value="00"></asp:ListItem>
-                                    <asp:ListItem Value="05"></asp:ListItem>
-                                    <asp:ListItem Value="10"></asp:ListItem>
-                                    <asp:ListItem Value="15"></asp:ListItem>
-                                    <asp:ListItem Value="20"></asp:ListItem>
-                                    <asp:ListItem Value="25"></asp:ListItem>
-                                    <asp:ListItem Value="30"></asp:ListItem>
-                                    <asp:ListItem Value="35"></asp:ListItem>
-                                    <asp:ListItem Value="40"></asp:ListItem>
-                                    <asp:ListItem Value="45"></asp:ListItem>
-                                    <asp:ListItem Value="50"></asp:ListItem>
-                                    <asp:ListItem Value="55"></asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:DropDownList ID="ddlAmPmModify" runat="server">
-                                    <asp:ListItem>AM</asp:ListItem>
-                                    <asp:ListItem>PM</asp:ListItem>
-                                </asp:DropDownList>
-                                <br />
-                                Select a new date:
-                                <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="tbRemoveDate"
-                                    FilterType="Custom" ValidChars='()1234567890-/'>
-                                </asp:FilteredTextBoxExtender>
-                                <asp:TextBox ID="tbDateModify" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
-                                    AutoPostBack="True" ValidationGroup="ModifyItem" OnTextChanged="tbDateModify_textChanged"></asp:TextBox>
-                                <asp:RegularExpressionValidator ID="modifyDateValidator" runat="server" ErrorMessage="Invalid Date"
-                                    ControlToValidate="tbDateModify" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                    ValidationGroup="ModifyItem" Display="Dynamic"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator ForeColor="Red" ID="modifyDateRequired" runat="server"
-                                    ErrorMessage="*" ControlToValidate="tbDateModify" ValidationGroup="ModifyItem"
-                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:CalendarExtender ID="calendarModify" runat="server" TargetControlID="tbDateModify">
-                                </asp:CalendarExtender>
-                                
-                                
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Change item to:
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlExercisesModify" runat="server" DataTextField="name" DataValueField="id"
+                                                Visible="False">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Select a new time:
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlHoursModify" runat="server">
+                                                <asp:ListItem>1</asp:ListItem>
+                                                <asp:ListItem>2</asp:ListItem>
+                                                <asp:ListItem>3</asp:ListItem>
+                                                <asp:ListItem>4</asp:ListItem>
+                                                <asp:ListItem>5</asp:ListItem>
+                                                <asp:ListItem>6</asp:ListItem>
+                                                <asp:ListItem>7</asp:ListItem>
+                                                <asp:ListItem>8</asp:ListItem>
+                                                <asp:ListItem>9</asp:ListItem>
+                                                <asp:ListItem>10</asp:ListItem>
+                                                <asp:ListItem>11</asp:ListItem>
+                                                <asp:ListItem>12</asp:ListItem>
+                                            </asp:DropDownList>
+                                            :
+                                            <asp:DropDownList ID="ddlMinutesModify" runat="server">
+                                                <asp:ListItem Value="00"></asp:ListItem>
+                                                <asp:ListItem Value="05"></asp:ListItem>
+                                                <asp:ListItem Value="10"></asp:ListItem>
+                                                <asp:ListItem Value="15"></asp:ListItem>
+                                                <asp:ListItem Value="20"></asp:ListItem>
+                                                <asp:ListItem Value="25"></asp:ListItem>
+                                                <asp:ListItem Value="30"></asp:ListItem>
+                                                <asp:ListItem Value="35"></asp:ListItem>
+                                                <asp:ListItem Value="40"></asp:ListItem>
+                                                <asp:ListItem Value="45"></asp:ListItem>
+                                                <asp:ListItem Value="50"></asp:ListItem>
+                                                <asp:ListItem Value="55"></asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:DropDownList ID="ddlAmPmModify" runat="server">
+                                                <asp:ListItem>AM</asp:ListItem>
+                                                <asp:ListItem>PM</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Select a new date:
+                                        </td>
+                                        <td>
+                                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" TargetControlID="tbRemoveDate"
+                                                FilterType="Custom" ValidChars='()1234567890-/'>
+                                            </asp:FilteredTextBoxExtender>
+                                            <asp:TextBox ID="tbDateModify" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
+                                                AutoPostBack="True" ValidationGroup="ModifyItem" OnTextChanged="tbDateModify_textChanged"></asp:TextBox>
+                                            <asp:RegularExpressionValidator ID="modifyDateValidator" runat="server" ErrorMessage="Invalid Date"
+                                                ControlToValidate="tbDateModify" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                                ValidationGroup="ModifyItem" Display="Dynamic"></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator ForeColor="Red" ID="modifyDateRequired" runat="server"
+                                                ErrorMessage="*" ControlToValidate="tbDateModify" ValidationGroup="ModifyItem"
+                                                Display="Dynamic"></asp:RequiredFieldValidator>
+                                            <asp:CalendarExtender ID="calendarModify" runat="server" TargetControlID="tbDateModify">
+                                            </asp:CalendarExtender>
+                                        </td>
+                                    </tr>
+                                </table>
                             </asp:Panel>
                             <br />
                             <br />
-                            <asp:Button ID="btnBackToCalendar" runat="server" Text="Back to Calendar" OnClick="goBack_Click" CssClass="button"/>
-                            <asp:Button ID="btnModify" runat="server" Text="Modify" CssClass="button" OnClick="btnModify_Click" ValidationGroup="ModifyItem" Visible="False" />
+                            <asp:Button ID="btnBackToCalendar" runat="server" Text="Back to Calendar" OnClick="goBack_Click"
+                                CssClass="button" />
+                            <asp:Button ID="btnModify" runat="server" Text="Modify" CssClass="button" OnClick="btnModify_Click"
+                                ValidationGroup="ModifyItem" Visible="False" />
                             <br />
                             <asp:Label ID="lblResultModify" runat="server" Text=""></asp:Label>
                             <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                             <br />
                             <br />
                         </asp:View>
                     </asp:MultiView>
