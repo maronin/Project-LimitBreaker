@@ -25,15 +25,14 @@ public class LoggedExerciseManager
             if (log != null)
             {
                 set = createSet(reps, time, weight, distance, log.id);
-                return true;
 
             }
             else
             {
                 log = createLoggedExercise(userID, exerciseID);
                 set = createSet(reps, time, weight, distance, log.id);
-                return true;
             }
+            return log != null && set != null;
         }
     }
 
@@ -53,12 +52,8 @@ public class LoggedExerciseManager
                         return log;
                     }
                 }
-                return null;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 
@@ -67,16 +62,25 @@ public class LoggedExerciseManager
 
         using (var context = new Layer2Container())
         {
-            LoggedExercise log;
-            log = new LoggedExercise();
-            log.sets = 1;
-            log.note = "";
-            log.timeLogged = DateTime.Now;
-            log.Exercise = context.Exercises.Where(e => e.id == exerciseID).First();
-            log.LimitBreaker = context.LimitBreakers.Where(l => l.id == userID).First();
-            context.LoggedExercises.AddObject(log);
-            context.SaveChanges();
-            return log;
+            Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
+            LimitBreaker limitBreaker = context.LimitBreakers.Where(l => l.id == userID).FirstOrDefault();
+            if (exercise != null && limitBreaker != null)
+            {
+                LoggedExercise log;
+                log = new LoggedExercise();
+                log.sets = 1;
+                log.note = "";
+                log.timeLogged = DateTime.Now;
+                log.Exercise = exercise;
+                log.LimitBreaker = limitBreaker;
+                context.LoggedExercises.AddObject(log);
+                context.SaveChanges();
+                return log;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
@@ -99,11 +103,11 @@ public class LoggedExerciseManager
         }
     }
 
-    public List<LoggedExercise> getLoggedExercises(Int32 userID, String exerciseName)
+    public List<LoggedExercise> getLoggedExercises(Int32 userID, Int32 exerciseID)
     {
         using (var context = new Layer2Container())
         {
-            return context.LoggedExercises.Where(log => log.Exercise.name == exerciseName && log.LimitBreaker.id == userID).OrderByDescending(log => log.timeLogged).ToList();
+            return context.LoggedExercises.Where(log => log.Exercise.id == exerciseID && log.LimitBreaker.id == userID).OrderByDescending(log => log.timeLogged).ToList();
         }
     }
 

@@ -25,7 +25,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             selectedExercise = exerciseManager.getFirstExercise();
             createTextBoxes();
-            displayLogs(selectedExercise.name);
+            displayLogs(exerciseID);
         }
         else
         {
@@ -44,7 +44,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         exerciseID = ucViewExercise.ddlSelectedValue;
         selectedExercise = exerciseManager.getExerciseById(exerciseID);
         createTextBoxes();
-        displayLogs(selectedExercise.name);
+        displayLogs(exerciseID);
     }
     protected void createTextBoxes()
     {
@@ -159,16 +159,16 @@ public partial class LoggedExercise_default : System.Web.UI.Page
             distanceValue = 0;
         }
         logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue);
-        displayLogs(selectedExercise.name);
+        displayLogs(exerciseID);
     }
     private int createTime(int minutes, int seconds)
     {
         return minutes * 60 + seconds;
     }
 
-    private void displayLogs(string exerciseName)
+    private void displayLogs(int exerciseID)
     {
-        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, exerciseName);
+        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, exerciseID);
         loggedExercises.DataSource = logs;
         loggedExercises.DataBind();
     }
