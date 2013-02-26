@@ -89,17 +89,25 @@ public class LoggedExerciseManager
 
         using (var context = new Layer2Container())
         {
-            SetAttributes set;
-            set = new SetAttributes();
-            set.reps = rep;
-            set.time = time;
-            set.weight = weight;
-            set.distance = distance;
-            set.timeLogged = DateTime.Now;
-            set.LoggedExercise = context.LoggedExercises.Where(log => log.id == logID).First();
-            context.SetAttributes.AddObject(set);
-            context.SaveChanges();
-            return set;
+            LoggedExercise existingLog = context.LoggedExercises.Where(log => log.id == logID).FirstOrDefault();
+            if (existingLog != null)
+            {
+                SetAttributes set;
+                set = new SetAttributes();
+                set.reps = rep;
+                set.time = time;
+                set.weight = weight;
+                set.distance = distance;
+                set.timeLogged = DateTime.Now;
+                set.LoggedExercise = existingLog;
+                context.SetAttributes.AddObject(set);
+                context.SaveChanges();
+                return set;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
