@@ -4,6 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <p>
-    Default page. Will redirect to use profile in future</p>
+    Home page. Will redirect to use profile in future</p>
 </asp:Content>
 
