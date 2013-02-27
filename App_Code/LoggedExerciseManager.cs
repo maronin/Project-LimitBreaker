@@ -9,14 +9,17 @@ using System.Web;
 
 public class LoggedExerciseManager
 {
+    ExperienceManager expMngr;
+
     System.Web.HttpApplication _context;
     public LoggedExerciseManager()
     {
         _context = System.Web.HttpContext.Current.ApplicationInstance;
+        expMngr = new ExperienceManager();
     }
 
-    public bool logExercise(Int32 userID, Int32 exerciseID, Int32 reps, Int32 time, Int32 weight, Double distance)
-    {
+    public int logExercise(Int32 userID, Int32 exerciseID, Int32 reps, Int32 time, Int32 weight, Double distance)
+    {       //changed the return type to return the amount of exp rewarded
         //Get a logged exercise that has been logged within the hour and with the same exercise, else create a new one
         using (var context = new Layer2Container())
         {
@@ -32,7 +35,16 @@ public class LoggedExerciseManager
                 log = createLoggedExercise(userID, exerciseID);
                 set = createSet(reps, time, weight, distance, log.id);
             }
-            return log != null && set != null;
+
+            int exp = 0;
+
+            if (set != null) 
+            {       
+                string exerciseName = context.Exercises.Where(s => s.id == exerciseID).FirstOrDefault().name;
+                exp = expMngr.calculateLoggedExerciseExperience(exerciseName, set);
+            }
+
+            return exp;
         }
     }
 

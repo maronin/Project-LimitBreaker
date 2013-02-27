@@ -155,19 +155,17 @@ public class ExperienceManager
     }
 
     //non-database related experience functions
-    public int calculateLoggedExerciseExperience(string exerciseName, List<SetAttributes> setAttributesSet)
+    public int calculateLoggedExerciseExperience(string exerciseName, SetAttributes setAttributes)
     {
         ExerciseExp exerciseExp = getExerciseExpByExerciseName(exerciseName);
         int resultExp = (int)exerciseExp.baseExperience;
 
-        foreach (SetAttributes sa in setAttributesSet)
-        {
-            resultExp += (int)(exerciseExp.distanceModifier * sa.distance + exerciseExp.repModifier * sa.reps + exerciseExp.timeModifier * sa.time + exerciseExp.weightModifier * sa.weight);
-        }
+        resultExp += (int)(exerciseExp.distanceModifier * setAttributes.distance + exerciseExp.repModifier * setAttributes.reps + exerciseExp.timeModifier * setAttributes.time + exerciseExp.weightModifier * setAttributes.weight);
 
         return resultExp;
     }
 
+    //gonna have to change this
     public int calculateLoggedRoutineExperience(List<Exercise> exerciseSet, string userName)
     {
         int resultExp = 0;
@@ -175,7 +173,7 @@ public class ExperienceManager
 
         foreach (Exercise exer in exerciseSet)
         {
-            resultExp += calculateLoggedExerciseExperience(exer.name, setMngr.getSetAttributesFromLoggedExerciseFromUser(userName, exer.name));
+            //resultExp += calculateLoggedExerciseExperience(exer.name, setMngr.getSetAttributesFromLoggedExerciseFromUser(userName, exer.name));
         }
 
         return resultExp;
@@ -184,33 +182,32 @@ public class ExperienceManager
     public int getRequiredExperienceForLevel(int level)
     {
         LevelFormula lvlForm = getLevelFormulaValues();
-        return (int)Math.Pow((lvlForm.baseRequired * level), lvlForm.expModifier);
+        return (int)((lvlForm.baseRequired * level) * lvlForm.expModifier);
     }
 
-    public bool rewardExperienceToUser(LimitBreaker user, int expGained) //returns true if the user levels up
+    public bool rewardExperienceToUser(int userID, int expGained) //returns true if the user levels up
     {
-        bool leveled = false;
-        int reqExp = getRequiredExperienceForLevel(user.Statistics.level);
-
-        user.Statistics.experience += expGained;
-
-        if (user.Statistics.experience >= reqExp)
+        using (var context = new Layer2Container())
         {
-            user.Statistics.level += 1;
-            user.Statistics.experience -= reqExp;
-            leveled = true;
-        }
+            bool leveled = false;
+            LimitBreaker user = context.LimitBreakers.Where(s => s.id == userID).FirstOrDefault();
+            int reqExp = getRequiredExperienceForLevel(user.Statistics.level);
+            user.Statistics.experience += expGained;
 
-        //Not 100% sure if code below will work
-        using (var context = new Layer2Container()) 
-        {
+            while (user.Statistics.experience >= reqExp)
+            {
+                user.Statistics.level += 1;
+                user.Statistics.experience -= reqExp;
+                leveled = true;
+            }
+        
             LimitBreaker saveUser = context.LimitBreakers.Where(s => s.username == user.username).FirstOrDefault();
             saveUser.Statistics.experience = user.Statistics.experience;
             saveUser.Statistics.level = user.Statistics.level;
             context.SaveChanges();
-        }
 
-        return leveled;
+            return leveled;
+        }
     }
 
     // Probably gonna have to make a function that uses the returned value from either 
