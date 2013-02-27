@@ -195,4 +195,20 @@ public class SystemExerciseManager
             return context.Exercises.FirstOrDefault(exercise => exercise.name == exerciseName);
         }
     }
+
+    public Exercise getExerciseById(int ID)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.Exercises.Where(e => e.id == ID).FirstOrDefault();
+        }
+    }
+
+    public Exercise getFirstExercise()
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.Exercises.FirstOrDefault();
+        }
+    }
 }
