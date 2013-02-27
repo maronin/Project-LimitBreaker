@@ -19,7 +19,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
             functionalityMultiView.ActiveViewIndex = 1;
             mngExerciseExpBtn.Enabled = true;
             mngUserExpBtn.Enabled = false;
-
+            loadUserExpFields();
         }
     }
 

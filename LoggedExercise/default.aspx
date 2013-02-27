@@ -53,10 +53,11 @@
         </tr>
         <tr>
             <td>
-                <asp:Button ID="recordSet" runat="server" Text="Add Set" OnClick="recordSet_Click" ValidationGroup="LogExercise" /></td>
-            
+                <asp:Button ID="recordSet" runat="server" Text="Add Set" OnClick="recordSet_Click" ValidationGroup="LogExercise" /></td> 
         </tr>
+                
     </table>
+    <asp:Label ID="expRewardLbl" runat="server" Text=""></asp:Label>
     <hr />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
