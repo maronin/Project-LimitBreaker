@@ -9,8 +9,6 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-        </asp:ScriptManager>
         <asp:TextBox runat="server" ID="_Default" />
     <Juice:Datepicker ID="Datepicker1" runat="server" TargetControlID="_Default" />
     </div>

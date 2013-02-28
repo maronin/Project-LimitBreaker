@@ -21,8 +21,6 @@
     </div>
     <br />
     <div>
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-        </asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>
                 <asp:MultiView ID="exerciseGoalMultiView" runat="server">
