@@ -4,24 +4,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Project LimitBreaker</title>
-    <link href="../css/StyleSheet.css?version=1" rel="stylesheet" type="text/css" />
+    <link media="all" rel="stylesheet" type="text/css" href="../css/all.css" />
+
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <link href="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/css/redmond/jquery-ui-1.8.2.custom.css"
-        rel="stylesheet" type="text/css" />
-    <link href="../../Areas/Datepicker/Styles/DatePickerStyles.css" rel="stylesheet"
-        type="text/css" />
-    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-1.4.1.min.js"
-        type="text/javascript"></script>
-    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-ui-1.8.2.custom.min.js"
-        type="text/javascript"></script>
+    <link href="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/css/redmond/jquery-ui-1.8.2.custom.css"rel="stylesheet" type="text/css" />
+    <link href="../../Areas/Datepicker/Styles/DatePickerStyles.css" rel="stylesheet"type="text/css" />
+    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/jquery-ui-1.8.2.custom.min.js"type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <link media="all" rel="stylesheet" type="text/css" href="../css/all.css" />
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript">        window.jQuery || document.write('<script type="text/javascript" src="js/jquery-1.7.2.min.js"><\/script>');</script>
-    <script type="text/javascript" src="../../Scripts/jquery.main.js"></script>
+    <link href="../css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    
+
+
+
     <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="../css/ie.css" /><![endif]-->
+
     <script type="text/javascript">
         function EndRequestHandler(sender, args) {
             if (args.get_error() == undefined)
@@ -43,25 +42,192 @@
                 <div class="controls">
                     <h1 id="logo">
                         Project LimitBreaker
+                        <asp:Label ID="lblTest" runat="server" Text=""></asp:Label>
                     </h1>
                     <nav class="links">
-						<ul>						<!--							<li><a href="#" class="ico1">Messages <span class="num">26</span></a></li>							<li><a href="#" class="ico2">Alerts <span class="num">5</span></a></li>							<li><a href="#" class="ico3">Documents <span class="num">3</span></a></li>							-->						</ul>
+						<ul>
+						<!--
+							<li><a href="#" class="ico1">Messages <span class="num">26</span></a></li>
+							<li><a href="#" class="ico2">Alerts <span class="num">5</span></a></li>
+							<li><a href="#" class="ico3">Documents <span class="num">3</span></a></li>
+							-->
+						</ul>
 					</nav>
                     <div class="profile-box">
-                        <span class="profile"><a href="#" class="section">
+                        
+                        <asp:LoginView ID="LoginView1" runat="server">
+            <AnonymousTemplate>
+                <asp:Login ID="Login1" runat="server" Orientation="Horizontal" RenderOuterTable="False"
+                    FailureText="Wrong Username or Password">
+                    <LayoutTemplate>
+                        <asp:Panel runat="server" ID="submit" DefaultButton="LoginButton" Width="338px">
+                            <table>
+                            <tr>
+                            <td>
+                            
+                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
+                                ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="ctl00$Login1"
+                                ForeColor="Red">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" ForeColor="Black">User Name:</asp:Label>
+                           </td>
+                           <td>
+                            <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
+                           </td>
+                           <td rowspan="2">
+                           <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="ctl00$Login1"
+                                Height="50px" Width="50px" />
+                           </td>
+                            </tr>
+                            <tr>
+                            <td>
+                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
+                                ErrorMessage="Password is required." ToolTip="Password is required." ValidationGroup="ctl00$Login1"
+                                ForeColor="Red">*</asp:RequiredFieldValidator>
+                            <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" ForeColor="Black">Password:</asp:Label>
+                            </td>
+                            <td>
+                            <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
+                            </td>
+                            <%--Note: The Literal Control is used here to display an error message that a log in control throws into the FailureText. By Default it is disabled--%>
+                           
+                            </tr>
+                            <span style="color: Red; float: right; margin: -20px 64px -1px 0px;">
+                                <asp:Literal ID="FailureText" runat="server" EnableViewState="False" />
+                            </span>
+                            </table>
+                        </asp:Panel>
+                    </LayoutTemplate>
+                </asp:Login>
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                <asp:Label ID="lblLoggedInAs" runat="server" Text="" ForeColor="Black">Logged in as:</asp:Label>
+                <asp:LoginName ID="LoginName1" runat="server" ForeColor="Black" />
+                <asp:LoginStatus ID="LoginStatus1" runat="server" />
+            </LoggedInTemplate>
+        </asp:LoginView>
+                  
+                        <%--<span class="profile"><a href="#" class="section">
                             <img class="image" src="../images/img1.png" alt="image description" width="26" height="26" />
                             <span class="text-box">Welcome <strong class="name">Asif Aleem</strong> </span></a>
-                            <a href="#" class="opener">opener</a> </span><a href="#" class="btn-on">On</a>
+                            <a href="#" class="opener">opener</a> </span><a href="#" class="btn-on">On</a>--%>
                     </div>
                 </div>
                 <div class="tabs">
                     <div id="tabContent" class="tab">
-                        <article>							<div class="text-section">								<h1>Dashboard</h1><asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate><asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">                </asp:ContentPlaceHolder></ContentTemplate></asp:UpdatePanel>															</div>							<ul class="states">								<div id="foot">                    <asp:HyperLink ID="support" runat="server" NavigateUrl="~/support.aspx">Support & FAQ</asp:HyperLink>                            <br />                    <asp:HyperLink ID="aboutUsLink" runat="server" NavigateUrl="~/aboutUs.aspx"                         >About Us</asp:HyperLink>                            <br />                    <asp:HyperLink ID="aboutLimitBreakerLink" runat="server"                         NavigateUrl="~/aboutLimitbreaker.aspx">About Project LimitBreaker</asp:HyperLink>                            <br />                    <asp:HyperLink ID="tosLink" runat="server" NavigateUrl="~/termsOfService.aspx">Terms of Service</asp:HyperLink>                            <br />                    <asp:HyperLink ID="contactUsLink" runat="server" NavigateUrl="~/contactUs.aspx">Contact Us</asp:HyperLink>							</ul>						</article>
+                        <article>
+							<div class="text-section">
+								
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+<ContentTemplate>
+
+
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">        window.jQuery || document.write('<script type="text/javascript" src="../../Scripts/jquery-1.7.2.min.js"><\/script>');</script>
+    <script type="text/javascript" src="../../Scripts/jquery.main.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-1.7.2.min.js"></script>
+                </asp:ContentPlaceHolder></ContentTemplate></asp:UpdatePanel>
+								
+							</div>
+							<ul class="states">
+								<div id="foot">
+                    <asp:HyperLink ID="support" runat="server" NavigateUrl="~/support.aspx">Support & FAQ</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="aboutUsLink" runat="server" NavigateUrl="~/aboutUs.aspx" 
+                        >About Us</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="aboutLimitBreakerLink" runat="server" 
+                        NavigateUrl="~/aboutLimitbreaker.aspx">About Project LimitBreaker</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="tosLink" runat="server" NavigateUrl="~/termsOfService.aspx">Terms of Service</asp:HyperLink>
+                            <br />
+                    <asp:HyperLink ID="contactUsLink" runat="server" NavigateUrl="~/contactUs.aspx">Contact Us</asp:HyperLink>
+							</ul>
+						</article>
                     </div>
                 </div>
             </div>
         </div>
-        <aside id="sidebar">			<strong class="logo"><a href="#">lg</a></strong>			<ul class="tabset buttons">			 						<li class="active">					<a href="<%= Page.ResolveUrl("~/default.aspx") %>" class="ico1"><span>Dashboard</span><em></em></a>					<span class="tooltip"><span>Dashboard</span></span>				</li>				<li>					<a href="<%= Page.ResolveUrl("~/SystemExercise/default.aspx") %>" class="ico2"><span>Gallery</span><em></em></a>					<span class="tooltip"><span>Gallery</span></span>                				</li>				<li>					<a href="<%= Page.ResolveUrl("~/User/profile.aspx") %>" class="ico3"><span>Pages</span><em></em></a>					<span class="tooltip"><span>Pages</span></span>				</li>				<li>					<a href="<%= Page.ResolveUrl("~/userRoutines/default.aspx") %>" class="ico4"><span>Widgets</span><em></em></a>					<span class="tooltip"><span>Widgets</span></span>				</li>				<li>					<a href="<%= Page.ResolveUrl("~/WorkoutSchedule/Default.aspx") %>" class="ico5"><span>Archive</span><em></em></a>					<span class="tooltip"><span>Archive</span></span>				</li>				<li>					<a href="<%= Page.ResolveUrl("~/LoggedExercise/default.aspx") %>" class="ico6">						<span>Comments</span><em></em>					</a>					<span class="tooltip"><span>Comments</span></span>				</li>				<li>					<a href="<%= Page.ResolveUrl("~/SystemExercise/manageExerciseExperience.aspx") %>" class="ico7"><span>Plug-in</span><em></em></a>					<span class="tooltip"><span>Plug-in</span></span>				</li>				<li>					<a href="<%= Page.ResolveUrl("~/User/ManageExerciseGoals.aspx") %>" class="ico8"><span>Settings</span><em></em></a>					<span class="tooltip"><span>Settings</span></span>				</li>			<!--				<li class="active">					<a href="#tab-1" class="ico1"><span>Dashboard</span><em></em></a>					<span class="tooltip"><span>Dashboard</span></span>				</li>				<li>					<a href="#tab-2" class="ico2"><span>Gallery</span><em></em></a>					<span class="tooltip"><span>Gallery</span></span>				</li>				<li>					<a href="#tab-3" class="ico3"><span>Pages</span><em></em></a>					<span class="tooltip"><span>Pages</span></span>				</li>				<li>					<a href="#tab-4" class="ico4"><span>Widgets</span><em></em></a>					<span class="tooltip"><span>Widgets</span></span>				</li>				<li>					<a href="#tab-5" class="ico5"><span>Archive</span><em></em></a>					<span class="tooltip"><span>Archive</span></span>				</li>				<li>					<a href="#tab-6" class="ico6">						<span>Comments</span><em></em>					</a>					<span class="num">11</span>					<span class="tooltip"><span>Comments</span></span>				</li>				<li>					<a href="#tab-7" class="ico7"><span>Plug-in</span><em></em></a>					<span class="tooltip"><span>Plug-in</span></span>				</li>				<li>					<a href="#tab-8" class="ico8"><span>Settings</span><em></em></a>					<span class="tooltip"><span>Settings</span></span>				</li>				-->			</ul>			<span class="shadow"></span>		</aside>
+        <aside id="sidebar">
+			<strong class="logo"><a href="#">lg</a></strong>
+            <ul id="Ulnav" class="tabset buttons" runat="server">
+			 
+				<li id="lihome" runat="server">
+					<a href="<%= Page.ResolveUrl("~/default.aspx")%>#tab-1" class="ico1"><span>Home</span><em></em></a>
+					<span class="tooltip"><span>Home</span></span>
+				</li>
+				<li id="lisystemExercise" runat="server"> 
+					<a href="<%= Page.ResolveUrl("~/SystemExercise/default.aspx") %>#tab-2" class="ico2"><span>System Exercises</span><em></em></a>
+					<span class="tooltip"><span>System Exercises</span></span>
+                
+				</li>
+				<li id="liprofile" runat="server">
+					<a href="<%= Page.ResolveUrl("~/User/profile.aspx") %>#tab-3" class="ico3"><span>Profile</span><em></em></a>
+					<span class="tooltip"><span>Profile</span></span>
+				</li>
+				<li id="liuserRoutines" runat="server">
+					<a href="<%= Page.ResolveUrl("~/userRoutines/default.aspx") %>" class="ico4"><span>User Routines</span><em></em></a>
+					<span class="tooltip"><span>User Routines</span></span>
+				</li>
+				<li id="liWorkoutSchedule" runat="server">
+					<a href="<%= Page.ResolveUrl("~/WorkoutSchedule/Default.aspx") %>" class="ico5"><span>WorkoutSchedule</span><em></em></a>
+					<span class="tooltip"><span>WorkoutSchedule</span></span>
+				</li>
+				<li  id="liLoggedExercises" runat="server"> 
+					<a href="<%= Page.ResolveUrl("~/LoggedExercise/default.aspx") %>" class="ico6">
+						<span>Logged Exercise</span><em></em>
+					</a>
+					<span class="tooltip"><span>Logged Exercise</span></span>
+				</li>
+				<li id="liManageExerciseExperience" runat="server">
+					<a href="<%= Page.ResolveUrl("~/SystemExercise/manageExerciseExperience.aspx") %>" class="ico7"><span>Manage Exercise Experience</span><em></em></a>
+					<span class="tooltip"><span>Manage Exercise Experience</span></span>
+				</li>
+				<li id="liManageExerciseGoals" runat="server">
+					<a href="<%= Page.ResolveUrl("~/User/ManageExerciseGoals.aspx") %>" class="ico8"><span>Settings Manage ExerciseGoals</span><em></em></a>
+					<span class="tooltip"><span>Settings Manage ExerciseGoals</span></span>
+				</li>
+			
+				<%--<li class="active">
+					<a href="#tab-1" class="ico1"><span>Dashboard</span><em></em></a>
+					<span class="tooltip"><span>Dashboard</span></span>
+				</li>
+				<li>
+					<a href="#tab-2" class="ico2"><span>Gallery</span><em></em></a>
+					<span class="tooltip"><span>Gallery</span></span>
+				</li>
+				<li>
+					<a href="#tab-3" class="ico3"><span>Pages</span><em></em></a>
+					<span class="tooltip"><span>Pages</span></span>
+				</li>
+				<li>
+					<a href="#tab-4" class="ico4"><span>Widgets</span><em></em></a>
+					<span class="tooltip"><span>Widgets</span></span>
+				</li>
+				<li>
+					<a href="#tab-5" class="ico5"><span>Archive</span><em></em></a>
+					<span class="tooltip"><span>Archive</span></span>
+				</li>
+				<li>
+					<a href="#tab-6" class="ico6">
+						<span>Comments</span><em></em>
+					</a>
+					<span class="num">11</span>
+					<span class="tooltip"><span>Comments</span></span>
+				</li>
+				<li>
+					<a href="#tab-7" class="ico7"><span>Plug-in</span><em></em></a>
+					<span class="tooltip"><span>Plug-in</span></span>
+				</li>
+				<li>
+					<a href="#tab-8" class="ico8"><span>Settings</span><em></em></a>
+					<span class="tooltip"><span>Settings</span></span>
+				</li>--%>
+				
+			</ul>
+			<span class="shadow"></span>
+		</aside>
     </div>
     </form>
 </body>

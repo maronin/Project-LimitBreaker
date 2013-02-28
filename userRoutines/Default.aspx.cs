@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 public partial class userRoutines_Default : System.Web.UI.Page
 {
@@ -22,6 +23,9 @@ public partial class userRoutines_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liuserRoutines");
+        li.Attributes.Add("class", "active");
+
         manager = new routineManager();
         authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";

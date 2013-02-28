@@ -32,21 +32,18 @@
     <br />
         <asp:Panel ID="viewExercisePanel" runat="server">
     <table class="scheduleTable2">
-        <tr>
+        <tr style="vertical-align: top;">
             <td colspan="2">
                 <h5>
                     Exercise Name:</h5>
-                <%--                                                <asp:DropDownList ID="ddlExercises" runat="server" AppendDataBoundItems="True" DataSourceID="ObjectDataSource3"
-                                                    DataTextField="name" DataValueField="id" AutoPostBack="True" CssClass="select"  onselectedindexchanged="dllExercises_SelectedIndexChanged">
-                                                </asp:DropDownList>--%>
-                <asp:DropDownList ID="ExerciseDDL" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ExerciseDDL_SelectedIndexChanged"
-                    CssClass="select" DataTextField="name" DataValueField="id">
-                </asp:DropDownList>
                 <asp:HyperLink ID="lblExerciseVideo" runat="server">[Video]</asp:HyperLink>
 
             </td>
             <td>
-                &nbsp;
+                <asp:DropDownList ID="ExerciseDDL" runat="server" AutoPostBack="True" 
+                    CssClass="select" DataTextField="name" DataValueField="id" 
+                    OnSelectedIndexChanged="ExerciseDDL_SelectedIndexChanged">
+                </asp:DropDownList>
             </td>
             <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
                 TypeName="ExerciseManager"></asp:ObjectDataSource>

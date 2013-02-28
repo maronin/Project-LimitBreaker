@@ -24,7 +24,7 @@ function initTabs() {
 			autoRotate:false,
 			animSpeed:400,
 			switchTime:3000,
-			effect: 'none', // "fade", "slide"
+			effect: 'slide', // "fade", "slide"
 			tabLinks:'a',
 			event:'click'
 		},o);

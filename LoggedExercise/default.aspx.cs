@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Web.UI.HtmlControls;
 
 public partial class LoggedExercise_default : System.Web.UI.Page
 {
@@ -19,6 +20,10 @@ public partial class LoggedExercise_default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liLoggedExercises");
+        li.Attributes.Add("class", "active");
+
         user = userManager.getLimitBreaker(User.Identity.Name);
         ucViewExercise.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         if (!IsPostBack)

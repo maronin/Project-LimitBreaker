@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 public partial class User_manageExerciseGoals : System.Web.UI.Page
 {
@@ -12,6 +13,10 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liManageExerciseGoals");
+        li.Attributes.Add("class", "active");
+        
+
         userName = User.Identity.Name;
         goalMngr = new GoalManager();
         viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);

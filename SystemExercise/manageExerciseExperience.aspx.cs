@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 public partial class systemExercise_manageExerciseExperience : System.Web.UI.Page
 {
@@ -12,6 +13,11 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liManageExerciseExperience");
+        li.Attributes.Add("class", "active");
+
+        
+
         viewExerciseExp.userControlEventHappened += new EventHandler(viewExerciseExp_userControlEventHappened);
 
         if (!Page.IsPostBack)
