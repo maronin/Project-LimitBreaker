@@ -15,6 +15,7 @@ public class ExperienceManager
 		//
 	}
 
+    //database retrieval and setting functions
     public bool createNewExerciseExp(string exerciseName, double baseExp, double weightMod, double repMod, double distanceMod, double timeMod)
     {
         bool rc = false;
@@ -151,5 +152,57 @@ public class ExperienceManager
         }
 
         return rc;
-     }
+    }
+
+    //non-database related experience functions
+    public int calculateLoggedExerciseExperience(string exerciseName, SetAttributes setAttributes)
+    {
+        ExerciseExp exerciseExp = getExerciseExpByExerciseName(exerciseName);
+        int resultExp = (int)exerciseExp.baseExperience;
+
+        resultExp += (int)(exerciseExp.distanceModifier * setAttributes.distance + exerciseExp.repModifier * setAttributes.reps + exerciseExp.timeModifier * setAttributes.time + exerciseExp.weightModifier * setAttributes.weight);
+
+        return resultExp;
+    }
+
+    //gonna have to change this
+    public int calculateLoggedRoutineExperience(List<Exercise> exerciseSet, string userName)
+    {
+        int resultExp = 0;
+        LoggedExerciseManager setMngr = new LoggedExerciseManager();
+
+        foreach (Exercise exer in exerciseSet)
+        {
+            //resultExp += calculateLoggedExerciseExperience(exer.name, setMngr.getSetAttributesFromLoggedExerciseFromUser(userName, exer.name));
+        }
+
+        return resultExp;
+    }
+
+    public int getRequiredExperienceForLevel(int level)
+    {
+        LevelFormula lvlForm = getLevelFormulaValues();
+        return (int)((lvlForm.baseRequired * level) * lvlForm.expModifier);
+    }
+
+    public bool rewardExperienceToUser(int userID, int expGained) //returns true if the user levels up
+    {
+        using (var context = new Layer2Container())
+        {
+            bool leveled = false;
+            LimitBreaker user = context.LimitBreakers.Where(s => s.id == userID).FirstOrDefault();
+            int reqExp = getRequiredExperienceForLevel(user.Statistics.level);
+            user.Statistics.experience += expGained;
+
+            while (user.Statistics.experience >= reqExp)
+            {
+                user.Statistics.level += 1;
+                user.Statistics.experience -= reqExp;
+                leveled = true;
+            }
+        
+            context.SaveChanges();
+            return leveled;
+        }
+    }
 }

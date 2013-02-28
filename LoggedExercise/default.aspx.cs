@@ -45,6 +45,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         selectedExercise = exerciseManager.getExerciseById(exerciseID);
         createTextBoxes();
         displayLogs(exerciseID);
+        expRewardLbl.Text = "";
     }
     protected void createTextBoxes()
     {
@@ -158,7 +159,14 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             distanceValue = 0;
         }
-        logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue);
+
+        ExperienceManager expMngr = new ExperienceManager();
+        int exp = logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue);
+        bool leveled = expMngr.rewardExperienceToUser(user.id, exp);
+        expRewardLbl.Text = "You received " + exp.ToString() + " experience for logging a set for " + ucViewExercise.ddlValue;
+        if (leveled)
+            expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
+        
         displayLogs(exerciseID);
     }
     private int createTime(int minutes, int seconds)
@@ -176,5 +184,6 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     {
         List<SetAttributes> sets = logManager.getSetAttributes(logID);
         setsLbl.Text = logManager.setsToString(sets);
+        expRewardLbl.Text = "";
     }
 }
