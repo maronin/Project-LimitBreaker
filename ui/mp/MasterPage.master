@@ -17,7 +17,7 @@
     <link href="../css/StyleSheet.css?version=1" rel="stylesheet" type="text/css" />
     
 
-
+     
 
     <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="../css/ie.css" /><![endif]-->
 
@@ -117,9 +117,7 @@
                         <article>
 							<div class="text-section">
 								
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
-<ContentTemplate>
 
 
 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -127,7 +125,7 @@
     <script type="text/javascript">        window.jQuery || document.write('<script type="text/javascript" src="../../Scripts/jquery-1.7.2.min.js"><\/script>');</script>
     <script type="text/javascript" src="../../Scripts/jquery.main.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-1.7.2.min.js"></script>
-                </asp:ContentPlaceHolder></ContentTemplate></asp:UpdatePanel>
+                </asp:ContentPlaceHolder>
 								
 							</div>
 							<ul class="states">
