@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Project LimitBreaker</title>
-    <link media="all" rel="stylesheet" type="text/css" href="../css/all.css" />
+    <link media="all" rel="stylesheet" type="text/css" href="../css/all.css?version=1" />
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     <link href="/ajaxLibrary/jQueryCodeSamplesMVC/Areas/Datepicker/Scripts/jQueryUI/css/redmond/jquery-ui-1.8.2.custom.css"rel="stylesheet" type="text/css" />
@@ -14,7 +14,7 @@
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <link href="../css/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="../css/StyleSheet.css?version=1" rel="stylesheet" type="text/css" />
     
 
 
@@ -185,8 +185,8 @@
 					<span class="tooltip"><span>Manage Exercise Experience</span></span>
 				</li>
 				<li id="liManageExerciseGoals" runat="server">
-					<a href="<%= Page.ResolveUrl("~/User/ManageExerciseGoals.aspx") %>" class="ico8"><span>Settings Manage ExerciseGoals</span><em></em></a>
-					<span class="tooltip"><span>Settings Manage ExerciseGoals</span></span>
+					<a href="<%= Page.ResolveUrl("~/User/ManageExerciseGoals.aspx") %>" class="ico8"><span>Manage ExerciseGoals</span><em></em></a>
+					<span class="tooltip"><span>Manage ExerciseGoals</span></span>
 				</li>
 			
 				<%--<li class="active">

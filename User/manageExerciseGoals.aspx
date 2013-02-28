@@ -12,7 +12,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <hr />
     <div style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="viewGoalsBtn" runat="server" Text="View Exercise Goals" CssClass="button"
             OnClick="viewGoalsBtn_Click" />
