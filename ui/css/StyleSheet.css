@@ -1,6 +1,6 @@
 ﻿body
 {
-    background-image: url('../images/paper.jpg');
+
 }
 
 
@@ -35,6 +35,7 @@
 #content
 {
     text-align: left;
+    font-size: 16px;
 }
 
 .button
@@ -167,7 +168,7 @@ p
 
 .today span
 {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: bold;
 }
 .NextMonth
@@ -189,18 +190,18 @@ p
 #week tr td
 {
     text-align: left;
-    width: 13.6%;
-    color: #FFFFFF;
+    width: -12.4%;
+    color: rgb(0, 0, 0);
     font-weight: bolder;
 }
 .calendar
 {
-    background-color: #eeeeee;
     border: 1px outset #cccccc;
     padding: 1em;
     margin: 1em;
     width: 90%;
-         -moz-border-radius: 20px;
+         background: url(../images/bg-controls.png);
+    -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     -khtml-border-radius: 20px;
     border-radius: 20px;
@@ -210,7 +211,7 @@ p
 {
     border: 1px solid #999999;
     padding: 0.25em;
-    background-color: #aa0000;
+    background-color: rgb(144, 192, 255);
     width: 97.5%;
 }
 
@@ -218,22 +219,22 @@ p
 {
     border: 1px solid #999999;
     padding: 0.25em;
-    background-color: #aa0000;
+    background-color: rgb(96, 142, 201);
     width: 97.5%;
 }
 .calendarMonthSelector a
 {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: bold;
 }
 .calendarDay
 {
-    border: 1px solid #999999;
+    border: 1px solid rgb(96, 142, 201);
     margin: 0em;
     background-color: white;
     font-size: smaller;
     padding: 0.1em;
-    width: 13.6%;
+    width: 13.75%;
     float: left;
     height: 125px;
     overflow-y: scroll;
@@ -278,6 +279,7 @@ position: absolute;
 background-color: rgb(255, 255, 255);
 width: 22px;
 height: 18px;
+font-size: 13px;
 }
 
 .events

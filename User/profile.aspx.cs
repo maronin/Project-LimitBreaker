@@ -5,12 +5,17 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Web.UI.HtmlControls;
 
 public partial class User_profile : System.Web.UI.Page
 {
     UserManager manager = new UserManager();
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liprofile");
+        li.Attributes.Add("class", "active");
+
         if (User.Identity.Name != "")
         {
             String username = User.Identity.Name;

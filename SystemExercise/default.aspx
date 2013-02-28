@@ -48,8 +48,6 @@
         <h4>
             Add system exercises</h4>
         <uc1:addExercise ID="courses" runat="server" />
-        <asp:ScriptManager ID="ScriptManager1" runat="Server">
-        </asp:ScriptManager>
         
         <uc1:viewExercise ID="viewExercises" runat="server" />
 
