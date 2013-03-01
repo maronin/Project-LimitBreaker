@@ -260,9 +260,13 @@ p
 {
 }
 
-#scheduleChoice
+.scheduleChoice
 {
-    
+width: 505px;
+left: 200px;
+position: absolute;
+
+padding: 24px;
 }
 .date
 {

@@ -37,7 +37,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div id="wrapper">
-        <div id="content">
+        <div id="content" style="min-height: 866px;">
             <div class="c1">
                 <div class="controls">
                     <h1 id="logo">

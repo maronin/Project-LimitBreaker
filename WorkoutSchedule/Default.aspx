@@ -107,11 +107,12 @@
                             <!------------------------------------------------------------------------------------------------------- MultiView Add Item ----------------------------------------------------------------------------------->
                             <asp:MultiView ID="addItemView" runat="server">
                                 <asp:View ID="choiceView" runat="server">
-                                    <h3>
-                                        Add a routine or exercise</h3>
-                                    <div id="scheduleChoice">
+                                    <div class="scheduleChoice">
+                                        <h3>
+                                            Add a routine or exercise</h3>
                                         <asp:Button ID="addRoutine" runat="server" Text="Routine" OnClick="addRoutine_Click"
                                             CssClass="button" />
+                                        <br />
                                         <asp:Button ID="addExercise" runat="server" Text="Exercise" OnClick="addExercise_Click"
                                             CssClass="button" />
                                         <br />
@@ -120,6 +121,7 @@
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Exercise view[0] --------------------------------------------------------------------------------------->
                                 <asp:View ID="addExerciseView" runat="server">
+                                    <div class="scheduleChoice">
                                     <h3>
                                         Schedule a new Exercise!</h3>
                                     <br />
@@ -176,10 +178,8 @@
                                         <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
                                         </asp:CalendarExtender>
                                         <br />
-                                        <asp:CheckBox ID="cbRepeat" runat="server" OnCheckedChanged="reaptClicked" AutoPostBack="true"/>
+                                        <asp:CheckBox ID="cbRepeat" runat="server" OnCheckedChanged="reaptClicked" AutoPostBack="true" />
                                         Repeat...
-                                        
-                                        
                                         <asp:Panel ID="pnlRepeatItem" runat="server" Visible="false">
                                             <asp:Panel ID="pnlDim" runat="server" Visible="false">
                                                 <div class="dim">
@@ -194,7 +194,8 @@
                                                             Repeats:
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList ID="ddlRepeatType" runat="server" OnSelectedIndexChanged="ddlRepeatType_indexChanged" AutoPostBack="true">
+                                                            <asp:DropDownList ID="ddlRepeatType" runat="server" OnSelectedIndexChanged="ddlRepeatType_indexChanged"
+                                                                AutoPostBack="true">
                                                                 <asp:ListItem Text="Daily"></asp:ListItem>
                                                                 <asp:ListItem Text="Weekly"></asp:ListItem>
                                                                 <asp:ListItem Text="Monthly"></asp:ListItem>
@@ -240,37 +241,33 @@
                                                             Ends:
                                                         </td>
                                                         <td>
-                                                            <table >
+                                                            <table>
                                                                 <tr>
                                                                     <td>
-                                                                        <asp:RadioButtonList ID="rblEnd" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblEnd_IndexChanged" style="width: 70px;">
+                                                                        <asp:RadioButtonList ID="rblEnd" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblEnd_IndexChanged"
+                                                                            Style="width: 70px;">
                                                                             <asp:ListItem Text="After" Selected="True">After </asp:ListItem>
-                                                                            <asp:ListItem Text="On" >On </asp:ListItem>
+                                                                            <asp:ListItem Text="On">On </asp:ListItem>
                                                                         </asp:RadioButtonList>
                                                                     </td>
                                                                     <td>
                                                                         <asp:TextBox ID="tbEndAfter" runat="server" Width="40px" MaxLength="2">5</asp:TextBox>
                                                                         occurances
-                                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" 
-                                                                         TargetControlID="tbEndAfter"
-                                                                         FilterType="Custom" 
-                                                                         ValidChars='()1234567890/'>
+                                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" TargetControlID="tbEndAfter"
+                                                                            FilterType="Custom" ValidChars='()1234567890/'>
                                                                         </asp:FilteredTextBoxExtender>
-                                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" 
-                                                                         TargetControlID="tbEndOnDate"
-                                                                         FilterType="Custom" 
-                                                                         ValidChars='()1234567890-/'>
+                                                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" TargetControlID="tbEndOnDate"
+                                                                            FilterType="Custom" ValidChars='()1234567890-/'>
                                                                         </asp:FilteredTextBoxExtender>
-
-                                                                    <asp:TextBox ID="tbEndOnDate" runat="server" Enabled="false" ReadOnly="False" AutoCompleteType="Disabled" Width="88px" ></asp:TextBox>
-                                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
-                                                                        ErrorMessage="Invalid Date" ControlToValidate="tbEndOnDate" Font-Size="Medium"
-                                                                        ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                                                        ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                            ForeColor="Red" ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
-                                                                            ControlToValidate="tbEndOnDate" ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                                    <asp:CalendarExtender ID="calendarEndsOnRepeat" runat="server" TargetControlID="tbEndOnDate">
-                                                                    </asp:CalendarExtender>
+                                                                        <asp:TextBox ID="tbEndOnDate" runat="server" Enabled="false" ReadOnly="False" AutoCompleteType="Disabled"
+                                                                            Width="88px"></asp:TextBox>
+                                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Invalid Date"
+                                                                            ControlToValidate="tbEndOnDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                                                            ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                                                ForeColor="Red" ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
+                                                                                ControlToValidate="tbEndOnDate" ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                        <asp:CalendarExtender ID="calendarEndsOnRepeat" runat="server" TargetControlID="tbEndOnDate">
+                                                                        </asp:CalendarExtender>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -280,8 +277,8 @@
                                                         <td>
                                                         </td>
                                                         <td>
-                                                            <asp:Button ID="btnDoneRepeat" runat="server" Text="Done"  OnClick="btnDoneRepeat_Clicked"/>
-                                                            <asp:Button ID="btnCancelRepeat" runat="server" Text="Cancel"  OnClick="btnCancelRepeat_Clicked"/>
+                                                            <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked" />
+                                                            <asp:Button ID="btnCancelRepeat" runat="server" Text="Cancel" OnClick="btnCancelRepeat_Clicked" />
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -300,6 +297,7 @@
                                         CssClass="button" ValidationGroup="ScheduleExercise" />
                                     <br />
                                     <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
+                                    </div>
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Routine  --------------------------------------------------------------------------------------->
                                 <asp:View ID="addRoutineView" runat="server">
@@ -388,43 +386,51 @@
                         <asp:View ID="removeItemView" runat="server">
                             <h3>
                                 Remove/Modify Items</h3>
-                            Select a date to view scheduled items for that date:
-                            <br />
-                            
-                            
-                            <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="tbRemoveDate"
-                                FilterType="Custom" ValidChars='()1234567890-/'>
-                            </asp:FilteredTextBoxExtender>
-                            
-                            <asp:LinkButton ID="lnkPrevMonthForRemove" runat="server" OnClick="prevRemoveMonth"><<</asp:LinkButton>
-                            <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
-                                AutoPostBack="True" OnTextChanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
-                            <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth">>></asp:LinkButton>
-                            <br />
-                            <asp:LinkButton ID="lnkButtonViewAll" runat="server" OnClick="lnkButtonViewAll_Click">View All</asp:LinkButton> for
-                            <asp:DropDownList ID="ddlRemoveMonth" runat="server" AutoPostBack=true>
-                            <asp:ListItem Value="1">January</asp:ListItem>
-                            <asp:ListItem Value="2">February</asp:ListItem>
-                            <asp:ListItem Value="3">March</asp:ListItem>
-                            <asp:ListItem Value="4">April</asp:ListItem>
-                            <asp:ListItem Value="5">May</asp:ListItem>
-                            <asp:ListItem Value="6">June</asp:ListItem>
-                            <asp:ListItem Value="7">July</asp:ListItem>
-                            <asp:ListItem Value="8">Augest</asp:ListItem>
-                            <asp:ListItem Value="9">September</asp:ListItem>
-                            <asp:ListItem Value="10">October</asp:ListItem>
-                            <asp:ListItem Value="11">November</asp:ListItem>
-                            <asp:ListItem Value="12">December</asp:ListItem>
-                            
-                            </asp:DropDownList>
-                            <hr />
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
-                                ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><%--<asp:RequiredFieldValidator
+                            <table>
+                                <tr>
+                                    <td>
+                                        By date:
+                                    </td>
+                                    <td style="float: right;">
+                                        <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="tbRemoveDate"
+                                            FilterType="Custom" ValidChars='()1234567890-/'>
+                                        </asp:FilteredTextBoxExtender>
+                                        <asp:LinkButton ID="lnkPrevMonthForRemove" runat="server" OnClick="prevRemoveMonth"><<</asp:LinkButton>
+                                        <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
+                                            AutoPostBack="True" OnTextChanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
+                                        <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth">>></asp:LinkButton>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
+                                            ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                            ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><%--<asp:RequiredFieldValidator
                                     ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                     ControlToValidate="tbRemoveDate" ValidationGroup="RemoveItem" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                            <asp:CalendarExtender ID="calendarRemoveItem" runat="server" TargetControlID="tbRemoveDate">
-                            </asp:CalendarExtender>
+                                        <asp:CalendarExtender ID="calendarRemoveItem" runat="server" TargetControlID="tbRemoveDate">
+                                        </asp:CalendarExtender>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        By Month:
+                                    </td>
+                                    <td style="float: right;">
+                                        <asp:DropDownList ID="ddlRemoveMonth" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlRemoveMonth_indexChanged">
+                                            <asp:ListItem Value="1">January</asp:ListItem>
+                                            <asp:ListItem Value="2">February</asp:ListItem>
+                                            <asp:ListItem Value="3">March</asp:ListItem>
+                                            <asp:ListItem Value="4">April</asp:ListItem>
+                                            <asp:ListItem Value="5">May</asp:ListItem>
+                                            <asp:ListItem Value="6">June</asp:ListItem>
+                                            <asp:ListItem Value="7">July</asp:ListItem>
+                                            <asp:ListItem Value="8">Augest</asp:ListItem>
+                                            <asp:ListItem Value="9">September</asp:ListItem>
+                                            <asp:ListItem Value="10">October</asp:ListItem>
+                                            <asp:ListItem Value="11">November</asp:ListItem>
+                                            <asp:ListItem Value="12">December</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="ddlRemoveMonth_indexChanged">Go</asp:LinkButton>
+                                    </td>
+                                </tr>
+                            </table>
                             <asp:GridView ID="GridViewScheduledItems" runat="server" AutoGenerateColumns="False"
                                 OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" BackColor="White"
                                 BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
@@ -453,7 +459,10 @@
                                 <SortedDescendingHeaderStyle BackColor="#575357" />
                             </asp:GridView>
                             <asp:Label ID="lblRemoveResult" runat="server" Text="There are no items scheduled for this day!"
-                                ForeColor="Red" Visible="False"></asp:Label>
+                                ForeColor="Red" Visible="False"></asp:Label></td><td>
+                                </td>
+                            </tr>
+                            <hr />
                             <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
                             <br />
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">

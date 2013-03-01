@@ -751,7 +751,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     }
 
 
-    protected void lnkButtonViewAll_Click(object sender, EventArgs e)
+    protected void ddlRemoveMonth_indexChanged(object sender, EventArgs e)
     {
         List<scheduledItem> items;
         itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
