@@ -118,6 +118,12 @@ public partial class Layer2Container : ObjectContext
     }
     private ObjectSet<ExerciseExp> _exerciseExps;
 
+    public ObjectSet<OldWeight> OldWeights
+    {
+        get { return _oldWeights  ?? (_oldWeights = CreateObjectSet<OldWeight>("OldWeights")); }
+    }
+    private ObjectSet<OldWeight> _oldWeights;
+
     #endregion
 
 }

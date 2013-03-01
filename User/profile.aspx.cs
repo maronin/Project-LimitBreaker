@@ -66,7 +66,14 @@ public partial class User_profile : System.Web.UI.Page
     protected void updateStats_Click(object sender, EventArgs e)
     {
         String username = User.Identity.Name;
-        manager.updateWeight(username, Convert.ToDouble(newWeight.Text));
+        if (manager.updateWeight(username, Convert.ToDouble(newWeight.Text)))
+        {
+            updateResultLbl.Text = "You have successfully updated your profile!";
+        }
+        else
+        {
+            updateResultLbl.Text = "Please wait 24 hours before updating ytour weight";
+        }
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);
         manager.updateBMI(username);
@@ -75,6 +82,6 @@ public partial class User_profile : System.Web.UI.Page
         newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
         rmr.Text = Convert.ToString(Math.Round(userStats.rmr, 2));
         bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));
-        updateResultLbl.Text = "You have successfully updated your profile!";
+        
     }
 }
