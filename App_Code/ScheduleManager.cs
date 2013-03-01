@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 
 /// <summary>
 /// The schedulemanager contains methods which allow to retreive information associated with scheduled items in the database
@@ -155,7 +154,6 @@ public class ScheduleManager
                                 context.SaveChanges();
                                 rc = true;
                                 start = start.AddDays(repeatEvery);
-                                Thread.Sleep(100);
                             }
                         }
                     }

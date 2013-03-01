@@ -539,7 +539,14 @@
                     </asp:MultiView>
                 </ContentTemplate>
             </asp:UpdatePanel>
-
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                <ProgressTemplate>
+                    <div class="loadingCalendar">
+                        <h1>
+                            Loading...</h1>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
         </LoggedInTemplate>
     </asp:LoginView>
 </asp:Content>
