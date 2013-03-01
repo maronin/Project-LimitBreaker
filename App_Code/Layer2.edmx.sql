@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 03/01/2013 13:04:09
+-- Date Created: 03/01/2013 13:06:26
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project-LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -65,6 +65,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_LoggedExerciseRoutine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_LoggedExerciseRoutine];
 GO
+IF OBJECT_ID(N'[dbo].[FK_OldWeightLimitBreaker]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OldWeights] DROP CONSTRAINT [FK_OldWeightLimitBreaker];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -108,6 +111,9 @@ IF OBJECT_ID(N'[dbo].[Statistics]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ExerciseExps]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExerciseExps];
+GO
+IF OBJECT_ID(N'[dbo].[OldWeights]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OldWeights];
 GO
 IF OBJECT_ID(N'[dbo].[ExerciseRoutine]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExerciseRoutine];
@@ -268,7 +274,7 @@ GO
 CREATE TABLE [dbo].[OldWeights] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [date] datetime  NOT NULL,
-    [weight] int  NOT NULL,
+    [weight] float  NOT NULL,
     [LimitBreaker_id] int  NOT NULL
 );
 GO

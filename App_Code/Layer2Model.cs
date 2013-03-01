@@ -1341,7 +1341,7 @@ public partial class OldWeight
         set;
     }
 
-    public virtual int weight
+    public virtual double weight
     {
         get;
         set;

@@ -19,6 +19,7 @@
     <EntitySet Name="LimitBreakers" EntityType="Layer2.Store.LimitBreakers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Statistics" EntityType="Layer2.Store.Statistics" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ExerciseExps" EntityType="Layer2.Store.ExerciseExps" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OldWeights" EntityType="Layer2.Store.OldWeights" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ExerciseRoutine" EntityType="Layer2.Store.ExerciseRoutine" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="LoggedExerciseSetAttributes" Association="Layer2.Store.LoggedExerciseSetAttributes">
       <End Role="LoggedExercise" EntitySet="LoggedExercises" />
@@ -83,6 +84,10 @@
     <AssociationSet Name="LoggedExerciseRoutine" Association="Layer2.Store.LoggedExerciseRoutine">
       <End Role="LoggedExercise" EntitySet="LoggedExercises" />
       <End Role="Routine" EntitySet="Routines" />
+    </AssociationSet>
+    <AssociationSet Name="OldWeightLimitBreaker" Association="Layer2.Store.OldWeightLimitBreaker">
+      <End Role="OldWeight" EntitySet="OldWeights" />
+      <End Role="LimitBreaker" EntitySet="LimitBreakers" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Exercises">
@@ -231,6 +236,15 @@
     <Property Name="timeModifier" Type="float" Nullable="false" />
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Exercise_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OldWeights">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="weight" Type="int" Nullable="false" />
+    <Property Name="LimitBreaker_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ExerciseRoutine">
     <Key>
@@ -405,6 +419,18 @@
       </Principal>
       <Dependent Role="LoggedExercise">
         <PropertyRef Name="Routine_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OldWeightLimitBreaker">
+    <End Role="OldWeight" Type="Layer2.Store.OldWeights" Multiplicity="*" />
+    <End Role="LimitBreaker" Type="Layer2.Store.LimitBreakers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="LimitBreaker">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="OldWeight">
+        <PropertyRef Name="LimitBreaker_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -746,7 +772,7 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="date" Nullable="false" />
-          <Property Type="Int32" Name="weight" Nullable="false" />
+          <Property Type="Double" Name="weight" Nullable="false" />
           <NavigationProperty Name="LimitBreaker" Relationship="Layer2.OldWeightLimitBreaker" FromRole="OldWeight" ToRole="LimitBreaker" />
         </EntityType>
         <Association Name="OldWeightLimitBreaker">
@@ -905,6 +931,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OldWeights">
+      <EntityTypeMapping TypeName="IsTypeOf(Layer2.OldWeight)">
+        <MappingFragment StoreEntitySet="OldWeights">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="LoggedExerciseSetAttributes" TypeName="Layer2.LoggedExerciseSetAttributes" StoreEntitySet="SetAttributes">
       <EndProperty Name="LoggedExercise">
         <ScalarProperty Name="id" ColumnName="LoggedExercise_id" />
@@ -1025,6 +1060,14 @@
         <ScalarProperty Name="id" ColumnName="id" />
       </EndProperty>
       <Condition ColumnName="Routine_id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OldWeightLimitBreaker" TypeName="Layer2.OldWeightLimitBreaker" StoreEntitySet="OldWeights">
+      <EndProperty Name="LimitBreaker">
+        <ScalarProperty Name="id" ColumnName="LimitBreaker_id" />
+      </EndProperty>
+      <EndProperty Name="OldWeight">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
