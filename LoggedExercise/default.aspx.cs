@@ -5,15 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Drawing;
 using System.Web.UI.HtmlControls;
 
 public partial class LoggedExercise_default : System.Web.UI.Page
 {
-    Int32 exerciseID;
-    Exercise selectedExercise;
     SystemExerciseManager exerciseManager = new SystemExerciseManager();
     LoggedExerciseManager logManager = new LoggedExerciseManager();
     UserManager userManager = new UserManager();
+
+    Exercise selectedExercise;
     Int64 logID;
     bool repOn, distanceOn, weightOn, timeOn;
     LimitBreaker user;
@@ -30,7 +31,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             selectedExercise = exerciseManager.getFirstExercise();
             createTextBoxes();
-            displayLogs(exerciseID);
+            displayLogs();
         }
         else
         {
@@ -38,19 +39,17 @@ public partial class LoggedExercise_default : System.Web.UI.Page
             {
                 logID = Convert.ToInt64(loggedExercises.SelectedValue);
             }
-            exerciseID = ucViewExercise.ddlSelectedValue;
-            selectedExercise = exerciseManager.getExerciseById(exerciseID);
+            selectedExercise = exerciseManager.getExerciseById(ucViewExercise.ddlSelectedValue);
             createTextBoxes();
         }
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
-        exerciseID = ucViewExercise.ddlSelectedValue;
-        selectedExercise = exerciseManager.getExerciseById(exerciseID);
+        selectedExercise = exerciseManager.getExerciseById(ucViewExercise.ddlSelectedValue);
         createTextBoxes();
-        displayLogs(exerciseID);
-        expRewardLbl.Text = "";
+        displayLogs();
+        disableLabels();
     }
     protected void createTextBoxes()
     {
@@ -165,23 +164,41 @@ public partial class LoggedExercise_default : System.Web.UI.Page
             distanceValue = 0;
         }
 
+        //Begin log operations and exp extraction
+
         ExperienceManager expMngr = new ExperienceManager();
-        int exp = logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue);
-        bool leveled = expMngr.rewardExperienceToUser(user.id, exp);
-        expRewardLbl.Text = "You received " + exp.ToString() + " experience for logging a set for " + ucViewExercise.ddlValue;
-        if (leveled)
-            expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
-        
-        displayLogs(exerciseID);
+        int exp = logManager.logExercise(user.id, selectedExercise.id, repValue, timeValue, weightValue, distanceValue);
+        if (exp != 0)
+        {
+            bool leveled = expMngr.rewardExperienceToUser(user.id, exp);
+            successLbl.Visible = true;
+            expRewardLbl.Visible = true;
+            expRewardLbl.Text = "You received " + exp.ToString() + " experience for logging a set for " + ucViewExercise.ddlValue;
+            if (leveled)
+                expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
+            displayLogs();
+
+            //Manually set the selected index to 0 (the most recently logged exercise) and set the logID to the selected one to display the most recent log (this one)
+            loggedExercises.SelectedIndex = 0;
+            logID = Convert.ToInt64(loggedExercises.SelectedValue);
+
+            loggedExercises_SelectedIndexChanged(sender, e);
+        }
+        else
+        {
+            successLbl.Visible = true;
+            successLbl.Text = "Something went wrong!";
+            successLbl.ForeColor = Color.Red;
+        }
     }
     private int createTime(int minutes, int seconds)
     {
         return minutes * 60 + seconds;
     }
 
-    private void displayLogs(int exerciseID)
+    private void displayLogs()
     {
-        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, exerciseID);
+        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, selectedExercise.id);
         loggedExercises.DataSource = logs;
         loggedExercises.DataBind();
     }
@@ -189,6 +206,11 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     {
         List<SetAttributes> sets = logManager.getSetAttributes(logID);
         setsLbl.Text = logManager.setsToString(sets);
-        expRewardLbl.Text = "";
+    }
+
+    private void disableLabels()
+    {
+        expRewardLbl.Visible = false;
+        successLbl.Visible = false;
     }
 }
