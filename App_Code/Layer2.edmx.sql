@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/25/2013 11:27:30
+-- Date Created: 03/01/2013 13:04:09
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project-LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -264,6 +264,15 @@ CREATE TABLE [dbo].[ExerciseExps] (
 );
 GO
 
+-- Creating table 'OldWeights'
+CREATE TABLE [dbo].[OldWeights] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [date] datetime  NOT NULL,
+    [weight] int  NOT NULL,
+    [LimitBreaker_id] int  NOT NULL
+);
+GO
+
 -- Creating table 'ExerciseRoutine'
 CREATE TABLE [dbo].[ExerciseRoutine] (
     [Exercises_id] int  NOT NULL,
@@ -351,6 +360,12 @@ GO
 ALTER TABLE [dbo].[ExerciseExps]
 ADD CONSTRAINT [PK_ExerciseExps]
     PRIMARY KEY CLUSTERED ([id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'OldWeights'
+ALTER TABLE [dbo].[OldWeights]
+ADD CONSTRAINT [PK_OldWeights]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Exercises_id], [Routines_id] in table 'ExerciseRoutine'
@@ -580,6 +595,20 @@ ADD CONSTRAINT [FK_LoggedExerciseRoutine]
 CREATE INDEX [IX_FK_LoggedExerciseRoutine]
 ON [dbo].[LoggedExercises]
     ([Routine_id]);
+GO
+
+-- Creating foreign key on [LimitBreaker_id] in table 'OldWeights'
+ALTER TABLE [dbo].[OldWeights]
+ADD CONSTRAINT [FK_OldWeightLimitBreaker]
+    FOREIGN KEY ([LimitBreaker_id])
+    REFERENCES [dbo].[LimitBreakers]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OldWeightLimitBreaker'
+CREATE INDEX [IX_FK_OldWeightLimitBreaker]
+ON [dbo].[OldWeights]
+    ([LimitBreaker_id]);
 GO
 
 -- --------------------------------------------------

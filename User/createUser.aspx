@@ -158,7 +158,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td class="auto-style1">I accept the terms of service (put link here later)
+                    <td class="auto-style1">I accept the terms of service (link below).
                     <asp:CheckBox ID="termOfService" runat="server" /><br />
                         <asp:Label ID="tosValidator" runat="server" Text="You must accept the terms of agreement to create an account" ForeColor="Red" Visible="False"></asp:Label>
                     </td>
