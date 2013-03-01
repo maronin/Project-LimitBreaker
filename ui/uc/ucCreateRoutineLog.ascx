@@ -60,12 +60,10 @@
                             <asp:TextBox ID="tbWeight" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbWeight" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
                         </td>
-                        <td>
-                            <asp:Label ID="Label1" runat="server" Text="Sets"></asp:Label>
+                        <td rowspan="4">
+                            <asp:Label ID="Label3" runat="server" Text="Note"></asp:Label>
                             <br />
-                            <asp:TextBox ID="tbSets" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbSets" Display="Dynamic" ErrorMessage="Required Set Number" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="tbSets" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:TextBox ID="tbNotes" runat="server" CausesValidation="True" TextMode="MultiLine" ValidationGroup="SaveLog"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -75,25 +73,15 @@
                             <asp:TextBox ID="tbDistance" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbDistance" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]*([\.][0-9]{1,3})?$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
                         </td>
-                        <td>
-                            <asp:Label ID="Label2" runat="server" Text="Time Logged"></asp:Label>
-                            <br />
-                            <asp:TextBox ID="tbTimeLogged" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbTimeLogged" Display="Dynamic" ErrorMessage="Required Time Logged" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="tbTimeLogged" Display="Dynamic" ErrorMessage="Invalid Time Format, use (23:59 format)" ForeColor="Red" ValidationExpression="^(20|21|22|23|[01]\d|\d)(([:][0-5]\d){1,2})$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
-                        </td>
                     </tr>
                     <tr>
                         <td class="auto-style2">
                             <asp:Label ID="Label5" runat="server" Text="Time"></asp:Label>
                             <br />
-                            <asp:TextBox ID="tbTime" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tbTime" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
-                        </td>
-                        <td rowspan="2">
-                            <asp:Label ID="Label3" runat="server" Text="Note"></asp:Label>
-                            <br />
-                            <asp:TextBox ID="tbNotes" runat="server" TextMode="MultiLine" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
+                            <asp:TextBox ID="tbTime_min" runat="server" CausesValidation="True" ValidationGroup="SaveLog" Width="54px"></asp:TextBox>min
+                            <asp:TextBox ID="tbTime_sec" runat="server" CausesValidation="True" ValidationGroup="SaveLog" Width="54px"></asp:TextBox>sec
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tbTime_min" Display="Dynamic" ErrorMessage="Minutes have to be an Integer" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="tbTime_sec" Display="Dynamic" ErrorMessage="Seconds have to be an Integer" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
                     <tr>
@@ -111,7 +99,7 @@
 
                     
                 </table>
-                <asp:Button ID="btnLog" runat="server" Text="Save" OnClick="btnLog_Click" ValidationGroup="SaveLog"/>
+                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog"/>
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
             </asp:Panel>

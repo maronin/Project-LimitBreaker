@@ -9,7 +9,7 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
 {
     public int userID { get; set; }
     routineManager routManager;
-    RadioButtonList rbl;
+    ListBox lb;
     SystemExerciseManager sysManager;
     int routineID;
 
@@ -17,10 +17,10 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
     {
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
-        rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-        if (rbl != null && rbl.SelectedIndex > -1)
+        lb = (ListBox)this.Parent.FindControl("lbRoutines");
+        if (lb != null && lb.SelectedIndex > -1)
         {
-            routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+            routineID = Convert.ToInt32(lb.SelectedItem.Value);
             GridView1.DataSource = routManager.getLoggedExercises(userID, routineID);
             GridView1.DataBind();
         }

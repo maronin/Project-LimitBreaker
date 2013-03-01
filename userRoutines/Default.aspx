@@ -30,8 +30,8 @@
         <LoggedInTemplate>
             <h4>List of Routines</h4>
             <div class="content">
-                <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
-                </asp:RadioButtonList>
+                <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="50%">
+                </asp:ListBox>
             </div>
             <asp:Panel ID="pnlButtons" runat="server">
 

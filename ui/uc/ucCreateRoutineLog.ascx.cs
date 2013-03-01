@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
 {
     public int userID { get; set; }
-    RadioButtonList rbl;
+    ListBox lb;
     SystemExerciseManager sysManager;
     routineManager routManager;
     int exerciseID;
@@ -19,7 +19,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
     {
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
-        rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
+        lb = (ListBox)this.Parent.FindControl("lbRoutines");
         
 
         if (Session["exerciseID"] != null)
@@ -32,20 +32,13 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
             Session.Abandon();
             init();
         }
-        if (rbl != null && rbl.SelectedIndex > -1)
+        if (lb != null && lb.SelectedIndex > -1)
         {
-            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+            init();
+            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(lb.SelectedItem.Value));
             GridView1.DataBind();
-            routineID = Convert.ToInt32(rbl.SelectedItem.Value);
-            //Panel1.Visible = true;
-            //Panel1.Enabled = true;
-            //Response.Write(rbl.SelectedIndex + " item: " + rbl.SelectedItem);
+            routineID = Convert.ToInt32(lb.SelectedItem.Value);
 
-            // to get the id of the button so that enter = submit
-            /*
-            tbRoutineName.Attributes.Add("onKeyPress",
-                 "doClick('" + btnConfirm.ClientID + "',event)");
-             * */
         }
     }
     protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
@@ -70,15 +63,14 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         exerciseID = Session["exerciseID"] != null ? (int)Session["exerciseID"] : -1;
         //pnlExerciseDetails.Visible = false;
         pnlInfo.Visible = true;
-        int sets = Convert.ToInt32(tbSets.Text.ToString());
         string note = tbNotes.Text.Trim();
-        DateTime logTime = Convert.ToDateTime(tbTimeLogged.Text.ToString());
         int weight = Convert.ToInt32(tbWeight.Text.ToString());
         float distance = (float)Convert.ToDouble(tbDistance.Text.ToString());
-        int time = Convert.ToInt32(tbTime.Text.ToString());
+        // convert the 2 text boxes to seconds
+        int time = Convert.ToInt32(tbTime_min.Text.ToString()) * 60 + Convert.ToInt32(tbTime_sec.Text.ToString());
         int rep = Convert.ToInt32(tbRep.Text.ToString());
         
-        LoggedExercise le = routManager.createLoggedExerciseRoutine(userID, exerciseID, routineID, sets, logTime, note);
+        LoggedExercise le = routManager.createLoggedExerciseRoutine(userID, exerciseID, routineID, 0, DateTime.Now, note);
         if (le != null)
         {
             int loggedExerciseID = Convert.ToInt32(le.id.ToString());
@@ -102,13 +94,14 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         tbDistance.Enabled = false;
         tbDistance.Text = "0";
 
-        tbTime.Enabled = false;
-        tbTime.Text = "0";
+        tbTime_min.Enabled = false;
+        tbTime_min.Text = "0";
+
+        tbTime_sec.Enabled = false;
+        tbTime_sec.Text = "0";
 
         tbRep.Enabled = false;
         tbRep.Text = "0";
-
-        tbTimeLogged.Text = DateTime.Now.ToString("HH:mm");
     }
 
     public void checkEnabled()
@@ -126,10 +119,15 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         //tbDistance.Text = ex.distance ? "0" : "";
         tbDistance.Text = "0";
 
-        tbTime.Enabled = ex.time;
-        tbTime.BackColor = ex.time ? Color.White : Color.Gray;
-        //tbTime.Text = ex.time ? "0" : "";
-        tbTime.Text = "0";
+        tbTime_min.Enabled = ex.time;
+        tbTime_min.BackColor = ex.time ? Color.White : Color.Gray;
+        //tbTime_min.Text = ex.time ? "0" : "";
+        tbTime_min.Text = "0";
+
+        tbTime_sec.Enabled = ex.time;
+        tbTime_sec.BackColor = ex.time ? Color.White : Color.Gray;
+        //tbTime_sec.Text = ex.time ? "0" : "";
+        tbTime_sec.Text = "0";
 
         tbRep.Enabled = ex.rep;
         tbRep.BackColor = ex.rep ? Color.White : Color.Gray;
@@ -141,12 +139,11 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
     {
         tbWeight.Text = "0";
         tbDistance.Text = "0";
-        tbTime.Text = "0";
+        tbTime_min.Text = "0";
+        tbTime_sec.Text = "0";
         tbRep.Text = "0";
 
         tbNotes.Text = "";
-        tbSets.Text = "";
-        tbTimeLogged.Text = "";
 
     }
 }

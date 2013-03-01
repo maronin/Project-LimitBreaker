@@ -19,7 +19,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     MultiView mvRoutines;
     Panel pnlButtons;
     Button btnBack;
-    RadioButtonList rblRoutines;
+    ListBox lbRoutines;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -38,7 +38,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
             mvRoutines = LoginView1.FindControl("mvRoutine") as MultiView;
             pnlButtons = LoginView1.FindControl("pnlButtons") as Panel;
             btnBack = LoginView1.FindControl("btnBack") as Button;
-            rblRoutines = LoginView1.FindControl("rblRoutines") as RadioButtonList;
+            lbRoutines = LoginView1.FindControl("lbRoutines") as ListBox;
 
         }
         if (!IsPostBack)
