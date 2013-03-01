@@ -80,8 +80,6 @@ public class LoggedExerciseManager
             {
                 LoggedExercise log;
                 log = new LoggedExercise();
-                log.sets = 1;
-                log.note = "";
                 log.timeLogged = DateTime.Now;
                 log.Exercise = exercise;
                 log.LimitBreaker = limitBreaker;

@@ -1073,18 +1073,6 @@ public partial class LoggedExercise
 {
     #region Primitive Properties
 
-    public virtual int sets
-    {
-        get;
-        set;
-    }
-
-    public virtual string note
-    {
-        get;
-        set;
-    }
-
     public virtual long id
     {
         get;
@@ -1843,6 +1831,12 @@ public partial class SetAttributes
     }
 
     public virtual System.DateTime timeLogged
+    {
+        get;
+        set;
+    }
+
+    public virtual string note
     {
         get;
         set;

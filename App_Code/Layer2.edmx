@@ -120,8 +120,6 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="sets" Type="int" Nullable="false" />
-    <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="timeLogged" Type="datetime" Nullable="false" />
     <Property Name="LimitBreaker_id" Type="int" Nullable="false" />
@@ -138,6 +136,7 @@
     <Property Name="time" Type="int" Nullable="true" />
     <Property Name="reps" Type="int" Nullable="true" />
     <Property Name="timeLogged" Type="datetime" Nullable="false" />
+    <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LoggedExercise_id" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="ExerciseGoals">
@@ -577,8 +576,6 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="sets" Nullable="false" Type="Int32" />
-          <Property Name="note" Nullable="true" Type="String" />
           <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int64" />
           <NavigationProperty Name="SetAttributes" Relationship="Layer2.LoggedExerciseSetAttributes" FromRole="LoggedExercise" ToRole="SetAttributes" />
           <NavigationProperty Name="LimitBreaker" Relationship="Layer2.LimitBreakerLoggedExercise" FromRole="LoggedExercise" ToRole="LimitBreaker" />
@@ -597,6 +594,7 @@
           <Property Name="reps" Nullable="true" Type="Int32" />
           <NavigationProperty Name="LoggedExercise" Relationship="Layer2.LoggedExerciseSetAttributes" FromRole="SetAttributes" ToRole="LoggedExercise" />
           <Property Type="DateTime" Name="timeLogged" Nullable="false" />
+          <Property Type="String" Name="note" Nullable="true" />
         </EntityType>
         <Association Name="LoggedExerciseSetAttributes">
           <End Type="Layer2.LoggedExercise" Multiplicity="1" Role="LoggedExercise" />
@@ -815,8 +813,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Layer2.LoggedExercise)">
         <MappingFragment StoreEntitySet="LoggedExercises">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="sets" ColumnName="sets" />
-          <ScalarProperty Name="note" ColumnName="note" />
           <ScalarProperty Name="timeLogged" ColumnName="timeLogged" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -830,6 +826,7 @@
           <ScalarProperty Name="time" ColumnName="time" />
           <ScalarProperty Name="reps" ColumnName="reps" />
           <ScalarProperty Name="timeLogged" ColumnName="timeLogged" />
+          <ScalarProperty Name="note" ColumnName="note" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1109,7 +1106,7 @@
           <ConnectorPoint PointX="12.125" PointY="3.6824446614583333" />
           <ConnectorPoint PointX="11.125" PointY="3.6824446614583333" />
         </AssociationConnector>
-        <EntityTypeShape Height="2.364889322916667" EntityType="Layer2.ExerciseExp" PointX="0.5" PointY="3" Width="1.625" />
+        <EntityTypeShape Height="2.364889322916667" EntityType="Layer2.ExerciseExp" PointX="0.5" PointY="3.5" Width="1.625" />
         <EntityTypeShape Height="1.787985026041667" EntityType="Layer2.LevelFormula" PointX="10.5" PointY="0.625" Width="1.5" />
         <EntityTypeShape Height="1.59568359375" EntityType="Layer2.ExperienceAtrophy" PointX="12.875" PointY="0.625" Width="1.75" />
         <EntityTypeShape Height="2.1725878906249996" EntityType="Layer2.Notification" PointX="14.375" PointY="4.75" Width="1.5" />

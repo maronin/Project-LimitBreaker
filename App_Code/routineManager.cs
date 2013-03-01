@@ -333,9 +333,7 @@ public class routineManager
                     rc.LimitBreaker = lb;
                     rc.Exercise = ex;
                     rc.Routine = rtn;
-                    rc.sets = sets;
                     rc.timeLogged = logTime;
-                    rc.note = note.Trim();
 
                     context.LoggedExercises.AddObject(rc);
                     context.SaveChanges();
