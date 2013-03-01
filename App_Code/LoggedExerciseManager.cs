@@ -48,12 +48,65 @@ public class LoggedExerciseManager
         }
     }
 
+    // neil - log exercise with note
+    public int logExerciseIntoRoutine(Int32 userID, Int32 exerciseID, Int32 routineID, Int32 reps, Int32 time, Int32 weight, Double distance, string note)
+    {       //changed the return type to return the amount of exp rewarded
+        //Get a logged exercise that has been logged within the hour and with the same exercise, else create a new one
+        using (var context = new Layer2Container())
+        {
+            LoggedExercise log = logExists(exerciseID, userID, routineID);
+            SetAttributes set;
+            if (log != null)
+            {
+                set = createSet(reps, time, weight, distance, log.id);
+
+            }
+            else
+            {
+                log = createLoggedExercise(userID, exerciseID, routineID, note);
+                set = createSet(reps, time, weight, distance, log.id);
+            }
+
+            int exp = 0;
+
+            if (set != null)
+            {
+                string exerciseName = context.Exercises.Where(s => s.id == exerciseID).FirstOrDefault().name;
+                exp = expMngr.calculateLoggedExerciseExperience(exerciseName, set);
+            }
+
+            return exp;
+        }
+    }
+
     LoggedExercise logExists(Int32 exerciseID, Int32 userID)
     {
         using (var context = new Layer2Container())
         {
             List<LoggedExercise> logs = (from loggedExercise in context.LoggedExercises
                                          where loggedExercise.Exercise.id == exerciseID && loggedExercise.LimitBreaker.id == userID
+                                         select loggedExercise).ToList();
+            if (logs != null)
+            {
+                foreach (LoggedExercise log in logs)
+                {
+                    if ((DateTime.Now - log.timeLogged).Hours < 1)
+                    {
+                        return log;
+                    }
+                }
+            }
+            return null;
+        }
+    }
+    
+    // neil - check if log exists within routine
+    LoggedExercise logExists(Int32 exerciseID, Int32 userID, Int32 routineID)
+    {
+        using (var context = new Layer2Container())
+        {
+            List<LoggedExercise> logs = (from loggedExercise in context.LoggedExercises
+                                         where loggedExercise.Exercise.id == exerciseID && loggedExercise.LimitBreaker.id == userID && loggedExercise.Routine.id == routineID
                                          select loggedExercise).ToList();
             if (logs != null)
             {
@@ -85,6 +138,37 @@ public class LoggedExerciseManager
                 log.timeLogged = DateTime.Now;
                 log.Exercise = exercise;
                 log.LimitBreaker = limitBreaker;
+                context.LoggedExercises.AddObject(log);
+                context.SaveChanges();
+                return log;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    // neil - create logged exercise with note
+    public LoggedExercise createLoggedExercise(Int32 userID, Int32 exerciseID, Int32 routineID, string note)
+    {
+
+        using (var context = new Layer2Container())
+        {
+            Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
+            LimitBreaker limitBreaker = context.LimitBreakers.Where(l => l.id == userID).FirstOrDefault();
+            Routine routine = context.Routines.Where(r => r.id == routineID).FirstOrDefault();
+
+            if (exercise != null && limitBreaker != null && routine != null)
+            {
+                LoggedExercise log;
+                log = new LoggedExercise();
+                log.sets = 1;
+                log.note = note.Trim();
+                log.timeLogged = DateTime.Now;
+                log.Exercise = exercise;
+                log.LimitBreaker = limitBreaker;
+                log.Routine = routine;
                 context.LoggedExercises.AddObject(log);
                 context.SaveChanges();
                 return log;

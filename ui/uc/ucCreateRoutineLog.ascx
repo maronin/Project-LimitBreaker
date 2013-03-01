@@ -19,6 +19,7 @@
     #tableLog {
         text-align: center;
     }
+
     .auto-style2 {
         width: 478px;
     }
@@ -91,17 +92,12 @@
                             <asp:TextBox ID="tbRep" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="tbRep" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
                         </td>
-
                     </tr>
-                    
-
-                            
-
-                    
                 </table>
-                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog"/>
+                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog" />
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
+                <asp:Label ID="expRewardLbl" runat="server" Text=""></asp:Label>
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
