@@ -9,11 +9,11 @@ using System.Drawing;
 
 public partial class LoggedExercise_default : System.Web.UI.Page
 {
-    Int32 exerciseID;
-    Exercise selectedExercise;
     SystemExerciseManager exerciseManager = new SystemExerciseManager();
     LoggedExerciseManager logManager = new LoggedExerciseManager();
     UserManager userManager = new UserManager();
+
+    Exercise selectedExercise;
     Int64 logID;
     bool repOn, distanceOn, weightOn, timeOn;
     LimitBreaker user;
@@ -26,7 +26,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             selectedExercise = exerciseManager.getFirstExercise();
             createTextBoxes();
-            displayLogs(exerciseID);
+            displayLogs();
         }
         else
         {
@@ -34,18 +34,16 @@ public partial class LoggedExercise_default : System.Web.UI.Page
             {
                 logID = Convert.ToInt64(loggedExercises.SelectedValue);
             }
-            exerciseID = ucViewExercise.ddlSelectedValue;
-            selectedExercise = exerciseManager.getExerciseById(exerciseID);
+            selectedExercise = exerciseManager.getExerciseById(ucViewExercise.ddlSelectedValue);
             createTextBoxes();
         }
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
-        exerciseID = ucViewExercise.ddlSelectedValue;
-        selectedExercise = exerciseManager.getExerciseById(exerciseID);
+        selectedExercise = exerciseManager.getExerciseById(ucViewExercise.ddlSelectedValue);
         createTextBoxes();
-        displayLogs(exerciseID);
+        displayLogs();
     }
     protected void createTextBoxes()
     {
@@ -159,10 +157,11 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             distanceValue = 0;
         }
-        if (logManager.logExercise(user.id, exerciseID, repValue, timeValue, weightValue, distanceValue))
+        if (logManager.logExercise(user.id, selectedExercise.id, repValue, timeValue, weightValue, distanceValue))
         {
             successLbl.Visible = true;
-            displayLogs(exerciseID);
+            displayLogs();
+            loggedExercises_SelectedIndexChanged(sender, e);
         }
         else
         {
@@ -176,9 +175,9 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         return minutes * 60 + seconds;
     }
 
-    private void displayLogs(int exerciseID)
+    private void displayLogs()
     {
-        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, exerciseID);
+        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, selectedExercise.id);
         loggedExercises.DataSource = logs;
         loggedExercises.DataBind();
     }
