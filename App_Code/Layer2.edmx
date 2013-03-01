@@ -243,7 +243,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="date" Type="datetime" Nullable="false" />
-    <Property Name="weight" Type="int" Nullable="false" />
+    <Property Name="weight" Type="float" Nullable="false" />
     <Property Name="LimitBreaker_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ExerciseRoutine">
