@@ -28,7 +28,6 @@
             <p>You need to log in first before you can manage your routines.</p>
         </AnonymousTemplate>
         <LoggedInTemplate>
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <h4>List of Routines</h4>
             <div class="content">
                 <asp:RadioButtonList ID="rblRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">

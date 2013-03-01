@@ -8,9 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>    
+    <div> 
     <Juice:Accordion ID="Accordion1" runat="server">
         <Juice:AccordionPanel Title="Section 1" ID="accWTF" runat="server">
             <PanelContent>

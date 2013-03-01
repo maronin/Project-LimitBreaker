@@ -29,7 +29,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <hr />
     <div style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="mngExerciseExpBtn" runat="server" Text="Manage Exercise Experience"
             CssClass="button" OnClick="mngExerciseExpBtn_Click" />
@@ -43,8 +42,6 @@
         <asp:View ID="exerciseExpView" runat="server">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager>
                 <uc1:viewExercise ID="viewExerciseExp" runat="server" />
                 <hr />
                 <asp:MultiView ID="manageExperienceMultiView" runat="server">

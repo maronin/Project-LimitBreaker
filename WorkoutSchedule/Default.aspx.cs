@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Globalization;
 using System.Text;
 using System.Drawing;
+using System.Web.UI.HtmlControls;
 public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 {
     ScheduleManager scheduleManager = new ScheduleManager();
@@ -24,6 +25,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liWorkoutSchedule");
+        li.Attributes.Add("class", "active");
+
         Page.MaintainScrollPositionOnPostBack = true;
         authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";

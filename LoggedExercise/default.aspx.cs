@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Drawing;
+using System.Web.UI.HtmlControls;
 
 public partial class LoggedExercise_default : System.Web.UI.Page
 {
@@ -18,12 +19,20 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     bool repOn, distanceOn, weightOn, timeOn;
     LimitBreaker user;
 
+    //Enables or disables labels based on whether or not the postback is caused by a log request or anything else
+    bool disableLabels;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liLoggedExercises");
+        li.Attributes.Add("class", "active");
+
         user = userManager.getLimitBreaker(User.Identity.Name);
         ucViewExercise.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         if (!IsPostBack)
         {
+            disableLabels = true;
             selectedExercise = exerciseManager.getFirstExercise();
             createTextBoxes();
             displayLogs();
@@ -41,6 +50,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
+        disableLabels = true;
         selectedExercise = exerciseManager.getExerciseById(ucViewExercise.ddlSelectedValue);
         createTextBoxes();
         displayLogs();
@@ -157,10 +167,26 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         {
             distanceValue = 0;
         }
-        if (logManager.logExercise(user.id, selectedExercise.id, repValue, timeValue, weightValue, distanceValue))
+
+        //Begin log operations and exp extraction
+
+        ExperienceManager expMngr = new ExperienceManager();
+        int exp = logManager.logExercise(user.id, selectedExercise.id, repValue, timeValue, weightValue, distanceValue);
+        if (exp != 0)
         {
+            disableLabels = false;
+            bool leveled = expMngr.rewardExperienceToUser(user.id, exp);
             successLbl.Visible = true;
+            expRewardLbl.Visible = true;
+            expRewardLbl.Text = "You received " + exp.ToString() + " experience for logging a set for " + ucViewExercise.ddlValue;
+            if (leveled)
+                expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
             displayLogs();
+
+            //Manually set the selected index to 0 (the most recently logged exercise) and set the logID to the selected one to display the most recent log (this one)
+            loggedExercises.SelectedIndex = 0;
+            logID = Convert.ToInt64(loggedExercises.SelectedValue);
+
             loggedExercises_SelectedIndexChanged(sender, e);
         }
         else
@@ -185,5 +211,10 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     {
         List<SetAttributes> sets = logManager.getSetAttributes(logID);
         setsLbl.Text = logManager.setsToString(sets);
+        if (disableLabels)
+        {
+            successLbl.Visible = false;
+            expRewardLbl.Visible = false;
+        }
     }
 }

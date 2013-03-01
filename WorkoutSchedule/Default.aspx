@@ -27,8 +27,6 @@
         <LoggedInTemplate>
             <h1>
                 Schedule Calendar</h1>
-            <asp:ScriptManager ID="ScriptManager1" runat="Server">
-            </asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <!-----------------------------------------------------------------Multiview Calendar ------------------------------------------------------------------------>

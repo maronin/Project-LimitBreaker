@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -11,6 +12,10 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        HtmlGenericControl home = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("lisystemExercise");
+        home.Attributes.Add("class", "active");
+
+
         viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         rblEnaber.Visible = false;
         Panel1.Visible = false;

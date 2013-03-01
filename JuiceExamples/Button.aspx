@@ -8,8 +8,6 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-        </asp:ScriptManager>
         <button id="_DefaultButton" runat="server">
             A Button Element</button>
         <juice:Button ID="Button1" TargetControlID="_DefaultButton" runat="server" />
