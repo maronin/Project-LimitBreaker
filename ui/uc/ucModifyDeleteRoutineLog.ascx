@@ -21,9 +21,19 @@
 <h4>View Logged Data</h4>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-        
-        <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
+
+        <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="False">
             <AlternatingRowStyle BackColor="White" />
+            <Columns>
+                <asp:BoundField DataField="sets" HeaderText="sets" SortExpression="sets" />
+                <asp:BoundField DataField="note" HeaderText="note" SortExpression="note" />
+                <asp:BoundField DataField="timeLogged" HeaderText="timeLogged" SortExpression="timeLogged" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CommandName="view" CommandArgument='<%# Eval("id") %>'>View Sets</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
             <FooterStyle BackColor="#CCCC99" />
             <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
@@ -34,6 +44,10 @@
             <SortedDescendingCellStyle BackColor="#EAEAD3" />
             <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
+        <asp:Panel ID="pnlSets" runat="server">
+            <h4>List of Sets</h4>
+            <asp:Label ID="lblSets" runat="server" Text=""></asp:Label>
+        </asp:Panel>
         <h4>Delete All Logs Within Routine</h4>
         <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs" />
         <asp:ModalPopupExtender ID="mdeDeleteLoggedExercises" runat="server" TargetControlID="btnDeleteAll" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
