@@ -161,6 +161,12 @@ public class UserManager
         {
             LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
             context.LoadProperty(user, "Statistics");
+            
+            //Create old weight record
+            OldWeight oldWeight = new OldWeight();
+            oldWeight.LimitBreaker = user;
+            oldWeight.date = DateTime.Now;
+            oldWeight.weight = user.Statistics.weight;
 
             user.Statistics.weight = newWeight;
 

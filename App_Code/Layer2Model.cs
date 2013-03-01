@@ -863,6 +863,38 @@ public partial class LimitBreaker
     }
     private ICollection<ExerciseGoal> _exerciseGoals;
 
+    public virtual ICollection<OldWeight> OldWeights
+    {
+        get
+        {
+            if (_oldWeights == null)
+            {
+                var newCollection = new FixupCollection<OldWeight>();
+                newCollection.CollectionChanged += FixupOldWeights;
+                _oldWeights = newCollection;
+            }
+            return _oldWeights;
+        }
+        set
+        {
+            if (!ReferenceEquals(_oldWeights, value))
+            {
+                var previousValue = _oldWeights as FixupCollection<OldWeight>;
+                if (previousValue != null)
+                {
+                    previousValue.CollectionChanged -= FixupOldWeights;
+                }
+                _oldWeights = value;
+                var newValue = value as FixupCollection<OldWeight>;
+                if (newValue != null)
+                {
+                    newValue.CollectionChanged += FixupOldWeights;
+                }
+            }
+        }
+    }
+    private ICollection<OldWeight> _oldWeights;
+
     #endregion
 
     #region Association Fixup
@@ -1012,24 +1044,34 @@ public partial class LimitBreaker
         }
     }
 
+    private void FixupOldWeights(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems != null)
+        {
+            foreach (OldWeight item in e.NewItems)
+            {
+                item.LimitBreaker = this;
+            }
+        }
+
+        if (e.OldItems != null)
+        {
+            foreach (OldWeight item in e.OldItems)
+            {
+                if (ReferenceEquals(item.LimitBreaker, this))
+                {
+                    item.LimitBreaker = null;
+                }
+            }
+        }
+    }
+
     #endregion
 
 }
 public partial class LoggedExercise
 {
     #region Primitive Properties
-
-    public virtual int sets
-    {
-        get;
-        set;
-    }
-
-    public virtual string note
-    {
-        get;
-        set;
-    }
 
     public virtual long id
     {
@@ -1264,6 +1306,70 @@ public partial class Notification
             if (!LimitBreaker.Notifications.Contains(this))
             {
                 LimitBreaker.Notifications.Add(this);
+            }
+        }
+    }
+
+    #endregion
+
+}
+public partial class OldWeight
+{
+    #region Primitive Properties
+
+    public virtual int Id
+    {
+        get;
+        set;
+    }
+
+    public virtual System.DateTime date
+    {
+        get;
+        set;
+    }
+
+    public virtual double weight
+    {
+        get;
+        set;
+    }
+
+    #endregion
+
+    #region Navigation Properties
+
+    public virtual LimitBreaker LimitBreaker
+    {
+        get { return _limitBreaker; }
+        set
+        {
+            if (!ReferenceEquals(_limitBreaker, value))
+            {
+                var previousValue = _limitBreaker;
+                _limitBreaker = value;
+                FixupLimitBreaker(previousValue);
+            }
+        }
+    }
+    private LimitBreaker _limitBreaker;
+
+    #endregion
+
+    #region Association Fixup
+
+    private void FixupLimitBreaker(LimitBreaker previousValue)
+    {
+        if (previousValue != null && previousValue.OldWeights.Contains(this))
+        {
+            previousValue.OldWeights.Remove(this);
+        }
+
+        if (LimitBreaker != null)
+        {
+            if (!LimitBreaker.OldWeights.Contains(this))
+            {
+                LimitBreaker.OldWeights.Add(this);
             }
         }
     }
@@ -1725,6 +1831,12 @@ public partial class SetAttributes
     }
 
     public virtual System.DateTime timeLogged
+    {
+        get;
+        set;
+    }
+
+    public virtual string note
     {
         get;
         set;
