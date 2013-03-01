@@ -10,6 +10,8 @@ using System.Web.UI.HtmlControls;
 public partial class User_profile : System.Web.UI.Page
 {
     UserManager manager = new UserManager();
+    ExperienceManager expMngr = new ExperienceManager();
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -21,13 +23,24 @@ public partial class User_profile : System.Web.UI.Page
             String username = User.Identity.Name;
             Statistics userStats = manager.getStats(username);
             alias.Text = username;
-            level.Text = Convert.ToString(userStats.level);
-            exp.Text = Convert.ToString(Math.Round(userStats.experience, 2));
-            weight.Text = Convert.ToString(Math.Round(userStats.weight, 2)) + " kg";
-            height.Text = Convert.ToString(Math.Round(userStats.height, 2)) + " cm";
             double tempRmr = userStats.rmr;
             double tempBmi = userStats.bmi;
             double tempVmax = userStats.vo2MAX;
+            string reqExp = Convert.ToString(expMngr.getRequiredExperienceForLevel(userStats.level));
+            string curExp = Convert.ToString(userStats.experience);
+            levelLbl.Text = "Level: " + Convert.ToString(userStats.level);
+            currentExpLbl.Text = curExp;
+            reqExpLbl.Text = "  /  " + reqExp + "  Experience";
+            expBar.Attributes.Add("value", curExp);
+            expBar.Attributes.Add("max", reqExp);
+            expBar.Attributes.Add("title", Convert.ToString(Math.Round(Convert.ToDouble(curExp)/Convert.ToDouble(reqExp)*100, 1)) + "% through the current level");
+
+            if (!Page.IsPostBack)
+            {
+                newWeight.Text = Convert.ToString(Math.Round(userStats.weight, 2));
+                newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
+            }
+
             if (tempRmr > 1)
             {
                 rmr.Text = Convert.ToString(Math.Round(tempRmr, 2));
@@ -46,7 +59,7 @@ public partial class User_profile : System.Web.UI.Page
             }
         }
         else
-        {
+        { 
             Response.Redirect("../login.aspx");
         }
     }
@@ -57,6 +70,11 @@ public partial class User_profile : System.Web.UI.Page
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);
         manager.updateBMI(username);
-        Response.Redirect("profile.aspx");
+        Statistics userStats = manager.getStats(username);
+        newWeight.Text = Convert.ToString(Math.Round(userStats.weight, 2));
+        newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
+        rmr.Text = Convert.ToString(Math.Round(userStats.rmr, 2));
+        bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));
+        updateResultLbl.Text = "You have successfully updated your profile!";
     }
 }
