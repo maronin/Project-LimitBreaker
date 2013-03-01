@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
+
 /// <summary>
 /// The schedulemanager contains methods which allow to retreive information associated with scheduled items in the database
 /// </summary>
@@ -125,7 +127,8 @@ public class ScheduleManager
             if (lb != null)
             {
                 List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
-                ScheduledExercise newScheduledExercise = new ScheduledExercise();
+                
+                Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
                 //This part is for validating if the exercise can be scheduled for a certain time
                 /* scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
                 foreach (var item in scheduledItemsForThatDay)
@@ -138,10 +141,35 @@ public class ScheduleManager
                 */
                 if (repeat)
                 {
+                    if (repeatInterval.Trim() == "Daily")
+                    {
+                        if(onAfter.Trim() == "After"){
+                            for (int i = 0; i < Convert.ToInt32(endsOnAfterValue); i++)
+                            {
+                                ScheduledExercise newScheduledExercise = new ScheduledExercise();
+                                newScheduledExercise.Exercise = exercise;
+                                newScheduledExercise.startTime = start;
+                                newScheduledExercise.LimitBreakers = lb;
+                                newScheduledExercise.needEmailNotification = notification;
+                                context.ScheduledExercises.AddObject(newScheduledExercise);
+                                context.SaveChanges();
+                                rc = true;
+                                start = start.AddDays(repeatEvery);
+                                Thread.Sleep(100);
+                            }
+                        }
+                    }
+                    else if (repeatInterval.Trim() == "Weekly")
+                    {
 
+                    }
+                    else if (repeatInterval.Trim() == "Monthly")
+                    {
+
+                    }
                 }
-                else { 
-                Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
+                else {
+                 ScheduledExercise newScheduledExercise = new ScheduledExercise();
                 newScheduledExercise.Exercise = exercise;
                 newScheduledExercise.startTime = start;
                 newScheduledExercise.LimitBreakers = lb;

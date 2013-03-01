@@ -505,6 +505,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             {
                 populateRemoveItems();
                 lblResultModify.Text = "Removed your item!";
+                pnlModifyItem.Visible = false;
             }
 
             else
@@ -728,4 +729,14 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         pnlRepeatItem.Visible = false;
         cbRepeat.Checked = false;
     }
+    protected void prevRemoveMonth(object sender, EventArgs e)
+    {
+        tbRemoveDate.Text = Convert.ToDateTime(tbRemoveDate.Text).AddDays(-1).ToString("MM/dd/yyyy");
+    }
+
+    protected void nextRemoveMonth(object sender, EventArgs e)
+    {
+        tbRemoveDate.Text = Convert.ToDateTime(tbRemoveDate.Text).AddDays(1).ToString("MM/dd/yyyy");
+    }
+
 }
