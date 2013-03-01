@@ -61,7 +61,7 @@ public class UserManager
             Statistics stats = new Statistics();
 
             stats.level = 1;
-            stats.experience = 1;
+            stats.experience = 0;
             stats.weight = weight;
             stats.height = height;
             stats.rmr = 0;
