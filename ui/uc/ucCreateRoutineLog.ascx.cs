@@ -74,7 +74,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         ExperienceManager expMngr = new ExperienceManager();
         int exp = logManager.logExerciseIntoRoutine(userID, exerciseID, routineID, rep, time, weight, distance, note);
         bool leveled = expMngr.rewardExperienceToUser(userID, exp);
-        expRewardLbl.Text = "<br />You received " + exp.ToString() + " experience, " + distance;
+        expRewardLbl.Text = "<br />You received " + exp.ToString() + " experience";
         if (leveled)
             expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
         init();
