@@ -6,3 +6,5 @@ ASPNETDB.MDF
 aspnetdb_log.ldf
 assets/
 *.sln
+Project-LimitBreaker.sln
+
