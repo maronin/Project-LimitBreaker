@@ -22,7 +22,7 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
 
-        <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="False">
+        <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" >
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="sets" HeaderText="sets" SortExpression="sets" />
@@ -44,10 +44,12 @@
             <SortedDescendingCellStyle BackColor="#EAEAD3" />
             <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
+        <br />
         <asp:Panel ID="pnlSets" runat="server">
             <h4>List of Sets</h4>
             <asp:Label ID="lblSets" runat="server" Text=""></asp:Label>
         </asp:Panel>
+        <br />
         <h4>Delete All Logs Within Routine</h4>
         <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs" />
         <asp:ModalPopupExtender ID="mdeDeleteLoggedExercises" runat="server" TargetControlID="btnDeleteAll" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>

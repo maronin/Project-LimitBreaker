@@ -401,6 +401,7 @@ public class routineManager
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
                 List<LoggedExercise> lelist = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == routineID).ToList();
+                
                 if (lb != null)
                 {
                     foreach (LoggedExercise le in lelist)

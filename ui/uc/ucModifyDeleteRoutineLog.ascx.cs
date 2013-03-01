@@ -31,7 +31,7 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
         if (!IsPostBack)
         {
             Session.Abandon();
-            //pnlSets.Visible = false;
+            pnlSets.Visible = false;
         }
 
         if (lb != null && lb.SelectedIndex > -1)
@@ -39,7 +39,7 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
             routineID = Convert.ToInt32(lb.SelectedItem.Value);
             GridView1.DataSource = routManager.getLoggedExercises(userID, routineID);
             GridView1.DataBind();
-            //pnlSets.Visible = false;
+            pnlSets.Visible = false;
         }
     }
     protected void okButton_Click(object sender, EventArgs e)
@@ -52,11 +52,6 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
             // redirect page to itself (refresh)
             //Response.Redirect(Request.RawUrl);
         }
-    }
-
-    protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
-    {
-        e.ExceptionHandled = true;
     }
 
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
