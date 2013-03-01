@@ -560,3 +560,28 @@ h6
 {
     text-decoration: underline;
 }
+
+.repeatForm
+{
+position: fixed;
+left: 40%;
+top: 35%;
+width: 350px;
+height: 280px;
+background-color: rgb(214, 214, 214);
+padding: 15px;
+border-width: 2px;
+border-style: solid;
+z-index: 100;
+}
+
+.dim
+{
+background-color: rgba(255, 255, 255, 0.49);
+width: 100%;
+height: 100%;
+position: fixed;
+left: 0;
+top: 0;
+z-index: 10;
+}

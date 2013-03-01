@@ -22,7 +22,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     static DateTime itemScheduledOn;
     static bool modifyExercise;
     static Int32 modifyItemID;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liWorkoutSchedule");
@@ -61,10 +61,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 exercises.ForeColor = Color.DarkViolet;
                 routines.ForeColor = Color.Red;
                 //populateExerciseInfo();
+                populateRepeatEveryList();
 
             }
 
         }
+
 
     }
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
@@ -633,4 +635,72 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         modifyDateValidator.Validate();
 
     }
+
+    protected void populateRepeatEveryList()
+    {
+    ddlRepeatEvery.ClearSelection();
+        for (int i = 1; i <= 30; i++)
+			{
+                ddlRepeatEvery.Items.Add(new ListItem(Convert.ToString(i), Convert.ToString(i)));
+			}
+
+
+
+    }
+
+    protected void reaptClicked(object sender, EventArgs e)
+    {
+
+        if (cbRepeat.Checked == true)
+        {
+            pnlRepeatItem.Visible = true;
+            pnlDim.Visible = true;
+
+        }
+
+
+        tbStartsOnDate.Text = tbDate_exercise.Text;
+
+    }
+     protected void btnCancelRepeat_Clicked(object sender, EventArgs e)
+    {
+
+        pnlDim.Visible = false;
+        pnlRepeatItem.Visible = false;
+        cbRepeat.Checked = false;
+
+    }
+
+    protected void ddlRepeatType_indexChanged(object sender, EventArgs e)
+    {
+
+        if (ddlRepeatType.SelectedIndex == 1)
+            lblDayType.Text = "weeks";
+        else if (ddlRepeatType.SelectedIndex == 2)
+            lblDayType.Text = "months";
+        else
+            lblDayType.Text = "days";
+
+    }
+
+    protected void dblEnd_IndexChanged(object sender, EventArgs e)
+    {
+        if (dblEnd.SelectedIndex == 0){
+            tbEndOnDate.Enabled = false;
+            tbEndAfter.Enabled = true;
+        }
+        else if (dblEnd.SelectedIndex == 1) { 
+            tbEndAfter.Enabled = false;
+            tbEndOnDate.Enabled = true;
+        }
+
+    }
+
+    protected void btnDoneRepeat_Clicked(object sender, EventArgs e)
+    {
+        pnlDim.Visible = false;
+        pnlRepeatItem.Visible = false;
+        
+    }
+    
 }
