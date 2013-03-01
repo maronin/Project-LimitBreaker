@@ -115,8 +115,6 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>   
 
     <div style="text-align:center; float:left; margin-left:35px;">
             <h1>Welcome LimitBreaker</h1>
@@ -204,8 +202,6 @@
         <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()">Pan
     </div> 
     
-    
-    </ContentTemplate>
-    </asp:UpdatePanel>
+   
 </asp:Content>
 
