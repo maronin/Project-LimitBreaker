@@ -739,4 +739,15 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         tbRemoveDate.Text = Convert.ToDateTime(tbRemoveDate.Text).AddDays(1).ToString("MM/dd/yyyy");
     }
 
+
+    protected void lnkButtonViewAll_Click(object sender, EventArgs e)
+    {
+        List<scheduledItem> items;
+        itemScheduledOn = Convert.ToDateTime("01/" + ddl_month.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
+        items = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+        GridViewScheduledItems.DataSource = items;
+        GridViewScheduledItems.DataBind();
+        lblRemoveResult.Visible = false;
+    }
+
 }

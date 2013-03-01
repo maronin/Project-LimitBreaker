@@ -100,7 +100,38 @@ public class ScheduleManager
         }
     }
 
+    public List<scheduledItem> getScheduledItemsForMonth(Int32 userID, DateTime day)
+    {
+        using (var context = new Layer2Container())
+        {
+            var ruleDate = Convert.ToDateTime(day).Date;
+            var routines = from r in context.ScheduledRoutines
+                           orderby r.startTime
+                           where (r.LimitBreaker.id == userID && (r.startTime.Month == day.Month && r.startTime.Year == day.Year))
+                           select new scheduledItem
+                           {
+                               itemName = r.Routine.name,
+                               startTime = r.startTime,
+                               user = r.LimitBreaker,
+                               id = r.id,
+                               isExericse = false
+                           };
+            var exercises = from e in context.ScheduledExercises
+                            orderby e.startTime
+                            where (e.LimitBreakers.id == userID && (e.startTime.Month == day.Month && e.startTime.Year == day.Year))
+                            select new scheduledItem
+                            {
+                                itemName = e.Exercise.name,
+                                startTime = e.startTime,
+                                user = e.LimitBreakers,
+                                id = e.id,
+                                isExericse = true
+                            };
+            var items = routines.Concat(exercises).ToList();
 
+            return items.ToList();
+        }
+    }
     /// <summary>
     /// Schedule a new routine
     /// </summary>

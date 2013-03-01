@@ -385,6 +385,8 @@
                                 Remove/Modify Items</h3>
                             Select a date to view scheduled items for that date:
                             <br />
+                            
+                            
                             <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="tbRemoveDate"
                                 FilterType="Custom" ValidChars='()1234567890-/'>
                             </asp:FilteredTextBoxExtender>
@@ -393,13 +395,14 @@
                             <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
                                 AutoPostBack="True" OnTextChanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
                             <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth">>></asp:LinkButton>
-                            
+                            <br />
+                           or <asp:LinkButton ID="lnkButtonViewAll" runat="server" OnClick="lnkButtonViewAll_Click">View All</asp:LinkButton> for this month
                             <hr />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
                                 ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><%--<asp:RequiredFieldValidator
                                     ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
-                                    ControlToValidate="tbRemoveDate" ValidationGroup="RemoveItem" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    ControlToValidate="tbRemoveDate" ValidationGroup="RemoveItem" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                             <asp:CalendarExtender ID="calendarRemoveItem" runat="server" TargetControlID="tbRemoveDate">
                             </asp:CalendarExtender>
                             <asp:GridView ID="GridViewScheduledItems" runat="server" AutoGenerateColumns="False"
