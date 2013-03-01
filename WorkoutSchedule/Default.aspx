@@ -467,7 +467,7 @@
                                 </tr>
                                 <tr>
                                 <td style="float:right;">
-                                <asp:LinkButton ID="lnkRemoveAll" runat="server" OnClick="lnkRemoveAll_clicked">Remove All</asp:LinkButton>
+                                <asp:LinkButton ID="lnkRemoveAll" runat="server" OnClick="lnkRemoveAll_clicked" Visible=false OnClientClick="return confirm('Doing this will irreversibly remove ALL currently displayed scheduled items from the system. Are you sure?');">Remove All</asp:LinkButton>
                                 <asp:Label ID="lblRemoveResult" runat="server" Text="There are no items scheduled for this day!"
                                     ForeColor="Red" Visible="False"></asp:Label>
                                </td>
