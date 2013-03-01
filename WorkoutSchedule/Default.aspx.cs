@@ -22,7 +22,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     static DateTime itemScheduledOn;
     static bool modifyExercise;
     static Int32 modifyItemID;
-
+    static string endsOnAfterValue = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liWorkoutSchedule");
@@ -58,8 +58,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 loadYears();
                 loadCalendar();
                 populateUserRoutines();
-                exercises.ForeColor = Color.DarkViolet;
-                routines.ForeColor = Color.Red;
+                exercises.ForeColor = Color.CornflowerBlue;
+                routines.ForeColor = Color.MediumBlue;
                 //populateExerciseInfo();
                 populateRepeatEveryList();
 
@@ -163,12 +163,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 if (item.isExericse)
                 {
                     lbl.Font.Size = 12;
-                    lbl.Text = lbl.Text + "<span style=\"color: DarkViolet\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
+                    lbl.Text = lbl.Text + "<span style=\"color: CornflowerBlue\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
                 }
                 else
                 {
+
                     lbl.Font.Size = 12;
-                    lbl.Text = lbl.Text + "<span style=\"color: Red\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
+                    lbl.Text = lbl.Text + "<span style=\"color: MediumBlue\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
                 }
             }
         }
@@ -373,9 +374,22 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         GridViewScheduledItems.Visible = true;
     }
 
+    //Schedule a new exercise
     protected void btnScheduleExercise_Click(object sender, EventArgs e)
     {
-        if (scheduleManager.scheduleNewExercise(viewExercises.ddlSelectedValue, Convert.ToDateTime(/*calDate.SelectedDate.ToString("d") + " " + ddlHours.Text + ":" + ddlMinutes.Text + ":00 " + ddlAmPm.Text*/ tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text), Convert.ToInt32(userID), false))
+
+        if (
+            scheduleManager.scheduleNewExercise
+            (viewExercises.ddlSelectedValue, 
+            Convert.ToDateTime(tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text),
+            Convert.ToInt32(userID), 
+            false, 
+            cbRepeat.Checked, 
+            ddlRepeatType.SelectedItem.Text, 
+            Convert.ToInt32(ddlRepeatEvery.SelectedItem.Text), 
+            endsOnAfterValue, 
+            rblEnd.SelectedItem.Text)
+            )
         {
             addNewItem = true;
             lblResult_Exercise.Text = "Successfuly scheduled your exercise!";
@@ -662,14 +676,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         tbStartsOnDate.Text = tbDate_exercise.Text;
 
     }
-     protected void btnCancelRepeat_Clicked(object sender, EventArgs e)
-    {
 
-        pnlDim.Visible = false;
-        pnlRepeatItem.Visible = false;
-        cbRepeat.Checked = false;
-
-    }
 
     protected void ddlRepeatType_indexChanged(object sender, EventArgs e)
     {
@@ -683,24 +690,42 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     }
 
-    protected void dblEnd_IndexChanged(object sender, EventArgs e)
+    protected void rblEnd_IndexChanged(object sender, EventArgs e)
     {
-        if (dblEnd.SelectedIndex == 0){
+        if (rblEnd.SelectedIndex == 0){
             tbEndOnDate.Enabled = false;
             tbEndAfter.Enabled = true;
+            
         }
-        else if (dblEnd.SelectedIndex == 1) { 
+        else if (rblEnd.SelectedIndex == 1) { 
             tbEndAfter.Enabled = false;
             tbEndOnDate.Enabled = true;
         }
-
+        
     }
 
+    //Done Button
     protected void btnDoneRepeat_Clicked(object sender, EventArgs e)
     {
         pnlDim.Visible = false;
         pnlRepeatItem.Visible = false;
+
+        if (rblEnd.SelectedIndex == 0){
+            endsOnAfterValue = tbEndAfter.Text;
+            
+        }
+        else if (rblEnd.SelectedIndex == 1) {
+            endsOnAfterValue = tbEndOnDate.Text;
+        }
         
     }
-    
+
+    //Cancel Button
+    protected void btnCancelRepeat_Clicked(object sender, EventArgs e)
+    {
+
+        pnlDim.Visible = false;
+        pnlRepeatItem.Visible = false;
+        cbRepeat.Checked = false;
+    }
 }

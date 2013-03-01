@@ -114,13 +114,12 @@ public class ScheduleManager
     /// <param name="userID">The current user logged in</param>
     /// <param name="notification">If the user wants notification or not</param>
     /// <returns>Returns true if the exercise was scheduled, otherwise false</returns>
-    public bool scheduleNewExercise(Int32 exerciseID, DateTime start, Int32 userID, bool notification)
+    public bool scheduleNewExercise(Int32 exerciseID, DateTime start, Int32 userID, bool notification, bool repeat, string repeatInterval, int repeatEvery, string endsOnAfterValue, string onAfter)
     {
         bool rc = false;
 
         using (var context = new Layer2Container())
         {
-
 
             LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
             if (lb != null)
@@ -137,6 +136,11 @@ public class ScheduleManager
                     }
                 }
                 */
+                if (repeat)
+                {
+
+                }
+                else { 
                 Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
                 newScheduledExercise.Exercise = exercise;
                 newScheduledExercise.startTime = start;
@@ -145,6 +149,7 @@ public class ScheduleManager
                 context.ScheduledExercises.AddObject(newScheduledExercise);
                 context.SaveChanges();
                 rc = true;
+                }
             }
             return rc;
         }

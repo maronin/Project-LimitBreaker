@@ -160,7 +160,7 @@
                                             <asp:ListItem>PM</asp:ListItem>
                                         </asp:DropDownList>
                                         <br />
-                                        Date
+                                        Date:
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderExercise" runat="server"
                                             TargetControlID="tbDate_exercise" FilterType="Custom" ValidChars='()1234567890-/'>
                                         </asp:FilteredTextBoxExtender>
@@ -243,13 +243,13 @@
                                                             <table >
                                                                 <tr>
                                                                     <td>
-                                                                        <asp:RadioButtonList ID="dblEnd" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dblEnd_IndexChanged" style="width: 70px;">
+                                                                        <asp:RadioButtonList ID="rblEnd" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rblEnd_IndexChanged" style="width: 70px;">
                                                                             <asp:ListItem Text="After" Selected="True">After </asp:ListItem>
                                                                             <asp:ListItem Text="On" >On </asp:ListItem>
                                                                         </asp:RadioButtonList>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="tbEndAfter" runat="server" Width="40px">5</asp:TextBox>
+                                                                        <asp:TextBox ID="tbEndAfter" runat="server" Width="40px" MaxLength="1">5</asp:TextBox>
                                                                         occurances
                                                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server" 
                                                                          TargetControlID="tbEndOnDate"
