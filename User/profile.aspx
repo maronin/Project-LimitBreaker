@@ -116,11 +116,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>
-     
-    <h1>Welcome LimitBreaker</h1>
+    <ContentTemplate>   
 
-    <div style="text-align:center; float:left;">
+    <div style="text-align:center; float:left; margin-left:35px;">
+            <h1>Welcome LimitBreaker</h1>
             <h2><asp:Label ID="alias" runat="server"></asp:Label>'s User Profile</h2>
             <asp:Label ID="levelLbl" runat="server" Text=""></asp:Label>
         <br />
@@ -145,7 +144,7 @@
                     ErrorMessage="RegularExpressionValidator" ControlToValidate="newWeight" 
                     ForeColor="Red" 
                     ValidationExpression="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$" 
-                    ValidationGroup="profileUpdate" Display="Dynamic">*Invalid weight</asp:RegularExpressionValidator>
+                    ValidationGroup="profileUpdate" Display="Dynamic">*Invalid</asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                     ErrorMessage="RequiredFieldValidator" Text="*Required" 
                     ControlToValidate="newWeight" Display="Dynamic" ForeColor="Red" ValidationGroup="profileUpdate"></asp:RequiredFieldValidator>
@@ -161,7 +160,7 @@
                     ErrorMessage="RegularExpressionValidator" ControlToValidate="newHeight" 
                     ForeColor="Red" 
                     ValidationExpression="^[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*$" 
-                    ValidationGroup="profileUpdate" Display="Dynamic">*Invalid height</asp:RegularExpressionValidator>
+                    ValidationGroup="profileUpdate" Display="Dynamic">*Invalid</asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                     ErrorMessage="RequiredFieldValidator" Text="*Required" 
                     ControlToValidate="newHeight" Display="Dynamic" ForeColor="Red" ValidationGroup="profileUpdate"></asp:RequiredFieldValidator>
@@ -186,12 +185,13 @@
                 <asp:Label ID="bmi" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr><td class="auto-style1">          
-                <asp:Button ID="updateStats" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateStats_Click" /></td>
+                <asp:Button ID="updateStats" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateStats_Click"/></td>
             <td class="auto-style1" colspan="2">
-                <asp:Label ID="updateResultLbl" runat="server" Text=""></asp:Label>
+                
             </td>
         </tr>
     </table>
+    <asp:Label ID="updateResultLbl" runat="server" Text=""></asp:Label>
     </div>
     </div>
 
@@ -203,7 +203,7 @@
         <input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
         <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()">Pan
     </div> 
-
+    
     
     </ContentTemplate>
     </asp:UpdatePanel>

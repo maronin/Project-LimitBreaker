@@ -27,12 +27,13 @@ public partial class User_profile : System.Web.UI.Page
             double tempBmi = userStats.bmi;
             double tempVmax = userStats.vo2MAX;
             string reqExp = Convert.ToString(expMngr.getRequiredExperienceForLevel(userStats.level));
-            string curExp = Convert.ToString(Math.Round(userStats.experience, 2));
+            string curExp = Convert.ToString(userStats.experience);
             levelLbl.Text = "Level: " + Convert.ToString(userStats.level);
             currentExpLbl.Text = curExp;
             reqExpLbl.Text = "  /  " + reqExp + "  Experience";
             expBar.Attributes.Add("value", curExp);
             expBar.Attributes.Add("max", reqExp);
+            expBar.Attributes.Add("title", Convert.ToString(Math.Round(Convert.ToDouble(curExp)/Convert.ToDouble(reqExp)*100, 1)) + "% through the current level");
 
             if (!Page.IsPostBack)
             {

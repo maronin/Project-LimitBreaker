@@ -34,7 +34,7 @@
                         <asp:TextBox ID="userName" runat="server"></asp:TextBox></td>
                     <td>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="userName" ForeColor="Red" ValidationGroup="createUser">Username required</asp:RequiredFieldValidator><br />
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="userName" ForeColor="Red" ValidationExpression="^[a-zA-Z][a-zA-Z0-9._\-]{3,32}$" ValidationGroup="createUser">Invalid username</asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="userName" ForeColor="Red" ValidationExpression="^[a-zA-Z][a-zA-Z0-9._\-]{3,15}$" ValidationGroup="createUser">Invalid username</asp:RegularExpressionValidator>
                 </tr>
                 <tr>
                     <td class="style2">Password:</td>
