@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 /// <summary>
 /// The schedulemanager contains methods which allow to retreive information associated with scheduled items in the database
@@ -65,6 +66,41 @@ public class ScheduleManager
             return items.ToList();
         }
     }
+
+    public List<scheduledItem> getScheduledItemsByDayOfYear(Int32 userID, DateTime day)
+    {
+        using (var context = new Layer2Container())
+        {
+            var ruleDate = Convert.ToDateTime(day).Date;
+            var routines = from r in context.ScheduledRoutines
+                           orderby r.startTime
+                           where (r.LimitBreaker.id == userID && (r.startTime.Day == day.Day && r.startTime.Month == day.Month && r.startTime.Year == day.Year))
+                           select new scheduledItem
+                           {
+                               itemName = r.Routine.name,
+                               startTime = r.startTime,
+                               user = r.LimitBreaker,
+                               id = r.id,
+                               isExericse = false
+                           };
+            var exercises = from e in context.ScheduledExercises
+                            orderby e.startTime
+                            where (e.LimitBreakers.id == userID && (e.startTime.Day == day.Day && e.startTime.Month == day.Month && e.startTime.Year == day.Year))
+                            select new scheduledItem
+                            {
+                                itemName = e.Exercise.name,
+                                startTime = e.startTime,
+                                user = e.LimitBreakers,
+                                id = e.id,
+                                isExericse = true
+                            };
+            var items = routines.Concat(exercises).ToList();
+
+            return items.ToList();
+        }
+    }
+
+
     /// <summary>
     /// Schedule a new routine
     /// </summary>
@@ -154,6 +190,7 @@ public class ScheduleManager
                                 context.SaveChanges();
                                 rc = true;
                                 start = start.AddDays(repeatEvery);
+                                Thread.Sleep(100);
                             }
                         }
                     }

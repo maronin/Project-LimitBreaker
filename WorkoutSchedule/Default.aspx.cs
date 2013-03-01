@@ -304,7 +304,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
             List<scheduledItem> items;
             itemScheduledOn = Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue);
-            items = scheduleManager.getScheduledItemsByDay(userID, itemScheduledOn);
+            items = scheduleManager.getScheduledItemsByDayOfYear(userID, itemScheduledOn);
             GridViewScheduledItems.DataSource = items;
             GridViewScheduledItems.DataBind();
             multiViewCalendar.ActiveViewIndex = 2;
@@ -609,7 +609,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void populateRemoveItems()
     {
         List<scheduledItem> items;
-        items = scheduleManager.getScheduledItemsByDay(userID, Convert.ToDateTime(tbRemoveDate.Text));
+        items = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
         GridViewScheduledItems.DataSource = items;
         GridViewScheduledItems.DataBind();
         if (GridViewScheduledItems.Rows.Count == 0)
