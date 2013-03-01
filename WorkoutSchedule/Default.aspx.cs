@@ -23,6 +23,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     static bool modifyExercise;
     static Int32 modifyItemID;
     static string endsOnAfterValue = "";
+    static List<scheduledItem> schdledItems;
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liWorkoutSchedule");
@@ -611,22 +612,27 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         GridViewScheduledItems.DataSource = null;
         GridViewScheduledItems.DataBind();
-        List<scheduledItem> items;
         if (tbRemoveDate.Text != "")
-            items = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
+            schdledItems = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
 
         else
         {
             itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
-            items = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+            schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
         }
-        GridViewScheduledItems.DataSource = items;
+        GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();
-        
+
         if (GridViewScheduledItems.Rows.Count == 0)
+        {
             lblRemoveResult.Visible = true;
+            lnkRemoveAll.Visible = false;
+        }
         else
+        {
             lblRemoveResult.Visible = false;
+            lnkRemoveAll.Visible = true;
+        }
     }
     protected void tbRemoveDate_TextChanged(object sender, EventArgs e)
     {
@@ -753,15 +759,29 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void ddlRemoveMonth_indexChanged(object sender, EventArgs e)
     {
-        List<scheduledItem> items;
+        
         itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
-        items = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
-        GridViewScheduledItems.DataSource = items;
+
+        schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+        GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();
         if (GridViewScheduledItems.Rows.Count == 0)
+        {
             lblRemoveResult.Visible = true;
+            lnkRemoveAll.Visible = false;
+        }
         else
+        {
             lblRemoveResult.Visible = false;
+            lnkRemoveAll.Visible = true;
+        }
+    }
+
+    protected void lnkRemoveAll_clicked(object sender, EventArgs e)
+    {
+        scheduleManager.deleteListOfScheduledItems(schdledItems, userID);
+        populateRemoveItems();
+
     }
 
 }

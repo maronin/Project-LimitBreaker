@@ -193,7 +193,7 @@ public class ScheduleManager
             if (lb != null)
             {
                 List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
-                
+
                 Exercise exercise = context.Exercises.Where(e => e.id == exerciseID).FirstOrDefault();
                 //This part is for validating if the exercise can be scheduled for a certain time
                 /* scheduledItemsForThatDay = getScheduledItemsByDay(userID, start);
@@ -209,7 +209,8 @@ public class ScheduleManager
                 {
                     if (repeatInterval.Trim() == "Daily")
                     {
-                        if(onAfter.Trim() == "After"){
+                        if (onAfter.Trim() == "After")
+                        {
                             for (int i = 0; i < Convert.ToInt32(endsOnAfterValue); i++)
                             {
                                 ScheduledExercise newScheduledExercise = new ScheduledExercise();
@@ -234,27 +235,28 @@ public class ScheduleManager
 
                     }
                 }
-                else {
-                 ScheduledExercise newScheduledExercise = new ScheduledExercise();
-                newScheduledExercise.Exercise = exercise;
-                newScheduledExercise.startTime = start;
-                newScheduledExercise.LimitBreakers = lb;
-                newScheduledExercise.needEmailNotification = notification;
-                context.ScheduledExercises.AddObject(newScheduledExercise);
-                context.SaveChanges();
-                rc = true;
+                else
+                {
+                    ScheduledExercise newScheduledExercise = new ScheduledExercise();
+                    newScheduledExercise.Exercise = exercise;
+                    newScheduledExercise.startTime = start;
+                    newScheduledExercise.LimitBreakers = lb;
+                    newScheduledExercise.needEmailNotification = notification;
+                    context.ScheduledExercises.AddObject(newScheduledExercise);
+                    context.SaveChanges();
+                    rc = true;
                 }
             }
             return rc;
         }
     }
-/// <summary>
-/// Removes a scheduled from the users schedule
-/// </summary>
-/// <param name="itemID">The scheduled item ID</param>
-/// <param name="isExercise">If its an exercise or a routine</param>
-/// <param name="userID">The id of the currently logged in user</param>
-/// <returns>Returns true if deleted the scheduled Item</returns>
+    /// <summary>
+    /// Removes a scheduled from the users schedule
+    /// </summary>
+    /// <param name="itemID">The scheduled item ID</param>
+    /// <param name="isExercise">If its an exercise or a routine</param>
+    /// <param name="userID">The id of the currently logged in user</param>
+    /// <returns>Returns true if deleted the scheduled Item</returns>
     public bool deletecheduledItem(Int32 itemID, bool isExercise, Int32 userID)
     {
         bool result = false;
@@ -426,4 +428,62 @@ public class ScheduleManager
 
     }
 
+    public bool deleteListOfScheduledItems(List<scheduledItem> items, Int32 userID)
+    {
+        bool result = false;
+        using (var context = new Layer2Container())
+        {
+            //Routine rc = new Routine();
+            try
+            {
+                foreach (var item in items)
+                {
+                if (item.isExericse)
+                {
+                    
+                    ScheduledExercise rc = context.ScheduledExercises.Where(e => e.id == item.id).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        context.ScheduledExercises.DeleteObject(rc);
+                        context.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                    }
+                
+                else
+                {
+                    ScheduledRoutine rc = context.ScheduledRoutines.Where(e => e.id == item.id).FirstOrDefault();
+                    if (rc != null)
+                    {
+                        context.ScheduledRoutines.DeleteObject(rc);
+                        context.SaveChanges();
+                        result = true;
+
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+            }
+            }
+            catch (NullReferenceException e)
+            {
+                //Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                //// write off the execeptions to my error.log file
+                //StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                //wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                //wrtr.Close();
+            }
+
+        }
+
+        return result;
+    }
 }
