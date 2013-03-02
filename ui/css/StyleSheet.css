@@ -294,8 +294,7 @@ p
 {
 width: 530px;
 left: 200px;
-position: absolute;
-
+position: relative;
 padding: 24px;
 }
 .date

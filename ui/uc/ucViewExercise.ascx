@@ -47,7 +47,7 @@
                         TypeName="ExerciseManager"></asp:ObjectDataSource>
                 </tr>
                 <tr class="description">
-                    <td colspan="2">
+                    <td colspan="3">
                         <h5>
                             Description:</h5>
                         <br />
