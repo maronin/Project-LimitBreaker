@@ -104,6 +104,9 @@
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
                 <asp:Label ID="expRewardLbl" runat="server" Text=""></asp:Label>
+                <br />
+                <asp:Label ID="goalAchievedLbl" runat="server" Text=""></asp:Label>
+                <asp:HyperLink ID="goalsLink" runat="server" NavigateUrl="~/LoggedExercise/manageExerciseGoals.aspx" ForeColor="#666666" Visible="False">here</asp:HyperLink>
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>

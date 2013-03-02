@@ -61,7 +61,8 @@
                         <asp:Label ID="expRewardLbl" runat="server" Text="" Visible="false"></asp:Label></td>
                 </tr>
             </table>
-
+            <asp:Label ID="goalAchievedLbl" runat="server" Text=""></asp:Label>
+            <asp:HyperLink ID="goalsLink" runat="server" NavigateUrl="~/LoggedExercise/manageExerciseGoals.aspx" ForeColor="#666666" Visible="False">here</asp:HyperLink>
             <hr />
 
             <asp:ListBox ID="loggedExercises" runat="server" DataTextField="timeLogged" DataValueField="id" Height="150px" Width="160px" OnSelectedIndexChanged="loggedExercises_SelectedIndexChanged" AutoPostBack="True"></asp:ListBox>

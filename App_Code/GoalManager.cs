@@ -43,11 +43,11 @@ public class GoalManager
         }
     }
 
-    public ExerciseGoal getExerciseGoalByExerciseNameAndUserName(string name, string userName)
+    public ExerciseGoal getUnachievedGoalByExerciseNameAndUserID(string name, int userID)
     {
         using (var context = new Layer2Container())
         {
-            return context.ExerciseGoals.Where(s => s.Exercise.name == name && s.LimitBreaker.username == userName).FirstOrDefault();
+            return context.ExerciseGoals.Where(s => s.Exercise.name == name && s.LimitBreaker.id == userID && s.achieved == false).FirstOrDefault();
         }
     }
 
@@ -203,5 +203,23 @@ public class GoalManager
 
             return goalSet;
         }
+    }
+
+    public bool achieveGoal(ExerciseGoal eg, int reps, int time, int weight, double distance)
+    {       
+        bool achieved = false;
+
+        if (reps >= eg.reps && time >= eg.time && weight >= eg.weight && distance >= eg.distance)
+        {
+            using (var context = new Layer2Container())
+            {
+                ExerciseGoal saveGoal = context.ExerciseGoals.Where(s => s.id == eg.id).FirstOrDefault();
+                saveGoal.achieved = true;
+                context.SaveChanges();
+                achieved = true;
+            }
+        }
+
+        return achieved;
     }
 }

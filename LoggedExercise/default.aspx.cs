@@ -13,6 +13,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     SystemExerciseManager exerciseManager = new SystemExerciseManager();
     LoggedExerciseManager logManager = new LoggedExerciseManager();
     UserManager userManager = new UserManager();
+    GoalManager goalMngr = new GoalManager();
 
     Exercise selectedExercise;
     Int64 logID;
@@ -168,6 +169,16 @@ public partial class LoggedExercise_default : System.Web.UI.Page
 
         ExperienceManager expMngr = new ExperienceManager();
         int exp = logManager.logExercise(user.id, selectedExercise.id, repValue, timeValue, weightValue, distanceValue);
+        ExerciseGoal eg = goalMngr.getUnachievedGoalByExerciseNameAndUserID(selectedExercise.name, user.id);
+
+        if (eg != null)
+        {
+            if (goalMngr.achieveGoal(eg, repValue, timeValue, weightValue, distanceValue))
+            {
+                goalAchievedLbl.Text = "Congratulations! You have achieved your goal for this exercise. You can view your goals ";
+                goalsLink.Visible = true;
+            }
+        }
         if (exp != 0)
         {
             bool leveled = expMngr.rewardExperienceToUser(user.id, exp);
@@ -212,5 +223,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     {
         expRewardLbl.Visible = false;
         successLbl.Visible = false;
+        goalAchievedLbl.Text = "";
+        goalsLink.Visible = false;
     }
 }
