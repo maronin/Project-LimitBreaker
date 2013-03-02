@@ -247,8 +247,9 @@ public class ScheduleManager
                         }
                         if (onAfter.Trim() == "On")
                         {
-                            difference = (Convert.ToDateTime(endsOnAfterValue) - start).Days;
-                            difference += 2;
+                            difference = (Convert.ToDateTime(endsOnAfterValue) - start).Days + 1;
+                            difference /= repeatEvery*7;
+                            difference++;
                         }
 
                         for (int i = 0; i < difference; i++)

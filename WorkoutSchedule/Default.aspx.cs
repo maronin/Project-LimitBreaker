@@ -419,6 +419,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         lblResult_Exercise.Text = "";
         lblResult_Routine.Text = "";
         cbRepeat.Checked = false;
+        lnkEditRepeat.Visible = false;
     }
 
     protected void goBack_Click(object sender, EventArgs e)
