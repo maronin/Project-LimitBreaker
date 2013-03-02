@@ -243,6 +243,14 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         loadCalendar();
     }
 
+    public static DateTime LastSunday(DateTime validDate)
+    {
+        Int32 daysInThisMonth = DateTime.DaysInMonth(validDate.Year, validDate.Month);
+        DateTime lastDayOfMonth = new DateTime(validDate.Year, validDate.Month, daysInThisMonth);
+        Int32 dayValue = (Int32)lastDayOfMonth.DayOfWeek;
+        return lastDayOfMonth.AddDays(-1 * dayValue);
+    }
+
     protected void loadCalendar()
     {
         Int16 m = Convert.ToInt16(ddl_month.SelectedItem.Value);
@@ -250,23 +258,16 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         List<DateTime> dates = new List<DateTime>();
         List<String> empty = new List<String>();
         DateTime dateValue = new DateTime(Convert.ToInt32(ddl_year.SelectedValue), Convert.ToInt32(ddl_month.SelectedValue), 1);
+        
         int sunday = Convert.ToInt32(DayOfWeek.Sunday) + 1;
         int currentDay = Convert.ToInt32(dateValue.DayOfWeek) + 1;
-        int difference = currentDay - sunday;
+        
 
-        if (dateValue.DayOfWeek == DayOfWeek.Sunday)
-        {
-            for (int i = 1; i < System.DateTime.DaysInMonth(y, m) + 1; i++)
-            {
-                DateTime d = new DateTime(y, m, i);
-                dates.Add(d);
-            }
-            rpt_calendar.DataSource = dates;
-            rpt_calendar.DataBind();
-        }
+        DateTime lastSunday = LastSunday(new DateTime(Convert.ToInt32(ddl_year.SelectedValue), Convert.ToInt32(ddl_month.SelectedValue), 1).AddMonths(-1).AddDays(0));
+        DateTime lastDayOfMonth = new DateTime(Convert.ToInt32(ddl_year.SelectedValue), Convert.ToInt32(ddl_month.SelectedValue), 1).AddMonths(0).AddDays(-1);
+        
 
-        if (dateValue.DayOfWeek != DayOfWeek.Sunday)
-        {
+        int difference = (lastDayOfMonth - lastSunday).Days + 1;
 
             for (int i = 0; i < difference; i++)
             {
@@ -287,7 +288,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
             rpt_calendar.DataBind();
 
-        }
+        
         lblToday.Text = ddl_month.SelectedItem.Text + " " + ddl_year.Text;
 
     }
