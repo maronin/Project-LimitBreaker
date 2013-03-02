@@ -102,7 +102,6 @@
                                             <br />
                                             <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
                                         </asp:Panel>
-
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <div style="clear: both; height: 0; overflow: hidden">

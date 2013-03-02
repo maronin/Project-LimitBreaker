@@ -123,7 +123,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         Panel pnl_calendarDay = (Panel)e.Item.FindControl("pnl_calendarDay");
         LinkButton lnk_dayLink = (LinkButton)e.Item.FindControl("lnk_dayLink");
         Literal ltl_dayEvents = (Literal)e.Item.FindControl("ltl_dayEvents");
-        Literal lineBreak = (Literal)e.Item.FindControl("lineBreak");
+
         //set values
         DateTime dt = (DateTime)e.Item.DataItem;
         //Here we set the day value for each day entry within the calendar
@@ -159,10 +159,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
         }
 
-        if (dt.DayOfWeek == DayOfWeek.Saturday)
-        {
-            rpt_calendar.Controls.Add(new LiteralControl("<br class=\"newWeek\"></>"));
-        }
+        //if (dt.DayOfWeek == DayOfWeek.Saturday)
+        //{
+        //    rpt_calendar.Controls.Add(new LiteralControl("<br class=\"newWeek\"></>"));
+        //}
         
         
         
