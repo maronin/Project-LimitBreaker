@@ -199,11 +199,14 @@ public class ScheduleManager
                     else if (repeatInterval.Trim() == "Weekly")
                     {
                         int weeks = 0;
+                        int occurances = -1;
+                        int occurancesEnd = 0;
                         //if its after certain amount of days
                         if (onAfter.Trim() == "After")
                         {
                             //get the number occurances
                             weeks = Convert.ToInt32(endsOnAfterValue);
+                            occurances = 0;
                         }
                         if (onAfter.Trim() == "On")
                         {
@@ -218,7 +221,7 @@ public class ScheduleManager
                             //go through each day of the week
                             for (int k = 0; k < 7; k++)
                             {
-                                if (selectedDaysOfWeek.Contains(Convert.ToString((Int32)start.DayOfWeek)))
+                                if (selectedDaysOfWeek.Contains(Convert.ToString((Int32)start.DayOfWeek)) && occurances < occurancesEnd)
                                 {
                                     ScheduledRoutine newScheduledRoutine = new ScheduledRoutine();
                                     newScheduledRoutine.Routine = routine;
@@ -228,6 +231,10 @@ public class ScheduleManager
                                     context.ScheduledRoutines.AddObject(newScheduledRoutine);
                                     context.SaveChanges();
                                     rc = true;
+                                    if (onAfter.Trim() == "After")
+                                    {
+                                        occurances++;
+                                    }
                                 }
                                 start = start.AddDays(1);
                                 //if reached a new week, break out of the for loop and start the new week
