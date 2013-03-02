@@ -13,7 +13,7 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
     SystemExerciseManager sysManager;
     routineManager routManager;
     List<Exercise> exercises;
-    RadioButtonList rbl;
+    ListBox lb;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -30,13 +30,13 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         {
             // full refresh of page will abandon current session
             Session.Abandon();
-            rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
+            lb = (ListBox)this.Parent.FindControl("lbRoutines");
             if (userID != null)
             {
-                rbl.DataSource = routManager.getUsersRoutines(userID).ToList();
-                rbl.DataTextField = "name";
-                rbl.DataValueField = "id";
-                rbl.DataBind();
+                lb.DataSource = routManager.getUsersRoutines(userID).ToList();
+                lb.DataTextField = "name";
+                lb.DataValueField = "id";
+                lb.DataBind();
             }
 
             // to get the id of the button so that enter = submit

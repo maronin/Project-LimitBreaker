@@ -399,6 +399,7 @@ public class routineManager
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
                 List<LoggedExercise> lelist = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == routineID).ToList();
+                
                 if (lb != null)
                 {
                     foreach (LoggedExercise le in lelist)
@@ -444,7 +445,42 @@ public class routineManager
                 if (rtn != null && lb != null)
                 {
                     //rc = lb.LoggedExercises.Where(x => x.Exercise.Routines.Contains(rtn)).ToList();
-                    rc = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == rtn.id).ToList();
+                    rc = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == rtn.id).OrderByDescending(x => x.timeLogged).ToList();
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message + Environment.NewLine + e.StackTrace);
+                // write off the execeptions to my error.log file
+                StreamWriter wrtr = new StreamWriter(System.Web.HttpContext.Current.ApplicationInstance.Server.MapPath("~/assets/documents/" + @"\" + "error.log"), true);
+
+                wrtr.WriteLine(DateTime.Now.ToString() + " | Error: " + e);
+
+                wrtr.Close();
+            }
+
+
+            return rc;
+        }
+    }
+
+    public ICollection<SetAttributes> getSetAttributes(int userID, int routineID, int logExerciseID)
+    {
+
+        using (var context = new Layer2Container())
+        {
+            ICollection<SetAttributes> rc = new List<SetAttributes>();
+
+            try
+            {
+                LoggedExercise le = context.LoggedExercises.Where(x => x.id == logExerciseID).FirstOrDefault();
+                Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
+                LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
+
+                if (le != null && rtn != null && lb != null)
+                {
+                    //rc = lb.LoggedExercises.Where(x => x.Exercise.Routines.Contains(rtn)).ToList();
+                    rc = context.SetAttributes.Where(x => x.LoggedExercise.LimitBreaker.id == userID).Where(x => x.LoggedExercise.Routine.id == routineID).Where(x => x.LoggedExercise.id == logExerciseID).ToList();
                 }
             }
             catch (NullReferenceException e)

@@ -9,20 +9,37 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
 {
     public int userID { get; set; }
     routineManager routManager;
-    RadioButtonList rbl;
+    ListBox lb;
     SystemExerciseManager sysManager;
+    LoggedExerciseManager logManager;
     int routineID;
+    int loggedExerciseID;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
-        rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-        if (rbl != null && rbl.SelectedIndex > -1)
+        logManager = new LoggedExerciseManager();
+
+        lb = (ListBox)this.Parent.FindControl("lbRoutines");
+
+        if (Session["loggedExerciseID"] != null)
         {
-            routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+            loggedExerciseID = (int)Session["loggedExerciseID"];
+        }
+
+        if (!IsPostBack)
+        {
+            Session.Abandon();
+            pnlSets.Visible = false;
+        }
+
+        if (lb != null && lb.SelectedIndex > -1)
+        {
+            routineID = Convert.ToInt32(lb.SelectedItem.Value);
             GridView1.DataSource = routManager.getLoggedExercises(userID, routineID);
             GridView1.DataBind();
+            pnlSets.Visible = false;
         }
     }
     protected void okButton_Click(object sender, EventArgs e)
@@ -34,6 +51,19 @@ public partial class ui_uc_ucModifyDeleteRoutineLog : System.Web.UI.UserControl
             GridView1.DataBind();
             // redirect page to itself (refresh)
             //Response.Redirect(Request.RawUrl);
+        }
+    }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "view")
+        {
+            loggedExerciseID = Convert.ToInt32(e.CommandArgument.ToString());
+            Session["loggedExerciseID"] = loggedExerciseID;
+            pnlSets.Visible = true;
+
+            List<SetAttributes> sets = routManager.getSetAttributes(userID, routineID, loggedExerciseID).ToList();
+            lblSets.Text = logManager.setsToString(sets);
         }
     }
 }

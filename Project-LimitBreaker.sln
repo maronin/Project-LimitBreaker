@@ -1,30 +1,19 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Project-LimitBreaker", ".", "{92C29599-E8F9-4B18-AB90-669D868690F4}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/Project-LimitBreaker"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\Project-LimitBreaker\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Project-LimitBreaker\"
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Project-LimitBreaker", ".", "{5A61E679-748D-42F4-A02A-E28FDDF8A7EF}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/Project LimitBreaker"
 		Debug.AspNetCompiler.PhysicalPath = "..\Project-LimitBreaker\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Project LimitBreaker\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Project-LimitBreaker\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/Project-LimitBreaker"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\Project-LimitBreaker\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Project-LimitBreaker\"
-		Release.AspNetCompiler.VirtualPath = "/Project LimitBreaker"
 		Release.AspNetCompiler.PhysicalPath = "..\Project-LimitBreaker\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Project LimitBreaker\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Project-LimitBreaker\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
