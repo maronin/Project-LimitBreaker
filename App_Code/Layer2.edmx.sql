@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/25/2013 11:27:30
+-- Date Created: 03/01/2013 16:24:59
 -- Generated from EDMX file: C:\Users\Lynart\Documents\Project-LimitBreaker\App_Code\Layer2.edmx
 -- --------------------------------------------------
 
@@ -65,6 +65,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_LoggedExerciseRoutine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[LoggedExercises] DROP CONSTRAINT [FK_LoggedExerciseRoutine];
 GO
+IF OBJECT_ID(N'[dbo].[FK_OldWeightLimitBreaker]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OldWeights] DROP CONSTRAINT [FK_OldWeightLimitBreaker];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -109,6 +112,9 @@ GO
 IF OBJECT_ID(N'[dbo].[ExerciseExps]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExerciseExps];
 GO
+IF OBJECT_ID(N'[dbo].[OldWeights]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OldWeights];
+GO
 IF OBJECT_ID(N'[dbo].[ExerciseRoutine]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ExerciseRoutine];
 GO
@@ -145,8 +151,6 @@ GO
 
 -- Creating table 'LoggedExercises'
 CREATE TABLE [dbo].[LoggedExercises] (
-    [sets] int  NOT NULL,
-    [note] nvarchar(max)  NULL,
     [id] bigint IDENTITY(1,1) NOT NULL,
     [timeLogged] datetime  NOT NULL,
     [LimitBreaker_id] int  NOT NULL,
@@ -163,6 +167,7 @@ CREATE TABLE [dbo].[SetAttributes] (
     [time] int  NULL,
     [reps] int  NULL,
     [timeLogged] datetime  NOT NULL,
+    [note] nvarchar(max)  NULL,
     [LoggedExercise_id] bigint  NOT NULL
 );
 GO
@@ -264,6 +269,15 @@ CREATE TABLE [dbo].[ExerciseExps] (
 );
 GO
 
+-- Creating table 'OldWeights'
+CREATE TABLE [dbo].[OldWeights] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [date] datetime  NOT NULL,
+    [weight] float  NOT NULL,
+    [LimitBreaker_id] int  NOT NULL
+);
+GO
+
 -- Creating table 'ExerciseRoutine'
 CREATE TABLE [dbo].[ExerciseRoutine] (
     [Exercises_id] int  NOT NULL,
@@ -351,6 +365,12 @@ GO
 ALTER TABLE [dbo].[ExerciseExps]
 ADD CONSTRAINT [PK_ExerciseExps]
     PRIMARY KEY CLUSTERED ([id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'OldWeights'
+ALTER TABLE [dbo].[OldWeights]
+ADD CONSTRAINT [PK_OldWeights]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [Exercises_id], [Routines_id] in table 'ExerciseRoutine'
@@ -580,6 +600,20 @@ ADD CONSTRAINT [FK_LoggedExerciseRoutine]
 CREATE INDEX [IX_FK_LoggedExerciseRoutine]
 ON [dbo].[LoggedExercises]
     ([Routine_id]);
+GO
+
+-- Creating foreign key on [LimitBreaker_id] in table 'OldWeights'
+ALTER TABLE [dbo].[OldWeights]
+ADD CONSTRAINT [FK_OldWeightLimitBreaker]
+    FOREIGN KEY ([LimitBreaker_id])
+    REFERENCES [dbo].[LimitBreakers]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OldWeightLimitBreaker'
+CREATE INDEX [IX_FK_OldWeightLimitBreaker]
+ON [dbo].[OldWeights]
+    ([LimitBreaker_id]);
 GO
 
 -- --------------------------------------------------
