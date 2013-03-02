@@ -22,15 +22,23 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
 
-        <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" AllowPaging="True" >
+        <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" AllowPaging="True">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-                <asp:BoundField DataField="timeLogged" HeaderText="timeLogged" SortExpression="timeLogged" />
+                <asp:TemplateField HeaderText="Exercise Name">
+                    <ItemTemplate>
+                        <asp:Label ID="lblExName" Text='<%# Bind("Exercise.name") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="timeLogged" HeaderText="Time Logged" SortExpression="timeLogged" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton1" runat="server" CommandName="view" CommandArgument='<%# Eval("id") %>'>View Sets</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+
+                
+
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
