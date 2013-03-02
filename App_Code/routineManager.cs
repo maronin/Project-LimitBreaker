@@ -445,7 +445,7 @@ public class routineManager
                 if (rtn != null && lb != null)
                 {
                     //rc = lb.LoggedExercises.Where(x => x.Exercise.Routines.Contains(rtn)).ToList();
-                    rc = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == rtn.id).ToList();
+                    rc = context.LoggedExercises.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.Routine.id == rtn.id).OrderByDescending(x => x.timeLogged).ToList();
                 }
             }
             catch (NullReferenceException e)

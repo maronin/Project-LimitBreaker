@@ -48,7 +48,7 @@ public class LoggedExerciseManager
         }
     }
 
-    // neil - log exercise with note
+    // neil - log exercise set with note
     public int logExerciseIntoRoutine(Int32 userID, Int32 exerciseID, Int32 routineID, Int32 reps, Int32 time, Int32 weight, Double distance, string note)
     {       //changed the return type to return the amount of exp rewarded
         //Get a logged exercise that has been logged within the hour and with the same exercise, else create a new one
@@ -58,13 +58,12 @@ public class LoggedExerciseManager
             SetAttributes set;
             if (log != null)
             {
-                set = createSet(reps, time, weight, distance, log.id);
-
+                set = createSet(reps, time, weight, distance, log.id, note);
             }
             else
             {
-                log = createLoggedExercise(userID, exerciseID, routineID, note);
-                set = createSet(reps, time, weight, distance, log.id);
+                log = createLoggedExercise(userID, exerciseID, routineID);
+                set = createSet(reps, time, weight, distance, log.id, note);
             }
 
             int exp = 0;
@@ -147,8 +146,8 @@ public class LoggedExerciseManager
         }
     }
 
-    // neil - create logged exercise with note
-    public LoggedExercise createLoggedExercise(Int32 userID, Int32 exerciseID, Int32 routineID, string note)
+    // neil - create logged exercise with a routine
+    public LoggedExercise createLoggedExercise(Int32 userID, Int32 exerciseID, Int32 routineID)
     {
 
         using (var context = new Layer2Container())
@@ -161,8 +160,6 @@ public class LoggedExerciseManager
             {
                 LoggedExercise log;
                 log = new LoggedExercise();
-                log.sets = 1;
-                log.note = note.Trim();
                 log.timeLogged = DateTime.Now;
                 log.Exercise = exercise;
                 log.LimitBreaker = limitBreaker;
@@ -191,6 +188,35 @@ public class LoggedExerciseManager
                 set.reps = rep;
                 set.time = time;
                 set.weight = weight;
+                set.distance = distance;
+                set.timeLogged = DateTime.Now;
+                set.LoggedExercise = existingLog;
+                context.SetAttributes.AddObject(set);
+                context.SaveChanges();
+                return set;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    // neil - create set with note
+    public SetAttributes createSet(Int32 rep, Int32 time, Int32 weight, Double distance, Int64 logID, string note)
+    {
+
+        using (var context = new Layer2Container())
+        {
+            LoggedExercise existingLog = context.LoggedExercises.Where(log => log.id == logID).FirstOrDefault();
+            if (existingLog != null)
+            {
+                SetAttributes set;
+                set = new SetAttributes();
+                set.reps = rep;
+                set.time = time;
+                set.weight = weight;
+                set.note = note.Trim();
                 set.distance = distance;
                 set.timeLogged = DateTime.Now;
                 set.LoggedExercise = existingLog;
@@ -256,6 +282,8 @@ public class LoggedExerciseManager
             }
             i++;
             rc += "<br />";
+            if (!set.note.Equals(""))
+                rc += "Note: " + set.note + "<br /><br/>";
         }
         return rc;
     }

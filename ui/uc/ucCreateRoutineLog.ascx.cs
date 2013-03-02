@@ -22,7 +22,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         routManager = new routineManager();
         logManager = new LoggedExerciseManager();
         lb = (ListBox)this.Parent.FindControl("lbRoutines");
-        
+
 
         if (Session["exerciseID"] != null)
         {
@@ -61,47 +61,63 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
 
     protected void btnLog_Click(object sender, EventArgs e)
     {
-        exerciseID = Session["exerciseID"] != null ? (int)Session["exerciseID"] : -1;
-        //pnlExerciseDetails.Visible = false;
-        
-        string note = tbNotes.Text.Trim();
+        if (checkZeroes())
+        {
+            exerciseID = Session["exerciseID"] != null ? (int)Session["exerciseID"] : -1;
+            //pnlExerciseDetails.Visible = false;
+            string note = tbNotes.Text.Trim();
+            int weight = Convert.ToInt32(tbWeight.Text.ToString());
+            float distance = (float)Convert.ToDouble(tbDistance.Text.ToString());
+            // convert the 2 text boxes to seconds
+            int time = Convert.ToInt32(tbTime_min.Text.ToString()) * 60 + Convert.ToInt32(tbTime_sec.Text.ToString());
+            int rep = Convert.ToInt32(tbRep.Text.ToString());
+            
+            ExperienceManager expMngr = new ExperienceManager();
+            int exp = logManager.logExerciseIntoRoutine(userID, exerciseID, routineID, rep, time, weight, distance, note);
+            /*
+            bool leveled = expMngr.rewardExperienceToUser(userID, exp);
+            expRewardLbl.Text = "<br />You received " + exp.ToString() + " experience";
+            if (leveled)
+                expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
+            */
+            init();
+            pnlInfo.Visible = true;
+        }
+    }
+
+    public bool checkZeroes()
+    {
         int weight = Convert.ToInt32(tbWeight.Text.ToString());
         float distance = (float)Convert.ToDouble(tbDistance.Text.ToString());
         // convert the 2 text boxes to seconds
         int time = Convert.ToInt32(tbTime_min.Text.ToString()) * 60 + Convert.ToInt32(tbTime_sec.Text.ToString());
         int rep = Convert.ToInt32(tbRep.Text.ToString());
 
-        ExperienceManager expMngr = new ExperienceManager();
-        int exp = logManager.logExerciseIntoRoutine(userID, exerciseID, routineID, rep, time, weight, distance, note);
-        bool leveled = expMngr.rewardExperienceToUser(userID, exp);
-        expRewardLbl.Text = "<br />You received " + exp.ToString() + " experience";
-        if (leveled)
-            expRewardLbl.Text += "<br />Congratulations, you have leveled up!";
-        init();
-        pnlInfo.Visible = true;
+        int sum = weight + Convert.ToInt32(distance) + time + rep;
+
+        return sum > 0;
     }
+
     public void init()
     {
+        clearAll();
+
         pnlExerciseDetails.Visible = false;
         ltlExerciseName.Text = "";
+        tbNotes.Text = "";
         pnlInfo.Visible = false;
 
         tbWeight.Enabled = false;
-        //tbWeight.Text = "0";
-
         tbDistance.Enabled = false;
-        //tbDistance.Text = "0";
-
         tbTime_min.Enabled = false;
-        //tbTime_min.Text = "0";
-
         tbTime_sec.Enabled = false;
-        //tbTime_sec.Text = "0";
-
         tbRep.Enabled = false;
-        //tbRep.Text = "0";
 
-        clearAll();
+        rfWeight.Enabled = false;
+        rfDistance.Enabled = false;
+        rfMinute.Enabled = false;
+        rfSecond.Enabled = false;
+        rfReps.Enabled = false;
     }
 
     public void checkEnabled()
@@ -110,28 +126,28 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         Exercise ex = sysManager.getExerciseInfo(exerciseID);
 
         tbWeight.Enabled = ex.weight;
+        rfWeight.Enabled = ex.weight;
         tbWeight.BackColor = ex.weight ? Color.White : Color.Gray;
-        //tbWeight.Text = ex.weight ? "0" : "";
         tbWeight.Text = "0";
 
         tbDistance.Enabled = ex.distance;
+        rfDistance.Enabled = ex.distance;
         tbDistance.BackColor = ex.distance ? Color.White : Color.Gray;
-        //tbDistance.Text = ex.distance ? "0" : "";
         tbDistance.Text = "0";
 
         tbTime_min.Enabled = ex.time;
+        rfMinute.Enabled = ex.time;
         tbTime_min.BackColor = ex.time ? Color.White : Color.Gray;
-        //tbTime_min.Text = ex.time ? "0" : "";
         tbTime_min.Text = "0";
 
         tbTime_sec.Enabled = ex.time;
+        rfSecond.Enabled = ex.time;
         tbTime_sec.BackColor = ex.time ? Color.White : Color.Gray;
-        //tbTime_sec.Text = ex.time ? "0" : "";
         tbTime_sec.Text = "0";
 
         tbRep.Enabled = ex.rep;
+        rfReps.Enabled = ex.rep;
         tbRep.BackColor = ex.rep ? Color.White : Color.Gray;
-        //tbRep.Text = ex.rep ? "0" : "";
         tbRep.Text = "0";
     }
 
