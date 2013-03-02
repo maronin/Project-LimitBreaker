@@ -49,6 +49,7 @@
                                 <asp:Label ID="exercises" runat="server" Text="Exercises" Font-Bold="True" CssClass="legenExerciseRoutine"></asp:Label>
                                 <br />
                                 <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" CssClass="legenExerciseRoutine"></asp:Label>
+                                <div class="theCalendar">
                                 <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
                                     <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"><<</asp:LinkButton>
                                     <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth">>></asp:LinkButton>
@@ -101,12 +102,14 @@
                                             <br />
                                             <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
                                         </asp:Panel>
+
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <div style="clear: both; height: 0; overflow: hidden">
                                     &nbsp;</div>
                                 <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
                             </asp:Panel>
+                            </div>
                         </asp:View>
                         <asp:View ID="add_item" runat="server">
                             <!------------------------------------------------------------------------------------------------------- MultiView Add Item ----------------------------------------------------------------------------------->

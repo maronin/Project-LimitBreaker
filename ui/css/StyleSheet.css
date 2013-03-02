@@ -211,6 +211,11 @@ p
     border-radius: 20px;
 }
 
+.newWeek
+{
+    line-height: 166px;
+}
+
 .DaysOfWeek
 {
     border: 1px solid #999999;
