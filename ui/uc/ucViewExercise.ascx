@@ -30,6 +30,7 @@
         </asp:DropDownList>
         <br />
         <br />
+        <hr />
         <asp:Panel ID="viewExercisePanel" runat="server">
             <table class="scheduleTable2">
                 <tr style="vertical-align: top;">
@@ -77,6 +78,7 @@
         </asp:Panel>
         <asp:Label ID="exceriseNotFound" runat="server" ForeColor="Red" Text="No exercise found"
             Visible="False"></asp:Label>
+        <hr />
         <br />
         <br />
     </ContentTemplate>

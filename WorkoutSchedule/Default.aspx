@@ -197,10 +197,12 @@
                                             <br />
                                             <hr />
                                         </asp:Panel>
+                                        <div class="ButtonChoiceScheduling">
                                         <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
                                             CssClass="button" />
                                         <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
-                                            CssClass="button" ValidationGroup="ScheduleExercise" />
+                                            CssClass="button" ValidationGroup="ScheduleExercise"/>
+                                        </div>
                                         <br />
                                         <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
                                     </div>
@@ -216,7 +218,7 @@
                                                     Step 1. Select a routine:
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id">
+                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id" Width="170px">
                                                     </asp:DropDownList>
                                                     <asp:LinkButton ID="lnkNotHaveRoutines" runat="server" Visible="False" OnClick="changeToRoutine">Click here to add a new routine</asp:LinkButton>
                                                 </td>
@@ -511,7 +513,7 @@
                                             AutoPostBack="true">
                                             <asp:ListItem Text="Daily"></asp:ListItem>
                                             <asp:ListItem Text="Weekly"></asp:ListItem>
-                                            <asp:ListItem Text="Monthly"></asp:ListItem>
+                                            <%--<asp:ListItem Text="Monthly"></asp:ListItem>--%>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>

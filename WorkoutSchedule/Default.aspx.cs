@@ -373,6 +373,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             selectedDaysOfWeek))
         {
             addNewItem = true;
+            clearScheduleForm();
             lblResult_Routine.Text = "Successfuly scheduled your routine!";
         }
         else
@@ -442,7 +443,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             )
         {
             addNewItem = true;
-            clearExerciseForm();
+            clearScheduleForm();
             lblResult_Exercise.Text = "Successfully scheduled your exercise!";
 
         }
@@ -451,7 +452,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     }
 
-    protected void clearExerciseForm()
+    protected void clearScheduleForm()
     {
         ddlMinutes_exercise.SelectedIndex = 0;
         ddlHours_exercise.SelectedIndex = 0;
@@ -485,7 +486,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (addNewItem)
         {
             addNewItem = false;
-            clearExerciseForm();
+            clearScheduleForm();
 
 
         }

@@ -630,3 +630,11 @@ h6
 
     text-align: center;
 }
+
+.ButtonChoiceScheduling
+{
+position: static;
+
+margin-bottom: -25px;
+
+}
