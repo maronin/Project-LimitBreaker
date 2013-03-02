@@ -209,22 +209,31 @@ public class ScheduleManager
                 {
                     if (repeatInterval.Trim() == "Daily")
                     {
+                        int difference = 0;
                         if (onAfter.Trim() == "After")
                         {
-                            for (int i = 0; i < Convert.ToInt32(endsOnAfterValue); i++)
-                            {
-                                ScheduledExercise newScheduledExercise = new ScheduledExercise();
-                                newScheduledExercise.Exercise = exercise;
-                                newScheduledExercise.startTime = start;
-                                newScheduledExercise.LimitBreakers = lb;
-                                newScheduledExercise.needEmailNotification = notification;
-                                context.ScheduledExercises.AddObject(newScheduledExercise);
-                                context.SaveChanges();
-                                rc = true;
-                                start = start.AddDays(repeatEvery);
-                                Thread.Sleep(100);
-                            }
+                            difference = Convert.ToInt32(endsOnAfterValue);
                         }
+                        if (onAfter.Trim() == "On")
+                        {
+                            difference = (Convert.ToDateTime(endsOnAfterValue) - start).Days;
+                            difference += 2;
+                        }
+
+                        for (int i = 0; i < difference; i++)
+                        {
+                            ScheduledExercise newScheduledExercise = new ScheduledExercise();
+                            newScheduledExercise.Exercise = exercise;
+                            newScheduledExercise.startTime = start;
+                            newScheduledExercise.LimitBreakers = lb;
+                            newScheduledExercise.needEmailNotification = notification;
+                            context.ScheduledExercises.AddObject(newScheduledExercise);
+                            context.SaveChanges();
+                            rc = true;
+                            start = start.AddDays(repeatEvery);
+
+                        }
+
                     }
                     else if (repeatInterval.Trim() == "Weekly")
                     {

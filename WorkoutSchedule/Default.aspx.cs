@@ -33,7 +33,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         authenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
         currentUser = authenticated ? HttpContext.Current.User.Identity.Name : "";
         userID = userManager.getUserID(currentUser);
-
+        
         if (authenticated && userID != -1)
         {
             DropDownList ddlRoutines = (DropDownList)LoginView1.FindControl("ddlRoutines");
@@ -65,6 +65,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 populateRepeatEveryList();
 
             }
+
+            
 
         }
 
@@ -394,12 +396,30 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             )
         {
             addNewItem = true;
+            clearExerciseForm();
             lblResult_Exercise.Text = "Successfuly scheduled your exercise!";
+
         }
         else
             lblResult_Exercise.Text = "Scheduled items can't be within 1 hour of each other! Please choose a different time or date";
 
     }
+
+    protected void clearExerciseForm()
+    {
+        ddlMinutes_exercise.SelectedIndex = 0;
+        ddlHours_exercise.SelectedIndex = 0;
+        ddlAmPm_exercise.SelectedIndex = 0;
+        ddlMinutes_routine.SelectedIndex = 0;
+        ddlHours_routine.SelectedIndex = 0;
+        ddlAmPm_routine.SelectedIndex = 0;
+        tbDate_exercise.Text = "";
+        tbDate_routine.Text = "";
+        lblResult_Exercise.Text = "";
+        lblResult_Routine.Text = "";
+        cbRepeat.Checked = false;
+    }
+
     protected void goBack_Click(object sender, EventArgs e)
     {
 
@@ -407,16 +427,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (addNewItem)
         {
             addNewItem = false;
-            ddlMinutes_exercise.SelectedIndex = 0;
-            ddlHours_exercise.SelectedIndex = 0;
-            ddlAmPm_exercise.SelectedIndex = 0;
-            ddlMinutes_routine.SelectedIndex = 0;
-            ddlHours_routine.SelectedIndex = 0;
-            ddlAmPm_routine.SelectedIndex = 0;
-            tbDate_exercise.Text = "";
-            tbDate_routine.Text = "";
-            lblResult_Exercise.Text = "";
-            lblResult_Routine.Text = "";
+            clearExerciseForm();
 
 
         }
@@ -687,9 +698,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             pnlRepeatItem.Visible = true;
             pnlDim.Visible = true;
-
+            lnkEditRepeat.Visible = true;
         }
-
+        else
+        {
+            lnkEditRepeat.Visible = false;
+        }
 
         tbStartsOnDate.Text = tbDate_exercise.Text;
 
@@ -713,11 +727,12 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (rblEnd.SelectedIndex == 0){
             tbEndOnDate.Enabled = false;
             tbEndAfter.Enabled = true;
-            
+            btnDoneRepeat.ValidationGroup = "";
         }
         else if (rblEnd.SelectedIndex == 1) { 
             tbEndAfter.Enabled = false;
             tbEndOnDate.Enabled = true;
+            btnDoneRepeat.ValidationGroup = "EndOnRepeat";
         }
         
     }
@@ -733,8 +748,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             
         }
         else if (rblEnd.SelectedIndex == 1) {
+            
             endsOnAfterValue = tbEndOnDate.Text;
+            repeatCalendarValidator.Validate();
+            repeatCalendarRequiredValidator.Validate();
+            
         }
+
         
     }
 
@@ -745,6 +765,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         pnlDim.Visible = false;
         pnlRepeatItem.Visible = false;
         cbRepeat.Checked = false;
+        lnkEditRepeat.Visible = false;
     }
     protected void prevRemoveMonth(object sender, EventArgs e)
     {
@@ -782,6 +803,47 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         scheduleManager.deleteListOfScheduledItems(schdledItems, userID);
         populateRemoveItems();
 
+    }
+    protected void tbEndOnDate_checkDate(object sender, EventArgs e)
+    {
+        validateEndDate();
+
+    }
+    protected void tbDate_exercise_validate(object sender, EventArgs e)
+    {
+        RegularExpressionValidatorExercise.Validate();
+        RequiredFieldValidatorExercise.Validate();
+        validateEndDate();
+        if (RegularExpressionValidatorExercise.IsValid && RequiredFieldValidatorExercise.IsValid)
+        {
+            cbRepeat.Enabled = true;
+        }
+        else
+        {
+            cbRepeat.Enabled = false;
+        }
+    }
+
+    protected void validateEndDate()
+    {
+        if (tbStartsOnDate.Text != "")
+        {
+            DateTime start = Convert.ToDateTime(tbDate_exercise.Text);
+            DateTime end = Convert.ToDateTime(tbEndOnDate.Text);
+
+            int difference = (end - start).Days;
+
+            if (difference <= 0)
+            {
+                tbEndOnDate.Text = tbDate_exercise.Text;
+            }
+        }
+    }
+
+    protected void lnkEditRepeat_EditRepeat(object sender, EventArgs e)
+    {
+        pnlRepeatItem.Visible = true;
+        pnlDim.Visible = true;
     }
 
 }

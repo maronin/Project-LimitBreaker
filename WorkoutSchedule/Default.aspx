@@ -166,20 +166,25 @@
                                             <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderExercise" runat="server"
                                                 TargetControlID="tbDate_exercise" FilterType="Custom" ValidChars='()1234567890-/'>
                                             </asp:FilteredTextBoxExtender>
+                                           
                                             <asp:TextBox ID="tbDate_exercise" runat="server" Enabled="true" ReadOnly="False"
-                                                AutoCompleteType="Disabled"></asp:TextBox>
+                                                AutoCompleteType="Disabled" OnTextChanged="tbDate_exercise_validate" AutoPostBack="true"></asp:TextBox>
+                                            
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidatorExercise" runat="server"
                                                 ErrorMessage="Invalid Date" ControlToValidate="tbDate_exercise" Font-Size="Medium"
                                                 ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                                 ValidationGroup="ScheduleExercise" Display="Dynamic"></asp:RegularExpressionValidator>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorExercise" runat="server" ErrorMessage="*"
                                                 ForeColor="Red" ControlToValidate="tbDate_exercise" ValidationGroup="ScheduleExercise"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                             <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
                                             </asp:CalendarExtender>
                                             <br />
-                                            <asp:CheckBox ID="cbRepeat" runat="server" OnCheckedChanged="reaptClicked" AutoPostBack="true" />
+                                           
+                                            <asp:CheckBox ID="cbRepeat" runat="server" OnCheckedChanged="reaptClicked" AutoPostBack="true" Enabled="false"/>
                                             Repeat...
+                                            <asp:LinkButton ID="lnkEditRepeat" runat="server" Visible="false" OnClick="lnkEditRepeat_EditRepeat">[Edit]</asp:LinkButton>
+                                            
                                             <asp:Panel ID="pnlRepeatItem" runat="server" Visible="false">
                                                 <asp:Panel ID="pnlDim" runat="server" Visible="false">
                                                     <div class="dim">
@@ -260,11 +265,11 @@
                                                                                 FilterType="Custom" ValidChars='()1234567890-/'>
                                                                             </asp:FilteredTextBoxExtender>
                                                                             <asp:TextBox ID="tbEndOnDate" runat="server" Enabled="false" ReadOnly="False" AutoCompleteType="Disabled"
-                                                                                Width="88px"></asp:TextBox>
-                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Invalid Date"
+                                                                                Width="88px" OnTextChanged="tbEndOnDate_checkDate" AutoPostBack=true></asp:TextBox>
+                                                                            <asp:RegularExpressionValidator ID="repeatCalendarValidator" runat="server" ErrorMessage="Invalid Date"
                                                                                 ControlToValidate="tbEndOnDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                                                                 ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                                    ForeColor="Red" ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
+                                                                                    ForeColor="Red" ID="repeatCalendarRequiredValidator" runat="server" ErrorMessage="*"
                                                                                     ControlToValidate="tbEndOnDate" ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                             <asp:CalendarExtender ID="calendarEndsOnRepeat" runat="server" TargetControlID="tbEndOnDate">
                                                                             </asp:CalendarExtender>
