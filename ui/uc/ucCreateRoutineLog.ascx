@@ -19,6 +19,7 @@
     #tableLog {
         text-align: center;
     }
+
     .auto-style2 {
         width: 478px;
     }
@@ -27,8 +28,8 @@
 <div id="content">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" CssClass="gv">
-                <AlternatingRowStyle BackColor="White" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="gv" AllowPaging="True">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name"></asp:BoundField>
                     <asp:BoundField DataField="equipment" HeaderText="Equipment" SortExpression="equipment" />
@@ -40,15 +41,16 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <FooterStyle BackColor="#CCCC99" />
-                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                <RowStyle BackColor="#F7F7DE" />
-                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#FBFBF2" />
-                <SortedAscendingHeaderStyle BackColor="#848384" />
-                <SortedDescendingCellStyle BackColor="#EAEAD3" />
-                <SortedDescendingHeaderStyle BackColor="#575357" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <asp:Panel ID="pnlExerciseDetails" runat="server">
                 <asp:Literal ID="ltlExerciseName" runat="server" Text=""></asp:Literal>
@@ -59,13 +61,12 @@
                             <br />
                             <asp:TextBox ID="tbWeight" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbWeight" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ID="rfWeight" runat="server" ControlToValidate="tbWeight" Display="Dynamic" Enabled="False" ErrorMessage="Required!" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
                         </td>
-                        <td>
-                            <asp:Label ID="Label1" runat="server" Text="Sets"></asp:Label>
+                        <td rowspan="4">
+                            <asp:Label ID="Label3" runat="server" Text="Note"></asp:Label>
                             <br />
-                            <asp:TextBox ID="tbSets" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbSets" Display="Dynamic" ErrorMessage="Required Set Number" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="tbSets" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:TextBox ID="tbNotes" runat="server" CausesValidation="True" TextMode="MultiLine" ValidationGroup="SaveLog"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -74,26 +75,19 @@
                             <br />
                             <asp:TextBox ID="tbDistance" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbDistance" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]*([\.][0-9]{1,3})?$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
-                        </td>
-                        <td>
-                            <asp:Label ID="Label2" runat="server" Text="Time Logged"></asp:Label>
-                            <br />
-                            <asp:TextBox ID="tbTimeLogged" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbTimeLogged" Display="Dynamic" ErrorMessage="Required Time Logged" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="tbTimeLogged" Display="Dynamic" ErrorMessage="Invalid Time Format, use (23:59 format)" ForeColor="Red" ValidationExpression="^(20|21|22|23|[01]\d|\d)(([:][0-5]\d){1,2})$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ID="rfDistance" runat="server" ControlToValidate="tbDistance" Display="Dynamic" Enabled="False" ErrorMessage="Required!" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td class="auto-style2">
                             <asp:Label ID="Label5" runat="server" Text="Time"></asp:Label>
                             <br />
-                            <asp:TextBox ID="tbTime" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tbTime" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
-                        </td>
-                        <td rowspan="2">
-                            <asp:Label ID="Label3" runat="server" Text="Note"></asp:Label>
-                            <br />
-                            <asp:TextBox ID="tbNotes" runat="server" TextMode="MultiLine" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
+                            <asp:TextBox ID="tbTime_min" runat="server" CausesValidation="True" ValidationGroup="SaveLog" Width="54px"></asp:TextBox>min
+                            <asp:TextBox ID="tbTime_sec" runat="server" CausesValidation="True" ValidationGroup="SaveLog" Width="54px"></asp:TextBox>sec
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tbTime_min" Display="Dynamic" ErrorMessage="Minutes have to be an Integer" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="tbTime_sec" Display="Dynamic" ErrorMessage="Seconds have to be an Integer" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ID="rfMinute" runat="server" ControlToValidate="tbTime_min" Display="Dynamic" Enabled="False" ErrorMessage="Minute Required!" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="rfSecond" runat="server" ControlToValidate="tbTime_sec" Display="Dynamic" Enabled="False" ErrorMessage="Second Required!" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
@@ -102,18 +96,14 @@
                             <br />
                             <asp:TextBox ID="tbRep" runat="server" CausesValidation="True" ValidationGroup="SaveLog"></asp:TextBox>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="tbRep" Display="Dynamic" ErrorMessage="Numbers Only" ForeColor="Red" ValidationExpression="^[0-9]+$" ValidationGroup="SaveLog"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ID="rfReps" runat="server" ControlToValidate="tbRep" Display="Dynamic" Enabled="False" ErrorMessage="Required!" ForeColor="Red" ValidationGroup="SaveLog"></asp:RequiredFieldValidator>
                         </td>
-
                     </tr>
-                    
-
-                            
-
-                    
                 </table>
-                <asp:Button ID="btnLog" runat="server" Text="Save" OnClick="btnLog_Click" ValidationGroup="SaveLog"/>
+                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog" />
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
+                <asp:Label ID="expRewardLbl" runat="server" Text=""></asp:Label>
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>

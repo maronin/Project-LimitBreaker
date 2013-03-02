@@ -9,7 +9,7 @@ using System.IO;
 public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
 {
     public int userID { get; set; }
-    RadioButtonList rbl;
+    ListBox lb;
     SystemExerciseManager sysManager;
     routineManager routManager;
 
@@ -17,14 +17,14 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
     {
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
-        rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
+        lb = (ListBox)this.Parent.FindControl("lbRoutines");
         if (!IsPostBack)
         {
 
         }
-        if (rbl != null && rbl.SelectedIndex > -1)
+        if (lb != null && lb.SelectedIndex > -1)
         {
-            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(lb.SelectedItem.Value));
             GridView1.DataBind();
             Panel1.Visible = true;
             Panel1.Enabled = true;
@@ -46,13 +46,13 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         if (e.CommandName == "del")
         {
             //Response.Write("item: "+ e.CommandArgument.ToString());
-            int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+            int routineID = Convert.ToInt32(lb.SelectedItem.Value);
             int exerciseID = Convert.ToInt32(e.CommandArgument.ToString());
             Routine rtn = routManager.removeExerciseFromRoutine(routineID, exerciseID);
 
             if (rtn != null)
             {
-                GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+                GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(lb.SelectedItem.Value));
                 GridView1.DataBind();
             }
         }
@@ -60,29 +60,29 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
 
     protected void btnConfirm_Click(object sender, EventArgs e)
     {
-        int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+        int routineID = Convert.ToInt32(lb.SelectedItem.Value);
         Routine rtn = routManager.changeRoutineName(routineID, tbRoutineName.Text);
-        int index = rbl.SelectedIndex;
+        int index = lb.SelectedIndex;
         if (rtn != null)
         {
-            rbl = (RadioButtonList)this.Parent.FindControl("rblRoutines");
-            rbl.DataSource = routManager.getUsersRoutines(userID).ToList();
-            rbl.DataTextField = "name";
-            rbl.DataValueField = "id";
-            rbl.DataBind();
-            rbl.SelectedIndex = index;
+            lb = (ListBox)this.Parent.FindControl("lbRoutines");
+            lb.DataSource = routManager.getUsersRoutines(userID).ToList();
+            lb.DataTextField = "name";
+            lb.DataValueField = "id";
+            lb.DataBind();
+            lb.SelectedIndex = index;
         }
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        int routineID = Convert.ToInt32(rbl.SelectedItem.Value);
+        int routineID = Convert.ToInt32(lb.SelectedItem.Value);
         int exerciseID = sysManager.getExerciseID(lbExerciseList.SelectedItem.Text);
         Routine rtn = routManager.addExerciseToRoutine(routineID, exerciseID);
 
         if (rtn != null)
         {
-            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+            GridView1.DataSource = routManager.getExerciseFromRoutine(Convert.ToInt32(lb.SelectedItem.Value));
             GridView1.DataBind();
         }
     }
@@ -90,12 +90,12 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
     protected void okButton_Click(object sender, EventArgs e)
     {
         bool rc = false;
-        if (rbl != null && rbl.SelectedIndex > -1)
+        if (lb != null && lb.SelectedIndex > -1)
         {
             try
             {
 
-                rc = routManager.deleteRoutine(Convert.ToInt32(rbl.SelectedItem.Value));
+                rc = routManager.deleteRoutine(Convert.ToInt32(lb.SelectedItem.Value));
             }
             catch (NullReferenceException ex)
             {
