@@ -79,7 +79,9 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 
     protected void userGoalsListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+        deleteGoalResultLbl.Text = "";
+        modifyGoalResultlbl.Text = "";
+        loadSelectedGoalsAttributes(Convert.ToInt32(userGoalsListBox.SelectedValue));
         resetGoalView();
     }
 
@@ -108,9 +110,10 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         {
             singleGoalAttributesMultiView.ActiveViewIndex = 1;
             updateGoalbtn.Text = "Cancel";
+            deleteGoalResultLbl.Text = "";
             saveModifyGoalBtn.Visible = true;
-            ExerciseGoal eg = goalMngr.getExerciseGoalByExerciseNameAndUserName(userGoalsListBox.SelectedValue, userName);
-            Exercise ex = goalMngr.getExerciseWithinGoal(userName, userGoalsListBox.SelectedValue);
+            ExerciseGoal eg = goalMngr.getExerciseGoalByGoalID(Convert.ToInt32(userGoalsListBox.SelectedValue));
+            Exercise ex = goalMngr.getExerciseWithinGoal(Convert.ToInt32(userGoalsListBox.SelectedValue));
 
             if (ex.time)
             {
@@ -185,6 +188,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 deleteGoalResultLbl.Text = "The goal has been successfully deleted!";
             else
                 deleteGoalResultLbl.Text = "Something went wrong with deleting the goal, and it has not been deleted...";
+
+            modifyGoalResultlbl.Text = "";
         }
 
         catch (Exception ex)
@@ -211,7 +216,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         }
 
         resetGoalView();
-        loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+        loadSelectedGoalsAttributes(Convert.ToInt32(userGoalsListBox.SelectedValue));
     }
 
     protected void achievedRbl_SelectedIndexChanged(object sender, EventArgs e)
@@ -240,10 +245,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         }
 
         userGoalsListBox.Items.Clear();
+        int i = 0;
 
         foreach (ExerciseGoal ex in goalSet)
         {
             userGoalsListBox.Items.Add(ex.Exercise.name);
+            userGoalsListBox.Items[i].Value = ex.id.ToString();
+            i++;
         }
 
         if (userGoalsListBox.Items.Count > 0)
@@ -251,7 +259,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             noAchievedPanel.Visible = true;
             resetGoalView();
             userGoalsListBox.SelectedIndex = 0;
-            loadSelectedGoalsAttributes(userGoalsListBox.SelectedValue);
+            loadSelectedGoalsAttributes(Convert.ToInt32(userGoalsListBox.SelectedValue));
         }
         else if (userGoalsListBox.Items.Count == 0 && Convert.ToInt32(achievedRbl.SelectedValue) == 1)
         {
@@ -262,13 +270,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             exerciseGoalMultiView.ActiveViewIndex = 1;
     }
 
-    public void loadSelectedGoalsAttributes(string exerciseName)
+    public void loadSelectedGoalsAttributes(int exerciseGoalID)
     {
         try
         {
             singleGoalAttributesMultiView.ActiveViewIndex = 0;
-            ExerciseGoal eg = goalMngr.getExerciseGoalByExerciseNameAndUserName(exerciseName, userName);
-            Exercise ex = goalMngr.getExerciseWithinGoal(userName, exerciseName);
+            ExerciseGoal eg = goalMngr.getExerciseGoalByGoalID(exerciseGoalID);
+            Exercise ex = goalMngr.getExerciseWithinGoal(exerciseGoalID);
 
             if (ex.time)
                 goalTimePanel.Visible = true;
@@ -290,11 +298,12 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             else
                 goalRepsPanel.Visible = false;
 
-            exerciseNameLbl.Text = exerciseName;
+            exerciseNameLbl.Text = ex.name;
             goalTimeLbl.Text = (eg.time / 60).ToString();
             goalDistancelbl.Text = eg.distance.ToString();
             goalWeightLbl.Text = eg.weight.ToString();
             goalRepsLbl.Text = eg.reps.ToString();
+            descriptionLbl.Text = ex.description;
         }
 
         catch (Exception ex)

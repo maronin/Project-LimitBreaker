@@ -36,6 +36,7 @@
                 <tr style="vertical-align: top;">
                     <td colspan="2">
                         <h5>Exercise Name:</h5>
+                        
                         <asp:HyperLink ID="lblExerciseVideo" runat="server">[Video]</asp:HyperLink>
 
                     </td>
@@ -49,7 +50,7 @@
                         TypeName="ExerciseManager"></asp:ObjectDataSource>
                 </tr>
                 <tr class="description">
-                    <td colspan="2">
+                    <td style="width:50%;" colspan="3">
                         <h5>Description:</h5>
                         <br />
                         <asp:Label ID="lblExerciseDescription" runat="server" Text="None"></asp:Label>

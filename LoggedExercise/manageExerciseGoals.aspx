@@ -138,7 +138,7 @@
                                 Width="230px" OnSelectedIndexChanged="userGoalsListBox_SelectedIndexChanged">
                             </asp:ListBox>
                         </div>
-                        <div style="padding: 10px; width: 60%; margin: 0px auto 0px auto">
+                        <div style="padding: 10px; width: 50%; margin: 0px auto 0px auto">
                             <asp:Panel ID="noAchievedPanel" runat="server">
                                 <table>
                                     <tr>
@@ -285,15 +285,17 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="style1">
+                                        <td class="style1" colspan="3">
                                             <asp:Button ID="saveModifyGoalBtn" runat="server" Text="Save" Visible="false" OnClick="saveModifyGoalBtn_Click"
                                                 ValidationGroup="modifyGoal" />
+                                            <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
+                                <strong>Description: </strong><asp:Label ID="descriptionLbl" runat="server" Text=""></asp:Label>
+                                <br />
                             </asp:Panel>
-                            <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
-                            <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
                         </div>
                     </asp:View>
                 </asp:MultiView>

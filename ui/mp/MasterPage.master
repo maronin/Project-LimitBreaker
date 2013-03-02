@@ -156,8 +156,8 @@
 					<span class="tooltip"><span>Home</span></span>
 				</li>
 				<li id="lisystemExercise" runat="server"> 
-					<a href="<%= Page.ResolveUrl("~/SystemExercise/default.aspx") %>#tab-2" class="ico2"><span>System Exercises</span><em></em></a>
-					<span class="tooltip"><span>System Exercises</span></span>
+					<a href="<%= Page.ResolveUrl("~/SystemExercise/default.aspx") %>#tab-2" class="ico2"><span>Manage System Exercises</span><em></em></a>
+					<span class="tooltip"><span>Manage System Exercises</span></span>
                 
 				</li>
 				<li id="liprofile" runat="server">
@@ -169,22 +169,22 @@
 					<span class="tooltip"><span>User Routines</span></span>
 				</li>
 				<li id="liWorkoutSchedule" runat="server">
-					<a href="<%= Page.ResolveUrl("~/WorkoutSchedule/Default.aspx") %>" class="ico5"><span>WorkoutSchedule</span><em></em></a>
-					<span class="tooltip"><span>WorkoutSchedule</span></span>
+					<a href="<%= Page.ResolveUrl("~/WorkoutSchedule/Default.aspx") %>" class="ico5"><span>Workout Schedule</span><em></em></a>
+					<span class="tooltip"><span>Workout Schedule</span></span>
 				</li>
 				<li  id="liLoggedExercises" runat="server"> 
 					<a href="<%= Page.ResolveUrl("~/LoggedExercise/default.aspx") %>" class="ico6">
 						<span>Logged Exercise</span><em></em>
 					</a>
-					<span class="tooltip"><span>Logged Exercise</span></span>
+					<span class="tooltip"><span>Log Exercises</span></span>
 				</li>
 				<li id="liManageExerciseExperience" runat="server">
 					<a href="<%= Page.ResolveUrl("~/SystemExercise/manageExerciseExperience.aspx") %>" class="ico7"><span>Manage Exercise Experience</span><em></em></a>
 					<span class="tooltip"><span>Manage Exercise Experience</span></span>
 				</li>
 				<li id="liManageExerciseGoals" runat="server">
-					<a href="<%= Page.ResolveUrl("~/LoggedExercise/ManageExerciseGoals.aspx") %>" class="ico8"><span>Manage ExerciseGoals</span><em></em></a>
-					<span class="tooltip"><span>Manage ExerciseGoals</span></span>
+					<a href="<%= Page.ResolveUrl("~/LoggedExercise/ManageExerciseGoals.aspx") %>" class="ico8"><span>Exercise Goals</span><em></em></a>
+					<span class="tooltip"><span>Exercise Goals</span></span>
 				</li>
 			
 				<%--<li class="active">
