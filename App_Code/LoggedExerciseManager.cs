@@ -105,7 +105,9 @@ public class LoggedExerciseManager
         using (var context = new Layer2Container())
         {
             List<LoggedExercise> logs = (from loggedExercise in context.LoggedExercises
-                                         where loggedExercise.Exercise.id == exerciseID && loggedExercise.LimitBreaker.id == userID && loggedExercise.Routine.id == routineID
+                                         where loggedExercise.LimitBreaker.id == userID
+                                         where loggedExercise.Routine.id == routineID
+                                         where loggedExercise.Exercise.id == exerciseID 
                                          select loggedExercise).ToList();
             if (logs != null)
             {
@@ -261,7 +263,7 @@ public class LoggedExerciseManager
         String rc = "";
         foreach (var set in sets)
         {
-            rc += "<strong>Set " + i + "</strong><br /> ";
+            rc += "<br/><strong>Set " + i + "</strong><br /> ";
             if (set.weight > 0)
             {
                 rc += "Weight: " + set.weight + "kg | ";
@@ -283,7 +285,7 @@ public class LoggedExerciseManager
             i++;
             rc += "<br />";
             if (!set.note.Equals(""))
-                rc += "Note: " + set.note + "<br /><br/>";
+                rc += "Note: " + set.note + "<br />";
         }
         return rc;
     }
