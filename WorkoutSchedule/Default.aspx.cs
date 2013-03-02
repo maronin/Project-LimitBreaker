@@ -131,6 +131,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         sb.Append(dt.Day.ToString());
         sb.Append(" ");
         //sb.Append(dt.ToString("d")); //' gets the day name based on the users computer settings (their local day name rather than English default)
+
         lnk_dayLink.Text = sb.ToString();
         lnk_dayLink.CommandArgument = dt.ToString();
         //Check to see if we have any dates matching today
@@ -166,13 +167,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 if (item.isExericse)
                 {
                     lbl.Font.Size = 12;
-                    lbl.Text = lbl.Text + "<span style=\"color: CornflowerBlue\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
+                    lbl.Text = lbl.Text + "<span class=\"CalendarItemsSpanExercises\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
                 }
                 else
                 {
 
                     lbl.Font.Size = 12;
-                    lbl.Text = lbl.Text + "<span style=\"color: MediumBlue\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
+                    lbl.Text = lbl.Text + "<span style=\"CalendarItemsSpanRoutines\"><b>" + item.itemName + "</b>" + "<br/> Starts at: " + item.startTime.ToString("hh:mm tt") + "<br/></span>";
                 }
             }
         }

@@ -573,7 +573,7 @@ h6
 {
 position: fixed;
 left: 40%;
-top: 35%;
+top: 29%;
 width: 350px;
 height: 280px;
 background-color: rgb(214, 214, 214);
@@ -581,6 +581,11 @@ padding: 15px;
 border-width: 2px;
 border-style: solid;
 z-index: 100;
+moz-border-radius: 20px;
+-webkit-border-radius: 20px;
+-khtml-border-radius: 20px;
+border-radius: 20px 20px 20px 20px;
+background-color: rgb(249, 249, 249);
 }
 
 .dim

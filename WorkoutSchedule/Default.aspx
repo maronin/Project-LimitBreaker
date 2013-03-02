@@ -280,10 +280,14 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
+                                                                <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked" />
                                                             </td>
                                                             <td>
-                                                                <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked" />
-                                                                <asp:Button ID="btnCancelRepeat" runat="server" Text="Cancel" OnClick="btnCancelRepeat_Clicked" />
+                                                                
+                                                                
+                                                            </td>
+                                                            <td>
+                                                            <asp:Button ID="btnCancelRepeat" runat="server" Text="Cancel" OnClick="btnCancelRepeat_Clicked" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -590,8 +594,8 @@
             <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                 <ProgressTemplate>
                     <div class="loadingCalendar">
-                        <h1>
-                            Loading...</h1>
+ <div class="dim">
+                                                    </div>
                     </div>
                 </ProgressTemplate>
             </asp:UpdateProgress>
