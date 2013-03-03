@@ -40,26 +40,35 @@
 
 .button
 {
-    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
-    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
-    box-shadow: inset 0px 1px 0px 0px #ffffff;
-    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-    background: -moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-    background-color: #ededed;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    border: 1px solid #dcdcdc;
-    display: inline-block;
-    color: #7a7a7a;
-    font-family: arial;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 6px 24px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #ffffff;
+-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #f9f9f9) );
+	background:-moz-linear-gradient( center top, #f9f9f9 5%, #f9f9f9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f9f9f9');
+	background-color:#f9f9f9;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border: 1px solid rgb(185, 185, 185);
+	display:inline-block;
+	color:#616161;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
     width: 250px;
+    color: #7a7a7a;
+    background-color: rgb(249, 249, 249);
+    
+    
+padding-top: 6px;
+text-align: center;
+    
+padding-bottom: 6px;
+    
 }
 .button:hover
 {
@@ -71,7 +80,6 @@
 .button:active
 {
     position: relative;
-    top: 1px;
 }
 .button[disabled]
 {
@@ -164,6 +172,7 @@ p
     margin: 0 auto;
     text-align: center;
     z-index: -1;
+    width: 13.7%;
 }
 
 .today span
@@ -190,7 +199,7 @@ p
 #week tr td
 {
     text-align: left;
-    width: -12.4%;
+    width: 10%;
     color: rgb(0, 0, 0);
     font-weight: bolder;
 }
@@ -207,6 +216,11 @@ p
     border-radius: 20px;
 }
 
+.newWeek
+{
+    line-height: 166px;
+}
+
 .DaysOfWeek
 {
     border: 1px solid #999999;
@@ -219,8 +233,16 @@ p
 {
     border: 1px solid #999999;
     padding: 0.25em;
+    padding-top: 10px;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-bottom: 13px;
     background-color: rgb(96, 142, 201);
-    width: 97.5%;
+    width: 96.2%;
+    -moz-border-radius: 20px;    
+    -webkit-border-radius: 20px;    
+    -khtml-border-radius: 20px;    
+    border-radius: 20px 20px 0px 0px;
 }
 .calendarMonthSelector a
 {
@@ -229,14 +251,15 @@ p
 }
 .calendarDay
 {
-    border: 1px solid rgb(96, 142, 201);
+    border: 1px solid rgb(144, 192, 255);
     margin: 0em;
     background-color: white;
     font-size: smaller;
     padding: 0.1em;
-    width: 13.75%;
+    width: 13.7%;
     float: left;
-    height: 125px;
+    height: 161px;
+    padding-top: -2px;
     overflow-y: scroll;
     scrollbar-face-color: #000000;
     scrollbar-shadow-color: #2D2C4D;
@@ -246,6 +269,23 @@ p
     scrollbar-track-color: #7D7E94;
     scrollbar-arrow-color: #C1C1D1;
 }
+
+.CalendarItemsSpanExercises{
+    color: CornflowerBlue; 
+    margin-top: 10px; 
+    position: relative;
+    padding-top: -13px;
+    top: 7px;
+}
+
+.CalendarItemsSpanRoutines{
+    color: MediumBlue; 
+    margin-top: 10px; 
+    position: relative;
+    padding-top: -13px;
+    top: 7px;
+}
+
 .event
 {
     margin: 0.25em auto 0.25em 1em;
@@ -260,9 +300,12 @@ p
 {
 }
 
-#scheduleChoice
+.scheduleChoice
 {
-    
+width: 530px;
+left: 200px;
+position: relative;
+padding: 24px;
 }
 .date
 {
@@ -271,15 +314,19 @@ text-decoration: none;
 font-family: 'Arial Black';
 color: #000000;
 font-weight: lighter;
-margin-left: -1px;
-margin-top: -1px;
-padding-left: 2px;
-padding-top: 0px;
+margin-left: -2px;
+margin-top: -2px;
+padding-left: 6px;
+padding-right: 8px;
+padding-top: 3px;
 position: absolute;
 background-color: rgb(255, 255, 255);
 width: 22px;
 height: 18px;
 font-size: 13px;
+-moz-border-radius: 20px;  -webkit-border-radius: 20px;  -khtml-border-radius: 20px;  
+border-radius: 0px 20px 20px 20px;  
+background-color: rgb(144, 192, 255);
 }
 
 .events

@@ -45,9 +45,18 @@ a:hover
 }
 input, textarea, select
 {
+    background-color: rgb(255, 255, 255);
     font: 100% arial,sans-serif;
     vertical-align: middle;
     color: #8a8a8a;
+    border-width: 1px;
+    moz-border-radius: 20px;
+}
+input[disabled], textarea[disabled], select[disabled]
+{
+    background-color: rgb(187, 187, 187);
+    font: 100% arial,sans-serif;
+    vertical-align: middle;
 }
 form, fieldset
 {
@@ -151,19 +160,19 @@ form, fieldset
 }
 .profile-box
 {
-float: right;
-font-size: 14px;
-padding: 0px 0px 8px 0px;
-float: right;
-font-size: 14px;
-padding: 2px 72px 8px 0px;
--moz-border-radius: 20px;
--webkit-border-radius: 20px;
--khtml-border-radius: 20px;
-border-radius: 20px 20px 0px 0px;
-background-color: rgb(249, 249, 249);
-width: 255px;
-text-align: right;
+    float: right;
+    font-size: 14px;
+    padding: 0px 0px 8px 0px;
+    float: right;
+    font-size: 14px;
+    padding: 2px 72px 8px 0px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px 20px 0px 0px;
+    background-color: rgb(249, 249, 249);
+    width: 255px;
+    text-align: right;
 }
 .btn-on
 {
@@ -235,13 +244,12 @@ text-align: right;
 }
 .tabs .text-section
 {
-
-padding: 19px 0 8px 36px;
-margin: 0px 0px 17px;
+    padding: 19px 0 8px 36px;
+    margin: 0px 0px 17px;
 }
 .tabs h1
 {
-    font-size: 18px;
+    font-size: 22px;
     line-height: 20px;
     margin: 0 0 8px;
     color: #2b333b;
@@ -485,14 +493,14 @@ margin: 0px 0px 17px;
 /* here */
 #foot
 {
-display: block;
-position: absolute;
-width: 100%;
-bottom: 0px;
-margin-bottom: 0px;
-padding: 15px 0px 10px 0px;
-text-align: center;
-background: url(../images/bg-controls.png);
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    margin-bottom: 0px;
+    padding: 15px 0px 10px 0px;
+    text-align: center;
+    background: url(../images/bg-controls.png);
 }
 
 #wrapper
@@ -509,14 +517,16 @@ h1, #contents h2, #contents h4, #contents h5, #contents h6
     font-weight: normal;
     margin: 0 0 18px;
 }
- h2
+h2
 {
+    color: #2e3a54;
     font-size: 24px;
     line-height: 24px;
     text-transform: uppercase;
 }
- h4
+h4
 {
+    color: #2e3a54;
     font-size: 16px;
     line-height: 24px;
     margin: 0 0 12px;
@@ -524,8 +534,10 @@ h1, #contents h2, #contents h4, #contents h5, #contents h6
 }
 h5
 {
+    color: #2e3a54;
     font-size: 14px;
     margin: 0;
+    margin-top: 4px;
     margin-bottom: 15px;
     text-transform: uppercase;
 }
@@ -559,4 +571,70 @@ h6
 #contents h5 a:hover
 {
     text-decoration: underline;
+}
+
+.repeatForm
+{
+    position: fixed;
+    left: 40%;
+    top: 29%;
+    width: 350px;
+    height: 300px;
+    background-color: rgb(214, 214, 214);
+    padding: 15px;
+    border-width: 2px;
+    border-style: solid;
+    z-index: 100;
+    moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: rgb(249, 249, 249);
+}
+
+.dim
+{
+    background-color: rgba(255, 255, 255, 0.49);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.LoginButton
+{
+    height: 50px;
+    width: 50px;
+    font-size: 13px;
+    background-color: rgb(41, 41, 41);
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.legenExerciseRoutine
+{
+    float: right;
+    position: relative;
+    top: -30px;
+    right: 42px;
+}
+
+.addRemoveButtons
+{
+    left: 25%;
+    width: 43%;
+    position: relative;
+
+    text-align: center;
+}
+
+.ButtonChoiceScheduling
+{
+position: static;
+
+margin-bottom: -25px;
+
 }

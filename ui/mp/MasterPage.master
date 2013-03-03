@@ -37,7 +37,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div id="wrapper">
-        <div id="content">
+        <div id="content" style="min-height: 866px;">
             <div class="c1">
                 <div class="controls">
                     <h1 id="logo">
@@ -75,7 +75,7 @@
                            </td>
                            <td rowspan="2">
                            <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="ctl00$Login1"
-                                Height="50px" Width="50px" />
+                                Height="50px" Width="50px" CssClass="LoginButton"/>
                            </td>
                             </tr>
                             <tr>
