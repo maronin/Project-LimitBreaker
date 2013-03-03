@@ -112,12 +112,7 @@
                         </asp:Panel>
                     </asp:View>
                     <asp:View ID="noGoalsView" runat="server">
-                        <h4>
-                            You Currently Have No Goals</h4>
-                        <p>
-                            If you want to add a goal for an exercise you have been working on, click on the
-                            "Add an Exercise Goal" button above, and you will be directed to a page where you
-                            can add goals for yourself.</p>
+                        
                     </asp:View>
                     <asp:View ID="manageGoalsView" runat="server">
                         <h4>
@@ -285,7 +280,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="style1" colspan="3">
+                                        <td class="style1" colspan="2">
                                             <asp:Button ID="saveModifyGoalBtn" runat="server" Text="Save" Visible="false" OnClick="saveModifyGoalBtn_Click"
                                                 ValidationGroup="modifyGoal" />
                                             <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
@@ -295,6 +290,17 @@
                                 </table>
                                 <strong>Description: </strong><asp:Label ID="descriptionLbl" runat="server" Text=""></asp:Label>
                                 <br />
+                            </asp:Panel>
+                            <asp:Panel ID="noUnachievedGoalsPanel" runat="server" Visible="False">
+                                <h4>You Currently Have No Goals</h4>
+                                <p>
+                                    If you want to add a goal for an exercise you have been working on, click on the
+                                    "Add an Exercise Goal" button above, and you will be directed to a page where you
+                                    can add goals for yourself</p>
+                            </asp:Panel>
+                            <asp:Panel ID="noAchievedGoalsPanel" runat="server" Visible="False">
+                                <h4>You Currently Have No Achieved Goals</h4>
+                                <p>Work hard and you will achieve your goals</p>
                             </asp:Panel>
                         </div>
                     </asp:View>

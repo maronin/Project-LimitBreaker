@@ -26,13 +26,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
             viewGoalsBtn.Enabled = false;
             addGoalBtn.Enabled = true;
 
-            if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
-                exerciseGoalMultiView.ActiveViewIndex = 1;
-            else
-            {
-                exerciseGoalMultiView.ActiveViewIndex = 2;
-                loadExerciseGoals();
-            }
+            exerciseGoalMultiView.ActiveViewIndex = 2;
+            loadExerciseGoals();
         }
     }
 
@@ -52,13 +47,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         deleteGoalResultLbl.Text = "";
         modifyGoalResultlbl.Text = "";
 
-        if (goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue)).Count < 1)
-            exerciseGoalMultiView.ActiveViewIndex = 1;
-        else
-        {
-            exerciseGoalMultiView.ActiveViewIndex = 2;
-            loadExerciseGoals();
-        }
+        exerciseGoalMultiView.ActiveViewIndex = 2;
+        loadExerciseGoals();
     }
 
     protected void addGoalBtn_Click(object sender, EventArgs e)
@@ -184,7 +174,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     {
         try
         {
-            if (goalMngr.deleteExerciseGoalByExerciseNameAndUserName(userName, userGoalsListBox.SelectedValue))
+            if (goalMngr.deleteGoalByGoalID(Convert.ToInt32(userGoalsListBox.SelectedValue)))
                 deleteGoalResultLbl.Text = "The goal has been successfully deleted!";
             else
                 deleteGoalResultLbl.Text = "Something went wrong with deleting the goal, and it has not been deleted...";
@@ -204,7 +194,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
     {
         try
         {
-            if (goalMngr.modifyExerciseGoalByExerciseNameAndUserName(userName, userGoalsListBox.SelectedValue, Convert.ToInt32(modGoalTimeTxtBox.Text) * 60, Convert.ToDouble(modGoalDistanceTxtBox.Text), Convert.ToInt32(modGoalWeightTxtBox.Text), Convert.ToInt32(modGoalRepsTxtBox.Text)))
+            if (goalMngr.modifyGoalByGoalID(Convert.ToInt32(userGoalsListBox.SelectedValue), Convert.ToInt32(modGoalTimeTxtBox.Text) * 60, Convert.ToDouble(modGoalDistanceTxtBox.Text), Convert.ToInt32(modGoalWeightTxtBox.Text), Convert.ToInt32(modGoalRepsTxtBox.Text)))
                 modifyGoalResultlbl.Text = "The goal has been successfully modified!";
             else
                 modifyGoalResultlbl.Text = "Something went wrong with the modification of the goal, and it has not been modified...";
@@ -257,6 +247,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         if (userGoalsListBox.Items.Count > 0)
         {
             noAchievedPanel.Visible = true;
+            noUnachievedGoalsPanel.Visible = false;
+            noAchievedGoalsPanel.Visible = false;
             resetGoalView();
             userGoalsListBox.SelectedIndex = 0;
             loadSelectedGoalsAttributes(Convert.ToInt32(userGoalsListBox.SelectedValue));
@@ -264,10 +256,15 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         else if (userGoalsListBox.Items.Count == 0 && Convert.ToInt32(achievedRbl.SelectedValue) == 1)
         {
             noAchievedPanel.Visible = false;
-            deleteGoalResultLbl.Text = "You do not have achieved exercise goals yet";
+            noUnachievedGoalsPanel.Visible = false;
+            noAchievedGoalsPanel.Visible = true;
         }
         else
-            exerciseGoalMultiView.ActiveViewIndex = 1;
+        {
+            noAchievedPanel.Visible = false;
+            noUnachievedGoalsPanel.Visible = true;
+            noAchievedGoalsPanel.Visible = false;
+        }
     }
 
     public void loadSelectedGoalsAttributes(int exerciseGoalID)
