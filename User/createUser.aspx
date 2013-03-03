@@ -24,6 +24,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
+        <h3>Please Create An Account To Continue</h3>
             <table>
                 <tr>
                     <td>Create New User</td>

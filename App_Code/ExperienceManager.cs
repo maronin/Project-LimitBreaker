@@ -192,15 +192,21 @@ public class ExperienceManager
             bool leveled = false;
             LimitBreaker user = context.LimitBreakers.Where(s => s.id == userID).FirstOrDefault();
             int reqExp = getRequiredExperienceForLevel(user.Statistics.level);
+            int max = getLevelFormulaValues().maxLevel;
+
             user.Statistics.experience += expGained;
 
-            while (user.Statistics.experience >= reqExp)
+            while (user.Statistics.experience >= reqExp && user.Statistics.level < max)
             {
                 user.Statistics.level += 1;
                 user.Statistics.experience -= reqExp;
                 leveled = true;
             }
-        
+
+
+            if (user.Statistics.experience > reqExp)
+                user.Statistics.experience = reqExp;
+
             context.SaveChanges();
             return leveled;
         }
