@@ -50,63 +50,63 @@
                                 <br />
                                 <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" CssClass="legenExerciseRoutine"></asp:Label>
                                 <div class="theCalendar">
-                                <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
-                                    <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"><<</asp:LinkButton>
-                                    <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth">>></asp:LinkButton>
-                                    <div class="today">
-                                        <asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton>
-                                        <br />
-                                        <asp:Label ID="lblToday" runat="server" Text=""></asp:Label></div>
-                                </asp:Panel>
-                                <asp:Panel ID="pnl_days" runat="server" CssClass="DaysOfWeek">
-                                    <table id="week">
-                                        <tr>
-                                            <td>
-                                                Sun
-                                            </td>
-                                            <td>
-                                                Mon
-                                            </td>
-                                            <td>
-                                                Tue
-                                            </td>
-                                            <td>
-                                                Wed
-                                            </td>
-                                            <td>
-                                                Thu
-                                            </td>
-                                            <td>
-                                                Fri
-                                            </td>
-                                            <td>
-                                                Sat
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </asp:Panel>
-                                <asp:Repeater ID="rpt_emptyDates" runat="server" OnItemDataBound="rpt_emptyDates_ItemDataBound">
-                                    <ItemTemplate>
-                                        <asp:Panel ID="pnl_emptyDate" runat="server" CssClass="calendarDay" ScrollBars="Auto">
-                                            <asp:Label ID="lblEmpty" runat="server" Text=""></asp:Label>
-                                        </asp:Panel>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <asp:Repeater ID="rpt_calendar" runat="server" OnItemDataBound="rpt_calendar_ItemDataBound"
-                                    OnItemCommand="ItemCommand">
-                                    <ItemTemplate>
-                                        <!-- onMouseOver ="this.style.backgroundImage='url(http://www.yellowcalx.com/wp-content/uploads/2012/04/yellow.png)'" onMouseOut ="this.style.backgroundImage='url(http://www.takenseriouslyamusing.com/wp-content/uploads/2012/08/Blue.png)'" -->
-                                        <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto">
-                                            <asp:LinkButton ID="lnk_dayLink" runat="server" CommandName="ButtonEvent" CssClass="date"
-                                                CommandArgument="<%# Container.DataItem %>" Text="<%#Container.DataItem %>" />
+                                    <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
+                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"><<</asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth">>></asp:LinkButton>
+                                        <div class="today">
+                                            <asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton>
                                             <br />
-                                            <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
-                                        </asp:Panel>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <div style="clear: both; height: 0; overflow: hidden">
-                                    &nbsp;</div>
-                                <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
+                                            <asp:Label ID="lblToday" runat="server" Text=""></asp:Label></div>
+                                    </asp:Panel>
+                                    <asp:Panel ID="pnl_days" runat="server" CssClass="DaysOfWeek">
+                                        <table id="week">
+                                            <tr>
+                                                <td>
+                                                    Sun
+                                                </td>
+                                                <td>
+                                                    Mon
+                                                </td>
+                                                <td>
+                                                    Tue
+                                                </td>
+                                                <td>
+                                                    Wed
+                                                </td>
+                                                <td>
+                                                    Thu
+                                                </td>
+                                                <td>
+                                                    Fri
+                                                </td>
+                                                <td>
+                                                    Sat
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                    <asp:Repeater ID="rpt_emptyDates" runat="server" OnItemDataBound="rpt_emptyDates_ItemDataBound">
+                                        <ItemTemplate>
+                                            <asp:Panel ID="pnl_emptyDate" runat="server" CssClass="calendarDay" ScrollBars="Auto">
+                                                <asp:Label ID="lblEmpty" runat="server" Text=""></asp:Label>
+                                            </asp:Panel>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                    <asp:Repeater ID="rpt_calendar" runat="server" OnItemDataBound="rpt_calendar_ItemDataBound"
+                                        OnItemCommand="ItemCommand">
+                                        <ItemTemplate>
+                                            <!-- onMouseOver ="this.style.backgroundImage='url(http://www.yellowcalx.com/wp-content/uploads/2012/04/yellow.png)'" onMouseOut ="this.style.backgroundImage='url(http://www.takenseriouslyamusing.com/wp-content/uploads/2012/08/Blue.png)'" -->
+                                            <asp:Panel ID="pnl_calendarDay" runat="server" CssClass="calendarDay" ScrollBars="Auto">
+                                                <asp:LinkButton ID="lnk_dayLink" runat="server" CommandName="ButtonEvent" CssClass="date"
+                                                    CommandArgument="<%# Container.DataItem %>" Text="<%#Container.DataItem %>" />
+                                                <br />
+                                                <asp:Label ID="lbl_dayEvents" CssClass="events" runat="server" Text=""></asp:Label>
+                                            </asp:Panel>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                    <div style="clear: both; height: 0; overflow: hidden">
+                                        &nbsp;</div>
+                                    <!-- This is needed to force the container (inc. background) around all the days if Days are floated with CSS -->
                             </asp:Panel>
                             </div>
                         </asp:View>
@@ -197,10 +197,10 @@
                                             <hr />
                                         </asp:Panel>
                                         <div class="ButtonChoiceScheduling">
-                                        <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
-                                            CssClass="button" />
-                                        <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
-                                            CssClass="button" ValidationGroup="ScheduleExercise"/>
+                                            <asp:Button ID="btnGoBack1" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
+                                                CssClass="button" />
+                                            <asp:Button ID="btnScheduleExercise" runat="server" Text="Schedule Exercise" OnClick="btnScheduleExercise_Click"
+                                                CssClass="button" ValidationGroup="ScheduleExercise" />
                                         </div>
                                         <br />
                                         <asp:Label ID="lblResult_Exercise" runat="server" Text=""></asp:Label>
@@ -217,7 +217,8 @@
                                                     Step 1. Select a routine:
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id" Width="170px">
+                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id"
+                                                        Width="170px">
                                                     </asp:DropDownList>
                                                     <asp:LinkButton ID="lnkNotHaveRoutines" runat="server" Visible="False" OnClick="changeToRoutine">Click here to add a new routine</asp:LinkButton>
                                                 </td>
@@ -591,14 +592,29 @@
                             <table style="top: 290px; position: absolute;">
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked"
-                                            Width="80px" />
+                                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("btnDoneRepeat").click(function () {
+                                                    $("pnlRepeatItem").hide(1000);
+                                                });
+                                            });
+
+                                            function hide() {
+                                                $("btnDoneRepeat").hide(1000);
+                                            
+                                            }
+
+                                        </script>
+                                        <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked" OnClientClick="hide()"
+                                            Width="80px" CssClass="button" />
                                     </td>
                                     <td style="width: 100%;">
                                     </td>
                                     <td>
                                         <asp:Button ID="btnCancelRepeat" runat="server" Text="Cancel" OnClick="btnCancelRepeat_Clicked"
-                                            Width="80px" />
+                                            Width="80px" CssClass="button" />
                                     </td>
                                 </tr>
                             </table>
