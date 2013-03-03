@@ -20,6 +20,7 @@
     </div>
     <br />
     <div>
+
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>
                 <asp:MultiView ID="exerciseGoalMultiView" runat="server">

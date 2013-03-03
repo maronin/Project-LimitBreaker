@@ -2,7 +2,9 @@
     Inherits="ui_uc_ucViewExercise" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    
     <ContentTemplate>
+    <div style="max-width:900px;">
         <label for="_Default">
             Search for an exercise via name:
         </label>
@@ -30,7 +32,7 @@
         </asp:DropDownList>
         <br />
         <br />
-        <hr />
+
         <asp:Panel ID="viewExercisePanel" runat="server">
             <table class="scheduleTable2">
                 <tr style="vertical-align: top;">
@@ -48,7 +50,7 @@
                         TypeName="ExerciseManager"></asp:ObjectDataSource>
                 </tr>
                 <tr class="description">
-                    <td colspan="3">
+                    <td colspan="3" style="max-width: 925px;">
                         <h5>
                             Description:</h5>
                         <br />
@@ -81,5 +83,7 @@
         <hr />
         <br />
         <br />
+            </div>
     </ContentTemplate>
+
 </asp:UpdatePanel>
