@@ -72,7 +72,7 @@ public partial class User_profile : System.Web.UI.Page
         }
         else
         {
-            updateResultLbl.Text = "Please wait 24 hours before updating ytour weight";
+            updateResultLbl.Text = "Please wait 24 hours before updating your profile again";
         }
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);

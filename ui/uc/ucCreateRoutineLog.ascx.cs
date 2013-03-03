@@ -13,6 +13,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
     SystemExerciseManager sysManager;
     LoggedExerciseManager logManager;
     routineManager routManager;
+    GoalManager goalMngr;
     int exerciseID;
     int routineID;
 
@@ -21,6 +22,7 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
         sysManager = new SystemExerciseManager();
         routManager = new routineManager();
         logManager = new LoggedExerciseManager();
+        goalMngr = new GoalManager();
         lb = (ListBox)this.Parent.FindControl("lbRoutines");
 
 
@@ -74,6 +76,22 @@ public partial class ui_uc_ucCreateRoutineLog : System.Web.UI.UserControl
             
             ExperienceManager expMngr = new ExperienceManager();
             int exp = logManager.logExerciseIntoRoutine(userID, exerciseID, routineID, rep, time, weight, distance, note);
+
+            ExerciseGoal eg = goalMngr.getUnachievedGoalByExerciseNameAndUserID(sysManager.getExerciseInfo(exerciseID).name, userID);
+
+            if (eg != null)
+            {
+                if (goalMngr.achieveGoal(eg, rep, time, weight, distance))
+                {
+                    goalAchievedLbl.Text = "Congratulations! You have achieved your goal for this exercise. You can view your goals ";
+                    goalsLink.Visible = true;
+                }
+                else
+                {
+                    goalAchievedLbl.Text = "";
+                    goalsLink.Visible = false;
+                }
+            }
 
             bool leveled = expMngr.rewardExperienceToUser(userID, exp);
             expRewardLbl.Text = "<br />You received " + exp.ToString() + " experience";

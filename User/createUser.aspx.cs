@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Net.Mail;
+using System.Web.UI.HtmlControls;
 
 //User name rules fo the regex on the aspx file: Usernames must be at least 3 characters long, starting with a letter, be alphanumeric and may contain . _ or -
 public partial class User_createUser : System.Web.UI.Page
@@ -24,6 +25,8 @@ public partial class User_createUser : System.Web.UI.Page
                 year = new ListItem(tempYear, tempYear);
                 birthday.Items.Add(year);
             }
+            HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liprofile");
+            li.Attributes.Add("class", "active");
         }
         else
         {

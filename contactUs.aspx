@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
 <h2>Send us an email</h2>
-
+<p>Have questions or comments? Send us an email and let us know!</p>
 <table>
     <tr>
         <td>

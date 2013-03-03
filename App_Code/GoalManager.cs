@@ -43,11 +43,19 @@ public class GoalManager
         }
     }
 
-    public ExerciseGoal getExerciseGoalByExerciseNameAndUserName(string name, string userName)
+    public ExerciseGoal getUnachievedGoalByExerciseNameAndUserID(string name, int userID)
     {
         using (var context = new Layer2Container())
         {
-            return context.ExerciseGoals.Where(s => s.Exercise.name == name && s.LimitBreaker.username == userName).FirstOrDefault();
+            return context.ExerciseGoals.Where(s => s.Exercise.name == name && s.LimitBreaker.id == userID && s.achieved == false).FirstOrDefault();
+        }
+    }
+
+    public ExerciseGoal getExerciseGoalByGoalID(int goalID)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.ExerciseGoals.Where(s => s.id == goalID).FirstOrDefault();
         }
     }
 
@@ -101,11 +109,11 @@ public class GoalManager
         }
     }
 
-    public Exercise getExerciseWithinGoal(string userName, string exerciseName)
+    public Exercise getExerciseWithinGoal(int goalID)
     {
         using (var context = new Layer2Container())
         {
-            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+            ExerciseGoal eg = context.ExerciseGoals.Where(s => s.id == goalID).FirstOrDefault();
 
             if (eg != null)
             {
@@ -117,7 +125,7 @@ public class GoalManager
         }
     }
 
-    public bool modifyExerciseGoalByExerciseNameAndUserName(string userName, string exerciseName, int time, double distance, int weight, int reps)
+    public bool modifyGoalByGoalID(int goalID, int time, double distance, int weight, int reps)
     {
         bool rc = false;
 
@@ -125,7 +133,7 @@ public class GoalManager
         {
             using (var context = new Layer2Container())
             {
-                ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+                ExerciseGoal eg = context.ExerciseGoals.Where(s => s.id == goalID).FirstOrDefault();
 
                 eg.time = time;
                 eg.distance = distance;
@@ -145,7 +153,7 @@ public class GoalManager
         return rc;
     }
 
-    public bool deleteExerciseGoalByExerciseNameAndUserName(string userName, string exerciseName)
+    public bool deleteGoalByGoalID(int goalID)
     {
         bool rc = false;
 
@@ -153,7 +161,7 @@ public class GoalManager
         {
             using (var context = new Layer2Container())
             {
-                ExerciseGoal eg = context.ExerciseGoals.Where(s => s.Exercise.name == exerciseName && s.LimitBreaker.username == userName).FirstOrDefault();
+                ExerciseGoal eg = context.ExerciseGoals.Where(s => s.id == goalID).FirstOrDefault();
 
                 context.ExerciseGoals.DeleteObject(eg);
                 context.SaveChanges();
@@ -195,5 +203,23 @@ public class GoalManager
 
             return goalSet;
         }
+    }
+
+    public bool achieveGoal(ExerciseGoal eg, int reps, int time, int weight, double distance)
+    {       
+        bool achieved = false;
+
+        if (reps >= eg.reps && time >= eg.time && weight >= eg.weight && distance >= eg.distance)
+        {
+            using (var context = new Layer2Container())
+            {
+                ExerciseGoal saveGoal = context.ExerciseGoals.Where(s => s.id == eg.id).FirstOrDefault();
+                saveGoal.achieved = true;
+                context.SaveChanges();
+                achieved = true;
+            }
+        }
+
+        return achieved;
     }
 }
