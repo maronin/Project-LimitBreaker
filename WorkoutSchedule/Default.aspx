@@ -592,22 +592,7 @@
                             <table style="top: 290px; position: absolute;">
                                 <tr>
                                     <td>
-                                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-</script>
-                                        <script>
-                                            $(document).ready(function () {
-                                                $("btnDoneRepeat").click(function () {
-                                                    $("pnlRepeatItem").hide(1000);
-                                                });
-                                            });
-
-                                            function hide() {
-                                                $("btnDoneRepeat").hide(1000);
-                                            
-                                            }
-
-                                        </script>
-                                        <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked" OnClientClick="hide()"
+                                        <asp:Button ID="btnDoneRepeat" runat="server" Text="Done" OnClick="btnDoneRepeat_Clicked"
                                             Width="80px" CssClass="button" />
                                     </td>
                                     <td style="width: 100%;">
