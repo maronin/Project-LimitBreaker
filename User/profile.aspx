@@ -15,9 +15,20 @@
         var chartData = [];
         var chartCursor;
 
-        AmCharts.ready(function () {
+        /*AmCharts.ready(window.onload = */function load(arrayWeight, arrayDate) {
             // generate some data first
-            generateChartData();
+            //generateChartData();
+            myWeight = new Array();
+            myWeight[0] = 25;
+            myWeight[1] = 20;
+            myWeight[2] = 20;
+            myWeight[3] = 23;
+            myDate = new Array();
+            myDate[0] = new Date(2011, 5, 1, 0, 0, 0, 0);
+            myDate[1] = new Date(2011, 5, 3, 0, 0, 0, 0);
+            myDate[2] = new Date(2011, 5, 4, 0, 0, 0, 0);
+            myDate[3] = new Date(2011, 6, 13, 0, 0, 0, 0);
+            populateChart(myWeight, myDate);
 
             // SERIAL CHART    
             chart = new AmCharts.AmSerialChart();
@@ -42,6 +53,7 @@
             categoryAxis.gridAlpha = 0.15;
             categoryAxis.position = "top";
             categoryAxis.axisColor = "#DADADA";
+            categoryAxis.equalSpacing = true;
 
             // value                
             var valueAxis = new AmCharts.ValueAxis();
@@ -74,7 +86,7 @@
 
             // WRITE
             chart.write("chartdiv");
-        });
+        }     //);
 
         // generate some random data, quite different range
         function generateChartData() {
@@ -90,6 +102,15 @@
                 chartData.push({
                     date: newDate,
                     visits: visits
+                });
+            }
+        }
+
+        function populateChart(arrayWeight, arrayDate) { //run the weight and date arrays in parallel
+            for (var i = 0; i < arrayWeight.length; i++) {
+                chartData.push({
+                    date: arrayDate[i],
+                    visits: arrayWeight[i]
                 });
             }
         }
@@ -198,8 +219,9 @@
     <div id="chartdiv" style="width: 50%; height: 400px; margin-left:250px; float:left;"></div>
 
     <div style="width: 50%; margin-left:250px; float:left; text-align:center;">
-        <input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
-        <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()">Pan
+        <input type="radio" name="group" id="rb1" onclick="setPanSelect()" />Select
+        <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()" />Pan
+        <asp:Button ID="Button1" runat="server" Text="Button" OnClientClick="load();" />
     </div> 
     
    

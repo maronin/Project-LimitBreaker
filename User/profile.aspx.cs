@@ -14,6 +14,12 @@ public partial class User_profile : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        ClientScript.RegisterStartupScript(GetType(), "hwa", "load();", true);
+
+        /*  EXAMPLE     DOESN'T WORK
+        string txtName = "Satheesh Babu";
+        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert(txtName.value)", true);
+        */
 
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liprofile");
         li.Attributes.Add("class", "active");
@@ -82,6 +88,10 @@ public partial class User_profile : System.Web.UI.Page
         newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
         rmr.Text = Convert.ToString(Math.Round(userStats.rmr, 2));
         bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));
+        //ClientScript.RegisterStartupScript(GetType(), "hwa", "load();", true);
+
         
+
+         
     }
 }
