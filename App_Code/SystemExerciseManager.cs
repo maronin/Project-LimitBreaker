@@ -125,6 +125,7 @@ public class SystemExerciseManager
         using (var context = new Layer2Container())
         {
             Exercise newExercise = new Exercise();
+            ExperienceManager expMngr = new ExperienceManager();
             try
             {
                 if ((context.Exercises.FirstOrDefault(exercise => exercise.name == exerciseName).name == exerciseName))
@@ -145,6 +146,9 @@ public class SystemExerciseManager
 
                 context.Exercises.AddObject(newExercise);
                 context.SaveChanges();
+
+                expMngr.createNewExerciseExp(exerciseName, 100, weight ? 1 : 0, rep ? 1 : 0, distance ? 1 : 0, time ? 1 : 0);
+
                 rc = true;
             }
             return rc;
