@@ -141,6 +141,23 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         List<scheduledItem> items;
 
         items = scheduleManager.getScheduledItemsByDay(userID, dt);
+
+
+        //Order the items based on the start time, from earlist to latest
+        for (int i = 0; i < items.Count; i++)
+        {
+            for (int j = i + 1; j < items.Count; j++)
+            {
+                if (items[i].startTime > items[j].startTime)
+                {
+                    scheduledItem temp = items[i];
+                    items[i] = items[j];
+                    items[j] = temp;
+                }
+            }
+        }
+
+
         if (atlernatingColor)
         {
             //pnl_calendarDay.BackColor = Color.Azure;
