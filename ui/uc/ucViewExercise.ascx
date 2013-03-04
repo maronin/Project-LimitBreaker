@@ -30,7 +30,6 @@
         </asp:DropDownList>
         <br />
         <br />
-        <hr />
         <asp:Panel ID="viewExercisePanel" runat="server">
             <table class="scheduleTable2">
                 <tr style="vertical-align: top;">

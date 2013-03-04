@@ -51,8 +51,8 @@
                                 <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" CssClass="legenExerciseRoutine"></asp:Label>
                                 <div class="theCalendar">
                                     <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
-                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"><<</asp:LinkButton>
-                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth">>></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth" Text="<< Prev Month"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth" Text="Next Month >>"></asp:LinkButton>
                                         <div class="today">
                                             <asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton>
                                             <br />
