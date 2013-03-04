@@ -27,7 +27,7 @@
                         <h4>
                             Add A New Goal</h4>
                         <uc1:viewExercise ID="viewExercises" runat="server" />
-                        <hr />
+
                         <asp:Panel ID="addGoalPanel" runat="server">
                             <h4>
                                 Add your target goals for the selected exercise:</h4>

@@ -205,7 +205,7 @@ public class ScheduleManager
                         if (onAfter.Trim() == "After")
                         {
                             //get the number occurances
-                            weeks = Convert.ToInt32(endsOnAfterValue);
+                            weeks = occurancesEnd = Convert.ToInt32(endsOnAfterValue);
                             occurances = 0;
                         }
                         if (onAfter.Trim() == "On")

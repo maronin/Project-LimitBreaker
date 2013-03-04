@@ -219,7 +219,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         StringBuilder sb = new StringBuilder();
         sb.Append(" ");
         lblEmpty.Text = sb.ToString();
-        pnl_calendarDay.BackColor = Color.Ivory;
+        pnl_calendarDay.BackColor = Color.FromArgb(200, 182, 214, 255);
     }
 
     protected void lnk_loadCalendar_Click(object sender, EventArgs e)
@@ -481,6 +481,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         tbDate_routine.Text = "";
         lblResult_Exercise.Text = "";
         lblResult_Routine.Text = "";
+        tbStartsOnDate.Text = "";
+        tbEndAfter.Text = "5";
+        ddlRepeatType.SelectedIndex = 0;
+        ddlRepeatEvery.SelectedIndex = 0;
         if (addItemView.ActiveViewIndex == 1)
         {
             cbRepeatExercise.Checked = false;
@@ -965,16 +969,39 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void validateEndDate()
     {
-        if (tbStartsOnDate.Text != "" && tbEndOnDate.Text != "")
+
+
+        if (addItemView.ActiveViewIndex == 1)
         {
-            DateTime start = Convert.ToDateTime(tbDate_exercise.Text);
-            DateTime end = Convert.ToDateTime(tbEndOnDate.Text);
-
-            int difference = (end - start).Days;
-
-            if (difference <= 0)
+            if (tbStartsOnDate.Text != "" && tbEndOnDate.Text != "")
             {
-                tbEndOnDate.Text = tbDate_exercise.Text;
+                DateTime start = Convert.ToDateTime(tbDate_exercise.Text);
+                DateTime end = Convert.ToDateTime(tbEndOnDate.Text);
+
+                int difference = (end - start).Days;
+
+                if (difference <= 0)
+                {
+                    tbEndOnDate.Text = tbDate_exercise.Text;
+                }
+            }
+        }
+
+
+        else if (addItemView.ActiveViewIndex == 2)
+        {
+            if (tbStartsOnDate.Text != "" && tbEndOnDate.Text != "")
+            {
+
+                DateTime start = Convert.ToDateTime(tbDate_routine.Text);
+                DateTime end = Convert.ToDateTime(tbEndOnDate.Text);
+
+                int difference = (end - start).Days;
+
+                if (difference <= 0)
+                {
+                    tbEndOnDate.Text = tbDate_routine.Text;
+                }
             }
         }
     }
