@@ -166,7 +166,7 @@ p
     float: left;
     text-align: left;
     z-index: 0;
-    margin-left: 20px;
+    margin-left: 73px;
 }
 
 .today
@@ -324,7 +324,7 @@ font-size: 13px;
 -moz-border-radius: 20px;  -webkit-border-radius: 20px;  -khtml-border-radius: 20px;  
 border-radius: 0px 20px 20px 20px;  
 background-color: rgb(144, 192, 255);
-  
+  z-index: 1;
 }
 
 .events

@@ -9,7 +9,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <uc1:ucViewExercise runat="server" ID="ucViewExercise" />
-            <hr />
+
             <table>
                 <tr>
                     <td>Weight: 
