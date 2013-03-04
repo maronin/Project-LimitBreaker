@@ -136,6 +136,7 @@ p
     font-size: medium;
 }
 
+/*Calendar settings*/
 #calendarTable
 {
     border: thin solid #000000;
@@ -165,6 +166,7 @@ p
     float: left;
     text-align: left;
     z-index: 0;
+    margin-left: 20px;
 }
 
 .today
@@ -185,6 +187,7 @@ p
     text-align: right;
     float: right;
     z-index: 10;
+    margin-right: 20px;
 }
 
 #week
@@ -194,6 +197,7 @@ p
 
 #week tr
 {
+    padding: -1px;
 }
 
 #week tr td
@@ -223,22 +227,16 @@ p
 
 .DaysOfWeek
 {
-    border: 1px solid #999999;
-    padding: 0.25em;
     background-color: rgb(144, 192, 255);
-    width: 97.5%;
+    width: 100.08%;
 }
 
 .calendarMonthSelector
 {
-    border: 1px solid #999999;
-    padding: 0.25em;
     padding-top: 10px;
-    padding-left: 13px;
-    padding-right: 13px;
     padding-bottom: 13px;
     background-color: rgb(96, 142, 201);
-    width: 96.2%;
+    width: 100.08%;
     -moz-border-radius: 20px;    
     -webkit-border-radius: 20px;    
     -khtml-border-radius: 20px;    
@@ -251,23 +249,22 @@ p
 }
 .calendarDay
 {
-    border: 1px solid rgb(144, 192, 255);
     margin: 0em;
     background-color: white;
     font-size: smaller;
-    padding: 0.1em;
-    width: 13.7%;
+    width: 14.285714285714285714285714285714%;
     float: left;
-    height: 161px;
+    height: 180px;
     padding-top: -2px;
     overflow-y: scroll;
-    scrollbar-face-color: #000000;
     scrollbar-shadow-color: #2D2C4D;
     scrollbar-highlight-color: #7D7E94;
     scrollbar-3dlight-color: #7D7E94;
     scrollbar-darkshadow-color: #2D2C4D;
     scrollbar-track-color: #7D7E94;
     scrollbar-arrow-color: #C1C1D1;
+    outline: solid rgb(144, 192, 255) 1px; 1px;        
+    outline-offset: 0px;
 }
 
 .CalendarItemsSpanExercises{
@@ -314,11 +311,11 @@ text-decoration: none;
 font-family: 'Arial Black';
 color: #000000;
 font-weight: lighter;
-margin-left: -2px;
-margin-top: -2px;
-padding-left: 6px;
+margin-left: -1px;
+margin-top: 0px;
+padding-left: 5px;
 padding-right: 8px;
-padding-top: 3px;
+padding-top: 2px;
 position: absolute;
 background-color: rgb(255, 255, 255);
 width: 22px;
@@ -327,6 +324,7 @@ font-size: 13px;
 -moz-border-radius: 20px;  -webkit-border-radius: 20px;  -khtml-border-radius: 20px;  
 border-radius: 0px 20px 20px 20px;  
 background-color: rgb(144, 192, 255);
+  
 }
 
 .events
@@ -361,11 +359,16 @@ background-color: rgb(144, 192, 255);
     z-index: 5;
 }
 
+
+
+
+
+
+
 .scheduleTable2
 {
 
 }
-
 .description
 {
     height: 100px;
