@@ -38,8 +38,8 @@ public class LoggedExerciseManager
 
             int exp = 0;
 
-            if (set != null) 
-            {       
+            if (set != null)
+            {
                 string exerciseName = context.Exercises.Where(s => s.id == exerciseID).FirstOrDefault().name;
                 exp = expMngr.calculateLoggedExerciseExperience(exerciseName, set);
             }
@@ -98,7 +98,7 @@ public class LoggedExerciseManager
             return null;
         }
     }
-    
+
     // neil - check if log exists within routine
     LoggedExercise logExists(Int32 exerciseID, Int32 userID, Int32 routineID)
     {
@@ -107,7 +107,7 @@ public class LoggedExerciseManager
             List<LoggedExercise> logs = (from loggedExercise in context.LoggedExercises
                                          where loggedExercise.LimitBreaker.id == userID
                                          where loggedExercise.Routine.id == routineID
-                                         where loggedExercise.Exercise.id == exerciseID 
+                                         where loggedExercise.Exercise.id == exerciseID
                                          select loggedExercise).ToList();
             if (logs != null)
             {
@@ -278,14 +278,19 @@ public class LoggedExerciseManager
             }
             if (set.time > 0)
             {
-                int minutes = (Int32)set.time/60;
+                int minutes = (Int32)set.time / 60;
                 int seconds = (Int32)set.time - minutes * 60;
                 rc += "time: " + minutes + "m " + seconds + "s | ";
             }
             i++;
             rc += "<br />";
-            if (!set.note.Equals(""))
-                rc += "Note: " + set.note + "<br />";
+            if (set.note != null)
+            {
+                if (!set.note.Equals(""))
+                {
+                    rc += "Note: " + set.note + "<br />";
+                }
+            }
         }
         return rc;
     }
