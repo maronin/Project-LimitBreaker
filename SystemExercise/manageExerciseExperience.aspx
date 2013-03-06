@@ -43,7 +43,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
                 <uc1:viewExercise ID="viewExerciseExp" runat="server" />
-                <hr />
+                
                 <asp:MultiView ID="manageExperienceMultiView" runat="server">
                     <asp:View ID="emptyView" runat="server">
                     </asp:View>

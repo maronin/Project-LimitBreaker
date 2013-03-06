@@ -16,8 +16,8 @@ public partial class User_profile : System.Web.UI.Page
     {
         ClientScript.RegisterStartupScript(GetType(), "hwa", "load();", true);
 
-        /*  EXAMPLE     DOESN'T WORK
-        string txtName = "Satheesh Babu";
+        /*  EXAMPLE     
+        string txtName = "Satheesh Babu";                                       V DOESN'T WORK
         ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert(txtName.value)", true);
         */
 
