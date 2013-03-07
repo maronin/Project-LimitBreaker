@@ -144,18 +144,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
 
         //Order the items based on the start time, from earlist to latest
-        for (int i = 0; i < items.Count; i++)
-        {
-            for (int j = i + 1; j < items.Count; j++)
-            {
-                if (items[i].startTime > items[j].startTime)
-                {
-                    scheduledItem temp = items[i];
-                    items[i] = items[j];
-                    items[j] = temp;
-                }
-            }
-        }
+        items = sortItems(items);
 
 
         if (atlernatingColor)
@@ -337,6 +326,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             List<scheduledItem> items;
             itemScheduledOn = Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue);
             items = scheduleManager.getScheduledItemsByDayOfYear(userID, itemScheduledOn);
+            items = sortItems(items);
             GridViewScheduledItems.DataSource = items;
             GridViewScheduledItems.DataBind();
             multiViewCalendar.ActiveViewIndex = 2;
@@ -481,10 +471,18 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         tbDate_routine.Text = "";
         lblResult_Exercise.Text = "";
         lblResult_Routine.Text = "";
+        
+        //Repeat Form
         tbStartsOnDate.Text = "";
         tbEndAfter.Text = "5";
         ddlRepeatType.SelectedIndex = 0;
         ddlRepeatEvery.SelectedIndex = 0;
+        cblDayOfWeek.Visible = false;
+        repeatOn.Visible = false;
+        lblDayType.Text = "days";
+        tbEndOnDate.Text = "";
+        rblEnd.SelectedIndex = 0;
+
         if (addItemView.ActiveViewIndex == 1)
         {
             cbRepeatExercise.Checked = false;
@@ -704,13 +702,17 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         GridViewScheduledItems.DataSource = null;
         GridViewScheduledItems.DataBind();
         if (tbRemoveDate.Text != "")
+        {
             schdledItems = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
-
+            schdledItems = sortItems(schdledItems);
+        }
         else
         {
             itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
             schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+            schdledItems = sortItems(schdledItems);
         }
+        
         GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();
 
@@ -813,6 +815,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             lblDayType.Text = "weeks";
             repeatOn.Visible = true;
+            cblDayOfWeek.Visible = true;
         }
 
         else if (ddlRepeatType.SelectedIndex == 2)
@@ -903,8 +906,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
 
         schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+        schdledItems = sortItems(schdledItems);
         GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();
+        
         if (GridViewScheduledItems.Rows.Count == 0)
         {
             lblRemoveResult.Visible = true;
@@ -1010,6 +1015,27 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         pnlRepeatItem.Visible = true;
         pnlDim.Visible = true;
+    }
+
+
+    protected List<scheduledItem> sortItems(List<scheduledItem> items)
+    {
+        //Order the items based on the start time, from earlist to latest
+        for (int i = 0; i < items.Count; i++)
+        {
+            for (int j = i + 1; j < items.Count; j++)
+            {
+                if (items[i].startTime > items[j].startTime)
+                {
+                    scheduledItem temp = items[i];
+                    items[i] = items[j];
+                    items[j] = temp;
+                }
+            }
+        }
+
+        return items;
+
     }
 
 }
