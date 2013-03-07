@@ -25,7 +25,6 @@ public partial class User_profile : System.Web.UI.Page
             alias.Text = username;
             double tempRmr = userStats.rmr;
             double tempBmi = userStats.bmi;
-            double tempVmax = userStats.vo2MAX;
             string reqExp = Convert.ToString(expMngr.getRequiredExperienceForLevel(userStats.level));
             string curExp = Convert.ToString(userStats.experience);
             levelLbl.Text = "Level: " + Convert.ToString(userStats.level);
@@ -39,6 +38,7 @@ public partial class User_profile : System.Web.UI.Page
             {
                 newWeight.Text = Convert.ToString(Math.Round(userStats.weight, 2));
                 newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
+                email.Text = manager.getLimitBreaker(username).email;
             }
 
             if (tempRmr > 1)
@@ -77,6 +77,7 @@ public partial class User_profile : System.Web.UI.Page
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);
         manager.updateBMI(username);
+        manager.updateEmail(username, email.Text);
         Statistics userStats = manager.getStats(username);
         newWeight.Text = Convert.ToString(Math.Round(userStats.weight, 2));
         newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));

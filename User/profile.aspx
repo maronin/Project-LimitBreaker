@@ -182,6 +182,13 @@
             <td class="auto-style1">
                 <asp:Label ID="bmi" runat="server" Text=""></asp:Label></td>
         </tr>
+        <tr>
+            <td>Update Email</td>
+            <td>
+                <asp:TextBox ID="email" runat="server"></asp:TextBox></td>
+            <td>
+                <asp:RegularExpressionValidator ID="emalREV" runat="server" ErrorMessage="Invalid email" ControlToValidate="email" ValidationGroup="profileUpdate" Text="Invalid email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator></td>
+        </tr>
         <tr><td class="auto-style1">          
                 <asp:Button ID="updateStats" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateStats_Click"/></td>
             <td class="auto-style1" colspan="2">
