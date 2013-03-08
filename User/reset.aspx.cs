@@ -11,6 +11,10 @@ public partial class User_reset : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (User.Identity.Name != "")
+        {
+            Response.Redirect("profile.aspx");
+        }
         if (String.IsNullOrEmpty(Request.QueryString["ID"]) || !Regex.IsMatch(Request.QueryString["ID"], "[0-9a-f]{8}\\-([0-9a-f]{4}\\-){3}[0-9a-f]{12}"))
         {
             Label1.Text = "Invalid! Go lift some more.";
