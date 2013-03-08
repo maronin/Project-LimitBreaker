@@ -37,7 +37,7 @@
             <asp:ListItem>Legs</asp:ListItem>
             <asp:ListItem>Cardio</asp:ListItem>
         </asp:DropDownList>
-        <asp:Button ID="lnkButtonGo" runat="server" style="width: 91px;padding: 2px 0px 2px 0px;height: 24px;" CssClass="button" Text="Go"></asp:Button>
+        <asp:Button ID="lnkButtonGo" runat="server" style="width: 91px;padding: 2px 0px 2px 0px;height: 24px;" CssClass="button" Text="Go" OnClick="MuscleGroupDDL_SelectedIndexChanged"></asp:Button>
         </td>
         </tr>
         </table>
