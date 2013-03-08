@@ -98,7 +98,7 @@
                             ValidationGroup="ModifyExercise"></asp:RequiredFieldValidator>
                          
                          <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tbExerciseName"
-                    ErrorMessage="*Please enter alphanumeric characters for name" ValidationExpression="^[0-9a-zA-Z ]+$"
+                    ErrorMessage="*Please enter alphanumeric characters for name" ValidationExpression="^[-0-9a-zA-Z ]+$"
                     ForeColor="Red" ValidationGroup="ModifyExercise"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
