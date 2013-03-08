@@ -51,6 +51,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         createTextBoxes();
         displayLogs();
         disableLabels();
+
     }
     protected void createTextBoxes()
     {
@@ -225,5 +226,6 @@ public partial class LoggedExercise_default : System.Web.UI.Page
         successLbl.Visible = false;
         goalAchievedLbl.Text = "";
         goalsLink.Visible = false;
+        setsLbl.Text = "";
     }
 }
