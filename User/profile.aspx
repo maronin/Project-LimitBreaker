@@ -195,8 +195,9 @@
                 
             </td>
         </tr>
+        <tr><td><asp:Label ID="updateResultLbl" runat="server" Text=""></asp:Label></td></tr>
+        <tr><td><a href="changePassword.aspx">Click here to change your password</a></td></tr>
     </table>
-    <asp:Label ID="updateResultLbl" runat="server" Text=""></asp:Label>
     </div>
     </div>
 

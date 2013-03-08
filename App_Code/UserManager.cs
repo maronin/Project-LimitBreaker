@@ -419,4 +419,9 @@ public class UserManager
         aspUser.Email = email;
         Membership.UpdateUser(aspUser);
     }
+
+    public bool updatePassword(MembershipUser user, string newPassword, string oldPassword)
+    {
+        return user.ChangePassword(oldPassword, newPassword);
+    }
 }
