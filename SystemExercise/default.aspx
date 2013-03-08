@@ -53,16 +53,17 @@
 
         <br />
     </div>
-    <div>
-        <asp:RadioButtonList ID="rblEnaber" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rblEnaber_SelectedIndexChanged"
-            TextAlign="Left">
-            <asp:ListItem Value="1">Enabled</asp:ListItem>
-            <asp:ListItem Value="0">Disabled</asp:ListItem>
-        </asp:RadioButtonList>
-    </div>
-    <asp:Panel ID="Panel1" runat="server">
+        <asp:Panel ID="pnlModifyExercise" runat="server">
+
+        
+
+
         <div>
             <table id="newExerciseForm">
+                <tr>
+                <td>Enabled <asp:CheckBox ID="cbEnabler" runat="server"  OnCheckedChanged="rblEnaber_SelectedIndexChanged" AutoPostBack="True"/></td>
+                <td>
+                    <asp:Label ID="lblEnabled" runat="server" Text=""></asp:Label></td></tr>
                 <tr>
                     <td>
                         <p>
@@ -85,7 +86,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="width: 14%;">
                         <p>
                             Exercise Name:</p>
                     </td>
@@ -123,22 +124,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="vertical-align:top;">
                         <p>
                             Equipment:</p>
                     </td>
                     <td class="style1">
                         <asp:TextBox ID="tbEquipment" runat="server" Height="144px" CssClass="tbStyle" TextMode="MultiLine"></asp:TextBox>
-                       <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                       
+                    </td>
+                    <td  class="style1" style="vertical-align:top;">
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                             ControlToValidate="tbEquipment" ErrorMessage="*Please enter equipment needed" 
                             ForeColor="Red" ValidationGroup="ModifyExercise" Display="Dynamic"></asp:RequiredFieldValidator>
                     </td>
-                    <td>
-
-                    </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="vertical-align:top;">
                         <p>Description:</p>
                     </td>
                     <td>
@@ -154,10 +155,10 @@
                     <td>
                         <asp:TextBox ID="tbVideoLink" runat="server" CssClass="tbStyle"></asp:TextBox>
                     </td>
-                    <td>
+                    <td  class="style1">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                             ControlToValidate="tbVideoLink" ErrorMessage="*Please enter a video link" 
-                            ForeColor="Red" ValidationGroup="ModifyExercise"></asp:RequiredFieldValidator>
+                            ForeColor="Red" ValidationGroup="ModifyExercise" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Improper video link format"
                             ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" 
                             ValidationGroup="ModifyExercise" 
@@ -169,8 +170,11 @@
                         &nbsp;
                     </td>
                     <td>
+                     <asp:Button ID="btnDeleteExercise" runat="server" Text="Delete Exercise" OnClientClick="return confirm('Doing this will irreversibly remove the exercise from the system. Are you sure?');"
+                OnClick="btnDeleteExercise_Click" ValidationGroup="ModifyExercise"  CssClass="button" style="width: 200px;"/>
                         <asp:Button ID="btnConfirmChanges" runat="server" OnClick="btnConfirmChanges_Click"
-                            Text="CONFIRM" ValidationGroup="ModifyExercise" />
+                            Text="Confirm Modification" ValidationGroup="ModifyExercise" CssClass="button" style="width: 200px;"/>
+                                       
                     </td>
                 </tr>
                 <tr>
@@ -183,8 +187,7 @@
                 </tr>
             </table>
             <br />
-            <asp:Button ID="btnDeleteExercise" runat="server" Text="Delete Exercise" OnClientClick="return confirm('Doing this will irreversibly remove the exercise from the system. Are you sure?');"
-                OnClick="btnDeleteExercise_Click" ValidationGroup="ModifyExercise" />
+
             <asp:Label ID="lblDeletionResult" runat="server"></asp:Label>
         </div>
     </asp:Panel>
