@@ -81,7 +81,7 @@
                     ControlToValidate="tbExerciseName" Display="Dynamic" ForeColor="Red" SetFocusOnError="True"
                     ValidationGroup="AddExercise"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbExerciseName"
-                    ErrorMessage="*Please enter alphanumeric characters for name" ValidationExpression="^[0-9a-zA-Z ]+$"
+                    ErrorMessage="*Please enter alphanumeric characters for name" ValidationExpression="^[-0-9a-zA-Z ]+$"
                     ForeColor="Red" ValidationGroup="AddExercise"></asp:RegularExpressionValidator>
             </td>
         </tr>
