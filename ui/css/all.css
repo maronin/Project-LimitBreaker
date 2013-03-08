@@ -638,4 +638,13 @@ position: static;
 
 margin-bottom: -5px;
 
+text-align: center;
+}
+
+input.input-validation-error,
+textarea.input-validation-error,
+select.input-validation-error
+{
+    background: #FEF1EC;
+    border: 1px solid #CD0A0A;
 }

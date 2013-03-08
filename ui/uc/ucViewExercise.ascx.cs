@@ -174,7 +174,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         Exercise exercise = exerciseManager.getExerciseById(Convert.ToInt32(ExerciseDDL.SelectedValue));
             lblExerciseEquipment.Text = exercise.equipment;
 
-            if (exercise.description == null)
+            if (exercise.description == "")
             {
                 lblExerciseDescription.Text = "None";
             }

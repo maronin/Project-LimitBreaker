@@ -3,23 +3,32 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
+        <table><tr>
+        <td>
         <label for="_Default">
-            Search for an exercise via name:
+            Search via exercise name:
         </label>
+        </td>
+        <td>
         <asp:TextBox runat="server" ID="exerciseSearchBox" ClientIDMode="Static" AutoPostBack="False"
-            ValidationGroup="Search" />
+            ValidationGroup="Search" style="width: 160px; padding: 0px 0px 0px 4px;"/>
         <juice:Autocomplete ID="exerciseAutoComplete" runat="server" TargetControlID="exerciseSearchBox" />
         <asp:Button ID="exerciseSearchButton" runat="server" Text="Search" OnClick="exerciseSearchButton_Click"
-            ValidationGroup="Search" />
+            ValidationGroup="Search" CssClass="button" style="width: 91px;padding: 2px 0px 2px 0px;height: 24px;"/>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="exerciseSearchBox"
             ErrorMessage="No symbols" ForeColor="Red" ValidationExpression="^[a-zA-Z0-9 ]+$"
             Display="Dynamic" ValidationGroup="Search"></asp:RegularExpressionValidator>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="exerciseSearchBox"
             Display="Dynamic" ErrorMessage="Need a name" ForeColor="Red" ValidationGroup="Search"></asp:RequiredFieldValidator>
-        <br />
-        Search via muscle groups:
+        </td>
+        </tr>
+        <tr>
+        <td>
+        Search via muscle groups: 
+                </td>
+                <td>
         <asp:DropDownList ID="ddlMuscleGroups" runat="server" OnSelectedIndexChanged="MuscleGroupDDL_SelectedIndexChanged"
-            AutoPostBack="True">
+            AutoPostBack="True" style="margin-left: 0;width: 166px;">
             <asp:ListItem Value="ALL">All Groups</asp:ListItem>
             <asp:ListItem>Chest</asp:ListItem>
             <asp:ListItem>Back</asp:ListItem>
@@ -28,10 +37,12 @@
             <asp:ListItem>Legs</asp:ListItem>
             <asp:ListItem>Cardio</asp:ListItem>
         </asp:DropDownList>
-        <br />
-        <br />
+        <asp:Button ID="lnkButtonGo" runat="server" style="width: 91px;padding: 2px 0px 2px 0px;height: 24px;" CssClass="button" Text="Go"></asp:Button>
+        </td>
+        </tr>
+        </table>
         <asp:Panel ID="viewExercisePanel" runat="server">
-            <table class="scheduleTable2">
+            <table>
                 <tr style="vertical-align: top;">
                     <td colspan="1" style="width: 140px;">
                         <h5>
@@ -51,7 +62,8 @@
                         <h5>
                             Description:</h5>
                         <br />
-                        <asp:Label ID="lblExerciseDescription" runat="server" Text="None"></asp:Label>
+                        <asp:TextBox ID="lblExerciseDescription" onkeypress="return false;" runat="server" Text="None" Height="211px" TextMode="MultiLine" width="511px" Font-Italic="False">None</asp:TextBox>
+                        
                     </td>
                     <td>
                         &nbsp;
