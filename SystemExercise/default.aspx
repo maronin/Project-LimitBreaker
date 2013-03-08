@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="default.aspx.cs" Inherits="_Default" %>
 
 <%@ Register Src="~/ui/uc/AddNewExercise.ascx" TagName="addExercise" TagPrefix="uc1" %>
@@ -97,7 +97,7 @@
                             ValidationGroup="ModifyExercise"></asp:RequiredFieldValidator>
                          
                          <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="tbExerciseName"
-                    ErrorMessage="*Please enter alphanumeric characters for name" ValidationExpression="^[0-9a-zA-Z ]+$"
+                    ErrorMessage="*Please enter alphanumeric characters for name" ValidationExpression="^[-0-9a-zA-Z ]+$"
                     ForeColor="Red" ValidationGroup="ModifyExercise"></asp:RegularExpressionValidator>
                     </td>
                 </tr>
