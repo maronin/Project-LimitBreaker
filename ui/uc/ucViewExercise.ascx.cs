@@ -145,7 +145,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     }
 
-    protected void populateExiseList()
+    public void populateExiseList()
     {
    
         List<Exercise> foundExercises = manager.getExercisesByMuscleGroup(ddlMuscleGroups.SelectedValue.Trim());

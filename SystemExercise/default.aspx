@@ -50,11 +50,9 @@
         <uc1:addExercise ID="courses" runat="server" />
         
         <uc1:viewExercise ID="viewExercises" runat="server" />
-
-        <br />
     </div>
         <asp:Panel ID="pnlModifyExercise" runat="server">
-
+        <h1>Modifying Exercise</h1>
         
 
 

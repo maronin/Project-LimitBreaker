@@ -18,7 +18,11 @@ public partial class _Default : System.Web.UI.Page
 
         viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         //rblEnaber.Visible = false;
-        pnlModifyExercise.Visible = false;
+        //pnlModifyExercise.Visible = false;
+        if (!IsPostBack) { 
+        viewExercises.populateExiseList();
+        populateForm();
+        }
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
@@ -158,6 +162,7 @@ public partial class _Default : System.Web.UI.Page
         {
             lblResult.ForeColor = System.Drawing.Color.Green;
             lblResult.Text = "Modified Succesfully!";
+            viewExercises.populateExiseList();
         }
         else
         {

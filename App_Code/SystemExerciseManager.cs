@@ -82,14 +82,13 @@ public class SystemExerciseManager
     {
         Boolean rc = false;
         Exercise exercise = null;
-
         using (var context = new Layer2Container())
         {
             exercise = context.Exercises.Where(x => x.id == id).FirstOrDefault();
 
             try
             {
-                if ((context.Exercises.FirstOrDefault(e => e.name == exerciseName).name == exerciseName && exerciseName != exercise.name))
+                if (context.Exercises.Where(e => e.name == exerciseName).FirstOrDefault() != null)
                 {
                     rc = false;
                 }
