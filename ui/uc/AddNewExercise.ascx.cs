@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
 {
@@ -26,7 +27,7 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
             distance = true;
         if (cblAttributes.Items[3].Selected)
             time = true;
-        if (cbEnabled.Enabled)
+        if (cbEnabled.Checked)
             enabled = true;
 
         foreach (ListItem item in cblMuscleGroups.Items)
@@ -38,6 +39,7 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
         if (manager.createNewExercise(tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, enabled, tbDescription.Text) && tbExerciseName.Text != ""){  
             lblResult.ForeColor = System.Drawing.Color.Green;       
             lblResult.Text = "Added Succesfully!";
+
         }
         else
         {

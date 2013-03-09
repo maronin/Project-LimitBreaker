@@ -147,6 +147,7 @@
         </tr>
     </table>
     <%--OnClientClick="return confirm('Are you sure you would create this exercise');" --%>
+
     <asp:Button ID="btnCreateExercise" runat="server" Text="Create" CssClass="button"
         Style="margin-left: 210px; width: 300px;" ValidationGroup="AddExercise" OnClick="btnCreateExercise_Click" />
     <br />
