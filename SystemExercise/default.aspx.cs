@@ -9,12 +9,12 @@ using System.Drawing;
 public partial class _Default : System.Web.UI.Page
 {
     SystemExerciseManager manager = new SystemExerciseManager();
-
+    static bool nameChanged = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl home = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("lisystemExercise");
         home.Attributes.Add("class", "active");
-
+        nameChanged = false;
 
         viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         //rblEnaber.Visible = false;
@@ -157,7 +157,7 @@ public partial class _Default : System.Web.UI.Page
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text) && tbExerciseName.Text != "")
+        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text, nameChanged) && tbExerciseName.Text != "")
         {
             lblResult.ForeColor = System.Drawing.Color.Green;
             lblResult.Text = "Modified Succesfully!";
@@ -201,5 +201,9 @@ public partial class _Default : System.Web.UI.Page
         {
             lblDeletionResult.Text = "Something went wrong with the execution of the page";
         }
+    }
+    protected void tbExerciseName_TextChanged(object sender, EventArgs e)
+    {
+        nameChanged = true;
     }
 }

@@ -89,7 +89,8 @@
                             Exercise Name:</p>
                     </td>
                     <td>
-                        <asp:TextBox ID="tbExerciseName" runat="server" class="tbStyle"></asp:TextBox>
+                        <asp:TextBox ID="tbExerciseName" runat="server" class="tbStyle" 
+                            ontextchanged="tbExerciseName_TextChanged"></asp:TextBox>
                     </td>
                     <td class="style1">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Exercise name required"

@@ -62,7 +62,7 @@
                         <h5>
                             Description:</h5>
                         <br />
-                        <asp:TextBox ID="lblExerciseDescription" onkeypress="return false;" runat="server" Text="None" Height="211px" TextMode="MultiLine" width="511px" Font-Italic="False">None</asp:TextBox>
+                        <asp:TextBox ID="lblExerciseDescription" onkeypress="return false;" runat="server" Text="None" Height="211px" TextMode="MultiLine" width="511px" Font-Italic="False" ReadOnly="True">None</asp:TextBox>
                         
                     </td>
                     <td>

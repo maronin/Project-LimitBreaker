@@ -85,23 +85,39 @@ public class SystemExerciseManager
         return rc;
     }
 
-    public Boolean modifyExercise(Int32 id, string exerciseName, string muscleGroups, string equipment, string videoLink, bool rep, bool weight, bool distance, bool time, string desc)
+    public Boolean modifyExercise(Int32 id, string exerciseName, string muscleGroups, string equipment, string videoLink, bool rep, bool weight, bool distance, bool time, string desc, bool nameChanged)
     {
         Boolean rc = false;
         Exercise exercise = null;
         using (var context = new Layer2Container())
         {
             exercise = context.Exercises.Where(x => x.id == id).FirstOrDefault();
-
+            
             try
             {
-                if (context.Exercises.Where(e => e.name == exerciseName).FirstOrDefault() != null)
-                {
-                    rc = false;
+                if (nameChanged) { 
+                    if (context.Exercises.Where(e => e.name == exerciseName).FirstOrDefault() != null)
+                    {
+                        rc = false;
+                    }
+                    else
+                    {
+                        exercise.name = exerciseName.Trim();
+                        exercise.equipment = equipment.Trim();
+                        exercise.videoLink = videoLink.Trim();
+                        exercise.rep = rep;
+                        exercise.weight = weight;
+                        exercise.distance = distance;
+                        exercise.time = time;
+                        exercise.muscleGroups = muscleGroups;
+                        exercise.description = desc;
+                        context.Exercises.ApplyCurrentValues(exercise);
+                        context.SaveChanges();
+                        rc = true;
+                    }
                 }
                 else
                 {
-                    exercise.name = exerciseName.Trim();
                     exercise.equipment = equipment.Trim();
                     exercise.videoLink = videoLink.Trim();
                     exercise.rep = rep;
@@ -114,6 +130,7 @@ public class SystemExerciseManager
                     context.SaveChanges();
                     rc = true;
                 }
+                
             }
             catch (Exception ex)
             {
