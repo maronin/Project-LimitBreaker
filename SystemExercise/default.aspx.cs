@@ -167,6 +167,7 @@ public partial class _Default : System.Web.UI.Page
         {
             lblResult.ForeColor = System.Drawing.Color.Red;
             lblResult.Text = "Exercise name already exists";
+            viewExercises.populateExiseList();
         }
 
         if (tbExerciseName.Text == "")
