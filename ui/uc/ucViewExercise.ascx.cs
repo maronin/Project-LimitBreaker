@@ -9,6 +9,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 {
     SystemExerciseManager manager = new SystemExerciseManager();
     ExerciseManager exerciseManager = new ExerciseManager();
+    bool isAdmin = false;
     public event EventHandler userControlEventHappened;
 
     private void OnUserControlEvent()
@@ -21,8 +22,18 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        exerciseAutoComplete.SourceList = manager.getExerciseNamesAC();
-        
+        if (HttpContext.Current.User.IsInRole("admin")) {
+            isAdmin = true;
+            exerciseAutoComplete.SourceList = manager.getExerciseNamesAC(isAdmin); 
+            
+        }
+        else
+        {
+            isAdmin = false;
+            exerciseAutoComplete.SourceList = manager.getExerciseNamesAC(isAdmin); 
+        }
+
+
         if (!IsPostBack)
         {
             populateExiseList();
@@ -34,7 +45,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
     protected void exerciseSearchButton_Click(object sender, EventArgs e)
     {
         //lblResult.Text = "";
-        List<Exercise> foundExercises = manager.getExercisesByName(exerciseSearchBox.Text.Trim());
+        List<Exercise> foundExercises = manager.getExercisesByName(exerciseSearchBox.Text.Trim(), isAdmin);
         ExerciseDDL.Items.Clear();
         if (foundExercises.Count != 0)
         {
@@ -72,6 +83,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
     protected void ExerciseDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
         populateExerciseInfo();
+        colorCodeExercises();
         /*
         Exercise exercise = manager.getExercise(ExerciseDDL.SelectedValue);
         exerciseName.Visible = true;
@@ -95,6 +107,34 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         //populateForm();
         */
         OnUserControlEvent();
+    }
+
+    public void colorCodeExercises()
+    {
+        if (HttpContext.Current.User.IsInRole("admin"))
+        {
+            foreach (ListItem items in ExerciseDDL.Items)
+            {
+                if (exerciseManager.enabled(Convert.ToInt32(items.Value)))
+                    items.Attributes.Add("style", "background-color:#67E667; color:#008500");
+                else
+                {
+                    items.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+                }
+
+            }
+
+            if (exerciseManager.enabled(Convert.ToInt32(ExerciseDDL.SelectedItem.Value)))
+            {
+                ExerciseDDL.Attributes.Add("style", "background-color:#67E667; color:#008500");
+            }
+            else
+            {
+                ExerciseDDL.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+            }
+        }
+
+
     }
 
     protected void exerciesNotFound()
@@ -126,7 +166,12 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     public int ddlSelectedValue
     {
-        get { return Convert.ToInt32(ExerciseDDL.SelectedValue); }
+        get {
+            if (ExerciseDDL.SelectedValue != "")
+                return Convert.ToInt32(ExerciseDDL.SelectedValue);
+            else 
+                return -1;
+        }
     }
 
     public int ddlCount
@@ -145,7 +190,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     }
 
-    protected void populateExiseList()
+    public void populateExiseList()
     {
    
         List<Exercise> foundExercises = manager.getExercisesByMuscleGroup(ddlMuscleGroups.SelectedValue.Trim());
@@ -153,8 +198,34 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         exerciseSearchBox.Text = "";
         if (foundExercises.Count != 0)
         {
-            ExerciseDDL.DataSource = foundExercises;
-            ExerciseDDL.DataBind();
+            //ExerciseDDL.DataSource = foundExercises;
+            //ExerciseDDL.DataBind();
+
+            // ExerciseDDL.DataSource = foundExercises;
+            ListItem item;
+            foreach (Exercise name in foundExercises)
+            {
+                //ExerciseDDL.Items.Add(new ListItem(name.name, Convert.ToString(name.id), name.enabled));
+             if( HttpContext.Current.User.IsInRole("admin")){
+                    item = new ListItem(name.name, name.id.ToString());
+                    ExerciseDDL.Items.Add(item);
+            }
+            else{
+                if (name.enabled) { 
+                item = new ListItem(name.name, name.id.ToString());
+                ExerciseDDL.Items.Add(item);
+                }
+            }
+
+            }
+            colorCodeExercises();
+            //ExerciseDDL.DataBind();
+
+
+
+
+
+
             exceriseNotFound.Visible = false;
             viewExercisePanel.Visible = true;
             populateExerciseInfo();
@@ -174,7 +245,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         Exercise exercise = exerciseManager.getExerciseById(Convert.ToInt32(ExerciseDDL.SelectedValue));
             lblExerciseEquipment.Text = exercise.equipment;
 
-            if (exercise.description == null)
+            if (exercise.description == "")
             {
                 lblExerciseDescription.Text = "None";
             }

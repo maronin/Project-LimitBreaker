@@ -26,7 +26,7 @@ public class SystemExerciseManager
         }
     }
 
-    public List<Juice.AutocompleteItem> getExerciseNamesAC()
+    public List<Juice.AutocompleteItem> getExerciseNamesAC(bool admin)
     {
         using (var context = new Layer2Container())
         {
@@ -43,7 +43,14 @@ public class SystemExerciseManager
             }
             else
             {
-                rc = context.Exercises.Select(x => new Juice.AutocompleteItem { Label = x.name, Value = x.name }).ToList();
+                if (admin)
+                {
+                    rc = context.Exercises.Select(x => new Juice.AutocompleteItem { Label = x.name, Value = x.name }).ToList();
+                }
+                else
+                {
+                    rc = context.Exercises.Where(e => e.enabled == true).Select(x => new Juice.AutocompleteItem { Label = x.name, Value = x.name }).ToList();
+                }
             }
 
             return rc;
@@ -78,24 +85,39 @@ public class SystemExerciseManager
         return rc;
     }
 
-    public Boolean modifyExercise(Int32 id, string exerciseName, string muscleGroups, string equipment, string videoLink, bool rep, bool weight, bool distance, bool time, string desc)
+    public Boolean modifyExercise(Int32 id, string exerciseName, string muscleGroups, string equipment, string videoLink, bool rep, bool weight, bool distance, bool time, string desc, bool nameChanged)
     {
         Boolean rc = false;
         Exercise exercise = null;
-
         using (var context = new Layer2Container())
         {
             exercise = context.Exercises.Where(x => x.id == id).FirstOrDefault();
-
+            
             try
             {
-                if ((context.Exercises.FirstOrDefault(e => e.name == exerciseName).name == exerciseName && exerciseName != exercise.name))
-                {
-                    rc = false;
+                if (nameChanged) { 
+                    if (context.Exercises.Where(e => e.name == exerciseName).FirstOrDefault() != null)
+                    {
+                        rc = false;
+                    }
+                    else
+                    {
+                        exercise.name = exerciseName.Trim();
+                        exercise.equipment = equipment.Trim();
+                        exercise.videoLink = videoLink.Trim();
+                        exercise.rep = rep;
+                        exercise.weight = weight;
+                        exercise.distance = distance;
+                        exercise.time = time;
+                        exercise.muscleGroups = muscleGroups;
+                        exercise.description = desc;
+                        context.Exercises.ApplyCurrentValues(exercise);
+                        context.SaveChanges();
+                        rc = true;
+                    }
                 }
                 else
                 {
-                    exercise.name = exerciseName.Trim();
                     exercise.equipment = equipment.Trim();
                     exercise.videoLink = videoLink.Trim();
                     exercise.rep = rep;
@@ -108,6 +130,7 @@ public class SystemExerciseManager
                     context.SaveChanges();
                     rc = true;
                 }
+                
             }
             catch (Exception ex)
             {
@@ -155,18 +178,30 @@ public class SystemExerciseManager
         }
     }
 
-    public List<Exercise> getExercisesByName(string exerciseName)
+    public List<Exercise> getExercisesByName(string exerciseName, bool isAdmin)
     {
         using (var context = new Layer2Container())
         {
             //context.ContextOptions.LazyLoadingEnabled = false;
-            var query = (from exercise in context.Exercises
-                         where exercise.name.Contains(exerciseName)
-                         select exercise);
+            if (isAdmin)
+            {
+                var query = (from exercise in context.Exercises
+                             where exercise.name.Contains(exerciseName)
+                             select exercise);
+                return query.OrderBy(exercise => exercise.name).ToList();
+            }
+            else
+            {
+                var query = (from exercise in context.Exercises
+                             where exercise.name.Contains(exerciseName)
+                             where exercise.enabled == true
+                             select exercise);
+                return query.OrderBy(exercise => exercise.name).ToList();
+            }
 
 
             //context.LoadProperty(query, "MuscleGroups");
-            return query.OrderBy(exercise => exercise.name).ToList();
+            
         }
     }
 

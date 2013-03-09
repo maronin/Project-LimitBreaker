@@ -299,11 +299,40 @@ p
 
 .scheduleChoice
 {
-width: 530px;
-left: 200px;
+width: 46%;
+margin-left: 27%;
 position: relative;
 padding: 24px;
+-webkit-border-radius: 20px;  
+border-radius: 20px;
+margin-bottom: 20px;
+text-align: center;
 }
+
+.scheduleExerciseForm
+{
+width: 46%;
+margin-left: 27%;
+position: relative;
+padding: 24px;
+-webkit-border-radius: 20px;  
+border-radius: 20px;
+margin-bottom: 20px;
+background: url(../images/bg-controls.png);
+}
+
+.scheduleExerciseForm
+{
+    width: 46%;
+margin-left: 27%;
+position: relative;
+padding: 24px;
+-webkit-border-radius: 20px;  
+border-radius: 20px;
+margin-bottom: 20px;
+background: url(../images/bg-controls.png);
+}
+
 .date
 {
 font-style: normal;
@@ -365,7 +394,7 @@ background-color: rgb(144, 192, 255);
 
 
 
-.scheduleTable2
+.scheduleTable
 {
 
 }

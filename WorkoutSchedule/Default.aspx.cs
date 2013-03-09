@@ -24,6 +24,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     static Int32 modifyItemID;
     static string endsOnAfterValue = "";
     static List<scheduledItem> schdledItems;
+    static bool viewingAllRemoveItems = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liWorkoutSchedule");
@@ -82,6 +83,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             TimeSelectPanel.Visible = true;
         }
+        
     }
 
     protected void loadMonths()
@@ -144,18 +146,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
 
         //Order the items based on the start time, from earlist to latest
-        for (int i = 0; i < items.Count; i++)
-        {
-            for (int j = i + 1; j < items.Count; j++)
-            {
-                if (items[i].startTime > items[j].startTime)
-                {
-                    scheduledItem temp = items[i];
-                    items[i] = items[j];
-                    items[j] = temp;
-                }
-            }
-        }
+        items = sortItems(items);
 
 
         if (atlernatingColor)
@@ -337,6 +328,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             List<scheduledItem> items;
             itemScheduledOn = Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue);
             items = scheduleManager.getScheduledItemsByDayOfYear(userID, itemScheduledOn);
+            items = sortItems(items);
             GridViewScheduledItems.DataSource = items;
             GridViewScheduledItems.DataBind();
             multiViewCalendar.ActiveViewIndex = 2;
@@ -359,7 +351,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void addExercise_Click(object sender, EventArgs e)
     {
         addItemView.ActiveViewIndex = 1;
-
+        viewExercises.colorCodeExercises();
     }
 
     protected void addRoutine_Click(object sender, EventArgs e)
@@ -481,10 +473,18 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         tbDate_routine.Text = "";
         lblResult_Exercise.Text = "";
         lblResult_Routine.Text = "";
+        
+        //Repeat Form
         tbStartsOnDate.Text = "";
         tbEndAfter.Text = "5";
         ddlRepeatType.SelectedIndex = 0;
         ddlRepeatEvery.SelectedIndex = 0;
+        cblDayOfWeek.Visible = false;
+        repeatOn.Visible = false;
+        lblDayType.Text = "days";
+        tbEndOnDate.Text = "";
+        rblEnd.SelectedIndex = 0;
+
         if (addItemView.ActiveViewIndex == 1)
         {
             cbRepeatExercise.Checked = false;
@@ -593,10 +593,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         modifyItemID = Convert.ToInt32(commandArgs[0]);
         if (e.CommandName == "del")
         {
-
+            hideModifyForm();
             if (scheduleManager.deletecheduledItem(Convert.ToInt32(commandArgs[0]), Convert.ToBoolean(commandArgs[1]), userID))
             {
-                lblResultModify.Text = "Removed your item!";
+                lblResultModify.Text = "Modified your item!";
                 pnlModifyItem.Visible = false;
                 populateRemoveItems();
             }
@@ -608,6 +608,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
         if (e.CommandName == "modify")
         {
+            lblResultModify.Text = "";
             lblMuscleGroupsModify.Text = "";
             pnlModifyItem.Visible = true;
             btnModify.Visible = true;
@@ -703,14 +704,18 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         GridViewScheduledItems.DataSource = null;
         GridViewScheduledItems.DataBind();
-        if (tbRemoveDate.Text != "")
+        if (tbRemoveDate.Text != "" && !viewingAllRemoveItems)
+        {
             schdledItems = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
-
+            schdledItems = sortItems(schdledItems);
+        }
         else
         {
             itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
             schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+            schdledItems = sortItems(schdledItems);
         }
+        
         GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();
 
@@ -727,6 +732,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     }
     protected void tbRemoveDate_TextChanged(object sender, EventArgs e)
     {
+        viewingAllRemoveItems = false;
         lblResultModify.Text = "";
         pnlModifyItem.Visible = false;
         btnModify.Visible = false;
@@ -813,6 +819,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             lblDayType.Text = "weeks";
             repeatOn.Visible = true;
+            cblDayOfWeek.Visible = true;
         }
 
         else if (ddlRepeatType.SelectedIndex == 2)
@@ -896,15 +903,18 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         tbRemoveDate.Text = Convert.ToDateTime(tbRemoveDate.Text).AddDays(1).ToString("MM/dd/yyyy");
     }
 
-
+    //Remove month date changed
     protected void ddlRemoveMonth_indexChanged(object sender, EventArgs e)
     {
-
+        viewingAllRemoveItems = true;
+        hideModifyForm();
         itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
 
         schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+        schdledItems = sortItems(schdledItems);
         GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();
+        
         if (GridViewScheduledItems.Rows.Count == 0)
         {
             lblRemoveResult.Visible = true;
@@ -921,7 +931,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         scheduleManager.deleteListOfScheduledItems(schdledItems, userID);
         populateRemoveItems();
-
+        hideModifyForm();
     }
     protected void tbEndOnDate_checkDate(object sender, EventArgs e)
     {
@@ -1010,6 +1020,35 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         pnlRepeatItem.Visible = true;
         pnlDim.Visible = true;
+    }
+
+
+    protected List<scheduledItem> sortItems(List<scheduledItem> items)
+    {
+        //Order the items based on the start time, from earlist to latest
+        for (int i = 0; i < items.Count; i++)
+        {
+            for (int j = i + 1; j < items.Count; j++)
+            {
+                if (items[i].startTime > items[j].startTime)
+                {
+                    scheduledItem temp = items[i];
+                    items[i] = items[j];
+                    items[j] = temp;
+                }
+            }
+        }
+
+        return items;
+
+    }
+
+    protected void hideModifyForm()
+    {
+        pnlModifyItem.Visible = false;
+        btnModify.Visible = false;
+        ddlModifyItems.Visible = false;
+        lblEquipmentModify.Visible = false;
     }
 
 }

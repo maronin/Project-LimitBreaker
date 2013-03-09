@@ -58,6 +58,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         exerciseGoalMultiView.ActiveViewIndex = 0;
         addGoalResultLbl.Text = "";
         showAddGoal();
+        viewExercises.colorCodeExercises();
     }
 
     protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
