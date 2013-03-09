@@ -9,7 +9,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 {
     SystemExerciseManager manager = new SystemExerciseManager();
     ExerciseManager exerciseManager = new ExerciseManager();
-
+    bool isAdmin = false;
     public event EventHandler userControlEventHappened;
 
     private void OnUserControlEvent()
@@ -22,7 +22,17 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        exerciseAutoComplete.SourceList = manager.getExerciseNamesAC();
+        if (HttpContext.Current.User.IsInRole("admin")) {
+            isAdmin = true;
+            exerciseAutoComplete.SourceList = manager.getExerciseNamesAC(isAdmin); 
+            
+        }
+        else
+        {
+            isAdmin = false;
+            exerciseAutoComplete.SourceList = manager.getExerciseNamesAC(isAdmin); 
+        }
+
 
         if (!IsPostBack)
         {
@@ -35,7 +45,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
     protected void exerciseSearchButton_Click(object sender, EventArgs e)
     {
         //lblResult.Text = "";
-        List<Exercise> foundExercises = manager.getExercisesByName(exerciseSearchBox.Text.Trim());
+        List<Exercise> foundExercises = manager.getExercisesByName(exerciseSearchBox.Text.Trim(), isAdmin);
         ExerciseDDL.Items.Clear();
         if (foundExercises.Count != 0)
         {
@@ -124,6 +134,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
             }
         }
 
+
     }
 
     protected void exerciesNotFound()
@@ -155,7 +166,12 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     public int ddlSelectedValue
     {
-        get { return Convert.ToInt32(ExerciseDDL.SelectedValue); }
+        get {
+            if (ExerciseDDL.SelectedValue != "")
+                return Convert.ToInt32(ExerciseDDL.SelectedValue);
+            else 
+                return -1;
+        }
     }
 
     public int ddlCount

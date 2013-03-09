@@ -26,7 +26,7 @@ public class SystemExerciseManager
         }
     }
 
-    public List<Juice.AutocompleteItem> getExerciseNamesAC()
+    public List<Juice.AutocompleteItem> getExerciseNamesAC(bool admin)
     {
         using (var context = new Layer2Container())
         {
@@ -43,7 +43,14 @@ public class SystemExerciseManager
             }
             else
             {
-                rc = context.Exercises.Select(x => new Juice.AutocompleteItem { Label = x.name, Value = x.name }).ToList();
+                if (admin)
+                {
+                    rc = context.Exercises.Select(x => new Juice.AutocompleteItem { Label = x.name, Value = x.name }).ToList();
+                }
+                else
+                {
+                    rc = context.Exercises.Where(e => e.enabled == true).Select(x => new Juice.AutocompleteItem { Label = x.name, Value = x.name }).ToList();
+                }
             }
 
             return rc;
@@ -154,18 +161,30 @@ public class SystemExerciseManager
         }
     }
 
-    public List<Exercise> getExercisesByName(string exerciseName)
+    public List<Exercise> getExercisesByName(string exerciseName, bool isAdmin)
     {
         using (var context = new Layer2Container())
         {
             //context.ContextOptions.LazyLoadingEnabled = false;
-            var query = (from exercise in context.Exercises
-                         where exercise.name.Contains(exerciseName)
-                         select exercise);
+            if (isAdmin)
+            {
+                var query = (from exercise in context.Exercises
+                             where exercise.name.Contains(exerciseName)
+                             select exercise);
+                return query.OrderBy(exercise => exercise.name).ToList();
+            }
+            else
+            {
+                var query = (from exercise in context.Exercises
+                             where exercise.name.Contains(exerciseName)
+                             where exercise.enabled == true
+                             select exercise);
+                return query.OrderBy(exercise => exercise.name).ToList();
+            }
 
 
             //context.LoadProperty(query, "MuscleGroups");
-            return query.OrderBy(exercise => exercise.name).ToList();
+            
         }
     }
 
