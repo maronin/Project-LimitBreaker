@@ -37,8 +37,6 @@ public partial class _Default : System.Web.UI.Page
         disableManager enabler = new disableManager();
         try
         {
-            
-
             if (cbEnabler.Checked)
             {
                 enabler.enableExerciseByName(viewExercises.ddlValue);
@@ -50,6 +48,7 @@ public partial class _Default : System.Web.UI.Page
             }
 
             populateForm();
+            viewExercises.colorCodeExercises();
         }
         catch (Exception)
         {

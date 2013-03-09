@@ -72,6 +72,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
     protected void ExerciseDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
         populateExerciseInfo();
+        colorCodeExercises();
         /*
         Exercise exercise = manager.getExercise(ExerciseDDL.SelectedValue);
         exerciseName.Visible = true;
@@ -95,6 +96,30 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         //populateForm();
         */
         OnUserControlEvent();
+    }
+
+    public void colorCodeExercises()
+    {
+        foreach (ListItem items in ExerciseDDL.Items)
+        {
+            if (exerciseManager.enabled(Convert.ToInt32(items.Value)))
+                items.Attributes.Add("style", "background-color:#67E667; color:#008500");
+            else
+            {
+                items.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+            }
+
+        }
+
+        if (exerciseManager.enabled(Convert.ToInt32(ExerciseDDL.SelectedItem.Value)))
+        {
+            ExerciseDDL.Attributes.Add("style", "background-color:#67E667; color:#008500");
+        }
+        else
+        {
+            ExerciseDDL.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+        }
+
     }
 
     protected void exerciesNotFound()
@@ -153,8 +178,34 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
         exerciseSearchBox.Text = "";
         if (foundExercises.Count != 0)
         {
-            ExerciseDDL.DataSource = foundExercises;
-            ExerciseDDL.DataBind();
+            //ExerciseDDL.DataSource = foundExercises;
+            //ExerciseDDL.DataBind();
+
+            // ExerciseDDL.DataSource = foundExercises;
+            ListItem item;
+            foreach (Exercise name in foundExercises)
+            {
+                //ExerciseDDL.Items.Add(new ListItem(name.name, Convert.ToString(name.id), name.enabled));
+                if (name.enabled)
+                {
+                    item = new ListItem(name.name, name.id.ToString());
+                    ExerciseDDL.Items.Add(item);
+                }
+                else
+                {
+                    item = new ListItem(name.name, name.id.ToString());
+                    ExerciseDDL.Items.Add(item);
+                }
+
+            }
+            colorCodeExercises();
+            //ExerciseDDL.DataBind();
+
+
+
+
+
+
             exceriseNotFound.Visible = false;
             viewExercisePanel.Visible = true;
             populateExerciseInfo();
