@@ -77,6 +77,7 @@ public partial class systemExercise_manageExerciseExperience : System.Web.UI.Pag
         mngUserExpBtn.Enabled = true;
         functionalityMultiView.ActiveViewIndex = 0;
         loadExerciseExpFields();
+        viewExerciseExp.colorCodeExercises();
     }
 
     protected void mngUserExpBtn_Click(object sender, EventArgs e)

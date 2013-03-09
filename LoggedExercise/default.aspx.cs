@@ -47,6 +47,7 @@ public partial class LoggedExercise_default : System.Web.UI.Page
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
+        if (ucViewExercise.ddlSelectedValue != null)
         selectedExercise = exerciseManager.getExerciseById(ucViewExercise.ddlSelectedValue);
         createTextBoxes();
         displayLogs();
@@ -55,75 +56,78 @@ public partial class LoggedExercise_default : System.Web.UI.Page
     }
     protected void createTextBoxes()
     {
-        if (selectedExercise.rep)
+        if (selectedExercise != null)
         {
-            rep.Enabled = true;
-            repOn = true;
-            repREV.Enabled = true;
-            repRF.Enabled = true;
-        }
-        else
-        {
-            rep.Enabled = false;
-            repOn = false;
-            rep.Text = "";
-            repREV.Enabled = false;
-            repRF.Enabled = false;
-        }
+            if (selectedExercise.rep)
+            {
+                rep.Enabled = true;
+                repOn = true;
+                repREV.Enabled = true;
+                repRF.Enabled = true;
+            }
+            else
+            {
+                rep.Enabled = false;
+                repOn = false;
+                rep.Text = "";
+                repREV.Enabled = false;
+                repRF.Enabled = false;
+            }
 
-        if (selectedExercise.time)
-        {
-            timeMinutes.Enabled = true;
-            timeSeconds.Enabled = true;
-            timeOn = true;
-            minutesREV.Enabled = true;
-            minutesRF.Enabled = true;
-            secondsREV.Enabled = true;
-            secondsRF.Enabled = true;
-        }
-        else
-        {
-            timeMinutes.Enabled = false;
-            timeSeconds.Enabled = false;
-            timeOn = false;
-            timeMinutes.Text = "";
-            timeSeconds.Text = "";
-            minutesREV.Enabled = false;
-            minutesRF.Enabled = false;
-            secondsREV.Enabled = false;
-            secondsRF.Enabled = false;
-        }
+            if (selectedExercise.time)
+            {
+                timeMinutes.Enabled = true;
+                timeSeconds.Enabled = true;
+                timeOn = true;
+                minutesREV.Enabled = true;
+                minutesRF.Enabled = true;
+                secondsREV.Enabled = true;
+                secondsRF.Enabled = true;
+            }
+            else
+            {
+                timeMinutes.Enabled = false;
+                timeSeconds.Enabled = false;
+                timeOn = false;
+                timeMinutes.Text = "";
+                timeSeconds.Text = "";
+                minutesREV.Enabled = false;
+                minutesRF.Enabled = false;
+                secondsREV.Enabled = false;
+                secondsRF.Enabled = false;
+            }
 
-        if (selectedExercise.weight)
-        {
-            weight.Enabled = true;
-            weightOn = true;
-            weightREV.Enabled = true;
-            weightRF.Enabled = true;
-        }
-        else
-        {
-            weight.Enabled = false;
-            weightOn = false;
-            weight.Text = "";
-            weightREV.Enabled = false;
-            weightRF.Enabled = false;
-        }
+            if (selectedExercise.weight)
+            {
+                weight.Enabled = true;
+                weightOn = true;
+                weightREV.Enabled = true;
+                weightRF.Enabled = true;
+            }
+            else
+            {
+                weight.Enabled = false;
+                weightOn = false;
+                weight.Text = "";
+                weightREV.Enabled = false;
+                weightRF.Enabled = false;
+            }
 
-        if (selectedExercise.distance)
-        {
-            distance.Enabled = true;
-            distanceOn = true;
-            distanceREV.Enabled = true;
-            distanceRF.Enabled = true;
-        }
-        else
-        {
-            distance.Enabled = false;
-            distanceOn = false;
-            distance.Text = "";
-            distanceREV.Enabled = false;
-            distanceRF.Enabled = false;
+            if (selectedExercise.distance)
+            {
+                distance.Enabled = true;
+                distanceOn = true;
+                distanceREV.Enabled = true;
+                distanceRF.Enabled = true;
+            }
+            else
+            {
+                distance.Enabled = false;
+                distanceOn = false;
+                distance.Text = "";
+                distanceREV.Enabled = false;
+                distanceRF.Enabled = false;
+            }
         }
     }
     protected void recordSet_Click(object sender, EventArgs e)
@@ -210,9 +214,12 @@ public partial class LoggedExercise_default : System.Web.UI.Page
 
     private void displayLogs()
     {
-        List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, selectedExercise.id);
-        loggedExercises.DataSource = logs;
-        loggedExercises.DataBind();
+        if (selectedExercise != null)
+        {
+            List<LoggedExercise> logs = logManager.getLoggedExercises(user.id, selectedExercise.id);
+            loggedExercises.DataSource = logs;
+            loggedExercises.DataBind();
+        }
     }
     protected void loggedExercises_SelectedIndexChanged(object sender, EventArgs e)
     {

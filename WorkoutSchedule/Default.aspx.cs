@@ -83,6 +83,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
             TimeSelectPanel.Visible = true;
         }
+        
     }
 
     protected void loadMonths()
@@ -350,7 +351,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void addExercise_Click(object sender, EventArgs e)
     {
         addItemView.ActiveViewIndex = 1;
-
+        viewExercises.colorCodeExercises();
     }
 
     protected void addRoutine_Click(object sender, EventArgs e)

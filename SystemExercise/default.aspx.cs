@@ -5,26 +5,31 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-
+using System.Drawing;
 public partial class _Default : System.Web.UI.Page
 {
     SystemExerciseManager manager = new SystemExerciseManager();
-
+    static bool nameChanged = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl home = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("lisystemExercise");
         home.Attributes.Add("class", "active");
-
+        nameChanged = false;
 
         viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
-        rblEnaber.Visible = false;
-        Panel1.Visible = false;
+        //rblEnaber.Visible = false;
+        //pnlModifyExercise.Visible = false;
+        if (!IsPostBack) { 
+        viewExercises.populateExiseList();
+        populateForm();
+        }
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
         if (viewExercises.exists)
             populateForm();
+        
     }
 
     protected void rblEnaber_SelectedIndexChanged(object sender, EventArgs e)
@@ -32,17 +37,18 @@ public partial class _Default : System.Web.UI.Page
         disableManager enabler = new disableManager();
         try
         {
-            if (Convert.ToInt32(rblEnaber.SelectedValue) == 1)
+            if (cbEnabler.Checked)
             {
                 enabler.enableExerciseByName(viewExercises.ddlValue);
             }
 
-            else if (Convert.ToInt32(rblEnaber.SelectedValue) == 0)
+            else  if (!cbEnabler.Checked)
             {
                 enabler.disableExerciseByName(viewExercises.ddlValue);
             }
 
             populateForm();
+            viewExercises.colorCodeExercises();
         }
         catch (Exception)
         {
@@ -71,9 +77,9 @@ public partial class _Default : System.Web.UI.Page
 
         if (foundExercise != null)
         {
-            rblEnaber.Visible = true;
+            cbEnabler.Visible = true;
             muscleGroups = manager.splitMuscleGroups(foundExercise.muscleGroups);
-            Panel1.Visible = true;
+            pnlModifyExercise.Visible = true;
             if (foundExercise.rep)
                 cblAttributes.Items[0].Selected = true;
             if (foundExercise.weight)
@@ -111,6 +117,20 @@ public partial class _Default : System.Web.UI.Page
             }
 
             tbExerciseName.Text = foundExercise.name;
+
+            if (foundExercise.enabled)
+            {
+                cbEnabler.Checked = true;
+                lblEnabled.ForeColor = Color.Green;
+                lblEnabled.Text = "Enabled Exercise";
+            }
+            else
+            {
+                cbEnabler.Checked = false;
+                lblEnabled.ForeColor = Color.Red;
+                lblEnabled.Text = "Disabled Exercise";
+            }
+
             tbVideoLink.Text = foundExercise.videoLink;
             tbEquipment.Text = foundExercise.equipment;
             tbModifyDescription.Text = foundExercise.description;
@@ -137,15 +157,17 @@ public partial class _Default : System.Web.UI.Page
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text) && tbExerciseName.Text != "")
+        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text, nameChanged) && tbExerciseName.Text != "")
         {
             lblResult.ForeColor = System.Drawing.Color.Green;
             lblResult.Text = "Modified Succesfully!";
+            viewExercises.populateExiseList();
         }
         else
         {
             lblResult.ForeColor = System.Drawing.Color.Red;
             lblResult.Text = "Exercise name already exists";
+            viewExercises.populateExiseList();
         }
 
         if (tbExerciseName.Text == "")
@@ -180,5 +202,9 @@ public partial class _Default : System.Web.UI.Page
         {
             lblDeletionResult.Text = "Something went wrong with the execution of the page";
         }
+    }
+    protected void tbExerciseName_TextChanged(object sender, EventArgs e)
+    {
+        nameChanged = true;
     }
 }

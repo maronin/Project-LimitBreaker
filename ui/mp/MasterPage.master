@@ -75,7 +75,7 @@
                            </td>
                            <td rowspan="2">
                            <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="ctl00$Login1"
-                                Height="50px" Width="50px" CssClass="LoginButton"/>
+                                Height="50px" Width="50px" CssClass="LoginButton" TabIndex="-1"/>
                            </td>
                             </tr>
                             <tr>
