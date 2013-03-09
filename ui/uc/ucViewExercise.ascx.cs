@@ -9,6 +9,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 {
     SystemExerciseManager manager = new SystemExerciseManager();
     ExerciseManager exerciseManager = new ExerciseManager();
+
     public event EventHandler userControlEventHappened;
 
     private void OnUserControlEvent()
@@ -22,7 +23,7 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         exerciseAutoComplete.SourceList = manager.getExerciseNamesAC();
-        
+
         if (!IsPostBack)
         {
             populateExiseList();
@@ -100,24 +101,27 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     public void colorCodeExercises()
     {
-        foreach (ListItem items in ExerciseDDL.Items)
+        if (HttpContext.Current.User.IsInRole("admin"))
         {
-            if (exerciseManager.enabled(Convert.ToInt32(items.Value)))
-                items.Attributes.Add("style", "background-color:#67E667; color:#008500");
-            else
+            foreach (ListItem items in ExerciseDDL.Items)
             {
-                items.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+                if (exerciseManager.enabled(Convert.ToInt32(items.Value)))
+                    items.Attributes.Add("style", "background-color:#67E667; color:#008500");
+                else
+                {
+                    items.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+                }
+
             }
 
-        }
-
-        if (exerciseManager.enabled(Convert.ToInt32(ExerciseDDL.SelectedItem.Value)))
-        {
-            ExerciseDDL.Attributes.Add("style", "background-color:#67E667; color:#008500");
-        }
-        else
-        {
-            ExerciseDDL.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+            if (exerciseManager.enabled(Convert.ToInt32(ExerciseDDL.SelectedItem.Value)))
+            {
+                ExerciseDDL.Attributes.Add("style", "background-color:#67E667; color:#008500");
+            }
+            else
+            {
+                ExerciseDDL.Attributes.Add("style", "background-color:#FF7373; color:#A60000");
+            }
         }
 
     }
@@ -186,16 +190,16 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
             foreach (Exercise name in foundExercises)
             {
                 //ExerciseDDL.Items.Add(new ListItem(name.name, Convert.ToString(name.id), name.enabled));
-                if (name.enabled)
-                {
+             if( HttpContext.Current.User.IsInRole("admin")){
                     item = new ListItem(name.name, name.id.ToString());
                     ExerciseDDL.Items.Add(item);
+            }
+            else{
+                if (name.enabled) { 
+                item = new ListItem(name.name, name.id.ToString());
+                ExerciseDDL.Items.Add(item);
                 }
-                else
-                {
-                    item = new ListItem(name.name, name.id.ToString());
-                    ExerciseDDL.Items.Add(item);
-                }
+            }
 
             }
             colorCodeExercises();
