@@ -51,6 +51,20 @@ public class LeaderboardManager
             return leaderBoardItemSet;
         }
     }
+
+    public LeaderBoardItem getUserValues(string userName)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker lb = context.LimitBreakers.Where(l => l.username == userName).FirstOrDefault();
+
+            context.LoadProperty(lb, "ExerciseGoals");
+            context.LoadProperty(lb, "Statistics");
+            context.LoadProperty(lb, "LoggedExercises");
+
+            return new LeaderBoardItem(userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
+        }
+    }
 }
 
 public class LeaderBoardItem
