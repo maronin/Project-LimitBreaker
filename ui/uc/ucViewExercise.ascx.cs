@@ -181,8 +181,18 @@ public partial class ui_uc_ucViewExercise : System.Web.UI.UserControl
 
     public bool ddle
     {
-        set {
-            viewExercisePanel.Visible = value; }
+        set 
+        {
+            viewExercisePanel.Visible = value; 
+        }
+    }
+
+    public bool hideInfo
+    {
+        set
+        {
+            pnlExerciseInfo.Visible = value;
+        }
     }
 
     protected void dllExercises_SelectedIndexChanged(object sender, EventArgs e)
