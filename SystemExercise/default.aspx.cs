@@ -22,7 +22,16 @@ public partial class _Default : System.Web.UI.Page
         if (!IsPostBack) { 
         viewExercises.populateExiseList();
         populateForm();
+        pnlAddExercise.Visible = true;
+        pnlModifyExercises.Visible = false;
+        btnModifyExercise.Enabled = true;
+        btnAddExercise.Enabled = false;
+
+       
         }
+
+        viewExercises.hideInfo = false;
+
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
@@ -206,5 +215,22 @@ public partial class _Default : System.Web.UI.Page
     protected void tbExerciseName_TextChanged(object sender, EventArgs e)
     {
         nameChanged = true;
+    }
+    protected void btnAddExercise_Click(object sender, EventArgs e)
+    {
+        btnAddExercise.Enabled = false;
+        //MultiViewExercises.ActiveViewIndex = 0;
+        pnlAddExercise.Visible = true;
+        pnlModifyExercises.Visible = false;
+        btnModifyExercise.Enabled = true;
+    }
+    protected void btnModifyExercise_Click(object sender, EventArgs e)
+    {
+        btnModifyExercise.Enabled = false;
+        //MultiViewExercises.ActiveViewIndex = 1;
+        pnlAddExercise.Visible = false;
+        pnlModifyExercises.Visible = true;
+        btnAddExercise.Enabled = true;
+        viewExercises.colorCodeExercises();
     }
 }
