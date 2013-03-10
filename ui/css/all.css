@@ -627,24 +627,33 @@ h6
     left: 25%;
     width: 43%;
     position: relative;
-
     text-align: center;
     margin-top: 20px;
 }
 
 .ButtonChoiceScheduling
 {
-position: static;
-
-margin-bottom: -5px;
-
-text-align: center;
+    position: static;
+    margin-bottom: -5px;
+    text-align: center;
 }
 
-input.input-validation-error,
-textarea.input-validation-error,
-select.input-validation-error
+input.input-validation-error, textarea.input-validation-error, select.input-validation-error
 {
     background: #FEF1EC;
     border: 1px solid #CD0A0A;
+}
+
+.exerciseForm
+{
+    width: 46%;
+    margin-left: 27%;
+    position: relative;
+    padding: 25px;
+    padding-left: 50px;
+    margin-top: 17px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background: url(../images/bg-controls.png);
 }

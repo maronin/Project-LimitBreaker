@@ -44,19 +44,22 @@
         <asp:Panel ID="viewExercisePanel" runat="server">
             <table>
                 <tr style="vertical-align: top;">
-                    <td colspan="1" style="width: 140px;">
-                        <h5>
-                            Exercise Name:</h5>
-                        <asp:HyperLink ID="lblExerciseVideo" runat="server">[Video]</asp:HyperLink>
+                    <td colspan="1" style="width: 150px;">
+                        <h4>
+                            Exercise Name:</h4>
+                        
                     </td>
-                    <td>
+                    <td style="width: 300px;">
                         <asp:DropDownList ID="ExerciseDDL" runat="server" AutoPostBack="True" CssClass="select"
                             DataTextField="name" DataValueField="id" OnSelectedIndexChanged="ExerciseDDL_SelectedIndexChanged">
                         </asp:DropDownList>
+                        <asp:HyperLink ID="lblExerciseVideo" runat="server">[Video]</asp:HyperLink>
                     </td>
                     <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="getExercises"
                         TypeName="ExerciseManager"></asp:ObjectDataSource>
                 </tr>
+                <asp:Panel ID="pnlExerciseInfo" runat="server">
+
                 <tr class="description">
                     <td colspan="3">
                         <h5>
@@ -85,12 +88,12 @@
                     <td>
                     </td>
                 </tr>
+                                </asp:Panel>
             </table>
         </asp:Panel>
         <asp:Label ID="exceriseNotFound" runat="server" ForeColor="Red" Text="No exercise found"
             Visible="False"></asp:Label>
         <hr />
-        <br />
-        <br />
+
     </ContentTemplate>
 </asp:UpdatePanel>
