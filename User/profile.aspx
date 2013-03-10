@@ -201,7 +201,6 @@
         <input type="radio" name="group" id="rb1" onclick="setPanSelect()">Select
         <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()">Pan
     </div> 
-    
    
 </asp:Content>
 
