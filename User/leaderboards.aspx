@@ -33,7 +33,7 @@
     <div>
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
             AutoGenerateColumns="False" CellPadding="4" 
-            ForeColor="#333333" GridLines="None">
+            ForeColor="#333333" GridLines="None" OnRowDataBound="GridView1_OnRowDataBound">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="rank" HeaderText="Rank" SortExpression="rank">

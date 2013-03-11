@@ -51,8 +51,14 @@ public partial class User_leaderboards : System.Web.UI.Page
             GridView2.Columns[5].Visible = false;
 
             for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
                 if (GridView1.Rows[i].Cells[1].Text == userName)
+                {
                     GridView2.Rows[0].Cells[0].Text = GridView1.Rows[i].Cells[0].Text;
+                    GridView1.Rows[i].BorderWidth = 1;
+                    GridView1.Rows[i].BorderColor = System.Drawing.Color.Green;
+                }
+            }
         }
         else
         {
@@ -132,5 +138,20 @@ public partial class User_leaderboards : System.Web.UI.Page
     protected void resultsddl_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridView1.PageSize = Convert.ToInt32(resultsddl.SelectedValue);
+    }
+
+    protected void GridView1_OnRowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (Request.IsAuthenticated)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (Convert.ToString(DataBinder.Eval(e.Row.DataItem, "userName")) == userName)
+                {
+                    e.Row.BorderWidth = 1;
+                    e.Row.BorderColor = System.Drawing.Color.Green;
+                }
+            }
+        }
     }
 }
