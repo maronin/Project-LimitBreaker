@@ -40,12 +40,14 @@ public class LeaderboardManager
                     break;
             }
 
+            int i = 1;
             foreach (LimitBreaker lb in lbSet)
             {
                 context.LoadProperty(lb, "ExerciseGoals");
                 context.LoadProperty(lb, "Statistics");
                 context.LoadProperty(lb, "LoggedExercises");
-                leaderBoardItemSet.Add(new LeaderBoardItem(lb.username, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count()));
+                leaderBoardItemSet.Add(new LeaderBoardItem(i, lb.username, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count()));
+                i++;
             }
 
             return leaderBoardItemSet;
@@ -62,13 +64,18 @@ public class LeaderboardManager
             context.LoadProperty(lb, "Statistics");
             context.LoadProperty(lb, "LoggedExercises");
 
-            return new LeaderBoardItem(userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
+            return new LeaderBoardItem(1, userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
         }
     }
 }
 
 public class LeaderBoardItem
 {
+    public virtual int rank
+    {
+        get;
+        set;
+    }
     public virtual string userName
     {
         get;
@@ -95,8 +102,9 @@ public class LeaderBoardItem
         set;
     }
 
-    public LeaderBoardItem(string name, int lvl, int exp, int goals, int logged)
+    public LeaderBoardItem(int rnk, string name, int lvl, int exp, int goals, int logged)
     {
+        rank = rnk;
         userName = name;
         level = lvl;
         experience = exp;

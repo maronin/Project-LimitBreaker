@@ -11,18 +11,6 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
     
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
-        SelectMethod="getLeaderBoardValues" TypeName="LeaderboardManager" 
-            UpdateMethod="getLeaderBoardValues">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="orderByddl" Name="orderBy" 
-                PropertyName="SelectedValue" Type="Int32" />
-        </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="orderBy" Type="Int32" />
-        </UpdateParameters>
-        </asp:ObjectDataSource>
-
     <p> See who's at the top of:
     <asp:DropDownList ID="orderByddl" runat="server" AutoPostBack="True" 
             onselectedindexchanged="orderByddl_SelectedIndexChanged">
@@ -42,77 +30,16 @@
     </asp:DropDownList>
     </p>
 
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
-        AutoGenerateColumns="False" CellPadding="4" 
-        ForeColor="#333333" GridLines="None" DataSourceID="ObjectDataSource1">
-        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-        <Columns>
-            <asp:TemplateField HeaderText="Rank" HeaderStyle-Width="60">
-                <ItemTemplate>
-                    <%# Container.DataItemIndex + 1 %>
-                </ItemTemplate>
-                <HeaderStyle Width="75px" HorizontalAlign="Center" />
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-            <asp:BoundField DataField="userName" HeaderText="Username" 
-                SortExpression="userName" HeaderStyle-Width="200" >
-            <HeaderStyle Width="200px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="level" HeaderText="Level" SortExpression="level" 
-                HeaderStyle-Width="200" >
-            <HeaderStyle Width="200px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="experience" HeaderText="Current Experience" 
-                SortExpression="experience" HeaderStyle-Width="200" >
-            <HeaderStyle Width="200px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="numGoals" HeaderText="Achieved Goals" 
-                SortExpression="numGoals" HeaderStyle-Width="200" >
-            <HeaderStyle Width="200px" />
-            </asp:BoundField>
-            <asp:BoundField DataField="numLogged" HeaderText="Logged Exercises" 
-                SortExpression="numLogged" HeaderStyle-Width="200" >
-            <HeaderStyle Width="200px" />
-            </asp:BoundField>
-        </Columns>
-        <EditRowStyle BackColor="#999999" />
-        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" Height="40" Font-Size="Large" BorderStyle="Solid" />
-        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="35px" />
-        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-    </asp:GridView>
-
-    <br />
-    <br />
-        
-    <asp:MultiView ID="userRankMultiView" runat="server">
-    
-    <asp:View ID="unAuthenticatedView" runat="server">
-        <p>Log in or <asp:HyperLink ID="signUpLink" runat="server" NavigateUrl="~/User/createUser.aspx">sign up</asp:HyperLink> to see where you are on the leaderboards!</p>
-    </asp:View>
-
-    <asp:View ID="authenticatedView" runat="server">
-        <h3><asp:Label ID="userNamelbl" runat="server" Text=""></asp:Label>'s Current Rank</h3>
-
-        <asp:GridView ID="GridView2" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="False"
-            GridLines="None">
+    <div>
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
+            AutoGenerateColumns="False" CellPadding="4" 
+            ForeColor="#333333" GridLines="None">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-                <asp:TemplateField HeaderText="Rank" HeaderStyle-Width="60">
-                    <ItemTemplate>
-                        <%# Container.DataItemIndex + 1 %>
-                    </ItemTemplate>
-                    <HeaderStyle Width="75px" HorizontalAlign="Center" />
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
+                <asp:BoundField DataField="rank" HeaderText="Rank" SortExpression="rank">
+                <HeaderStyle  Width="75px" HorizontalAlign="Center" />
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
                 <asp:BoundField DataField="userName" HeaderText="Username" 
                     SortExpression="userName" HeaderStyle-Width="200" >
                 <HeaderStyle Width="200px" />
@@ -132,26 +59,86 @@
                 <asp:BoundField DataField="numLogged" HeaderText="Logged Exercises" 
                     SortExpression="numLogged" HeaderStyle-Width="200" >
                 <HeaderStyle Width="200px" />
-            </asp:BoundField>
+                </asp:BoundField>
             </Columns>
-            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" Height="40" Font-Size="Large" BorderStyle="Solid" />
             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="35px" />
             <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
             <SortedAscendingCellStyle BackColor="#E9E7E2" />
             <SortedAscendingHeaderStyle BackColor="#506C8C" />
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
+    </div>
+    <br />
+    <br />
+        
+    <asp:MultiView ID="userRankMultiView" runat="server">
+    
+    <asp:View ID="unAuthenticatedView" runat="server">
+        <p>Log in or <asp:HyperLink ID="signUpLink" runat="server" NavigateUrl="~/User/createUser.aspx">sign up</asp:HyperLink> to see where you are on the leaderboards!</p>
+    </asp:View>
 
+    <asp:View ID="authenticatedView" runat="server">
+        <div>
+            <h3><asp:Label ID="userNamelbl" runat="server" Text=""></asp:Label>'s Current Rank</h3>
+
+            <asp:GridView ID="GridView2" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="False"
+                GridLines="None">
+                <Columns>
+                    <asp:BoundField DataField="rank" HeaderText="Rank" 
+                        SortExpression="rank" HeaderStyle-Width="75" >
+                    <HeaderStyle HorizontalAlign="Center" Width="75px" />
+                    <ItemStyle HorizontalAlign="Center" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="userName" HeaderText="Username" 
+                        SortExpression="userName" HeaderStyle-Width="200" >
+                    <HeaderStyle Width="200px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="level" HeaderText="Level" SortExpression="level" 
+                        HeaderStyle-Width="200" >
+                    <HeaderStyle Width="200px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="experience" HeaderText="Current Experience" 
+                        SortExpression="experience" HeaderStyle-Width="200" >
+                    <HeaderStyle Width="200px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="numGoals" HeaderText="Achieved Goals" 
+                        SortExpression="numGoals" HeaderStyle-Width="200" >
+                    <HeaderStyle Width="200px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="numLogged" HeaderText="Logged Exercises" 
+                        SortExpression="numLogged" HeaderStyle-Width="200" >
+                    <HeaderStyle Width="200px" />
+                </asp:BoundField>
+                </Columns>
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" Height="38" Font-Size="Large" BorderStyle="Solid" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" Height="33px" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
+        </div>
     </asp:View>
 
     </asp:MultiView>
 
     </ContentTemplate>
     </asp:UpdatePanel>
+
+    <br />
 
 </asp:Content>
