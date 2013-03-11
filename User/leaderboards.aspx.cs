@@ -36,7 +36,6 @@ public partial class User_leaderboards : System.Web.UI.Page
         if (Request.IsAuthenticated)
         {
             userRankMultiView.ActiveViewIndex = 1;
-            userNamelbl.Text = userName;
 
             //user's rank gridview databinding
             LeaderBoardItem userItem = lbMngr.getUserValues(userName);
@@ -138,6 +137,7 @@ public partial class User_leaderboards : System.Web.UI.Page
     protected void resultsddl_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridView1.PageSize = Convert.ToInt32(resultsddl.SelectedValue);
+        orderByddl_SelectedIndexChanged(sender, e);
     }
 
     protected void GridView1_OnRowDataBound(object sender, GridViewRowEventArgs e)
@@ -153,5 +153,14 @@ public partial class User_leaderboards : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        GridView1.DataBind();
+
+        resultsddl_SelectedIndexChanged(sender, e);
+        orderByddl_SelectedIndexChanged(sender, e);
     }
 }
