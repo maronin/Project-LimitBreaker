@@ -319,12 +319,13 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
             multiViewCalendar.ActiveViewIndex = 1;
             addItemView.ActiveViewIndex = 0;
+            
         }
         else
         {
             // multiViewCalendar.ActiveViewIndex = 1;
             //addItemView.ActiveViewIndex = 0;
-
+            btnAddExerciseFromRemove.Enabled = true;
             List<scheduledItem> items;
             itemScheduledOn = Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue);
             items = scheduleManager.getScheduledItemsByDayOfYear(userID, itemScheduledOn);
@@ -737,7 +738,16 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         pnlModifyItem.Visible = false;
         btnModify.Visible = false;
         GridViewScheduledItems.Visible = true;
-
+        
+        RegularExpressionValidator1.Validate();
+        if (RegularExpressionValidator1.IsValid && tbRemoveDate.Text != "")
+        {
+            btnAddExerciseFromRemove.Enabled = true;
+        }
+        else
+        {
+            btnAddExerciseFromRemove.Enabled = false;
+        }
         populateRemoveItems();
     }
 
@@ -1049,6 +1059,17 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         btnModify.Visible = false;
         ddlModifyItems.Visible = false;
         lblEquipmentModify.Visible = false;
+    }
+    protected void btnAddExerciseFromRemove_Clicked(object sender, EventArgs e)
+    {
+        lnk_add_item_Click(sender, e);
+        tbDate_exercise.Text = tbRemoveDate.Text;
+        tbDate_routine.Text = tbRemoveDate.Text;
+        cbRepeatExercise.Enabled = true;
+        if (ddlRoutines.Items.Count != 0)
+        {
+            cbRepeatRoutine.Enabled = true;
+        }
     }
 
 }

@@ -51,8 +51,10 @@
                                 <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" CssClass="legenExerciseRoutine"></asp:Label>
                                 <div class="theCalendar">
                                     <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
-                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth" Text="<< Prev Month"></asp:LinkButton>
-                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth" Text="Next Month >>"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"
+                                            Text="<< Prev Month"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth"
+                                            Text="Next Month >>"></asp:LinkButton>
                                         <div class="today">
                                             <asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton>
                                             <br />
@@ -128,8 +130,8 @@
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Exercise view[1] --------------------------------------------------------------------------------------->
                                 <asp:View ID="addExerciseView" runat="server">
-                                    <div class="scheduleExerciseForm" >
-                                        <h1 style="text-align:center;">
+                                    <div class="scheduleExerciseForm">
+                                        <h1 style="text-align: center;">
                                             Schedule a new Exercise!</h1>
                                         <br />
                                         <uc1:viewExercises ID="viewExercises" runat="server" />
@@ -209,7 +211,7 @@
                                 <!---------------------------------------------------------------------------- Schedule Routine[2]  --------------------------------------------------------------------------------------->
                                 <asp:View ID="addRoutineView" runat="server">
                                     <div class="scheduleExerciseForm">
-                                        <h1 style="text-align:center">
+                                        <h1 style="text-align: center">
                                             Schedule a new Routine!</h1>
                                         <table class="scheduleTable">
                                             <tr>
@@ -284,33 +286,42 @@
                                                     </asp:CalendarExtender>
                                                 </td>
                                             </tr>
-                                        <tr>
-                                        <td>
-                                        <asp:CheckBox ID="cbRepeatRoutine" runat="server" OnCheckedChanged="reaptClicked"
-                                            AutoPostBack="true" Enabled="false" />
-                                        Repeat...
-                                        <asp:LinkButton ID="lnkEditRepeatRoutine" runat="server" Visible="false" OnClick="lnkEditRepeat_EditRepeat">[Edit]</asp:LinkButton>
-                                        </td>
-                                        </tr>
-                                        <td>
-                                        </td>
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBox ID="cbRepeatRoutine" runat="server" OnCheckedChanged="reaptClicked"
+                                                        AutoPostBack="true" Enabled="false" />
+                                                    Repeat...
+                                                    <asp:LinkButton ID="lnkEditRepeatRoutine" runat="server" Visible="false" OnClick="lnkEditRepeat_EditRepeat">[Edit]</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                            <td>
+                                            </td>
                                         </table>
                                         <hr />
                                         <div class="ButtonChoiceScheduling">
-                                        <asp:Button ID="btnGoBack2" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
-                                            CssClass="button" />
-                                        <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
-                                            CssClass="button" ValidationGroup="ScheduleRoutine" />
-                                            </div>
+                                            <asp:Button ID="btnGoBack2" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
+                                                CssClass="button" />
+                                            <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
+                                                CssClass="button" ValidationGroup="ScheduleRoutine" />
+                                        </div>
                                         <asp:Label ID="lblResult_Routine" runat="server" Text=""></asp:Label>
                                     </div>
                                 </asp:View>
                             </asp:MultiView>
                         </asp:View>
                         <asp:View ID="removeItemView" runat="server">
+                            <div class="scheduleExerciseForm">
                             <h3>
                                 Remove/Modify Items</h3>
                             <table>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="btnAddExerciseFromRemove" runat="server" Text="Add an item for this day"
+                                            OnClick="btnAddExerciseFromRemove_Clicked" CssClass="addItemForThisDay" Enabled="false"/>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         By date:
@@ -319,17 +330,22 @@
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="tbRemoveDate"
                                             FilterType="Custom" ValidChars='()1234567890-/'>
                                         </asp:FilteredTextBoxExtender>
-                                        <asp:LinkButton ID="lnkPrevMonthForRemove" runat="server" OnClick="prevRemoveMonth"><<</asp:LinkButton>
+                                        <asp:LinkButton ID="lnkPrevMonthForRemove" runat="server" OnClick="prevRemoveMonth"
+                                            CssClass="removePrevButton" Style="text-decoration: none;"><<</asp:LinkButton>
                                         <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
                                             AutoPostBack="True" OnTextChanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
-                                        <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth">>></asp:LinkButton>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
-                                            ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                            ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><%--<asp:RequiredFieldValidator
+                                        <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth"
+                                            CssClass="removeNextButton" Style="text-decoration: none;">>></asp:LinkButton>
+<%--<asp:RequiredFieldValidator
                                     ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                     ControlToValidate="tbRemoveDate" ValidationGroup="RemoveItem" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                         <asp:CalendarExtender ID="calendarRemoveItem" runat="server" TargetControlID="tbRemoveDate">
                                         </asp:CalendarExtender>
+                                    </td>
+                                    <td>
+                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
+                                            ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                            ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -403,7 +419,7 @@
                                 <h5>
                                     Description:</h5>
                                 <br />
-                                <asp:Label ID="lblDescriptionModify" runat="server" Text=""></asp:Label>
+                                <asp:TextBox ID="lblDescriptionModify" onkeypress="return false;" runat="server" Text="None" Height="211px" TextMode="MultiLine" width="511px" Font-Italic="False" ReadOnly="True">None</asp:TextBox>
                                 <br />
                                 <asp:Panel ID="pnlEquipmentMuscle" runat="server">
                                     <h5>
@@ -501,6 +517,7 @@
                             <asp:Label ID="lblResultModify" runat="server" Text=""></asp:Label>
                             <br />
                             <br />
+                            </div>
                         </asp:View>
                     </asp:MultiView>
                     <asp:Panel ID="pnlRepeatItem" runat="server" Visible="false">
