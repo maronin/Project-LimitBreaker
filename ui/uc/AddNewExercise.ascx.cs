@@ -11,24 +11,13 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
     SystemExerciseManager manager;
     protected void Page_Load(object sender, EventArgs e)
     {
-        manager = new SystemExerciseManager();     
+        manager = new SystemExerciseManager();
+       
     }
     protected void btnCreateExercise_Click(object sender, EventArgs e)
     {   
-        lblResult.Text = "";
-        bool rep = false, wieght = false, time = false, distance = false, enabled = false;
-        string muscleGroups = "";
 
-        if (cblAttributes.Items[0].Selected)
-            rep = true;
-        if (cblAttributes.Items[1].Selected)
-            wieght = true;
-        if (cblAttributes.Items[2].Selected)
-            distance = true;
-        if (cblAttributes.Items[3].Selected)
-            time = true;
-        if (cbEnabled.Checked)
-            enabled = true;
+        string muscleGroups = "";
 
         foreach (ListItem item in cblMuscleGroups.Items)
         {
@@ -36,7 +25,8 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.createNewExercise(tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, enabled, tbDescription.Text) && tbExerciseName.Text != ""){  
+        if (manager.createNewExercise(tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, cblAttributes.Items[0].Selected, cblAttributes.Items[1].Selected, cblAttributes.Items[2].Selected, cblAttributes.Items[3].Selected, cbEnabled.Checked, tbDescription.Text) && tbExerciseName.Text != "")
+        {  
             lblResult.ForeColor = System.Drawing.Color.Green;       
             lblResult.Text = "Added Succesfully!";
 
@@ -52,6 +42,16 @@ public partial class ui_uc_AddNewExercise : System.Web.UI.UserControl
             lblResult.Text = "Please enter an exercise name";
         }
 
+        clearCreateForm();
+    }
+
+    void clearCreateForm()
+    {
+        cblAttributes.Items[0].Selected = false;
+        cblAttributes.Items[1].Selected = false;
+        cblAttributes.Items[2].Selected = false;
+        cblAttributes.Items[3].Selected = false;
+        cbEnabled.Checked = false;
         tbExerciseName.Text = "";
         tbEquipment.Text = "";
         tbVideoLink.Text = "";
