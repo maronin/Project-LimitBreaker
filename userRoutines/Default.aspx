@@ -28,9 +28,10 @@
             <p>You need to log in first before you can manage your routines.</p>
         </AnonymousTemplate>
         <LoggedInTemplate>
+        <div class="exerciseForm" style="min-height:670px;">
             <h4>List of Routines</h4>
             <div class="content">
-                <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="50%">
+                <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium">
                 </asp:ListBox>
             </div>
             <asp:Panel ID="pnlButtons" runat="server">
@@ -62,6 +63,7 @@
                 </asp:View>
             </asp:MultiView>
             <asp:Button ID="btnBack" runat="server" Text="Back" CssClass="button" OnClick="btnBack_Click" />
+            </div>
         </LoggedInTemplate>
     </asp:LoginView>
 

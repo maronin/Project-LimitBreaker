@@ -12,20 +12,20 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div style="width: 50%; margin: 0px auto 0px auto">
+    <div class="ButtonChoiceScheduling" style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="viewGoalsBtn" runat="server" Text="View Exercise Goals" CssClass="button"
             OnClick="viewGoalsBtn_Click" />
         <asp:Button ID="addGoalBtn" runat="server" Text="Add an Exercise Goal" CssClass="button"
             OnClick="addGoalBtn_Click" />
     </div>
     <br />
-    <div>
+    <div class="exerciseForm" style="min-height:670px;">
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>
                 <asp:MultiView ID="exerciseGoalMultiView" runat="server">
                     <asp:View ID="addGoalView" runat="server">
-                        <h4>
-                            Add A New Goal</h4>
+                                       <h2 style="text-align:center;">Add Exercise Goals</h2>
+
                         <uc1:viewExercise ID="viewExercises" runat="server" />
 
                         <asp:Panel ID="addGoalPanel" runat="server">
@@ -107,7 +107,7 @@
                             </table>
                             <br />
                             <asp:Button ID="saveNewGoalBtn" runat="server" Text="Save" OnClick="saveNewGoalBtn_Click"
-                                ValidationGroup="addGoal" />
+                                ValidationGroup="addGoal" CssClass="button" />
                             <asp:Label ID="addGoalResultLbl" runat="server" Text=""></asp:Label>
                         </asp:Panel>
                     </asp:View>
@@ -115,6 +115,8 @@
                         
                     </asp:View>
                     <asp:View ID="manageGoalsView" runat="server">
+                       <h2 style="text-align:center;">View Exercise Goals</h2>
+                       
                         <h4>
                             Your Current Exercise Goals</h4>
                         <div style="float: left; padding: 10px;">
