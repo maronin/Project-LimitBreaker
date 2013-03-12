@@ -183,7 +183,7 @@
                 <asp:Label ID="bmi" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr><td class="auto-style1">          
-                <asp:Button ID="updateStats" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateStats_Click"/></td>
+                <asp:Button ID="updateStats" runat="server" Text="Update" ValidationGroup="profileUpdate" OnClick="updateStats_Click" CssClass="button"/></td>
             <td class="auto-style1" colspan="2">
                 
             </td>

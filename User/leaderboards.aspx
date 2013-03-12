@@ -6,8 +6,8 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
-<h2>LimitBreaker Leaderboards</h2>
+<div class="exerciseForm">
+<h2 style="text-align:center;">LimitBreaker Leaderboards</h2>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
     
@@ -125,5 +125,5 @@
     </ContentTemplate>
     </asp:UpdatePanel>
     <br />
-
+    </div>
 </asp:Content>

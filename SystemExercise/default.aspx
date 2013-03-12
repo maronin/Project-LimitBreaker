@@ -52,8 +52,8 @@
         <%--                <asp:MultiView ID="MultiViewExercises" runat="server">
                     <asp:View ID="viewAddExercise" runat="server">--%>
         <asp:Panel ID="pnlAddExercise" runat="server">
-            <h4>
-                Add system exercises</h4>
+            <h2 style="text-align:center;">
+                Add system exercises</h2>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <uc1:addExercise ID="addExercises" runat="server" />
@@ -63,8 +63,8 @@
         <%--                    </asp:View>
                     <asp:View ID="viewModifyExercise" runat="server">--%>
         <asp:Panel ID="pnlModifyExercises" runat="server">
-            <h1>
-                Modifying Exercise</h1>
+            <h2 style="text-align:center;">
+                Modify Exercise</h2>
             <uc1:viewExercise ID="viewExercises" runat="server" />
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
