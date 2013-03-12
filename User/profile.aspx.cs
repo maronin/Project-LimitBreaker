@@ -11,6 +11,8 @@ public partial class User_profile : System.Web.UI.Page
 {
     UserManager manager = new UserManager();
     ExperienceManager expMngr = new ExperienceManager();
+    LeaderboardManager ldrMngr = new LeaderboardManager();
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -34,6 +36,9 @@ public partial class User_profile : System.Web.UI.Page
             expBar.Attributes.Add("value", curExp);
             expBar.Attributes.Add("max", reqExp);
             expBar.Attributes.Add("title", Convert.ToString(Math.Round(Convert.ToDouble(curExp)/Convert.ToDouble(reqExp)*100, 1)) + "% through the current level");
+            LeaderBoardItem userItem = ldrMngr.getUserValues(username);
+            achievedGoalslbl.Text = userItem.numGoals.ToString();
+            loggedExerciseslbl.Text = userItem.numLogged.ToString();
 
             if (!Page.IsPostBack)
             {

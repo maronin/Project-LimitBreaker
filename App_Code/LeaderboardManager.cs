@@ -64,7 +64,7 @@ public class LeaderboardManager
             context.LoadProperty(lb, "Statistics");
             context.LoadProperty(lb, "LoggedExercises");
 
-            return new LeaderBoardItem(1, userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
+            return new LeaderBoardItem(0, userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
         }
     }
 }
