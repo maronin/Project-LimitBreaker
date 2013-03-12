@@ -705,7 +705,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     {
         GridViewScheduledItems.DataSource = null;
         GridViewScheduledItems.DataBind();
-        if (tbRemoveDate.Text != "" && !viewingAllRemoveItems)
+        if (tbRemoveDate.Text != "" && !viewingAllRemoveItems && RegularExpressionValidator1.IsValid)
         {
             schdledItems = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
             schdledItems = sortItems(schdledItems);
@@ -738,9 +738,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         pnlModifyItem.Visible = false;
         btnModify.Visible = false;
         GridViewScheduledItems.Visible = true;
-        
+
         RegularExpressionValidator1.Validate();
-        if (RegularExpressionValidator1.IsValid && tbRemoveDate.Text != "")
+
+        if (RegularExpressionValidator1.IsValid == true && tbRemoveDate.Text != "")
         {
             btnAddExerciseFromRemove.Enabled = true;
         }
