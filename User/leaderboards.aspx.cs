@@ -16,6 +16,7 @@ public partial class User_leaderboards : System.Web.UI.Page
     {
         lbMngr = new LeaderboardManager();
         expMngr = new ExperienceManager();
+        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(1);
 
         if (!Page.IsPostBack)
         {
@@ -24,7 +25,6 @@ public partial class User_leaderboards : System.Web.UI.Page
             GridView1.Columns[4].Visible = false;
             GridView1.Columns[5].Visible = false;
 
-            List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(1);
             GridView1.DataSource = userItemSet;
             GridView1.DataBind();
         }
@@ -53,10 +53,15 @@ public partial class User_leaderboards : System.Web.UI.Page
             {
                 if (GridView1.Rows[i].Cells[1].Text == userName)
                 {
-                    GridView2.Rows[0].Cells[0].Text = GridView1.Rows[i].Cells[0].Text;
                     GridView1.Rows[i].BorderWidth = 1;
                     GridView1.Rows[i].BorderColor = System.Drawing.Color.Green;
                 }
+            }
+
+            foreach (LeaderBoardItem lbi in userItemSet)
+            {
+                if (lbi.userName == userName)
+                    GridView2.Rows[0].Cells[0].Text = lbi.rank.ToString();
             }
         }
         else
@@ -128,9 +133,11 @@ public partial class User_leaderboards : System.Web.UI.Page
             GridView2.DataSource = userItemList;
             GridView2.DataBind();
 
-            for (int i = 0; i < GridView1.Rows.Count; i++)
-                if (GridView1.Rows[i].Cells[1].Text == userName)
-                    GridView2.Rows[0].Cells[0].Text = GridView1.Rows[i].Cells[0].Text;
+            foreach (LeaderBoardItem lbi in userItemSet)
+            {
+                if (lbi.userName == userName)
+                    GridView2.Rows[0].Cells[0].Text = lbi.rank.ToString();
+            }
         }
     }
 
