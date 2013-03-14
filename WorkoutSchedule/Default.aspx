@@ -380,9 +380,8 @@
                                             GridLines="Vertical" CssClass="gv" AllowPaging="False">
                                             <AlternatingRowStyle BackColor="White" />
                                             <Columns>
-                                                <asp:BoundField DataField="itemName" HeaderText="Scheduled Item" SortExpression="itemName">
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="startTime" />
+                                                <asp:ButtonField HeaderText="Item Name" SortExpression="itemName" CommandName="info" DataTextField="itemName" Text="itemName"/> 
+                                                <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="startTime"/>
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="lnkModify" runat="server" CommandName="modify" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Modify</asp:LinkButton>
@@ -401,6 +400,7 @@
                                             <SortedDescendingCellStyle BackColor="#EAEAD3" />
                                             <SortedDescendingHeaderStyle BackColor="#575357" />
                                         </asp:GridView>
+                                        <asp:Label ID="test1" runat="server" Text="Label"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>

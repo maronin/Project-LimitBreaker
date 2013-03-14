@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
 using System.Globalization;
 using System.Text;
 using System.Drawing;
@@ -587,13 +588,37 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         e.ExceptionHandled = true;
     }
 
+    //protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+    //{
+    //    if (e.Row.RowType == DataControlRowType.DataRow)
+    //    {
+    //        Control control = e.Row.Cells[2].Controls[0];
+    //        LiteralControl wc = (LiteralControl)control;
+    //        Control control2 = e.Row.Cells[0].Controls[0];
+            
+    //        WebControl wc2 = (WebControl)control2;
+    //        LinkButton lb = (LinkButton)wc2;
+
+
+    //        wc.Text = lb.Text;
+
+
+    //    }
+    //} 
+
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ';' });
-        modifyExercise = Convert.ToBoolean(commandArgs[1]);
+       
+       if(commandArgs.Count() > 1)
+           modifyExercise = Convert.ToBoolean(commandArgs[1]);
+
         modifyItemID = Convert.ToInt32(commandArgs[0]);
+        
+        
         if (e.CommandName == "del")
         {
+           
             hideModifyForm();
             if (scheduleManager.deletecheduledItem(Convert.ToInt32(commandArgs[0]), Convert.ToBoolean(commandArgs[1]), userID))
             {
@@ -699,6 +724,67 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             }
         }
 
+        if (e.CommandName == "info")
+        {
+
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = GridViewScheduledItems.Rows[index];
+            Control control = row.Cells[0].Controls[0];
+   
+            WebControl wc = (WebControl)control;
+            LinkButton lb = (LinkButton)wc;
+            test1.Text = lb.Text;
+
+
+
+            control = row.Cells[0].Controls[0];
+
+
+
+
+
+
+
+            //User selected a scheduled Exercise
+            if(commandArgs.Count() > 1)
+            if (Convert.ToBoolean(commandArgs[1]))
+            {
+                Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
+                ddlModifyItems.DataSource = exerciseManager.getExercises();
+                ddlModifyItems.DataBind();
+                lblEquipmentModify.Text = exercise.equipment;
+                if (exercise != null)
+                    if (exercise.description != null)
+                        lblDescriptionModify.Text = exercise.description;
+                    else
+                    {
+                        lblDescriptionModify.Text = "None";
+                    }
+
+
+                String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
+                foreach (var item in muscles)
+                {
+                    if (item != "")
+                        lblMuscleGroupsModify.Text += "- " + item + "<br/>";
+                }
+                //lblDescriptionModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
+
+            }
+
+            //User selected a scheduled Routine
+            else
+            {
+                Routine routine = routineManager.getRoutine(Convert.ToInt32(commandArgs[0]));
+                ddlModifyItems.DataSource = routineManager.getUsersRoutines(userID);
+                ddlModifyItems.DataBind();
+                lblEquipmentModify.Visible = false;
+                pnlEquipmentMuscle.Visible = false;
+                lblDescriptionModify.Text = "";
+            }
+
+
+        }
 
     }
     protected void populateRemoveItems()

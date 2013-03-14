@@ -48,6 +48,7 @@ public class ScheduleManager
                                startTime = r.startTime,
                                user = r.LimitBreaker,
                                id = r.id,
+                               description = "None",
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -59,6 +60,7 @@ public class ScheduleManager
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
                                 id = e.id,
+                                description = e.Exercise.description,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
@@ -81,6 +83,7 @@ public class ScheduleManager
                                startTime = r.startTime,
                                user = r.LimitBreaker,
                                id = r.id,
+                               description = "None",
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -92,6 +95,7 @@ public class ScheduleManager
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
                                 id = e.id,
+                                description = e.Exercise.description,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList().OrderBy(s=>s.startTime);
@@ -114,6 +118,7 @@ public class ScheduleManager
                                startTime = r.startTime,
                                user = r.LimitBreaker,
                                id = r.id,
+                               description = "None",
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -125,6 +130,7 @@ public class ScheduleManager
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
                                 id = e.id,
+                                description = e.Exercise.description,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
@@ -544,6 +550,7 @@ public class ScheduleManager
                                        startTime = e.startTime,
                                        user = e.LimitBreakers,
                                        id = e.id,
+                                       description = e.Exercise.description,
                                        isExericse = true
                                    };
                     return exercise.FirstOrDefault();
@@ -558,6 +565,7 @@ public class ScheduleManager
                                       startTime = r.startTime,
                                       user = r.LimitBreaker,
                                       id = r.id,
+                                      description = "",
                                       isExericse = false
                                   };
                     return routine.FirstOrDefault();
