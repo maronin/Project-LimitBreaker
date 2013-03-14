@@ -51,7 +51,7 @@ public partial class User_leaderboards : System.Web.UI.Page
 
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                if (GridView1.Rows[i].Cells[1].Text == userName)
+                if (GridView1.Rows[i].Cells[1].Text.ToLower() == userName.ToLower())
                 {
                     GridView1.Rows[i].BorderWidth = 1;
                     GridView1.Rows[i].BorderColor = System.Drawing.Color.Green;
@@ -60,7 +60,7 @@ public partial class User_leaderboards : System.Web.UI.Page
 
             foreach (LeaderBoardItem lbi in userItemSet)
             {
-                if (lbi.userName == userName)
+                if (lbi.userName.ToLower() == userName.ToLower())
                     GridView2.Rows[0].Cells[0].Text = lbi.rank.ToString();
             }
         }
@@ -135,7 +135,7 @@ public partial class User_leaderboards : System.Web.UI.Page
 
             foreach (LeaderBoardItem lbi in userItemSet)
             {
-                if (lbi.userName == userName)
+                if (lbi.userName.ToLower() == userName.ToLower())
                     GridView2.Rows[0].Cells[0].Text = lbi.rank.ToString();
             }
         }
@@ -153,7 +153,7 @@ public partial class User_leaderboards : System.Web.UI.Page
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (Convert.ToString(DataBinder.Eval(e.Row.DataItem, "userName")) == userName)
+                if (Convert.ToString(DataBinder.Eval(e.Row.DataItem, "userName")).ToLower() == userName)
                 {
                     e.Row.BorderWidth = 1;
                     e.Row.BorderColor = System.Drawing.Color.Green;

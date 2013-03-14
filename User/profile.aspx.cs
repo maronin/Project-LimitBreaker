@@ -102,7 +102,7 @@ public partial class User_profile : System.Web.UI.Page
 
         for (int i = 1; i < 4; i++)
         {
-            if (expTop3[i-1].userName == userName)
+            if (expTop3[i - 1].userName.ToLower() == userName.ToLower())
             {
                 expRankPanel.Visible = true;
                 expRankImg.ImageUrl = "~/ui/images/rank" + i + ".png";
