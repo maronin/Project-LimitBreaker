@@ -130,8 +130,49 @@
         <br />
         <br />
 
+
+        <div style="margin-left:30px;">
+            <asp:Panel ID="expRankPanel" runat="server">        
+                <div style="float:left; margin-right:8px; font-size:x-small;">
+                    Experience Gained 
+                    <br />
+                    <asp:Image ID="expRankImg" runat="server" Height="60" Width="60" />
+                </div>
+            </asp:Panel>
+            <asp:Panel ID="goalsRankPanel" runat="server">
+                <div style="float:left; margin-right:8px; font-size:x-small;">
+                    Achieved Goals 
+                    <br />
+                    <asp:Image ID="goalsRankImg" runat="server" Height="60" Width="60" />
+                </div>
+            </asp:Panel>
+            <asp:Panel ID="loggedRankPanel" runat="server">
+                <div style="float:left; font-size:x-small;">
+                    Logged Exercises 
+                    <br />
+                    <asp:Image ID="loggedRankImg" runat="server" Height="60" Width="60" />
+                </div>
+            </asp:Panel>
+        </div>
+
         <div style="text-align:left;">
     <table>
+        <tr>
+            <td class="auto-style1">
+                Achieved Goals
+            </td>
+            <td class="auto-style1">
+                <asp:Label ID="achievedGoalslbl" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style1">
+                Logged Exercises
+            </td>
+            <td class="auto-style1">
+                <asp:Label ID="loggedExerciseslbl" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>
         <tr>
             <td class="auto-style1">Weight</td>
             <td class="auto-style1">

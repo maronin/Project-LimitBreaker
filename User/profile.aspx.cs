@@ -11,6 +11,8 @@ public partial class User_profile : System.Web.UI.Page
 {
     UserManager manager = new UserManager();
     ExperienceManager expMngr = new ExperienceManager();
+    LeaderboardManager ldrMngr = new LeaderboardManager();
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -34,6 +36,10 @@ public partial class User_profile : System.Web.UI.Page
             expBar.Attributes.Add("value", curExp);
             expBar.Attributes.Add("max", reqExp);
             expBar.Attributes.Add("title", Convert.ToString(Math.Round(Convert.ToDouble(curExp)/Convert.ToDouble(reqExp)*100, 1)) + "% through the current level");
+            LeaderBoardItem userItem = ldrMngr.getUserValues(username);
+            achievedGoalslbl.Text = userItem.numGoals.ToString();
+            loggedExerciseslbl.Text = userItem.numLogged.ToString();
+            populateMedals(username);
 
             if (!Page.IsPostBack)
             {
@@ -83,5 +89,36 @@ public partial class User_profile : System.Web.UI.Page
         rmr.Text = Convert.ToString(Math.Round(userStats.rmr, 2));
         bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));
         
+    }
+
+    public void populateMedals(string userName)
+    {
+        List<LeaderBoardItem> expTop3 = ldrMngr.getLeaderBoardValues(1, true);
+        List<LeaderBoardItem> goalsTop3 = ldrMngr.getLeaderBoardValues(2, true);
+        List<LeaderBoardItem> loggedTop3 = ldrMngr.getLeaderBoardValues(3, true);
+        expRankPanel.Visible = false;
+        goalsRankPanel.Visible = false;
+        loggedRankPanel.Visible = false;
+
+        for (int i = 1; i < 4; i++)
+        {
+            if (expTop3[i - 1].userName.ToLower() == userName.ToLower())
+            {
+                expRankPanel.Visible = true;
+                expRankImg.ImageUrl = "~/ui/images/rank" + i + ".png";
+            }
+
+            if (goalsTop3[i-1].userName == userName)
+            {
+                goalsRankPanel.Visible = true;
+                goalsRankImg.ImageUrl = "~/ui/images/rank" + i + ".png";
+            }
+
+            if (loggedTop3[i-1].userName == userName)
+            {
+                loggedRankPanel.Visible = true;
+                loggedRankImg.ImageUrl = "~/ui/images/rank" + i + ".png";
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ public class LeaderboardManager
         
 	}
 
-    public List<LeaderBoardItem> getLeaderBoardValues(int orderBy)
+    public List<LeaderBoardItem> getLeaderBoardValues(int orderBy, bool top3)  //if top3 is true it only returns the top 3 users
     {
         using (var context = new Layer2Container())
         {
@@ -41,13 +41,29 @@ public class LeaderboardManager
             }
 
             int i = 1;
-            foreach (LimitBreaker lb in lbSet)
+
+            if (!top3)
             {
-                context.LoadProperty(lb, "ExerciseGoals");
-                context.LoadProperty(lb, "Statistics");
-                context.LoadProperty(lb, "LoggedExercises");
-                leaderBoardItemSet.Add(new LeaderBoardItem(i, lb.username, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count()));
-                i++;
+                foreach (LimitBreaker lb in lbSet)
+                {
+                    context.LoadProperty(lb, "ExerciseGoals");
+                    context.LoadProperty(lb, "Statistics");
+                    context.LoadProperty(lb, "LoggedExercises");
+                    leaderBoardItemSet.Add(new LeaderBoardItem(i, lb.username, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count()));
+                    i++;
+                }
+            }
+
+            else
+            {
+                foreach (LimitBreaker lb in lbSet)
+                {
+                    context.LoadProperty(lb, "ExerciseGoals");
+                    context.LoadProperty(lb, "Statistics");
+                    context.LoadProperty(lb, "LoggedExercises");
+                    leaderBoardItemSet.Add(new LeaderBoardItem(i, lb.username, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count()));
+                    i++;
+                }
             }
 
             return leaderBoardItemSet;
@@ -64,7 +80,7 @@ public class LeaderboardManager
             context.LoadProperty(lb, "Statistics");
             context.LoadProperty(lb, "LoggedExercises");
 
-            return new LeaderBoardItem(1, userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
+            return new LeaderBoardItem(0, userName, lb.Statistics.level, Convert.ToInt32(lb.Statistics.experience), lb.ExerciseGoals.Where(g => g.achieved == true).Count(), lb.LoggedExercises.Count());
         }
     }
 }

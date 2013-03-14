@@ -16,6 +16,7 @@ public partial class User_leaderboards : System.Web.UI.Page
     {
         lbMngr = new LeaderboardManager();
         expMngr = new ExperienceManager();
+        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(1, false);
 
         if (!Page.IsPostBack)
         {
@@ -24,7 +25,6 @@ public partial class User_leaderboards : System.Web.UI.Page
             GridView1.Columns[4].Visible = false;
             GridView1.Columns[5].Visible = false;
 
-            List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(1);
             GridView1.DataSource = userItemSet;
             GridView1.DataBind();
         }
@@ -51,12 +51,17 @@ public partial class User_leaderboards : System.Web.UI.Page
 
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                if (GridView1.Rows[i].Cells[1].Text == userName)
+                if (GridView1.Rows[i].Cells[1].Text.ToLower() == userName.ToLower())
                 {
-                    GridView2.Rows[0].Cells[0].Text = GridView1.Rows[i].Cells[0].Text;
                     GridView1.Rows[i].BorderWidth = 1;
                     GridView1.Rows[i].BorderColor = System.Drawing.Color.Green;
                 }
+            }
+
+            foreach (LeaderBoardItem lbi in userItemSet)
+            {
+                if (lbi.userName.ToLower() == userName.ToLower())
+                    GridView2.Rows[0].Cells[0].Text = lbi.rank.ToString();
             }
         }
         else
@@ -115,7 +120,7 @@ public partial class User_leaderboards : System.Web.UI.Page
             }
         }
 
-        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(Convert.ToInt32(orderByddl.SelectedValue));
+        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(Convert.ToInt32(orderByddl.SelectedValue), false);
         GridView1.DataSource = userItemSet;
         GridView1.DataBind();
 
@@ -128,9 +133,11 @@ public partial class User_leaderboards : System.Web.UI.Page
             GridView2.DataSource = userItemList;
             GridView2.DataBind();
 
-            for (int i = 0; i < GridView1.Rows.Count; i++)
-                if (GridView1.Rows[i].Cells[1].Text == userName)
-                    GridView2.Rows[0].Cells[0].Text = GridView1.Rows[i].Cells[0].Text;
+            foreach (LeaderBoardItem lbi in userItemSet)
+            {
+                if (lbi.userName.ToLower() == userName.ToLower())
+                    GridView2.Rows[0].Cells[0].Text = lbi.rank.ToString();
+            }
         }
     }
 
@@ -146,7 +153,7 @@ public partial class User_leaderboards : System.Web.UI.Page
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (Convert.ToString(DataBinder.Eval(e.Row.DataItem, "userName")) == userName)
+                if (Convert.ToString(DataBinder.Eval(e.Row.DataItem, "userName")).ToLower() == userName)
                 {
                     e.Row.BorderWidth = 1;
                     e.Row.BorderColor = System.Drawing.Color.Green;
