@@ -16,7 +16,7 @@ public partial class User_leaderboards : System.Web.UI.Page
     {
         lbMngr = new LeaderboardManager();
         expMngr = new ExperienceManager();
-        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(1);
+        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(1, false);
 
         if (!Page.IsPostBack)
         {
@@ -120,7 +120,7 @@ public partial class User_leaderboards : System.Web.UI.Page
             }
         }
 
-        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(Convert.ToInt32(orderByddl.SelectedValue));
+        List<LeaderBoardItem> userItemSet = lbMngr.getLeaderBoardValues(Convert.ToInt32(orderByddl.SelectedValue), false);
         GridView1.DataSource = userItemSet;
         GridView1.DataBind();
 
