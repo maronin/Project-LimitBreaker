@@ -15,23 +15,30 @@
         var chartData = [];
         var chartCursor;
 
-        /*AmCharts.ready(window.onload = */function load(arrayWeight, arrayDate) {
+        /*AmCharts.ready(window.onload = */function load() {
             // generate some data first
             //generateChartData();
-            myWeight = new Array();
-            myWeight[0] = 25;
-            myWeight[1] = 20;
-            myWeight[2] = 20;
-            myWeight[3] = 23;
-            myDate = new Array();
-            myDate[0] = new Date(2011, 5, 1, 0, 0, 0, 0);
-            myDate[1] = new Date(2011, 5, 3, 0, 0, 0, 0);
-            myDate[2] = new Date(2011, 5, 4, 0, 0, 0, 0);
-            myDate[3] = new Date(2011, 6, 13, 0, 0, 0, 0);
-            populateChart(myWeight, myDate);
+
+            myDates = new Array();
+
+            var unsplitWeights = "<%=JSweights%>";
+            var unsplitYears = "<%=JSyears%>";
+            var unsplitMonths = "<%=JSmonths%>";
+            var unsplitDays = "<%=JSdays%>";
+
+            var splitWeights = unsplitWeights.split(',');
+            var splitYears = unsplitYears.split(',');
+            var splitMonths = unsplitMonths.split(',');
+            var splitDays = unsplitDays.split(',');
+
+            for (var i = 0; i < splitDays.length; i++) {
+                myDates[i] = new Date(splitYears[i], splitMonths[i]-1, splitDays[i], 0, 0, 0, 0);
+            }
+
+            populateChart(splitWeights, myDates);
 
             // SERIAL CHART    
-            chart = new AmCharts.AmSerialChart();
+            chart = new AmCharts.AmSerialChart();       
             chart.pathToImages = "../ui/images/";
             chart.zoomOutButton = {
                 backgroundColor: '#000000',
@@ -107,11 +114,13 @@
         }
 
         function populateChart(arrayWeight, arrayDate) { //run the weight and date arrays in parallel
-            for (var i = 0; i < arrayWeight.length; i++) {
-                chartData.push({
-                    date: arrayDate[i],
-                    visits: arrayWeight[i]
-                });
+            if (arrayWeight.length > 0) {
+                for (var i = 0; i < arrayWeight.length; i++) {
+                    chartData.push({
+                        date: arrayDate[i],
+                        visits: arrayWeight[i]
+                    });
+                }
             }
         }
 
@@ -130,8 +139,8 @@
                 chartCursor.pan = true;
             }
             chart.validateNow();
-        }   
-			            
+        }
+
         </script>
 
 </asp:Content>
@@ -262,7 +271,6 @@
     <div style="width: 50%; margin-left:250px; float:left; text-align:center;">
         <input type="radio" name="group" id="rb1" onclick="setPanSelect()" />Select
         <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()" />Pan
-        <asp:Button ID="Button1" runat="server" Text="Button" OnClientClick="load();" />
     </div> 
    
 </asp:Content>

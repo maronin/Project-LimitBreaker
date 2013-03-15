@@ -207,4 +207,12 @@ public class UserManager
             context.SaveChanges();
         }
     }
+
+    public List<OldWeight> getAllOldWeights(string userName)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.OldWeights.Where(s => s.LimitBreaker.username == userName).OrderBy(s => s.date).ToList();
+        }
+    }
 }
