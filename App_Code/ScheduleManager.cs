@@ -44,10 +44,11 @@ public class ScheduleManager
                            where (r.LimitBreaker.id == userID && r.startTime.Day == day.Day)
                            select new scheduledItem
                            {
-                               itemName = r.Routine.name,
+                               itemName = "[R] " + r.Routine.name,
                                startTime = r.startTime,
                                user = r.LimitBreaker,
                                id = r.id,
+                               description = "None",
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -55,10 +56,11 @@ public class ScheduleManager
                             where (e.LimitBreakers.id == userID && e.startTime.Day == day.Day)
                             select new scheduledItem
                             {
-                                itemName = e.Exercise.name,
+                                itemName = "[E] " + e.Exercise.name,
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
                                 id = e.id,
+                                description = e.Exercise.description,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
@@ -77,10 +79,11 @@ public class ScheduleManager
                            where (r.LimitBreaker.id == userID && (r.startTime.Day == day.Day && r.startTime.Month == day.Month && r.startTime.Year == day.Year))
                            select new scheduledItem
                            {
-                               itemName = r.Routine.name,
+                               itemName = "[R] " + r.Routine.name,
                                startTime = r.startTime,
                                user = r.LimitBreaker,
                                id = r.id,
+                               description = "None",
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -88,10 +91,11 @@ public class ScheduleManager
                             where (e.LimitBreakers.id == userID && (e.startTime.Day == day.Day && e.startTime.Month == day.Month && e.startTime.Year == day.Year))
                             select new scheduledItem
                             {
-                                itemName = e.Exercise.name,
+                                itemName = "[E] " + e.Exercise.name,
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
                                 id = e.id,
+                                description = e.Exercise.description,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList().OrderBy(s=>s.startTime);
@@ -110,10 +114,11 @@ public class ScheduleManager
                            where (r.LimitBreaker.id == userID && (r.startTime.Month == day.Month && r.startTime.Year == day.Year))
                            select new scheduledItem
                            {
-                               itemName = r.Routine.name,
+                               itemName = "[R] " + r.Routine.name,
                                startTime = r.startTime,
                                user = r.LimitBreaker,
                                id = r.id,
+                               description = "None",
                                isExericse = false
                            };
             var exercises = from e in context.ScheduledExercises
@@ -121,10 +126,11 @@ public class ScheduleManager
                             where (e.LimitBreakers.id == userID && (e.startTime.Month == day.Month && e.startTime.Year == day.Year))
                             select new scheduledItem
                             {
-                                itemName = e.Exercise.name,
+                                itemName = "[E] " + e.Exercise.name,
                                 startTime = e.startTime,
                                 user = e.LimitBreakers,
                                 id = e.id,
+                                description = e.Exercise.description,
                                 isExericse = true
                             };
             var items = routines.Concat(exercises).ToList();
@@ -540,10 +546,11 @@ public class ScheduleManager
                                    where (e.id == id)
                                    select new scheduledItem
                                    {
-                                       itemName = e.Exercise.name,
+                                       itemName = "[E] " + e.Exercise.name,
                                        startTime = e.startTime,
                                        user = e.LimitBreakers,
                                        id = e.id,
+                                       description = e.Exercise.description,
                                        isExericse = true
                                    };
                     return exercise.FirstOrDefault();
@@ -554,10 +561,11 @@ public class ScheduleManager
                                   where (r.id == id)
                                   select new scheduledItem
                                   {
-                                      itemName = r.Routine.name,
+                                      itemName = "[R] " + r.Routine.name,
                                       startTime = r.startTime,
                                       user = r.LimitBreaker,
                                       id = r.id,
+                                      description = "",
                                       isExericse = false
                                   };
                     return routine.FirstOrDefault();

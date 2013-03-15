@@ -58,6 +58,7 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         exerciseGoalMultiView.ActiveViewIndex = 0;
         addGoalResultLbl.Text = "";
         showAddGoal();
+        viewExercises.colorCodeExercises();
     }
 
     protected void orderByRbl_SelectedIndexChanged(object sender, EventArgs e)
@@ -157,7 +158,6 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
                 RegularExpressionValidator8.ValidationExpression = "[0-9]+";
             }
 
-            exerciseNameLbl.Text = userGoalsListBox.SelectedValue;
             modGoalTimeTxtBox.Text = (eg.time/60).ToString();
             modGoalDistanceTxtBox.Text = eg.distance.ToString();
             modGoalWeightTxtBox.Text = eg.weight.ToString();

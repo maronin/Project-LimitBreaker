@@ -120,4 +120,11 @@ public class ExerciseManager
 
     }
 
+    public bool enabled(int exerciseID)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.Exercises.Where(x => x.id == exerciseID).FirstOrDefault().enabled;
+        }
+    }
 }

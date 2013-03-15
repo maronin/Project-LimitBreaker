@@ -51,8 +51,10 @@
                                 <asp:Label ID="routines" runat="server" Text="Routines" Font-Bold="True" CssClass="legenExerciseRoutine"></asp:Label>
                                 <div class="theCalendar">
                                     <asp:Panel ID="pnl_monthSelector" runat="server" CssClass="calendarMonthSelector">
-                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth" Text="<< Prev Month"></asp:LinkButton>
-                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth" Text="Next Month >>"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnPrevMonth" runat="server" OnClick="prevMonth" CssClass="PrevMonth"
+                                            Text="<< Prev Month"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkBtnNextMonth" runat="server" OnClick="nextMonth" CssClass="NextMonth"
+                                            Text="Next Month >>"></asp:LinkButton>
                                         <div class="today">
                                             <asp:LinkButton ID="lnkBtnToday" runat="server" OnClick="today">Today</asp:LinkButton>
                                             <br />
@@ -128,9 +130,9 @@
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Exercise view[1] --------------------------------------------------------------------------------------->
                                 <asp:View ID="addExerciseView" runat="server">
-                                    <div class="scheduleChoice">
-                                        <h3>
-                                            Schedule a new Exercise!</h3>
+                                    <div class="scheduleExerciseForm">
+                                        <h1 style="text-align: center;">
+                                            Schedule a new Exercise!</h1>
                                         <br />
                                         <uc1:viewExercises ID="viewExercises" runat="server" />
                                         <asp:Panel ID="TimeSelectPanel" runat="server">
@@ -179,7 +181,7 @@
                                                 ErrorMessage="Invalid Date" ControlToValidate="tbDate_exercise" Font-Size="Medium"
                                                 ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                                 ValidationGroup="ScheduleExercise" Display="Dynamic"></asp:RegularExpressionValidator>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorExercise" runat="server" ErrorMessage="*"
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorExercise" runat="server" ErrorMessage="*Required"
                                                 ForeColor="Red" ControlToValidate="tbDate_exercise" ValidationGroup="ScheduleExercise"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                             <asp:CalendarExtender ID="CalendarExtenderExercise" runat="server" TargetControlID="tbDate_exercise">
@@ -208,24 +210,28 @@
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Routine[2]  --------------------------------------------------------------------------------------->
                                 <asp:View ID="addRoutineView" runat="server">
-                                    <div class="scheduleChoice">
-                                        <h3>
-                                            Schedule a new Routine!</h3>
+                                    <div class="scheduleExerciseForm">
+                                        <h1 style="text-align: center">
+                                            Schedule a new Routine!</h1>
                                         <table class="scheduleTable">
                                             <tr>
                                                 <td>
-                                                    Step 1. Select a routine:
+                                                    Select a routine:
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id"
-                                                        Width="170px">
+                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="ddlRoutines_indexChanged"
+                                                        Width="170px" AutoPostBack="True">
                                                     </asp:DropDownList>
                                                     <asp:LinkButton ID="lnkNotHaveRoutines" runat="server" Visible="False" OnClick="changeToRoutine">Click here to add a new routine</asp:LinkButton>
+                                                </td>
+                                                <td rowspan="3">
+                                                Exercises for routine:
+                                                    <asp:ListBox ID="listBoxExercisesForRoutine" runat="server" Width="170px" Height="75px" Enabled="False"></asp:ListBox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Step 2. Select Start Time:
+                                                    Select Start Time:
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList ID="ddlHours_routine" runat="server">
@@ -265,7 +271,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Step 3. Select Start Date:
+                                                    Select Start Date:
                                                 </td>
                                                 <td>
                                                     <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtenderRoutine" runat="server" TargetControlID="tbDate_routine"
@@ -278,31 +284,48 @@
                                                         ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                                         ValidationGroup="ScheduleRoutine" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     <asp:RequiredFieldValidator ForeColor="Red" ID="RequiredFieldValidatorRoutine" runat="server"
-                                                        ErrorMessage="*" ControlToValidate="tbDate_routine" ValidationGroup="ScheduleRoutine"
+                                                        ErrorMessage="*Required" ControlToValidate="tbDate_routine" ValidationGroup="ScheduleRoutine"
                                                         Display="Dynamic"></asp:RequiredFieldValidator>
                                                     <asp:CalendarExtender ID="CalendarExtenderRoutine" runat="server" TargetControlID="tbDate_routine">
                                                     </asp:CalendarExtender>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:CheckBox ID="cbRepeatRoutine" runat="server" OnCheckedChanged="reaptClicked"
+                                                        AutoPostBack="true" Enabled="false" />
+                                                    Repeat...
+                                                    <asp:LinkButton ID="lnkEditRepeatRoutine" runat="server" Visible="false" OnClick="lnkEditRepeat_EditRepeat">[Edit]</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                            <td>
+                                            </td>
                                         </table>
-                                        <asp:CheckBox ID="cbRepeatRoutine" runat="server" OnCheckedChanged="reaptClicked"
-                                            AutoPostBack="true" Enabled="false" />
-                                        Repeat...
-                                        <asp:LinkButton ID="lnkEditRepeatRoutine" runat="server" Visible="false" OnClick="lnkEditRepeat_EditRepeat">[Edit]</asp:LinkButton>
                                         <hr />
-                                        <asp:Button ID="btnGoBack2" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
-                                            CssClass="button" />
-                                        <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
-                                            CssClass="button" ValidationGroup="ScheduleRoutine" />
+                                        <div class="ButtonChoiceScheduling">
+                                            <asp:Button ID="btnGoBack2" runat="server" Text="Back To Calendar" OnClick="goBack_Click"
+                                                CssClass="button" />
+                                            <asp:Button ID="btnScheduleRoutine" runat="server" Text="Schedule Routine" OnClick="btnScheduleRoutine_Click"
+                                                CssClass="button" ValidationGroup="ScheduleRoutine" />
+                                        </div>
                                         <asp:Label ID="lblResult_Routine" runat="server" Text=""></asp:Label>
                                     </div>
                                 </asp:View>
                             </asp:MultiView>
                         </asp:View>
                         <asp:View ID="removeItemView" runat="server">
+                            <div class="scheduleExerciseForm">
                             <h3>
                                 Remove/Modify Items</h3>
                             <table>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="btnAddExerciseFromRemove" runat="server" Text="Add an item for this day"
+                                            OnClick="btnAddExerciseFromRemove_Clicked" CssClass="addItemForThisDay" Enabled="false"/>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         By date:
@@ -311,17 +334,22 @@
                                         <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" TargetControlID="tbRemoveDate"
                                             FilterType="Custom" ValidChars='()1234567890-/'>
                                         </asp:FilteredTextBoxExtender>
-                                        <asp:LinkButton ID="lnkPrevMonthForRemove" runat="server" OnClick="prevRemoveMonth"><<</asp:LinkButton>
+                                        <asp:LinkButton ID="lnkPrevMonthForRemove" runat="server" OnClick="prevRemoveMonth"
+                                            CssClass="removePrevButton" Style="text-decoration: none;"><<</asp:LinkButton>
                                         <asp:TextBox ID="tbRemoveDate" runat="server" Enabled="true" ReadOnly="False" AutoCompleteType="Disabled"
                                             AutoPostBack="True" OnTextChanged="tbRemoveDate_TextChanged" ValidationGroup="RemoveItem"></asp:TextBox>
-                                        <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth">>></asp:LinkButton>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
-                                            ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
-                                            ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator><%--<asp:RequiredFieldValidator
+                                        <asp:LinkButton ID="lnkNextMonthForRemove" runat="server" OnClick="nextRemoveMonth"
+                                            CssClass="removeNextButton" Style="text-decoration: none;">>></asp:LinkButton>
+<%--<asp:RequiredFieldValidator
                                     ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
                                     ControlToValidate="tbRemoveDate" ValidationGroup="RemoveItem" Display="Dynamic"></asp:RequiredFieldValidator>--%>
                                         <asp:CalendarExtender ID="calendarRemoveItem" runat="server" TargetControlID="tbRemoveDate">
                                         </asp:CalendarExtender>
+                                    </td>
+                                    <td>
+                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Date"
+                                            ControlToValidate="tbRemoveDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
+                                            ValidationGroup="RemoveItem" Display="Dynamic"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -356,9 +384,8 @@
                                             GridLines="Vertical" CssClass="gv" AllowPaging="False">
                                             <AlternatingRowStyle BackColor="White" />
                                             <Columns>
-                                                <asp:BoundField DataField="itemName" HeaderText="Scheduled Item" SortExpression="itemName">
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="startTime" />
+                                                <asp:ButtonField HeaderText="Item Name" SortExpression="itemName" CommandName="info" DataTextField="itemName" Text="itemName"/> 
+                                                <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="startTime"/>
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="lnkModify" runat="server" CommandName="modify" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Modify</asp:LinkButton>
@@ -377,6 +404,7 @@
                                             <SortedDescendingCellStyle BackColor="#EAEAD3" />
                                             <SortedDescendingHeaderStyle BackColor="#575357" />
                                         </asp:GridView>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -390,13 +418,43 @@
                             </table>
                             <hr />
                             <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
-                            <br />
+
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">
-                                <h5>
+                                <h2 style="text-align:center;">
+                                <asp:Label ID="lblNameModify" runat="server" Text=""></asp:Label>
+                                </h2>
+                                <h3 style="text-align:center; margin-top: -10px;"><asp:LinkButton ID="lnkVideoModify" runat="server">[Video]</asp:LinkButton></h3>
+
+                                <br />
+                                <table>
+                                <tr>
+                                <td>
+                                                                <h5>
                                     Description:</h5>
+                                </td>
+                                
+                                <td>
+                                                                    <asp:Panel ID="pnlExercisesInRoutine" runat="server">
+                                  <h5>Exercises: </h5>
+                                                                    </asp:Panel>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>
+
+                                <asp:TextBox ID="lblDescriptionModify" onkeypress="return false;" runat="server" Text="None" Height="211px" TextMode="MultiLine" width="511px" Font-Italic="False" ReadOnly="True">None</asp:TextBox>
+                                
+                                </td>
+                                <td style="vertical-align:top;">
+
+                                <asp:Label ID="lblExercisesInRoutine" runat="server" Text=""></asp:Label>
+
+                                </td>
+
+                                </tr>
+                                </table>
                                 <br />
-                                <asp:Label ID="lblDescriptionModify" runat="server" Text=""></asp:Label>
-                                <br />
+
                                 <asp:Panel ID="pnlEquipmentMuscle" runat="server">
                                     <h5>
                                         Muscle Groups</h5>
@@ -410,6 +468,10 @@
                                 </asp:Panel>
                                 <br />
                                 <br />
+                                <hr />
+                                <asp:Panel ID="pnlModifyStartTime" runat="server" Visible="false">
+
+                                <h4>Modify Start Time</h4>
                                 <table>
                                     <tr>
                                         <td>
@@ -475,13 +537,14 @@
                                                 ControlToValidate="tbDateModify" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                                 ValidationGroup="ModifyItem" Display="Dynamic"></asp:RegularExpressionValidator>
                                             <asp:RequiredFieldValidator ForeColor="Red" ID="modifyDateRequired" runat="server"
-                                                ErrorMessage="*" ControlToValidate="tbDateModify" ValidationGroup="ModifyItem"
+                                                ErrorMessage="*Required" ControlToValidate="tbDateModify" ValidationGroup="ModifyItem"
                                                 Display="Dynamic"></asp:RequiredFieldValidator>
                                             <asp:CalendarExtender ID="calendarModify" runat="server" TargetControlID="tbDateModify">
                                             </asp:CalendarExtender>
                                         </td>
                                     </tr>
                                 </table>
+                                                                </asp:Panel>
                             </asp:Panel>
                             <br />
                             <br />
@@ -493,6 +556,7 @@
                             <asp:Label ID="lblResultModify" runat="server" Text=""></asp:Label>
                             <br />
                             <br />
+                            </div>
                         </asp:View>
                     </asp:MultiView>
                     <asp:Panel ID="pnlRepeatItem" runat="server" Visible="false">
@@ -579,7 +643,7 @@
                                                     <asp:RegularExpressionValidator ID="repeatCalendarValidator" runat="server" ErrorMessage="Invalid Date"
                                                         ControlToValidate="tbEndOnDate" Font-Size="Medium" ForeColor="Red" ValidationExpression="(((0?[1-9]|1[012])[/.](0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])[/.](29|30)|(0?[13578]|1[02])/31)[/.](19|[2-9]\d)\d{2}|0?2[/.]29[/.]((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))"
                                                         ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                            ForeColor="Red" ID="repeatCalendarRequiredValidator" runat="server" ErrorMessage="*"
+                                                            ForeColor="Red" ID="repeatCalendarRequiredValidator" runat="server" ErrorMessage="*Required"
                                                             ControlToValidate="tbEndOnDate" ValidationGroup="EndOnRepeat" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     <asp:CalendarExtender ID="calendarEndsOnRepeat" runat="server" TargetControlID="tbEndOnDate">
                                                     </asp:CalendarExtender>

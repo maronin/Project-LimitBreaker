@@ -29,25 +29,25 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div style="width: 50%; margin: 0px auto 0px auto">
+    <div class="ButtonChoiceScheduling" style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="mngExerciseExpBtn" runat="server" Text="Manage Exercise Experience"
             CssClass="button" OnClick="mngExerciseExpBtn_Click" />
         <asp:Button ID="mngUserExpBtn" runat="server" Text="Manage User Experience" CssClass="button"
             OnClick="mngUserExpBtn_Click" />
     </div>
     <br />
-    <div>
-        
+    <div class="exerciseForm">
         <asp:MultiView ID="functionalityMultiView" runat="server">
         <asp:View ID="exerciseExpView" runat="server">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+                                    <h2 style="text-align:center;">Manage Exercise Experience Formulas</h2>
                 <uc1:viewExercise ID="viewExerciseExp" runat="server" />
-                <hr />
                 <asp:MultiView ID="manageExperienceMultiView" runat="server">
                     <asp:View ID="emptyView" runat="server">
                     </asp:View>
                     <asp:View ID="modifyExperienceView" runat="server">
+
                         <h4>
                             Modify Exercise Experience</h4>
                         <div>
@@ -139,9 +139,12 @@
                                 </tr>
                             </table>
                             <br />
+                            <div class="ButtonChoiceScheduling">
                             <asp:Button ID="saveExpBtn" runat="server" Text="Save" OnClick="saveExpBtn_Click"
-                                ValidationGroup="modifyExperience" />
+                                ValidationGroup="modifyExperience" CssClass="button" />
+                                <br />
                             <asp:Label ID="saveResultLbl" runat="server" Text=""></asp:Label>
+                            </div>
                         </div>
                     </asp:View>
                     <asp:View ID="setNewExperienceView" runat="server">
@@ -240,8 +243,11 @@
                                 </tr>
                             </table>
                             <br />
+                            <div class="ButtonChoiceScheduling">
                             <asp:Button ID="addExpBtn" runat="server" Text="Save" OnClick="addExpBtn_Click" ValidationGroup="addExperience" />
+                            <br />
                             <asp:Label ID="addResultLbl" runat="server" Text=""></asp:Label>
+                            </div>
                         </div>
                     </asp:View>
                 </asp:MultiView>
@@ -252,7 +258,7 @@
         <asp:View ID="userExpView" runat="server">
             <asp:UpdatePanel runat="server">
             <ContentTemplate>
-            
+             <h2 style="text-align:center;">Manage User Experience Formulas</h2>
                 <div>
                     <h4>
                         Modify Inactive User Experience Point Atrophy</h4>
@@ -293,9 +299,12 @@
                         </tr>
                     </table>
                     <br />
+                    <div class="ButtonChoiceScheduling">
                     <asp:Button ID="saveAtrophyBtn" runat="server" Text="Save" OnClick="saveAtrophyBtn_Click"
-                        ValidationGroup="expAtrophy" />
+                        ValidationGroup="expAtrophy" CssClass="button" />
+                        <br />
                     <asp:Label ID="saveAtrophyResultLbl" runat="server" Text=""></asp:Label>
+                    </div>
                 </div>
                 <br />
                 <hr />
@@ -363,9 +372,12 @@
                         </tr>
                     </table>
                     <br />
+                    <div class="ButtonChoiceScheduling">
                     <asp:Button ID="saveLvlFormulaBtn" runat="server" Text="Save" 
-                        onclick="saveLvlFormulaBtn_Click" ValidationGroup="lvlFormula" />
+                        onclick="saveLvlFormulaBtn_Click" ValidationGroup="lvlFormula" CssClass="button" />
+                        <br />
                     <asp:Label ID="saveLvlFormulaResultLbl" runat="server" Text=""></asp:Label>
+                    </div>
                 </div>
             
             </ContentTemplate>
