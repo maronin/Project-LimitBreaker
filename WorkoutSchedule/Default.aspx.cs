@@ -360,7 +360,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void addRoutine_Click(object sender, EventArgs e)
     {
         addItemView.ActiveViewIndex = 2;
-
+        ddlRoutines_indexChanged(sender, e);
     }
 
     protected void btnScheduleRoutine_Click(object sender, EventArgs e)
@@ -501,6 +501,19 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             lnkEditRepeatRoutine.Visible = false;
         }
 
+    }
+
+    protected void ddlRoutines_indexChanged(object sender, EventArgs e)
+    {
+      Routine selectedRoutine = routineManager.getRoutineByName(ddlRoutines.SelectedItem.Text);
+      ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(selectedRoutine.id);
+      listBoxExercisesForRoutine.Items.Clear();
+      
+      foreach (var item in exercisesInRoutine)
+      {
+          listBoxExercisesForRoutine.Items.Add(item.name);
+      }
+      listBoxExercisesForRoutine.DataBind();
     }
 
     protected void goBack_Click(object sender, EventArgs e)

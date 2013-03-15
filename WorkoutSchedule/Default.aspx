@@ -219,10 +219,14 @@
                                                     Select a routine:
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id"
-                                                        Width="170px">
+                                                    <asp:DropDownList ID="ddlRoutines" runat="server" DataTextField="name" DataValueField="id" OnSelectedIndexChanged="ddlRoutines_indexChanged"
+                                                        Width="170px" AutoPostBack="True">
                                                     </asp:DropDownList>
                                                     <asp:LinkButton ID="lnkNotHaveRoutines" runat="server" Visible="False" OnClick="changeToRoutine">Click here to add a new routine</asp:LinkButton>
+                                                </td>
+                                                <td rowspan="3">
+                                                Exercises for routine:
+                                                    <asp:ListBox ID="listBoxExercisesForRoutine" runat="server" Width="170px" Height="75px" Enabled="False"></asp:ListBox>
                                                 </td>
                                             </tr>
                                             <tr>
