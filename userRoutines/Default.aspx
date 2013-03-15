@@ -31,7 +31,7 @@
         <div class="exerciseForm" style="min-height:670px;">
             <h4>List of Routines</h4>
             <div class="content">
-                <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium">
+                <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
                 </asp:ListBox>
             </div>
             <asp:Panel ID="pnlButtons" runat="server">

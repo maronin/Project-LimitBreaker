@@ -11,12 +11,27 @@ using System.IO;
 public class routineManager
 {
     HttpResponse response = System.Web.HttpContext.Current.Response;
+    int userID;
 
     public routineManager()
     {
         //
         // TODO: Add constructor logic here
         //
+        userID = -1;
+    }
+
+    public routineManager(int id)
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+        userID = id;
+    }
+
+    public void setUserID(int id)
+    {
+        userID = id;
     }
 
     // Return a list of routines
@@ -34,7 +49,7 @@ public class routineManager
     {
         using (var context = new Layer2Container())
         {
-            return context.Routines.FirstOrDefault(routine => routine.name == routineName);
+            return userID != -1 ? context.Routines.FirstOrDefault(routine => routine.name == routineName && routine.LimitBreaker.id == userID) : null;
         }
     }
 
@@ -81,13 +96,18 @@ public class routineManager
     {
         using (var context = new Layer2Container())
         {
-            Routine rc = new Routine();
+            Routine rc = null;
+            Routine rtn = null;
             try
             {
                 LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
                 Exercise exc = new Exercise();
                 if (lb != null)
+                    rtn = context.Routines.Where(x => x.LimitBreaker.id == lb.id).Where(x => x.name == routineName.Trim()).FirstOrDefault();
+
+                if (lb != null && rtn == null)
                 {
+                    rc = new Routine();
                     rc.name = routineName.Trim();
                     rc.LimitBreaker = lb;
                     rc.lastModified = DateTime.Now;
@@ -163,14 +183,36 @@ public class routineManager
             {
                 Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
                 ICollection<ScheduledRoutine> srList = rtn.ScheduledRoutines;
+                ICollection<LoggedExercise> rlList = rtn.LoggedExercises;
+
                 if (rtn != null)
                 {
                     // clear dependencies
                     rtn.Exercises.Clear();
 
-                    foreach (ScheduledRoutine sr in srList.ToList())
-                        context.ScheduledRoutines.DeleteObject(sr);
-                    rtn.ScheduledRoutines.Clear();
+                    if (srList != null)
+                    {
+                        foreach (ScheduledRoutine sr in srList.ToList())
+                        {
+                            sr.Routine = null;
+                            context.ScheduledRoutines.DeleteObject(sr);
+                        }
+                        rtn.ScheduledRoutines.Clear();
+                    }
+
+                    if (rlList != null)
+                    {
+                        foreach (LoggedExercise rl in rlList.ToList())
+                        {
+                            rl.Routine = null;
+                            foreach (SetAttributes sa in rl.SetAttributes.ToList())
+                            {
+                                context.SetAttributes.DeleteObject(sa);
+                            }
+                            rl.SetAttributes.Clear();
+                            context.LoggedExercises.DeleteObject(rl);
+                        }
+                    }
 
                     context.Routines.DeleteObject(rtn);
                     context.SaveChanges();
@@ -296,17 +338,20 @@ public class routineManager
     {
         using (var context = new Layer2Container())
         {
-            Routine rc = new Routine();
+            Routine rc = null;
+            Routine uniqRtn = null;
             try
             {
                 Routine rtn = context.Routines.Where(x => x.id == routineID).FirstOrDefault();
-                if (rtn != null && rtn.name != name.Trim())
+                uniqRtn = context.Routines.Where(x => x.name == name.Trim()).FirstOrDefault();
+                if (rtn != null && rtn.name != name.Trim() && uniqRtn == null)
                 {
+                    rc = new Routine();
                     rtn.name = name.Trim();
                     context.Routines.ApplyCurrentValues(rtn);
                     context.SaveChanges();
+                    rc = rtn;
                 }
-                rc = rtn;
             }
             catch (NullReferenceException e)
             {
