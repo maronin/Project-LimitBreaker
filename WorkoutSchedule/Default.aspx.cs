@@ -66,9 +66,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 routines.ForeColor = Color.MediumBlue;
                 //populateExerciseInfo();
                 populateRepeatEveryList();
-
+                
             }
-
+            routineManager.setUserID(userID);
 
 
         }

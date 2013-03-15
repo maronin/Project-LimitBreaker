@@ -148,6 +148,7 @@
                             <asp:TextBox ID="tbRoutineName" runat="server" ValidationGroup="modName" Width="100%"></asp:TextBox>
                         </td>
                         <td>
+                            <asp:Label ID="lblUniqueName" runat="server" ForeColor="Red" Text="Name must be unique!" Visible="False"></asp:Label>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbRoutineName" ErrorMessage="Alphaneumeric characters only" ForeColor="Red" ValidationExpression="[a-zA-Z0-9 ]+" ValidationGroup="modName" Display="Dynamic" Font-Size="Medium"></asp:RegularExpressionValidator>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbRoutineName" Display="Dynamic" ErrorMessage="Name is needed" ForeColor="Red" ValidationGroup="modName" Font-Size="Medium"></asp:RequiredFieldValidator>
                         </td>

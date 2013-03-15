@@ -93,7 +93,9 @@
                         <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" />
                     </td>
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <asp:Label ID="lblUniqueName" runat="server" ForeColor="Red" Text="Name must be unique!" Visible="False"></asp:Label>
+                    </td>
                 </tr>
             </table>
 
