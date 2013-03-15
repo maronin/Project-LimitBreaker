@@ -48,11 +48,11 @@
 <div>
     <table id="newExerciseForm">
         <tr>
-            <td>
+            <td style="width: 19%;">
                 <p>
-                    Select a Muscle Group(s):</p>
+                    Muscle Group(s):</p>
             </td>
-            <td>
+            <td style="width:60%;">
                 <asp:CheckBoxList ID="cblMuscleGroups" runat="server" RepeatDirection="Horizontal"
                     CssClass="cblStyle">
                     <asp:ListItem>Chest</asp:ListItem>
@@ -71,7 +71,7 @@
         <tr>
             <td>
                 <p>
-                    Exercise Name:</p>
+                    Name:</p>
             </td>
             <td>
                 <asp:TextBox ID="tbExerciseName" runat="server" class="tbStyle"></asp:TextBox>
@@ -88,17 +88,19 @@
         <tr>
             <td class="style2">
                 <p>
-                    Exercise Attributes:
+                    Attributes:
                 </p>
             </td>
             <td class="style2">
-                <asp:CheckBoxList ID="cblAttributes" runat="server" CssClass="cblStyle" RepeatDirection="Horizontal">
+                
+                <table><tr><td>                <asp:CheckBoxList ID="cblAttributes" runat="server" CssClass="cblStyle" RepeatDirection="Horizontal">
                     <asp:ListItem>Rep</asp:ListItem>
                     <asp:ListItem>Weight</asp:ListItem>
                     <asp:ListItem>Distance</asp:ListItem>
                     <asp:ListItem>Time</asp:ListItem>
-                </asp:CheckBoxList>
-                <asp:CheckBox ID="cbEnabled" runat="server" Text="Enabled" CssClass="cblStyle" />
+                </asp:CheckBoxList></td><td> <asp:CheckBox ID="cbEnabled" runat="server" Text="Enabled" CssClass="cblStyle"/></td></tr></table>
+
+               
             </td>
             <td class="style3">
                 <asp:CustomValidator runat="server" ID="CustomValidator1" ClientValidationFunction="ValidateModuleList2"
@@ -106,7 +108,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td style="vertical-align:top;">
                 <p>
                     Equipment:</p>
             </td>
@@ -119,11 +121,12 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td style="vertical-align:top;">
                 <p>Description:</p>
             </td>
             <td>
                 <asp:TextBox ID="tbDescription" runat="server" Height="144px" CssClass="tbStyle" TextMode="MultiLine"></asp:TextBox>
+
             </td>
         </tr>
         <tr>
@@ -134,15 +137,17 @@
             </td>
             <td>
                 <asp:TextBox ID="tbVideoLink" runat="server" CssClass="tbStyle"></asp:TextBox>
-            </td>
-            <td class="style1">
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Please enter a video link"
+                                <br />
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Please enter a video link"
                     ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" SetFocusOnError="True"
                     ValidationGroup="AddExercise"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Improper video link format"
                     ControlToValidate="tbVideoLink" Display="Dynamic" ForeColor="Red" 
                     ValidationGroup="AddExercise" 
                     ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?"></asp:RegularExpressionValidator>
+            </td>
+            <td class="style1">
+
             </td>
         </tr>
     </table>

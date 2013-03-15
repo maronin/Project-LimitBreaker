@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Drawing;
+
 public partial class _Default : System.Web.UI.Page
 {
     SystemExerciseManager manager = new SystemExerciseManager();
@@ -15,20 +16,30 @@ public partial class _Default : System.Web.UI.Page
         HtmlGenericControl home = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("lisystemExercise");
         home.Attributes.Add("class", "active");
         nameChanged = false;
-
+        lblResult.Text = "";
         viewExercises.userControlEventHappened += new EventHandler(viewExercises_userControlEventHappened);
         //rblEnaber.Visible = false;
         //pnlModifyExercise.Visible = false;
         if (!IsPostBack) { 
         viewExercises.populateExiseList();
         populateForm();
+        pnlAddExercise.Visible = true;
+        pnlModifyExercises.Visible = false;
+        btnModifyExercise.Enabled = true;
+        btnAddExercise.Enabled = false;
+
+       
         }
+
+        viewExercises.hideInfo = false;
+
     }
 
     private void viewExercises_userControlEventHappened(object sender, EventArgs e)
     {
         if (viewExercises.exists)
             populateForm();
+        lblDeletionResult.Text = "";
         
     }
 
@@ -139,17 +150,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnConfirmChanges_Click(object sender, EventArgs e)
     {
-        bool rep = false, wieght = false, time = false, distance = false;
         string muscleGroups = "";
-
-        if (cblAttributes.Items[0].Selected)
-            rep = true;
-        if (cblAttributes.Items[1].Selected)
-            wieght = true;
-        if (cblAttributes.Items[2].Selected)
-            distance = true;
-        if (cblAttributes.Items[3].Selected)
-            time = true;
 
         foreach (ListItem item in cblMuscleGroups.Items)
         {
@@ -157,7 +158,7 @@ public partial class _Default : System.Web.UI.Page
                 muscleGroups += item.Text + System.Environment.NewLine;
         }
 
-        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, rep, wieght, distance, time, tbModifyDescription.Text, nameChanged) && tbExerciseName.Text != "")
+        if (manager.modifyExercise(manager.getExerciseID(viewExercises.ddlValue), tbExerciseName.Text, muscleGroups, tbEquipment.Text, tbVideoLink.Text, cblAttributes.Items[0].Selected, cblAttributes.Items[1].Selected, cblAttributes.Items[2].Selected, cblAttributes.Items[3].Selected, tbModifyDescription.Text, nameChanged) && tbExerciseName.Text != "")
         {
             lblResult.ForeColor = System.Drawing.Color.Green;
             lblResult.Text = "Modified Succesfully!";
@@ -167,6 +168,7 @@ public partial class _Default : System.Web.UI.Page
         {
             lblResult.ForeColor = System.Drawing.Color.Red;
             lblResult.Text = "Exercise name already exists";
+            lblResult.ForeColor = Color.Red;
             viewExercises.populateExiseList();
         }
 
@@ -174,10 +176,25 @@ public partial class _Default : System.Web.UI.Page
         {
             lblResult.ForeColor = System.Drawing.Color.Orange;
             lblResult.Text = "Please enter an exercise name";
+            lblResult.ForeColor = Color.Orange;
         }
-
+        clearModifyForm();
         populateForm();
     }
+
+    protected void clearModifyForm()
+    {
+
+        cblAttributes.Items[0].Selected = false;
+        cblAttributes.Items[1].Selected = false;
+        cblAttributes.Items[2].Selected = false;
+        cblAttributes.Items[3].Selected = false;
+        tbEquipment.Text = "";
+        tbModifyDescription.Text = "";
+        tbVideoLink.Text = "";
+
+    }
+
     protected void btnDeleteExercise_Click(object sender, EventArgs e)
     {
         ExerciseManager deleter = new ExerciseManager();
@@ -189,22 +206,48 @@ public partial class _Default : System.Web.UI.Page
             if (result)
             {
                 lblDeletionResult.Text = "The exercise has been removed";
-                Response.Redirect("default.aspx");
+                lblDeletionResult.ForeColor = Color.Green;
+                //Response.Redirect("default.aspx");
+                viewExercises.populateExiseList();
+                clearModifyForm();
+                populateForm();
             }
 
             else
             {
                 lblDeletionResult.Text = "Something went wrong with the database deletion";
+                lblDeletionResult.ForeColor = Color.Red;
             }
         }
 
         catch (Exception)
         {
             lblDeletionResult.Text = "Something went wrong with the execution of the page";
+            lblDeletionResult.ForeColor = Color.Red;
         }
     }
     protected void tbExerciseName_TextChanged(object sender, EventArgs e)
     {
         nameChanged = true;
+    }
+    protected void btnAddExercise_Click(object sender, EventArgs e)
+    {
+        btnAddExercise.Enabled = false;
+        //MultiViewExercises.ActiveViewIndex = 0;
+        pnlAddExercise.Visible = true;
+        pnlModifyExercises.Visible = false;
+        btnModifyExercise.Enabled = true;
+        Label result = (Label)addExercises.FindControl("lblResult");
+        result.Text = "";
+    }
+    protected void btnModifyExercise_Click(object sender, EventArgs e)
+    {
+        btnModifyExercise.Enabled = false;
+        //MultiViewExercises.ActiveViewIndex = 1;
+        pnlAddExercise.Visible = false;
+        pnlModifyExercises.Visible = true;
+        btnAddExercise.Enabled = true;
+        viewExercises.populateExiseList();
+        viewExercises.colorCodeExercises();
     }
 }
