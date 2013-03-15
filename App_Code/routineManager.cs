@@ -30,6 +30,14 @@ public class routineManager
         }
     }
 
+    public Routine getRoutineByName(string routineName)
+    {
+        using (var context = new Layer2Container())
+        {
+            return context.Routines.FirstOrDefault(routine => routine.name == routineName);
+        }
+    }
+
     public ICollection<Routine> getUsersRoutines(int userID)
     {
         using (var context = new Layer2Container())
@@ -43,6 +51,18 @@ public class routineManager
 
             return rc;
         }
+    }
+
+    public Routine getRoutineByScheduledItem(Int32 id)
+    {
+        using (var context = new Layer2Container())
+        {
+            ScheduledRoutine schRoutine = context.ScheduledRoutines.Where(e => e.id == id).FirstOrDefault();
+            context.LoadProperty(schRoutine, "Routine");
+            return context.Routines.Where(e => e.id == schRoutine.Routine.id).FirstOrDefault();
+
+        }
+
     }
 
     // Return a single routine object based on routine ID parameter
