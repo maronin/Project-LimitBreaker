@@ -14,11 +14,11 @@ public partial class User_Default : System.Web.UI.Page
         MembershipUser userInfo = Membership.GetUser(username.Text.Trim());
         if (userInfo != null)
         {
-            String verifyURL = Request.Url.GetLeftPart(UriPartial.Authority) + Page.ResolveUrl("~/User/reset.aspx?ID=" + userInfo.ProviderUserKey.ToString());
             MailMessage mm = new MailMessage();
             mm.To.Add(new MailAddress(userInfo.Email, "LimitBreaker password reset"));
             mm.From = new MailAddress("lynart@limitbreaker.com");
-            mm.Body = "<a href=" + verifyURL + ">Click here to reset</a> your password";
+            mm.Body = "Your password has been reset to <b>" + userInfo.ResetPassword() + "</b>\nPlease login and change your password";
+            Membership.UpdateUser(userInfo);
             mm.IsBodyHtml = true;
             mm.Subject = "LimitBreaker password reset";
             SmtpClient smcl = new SmtpClient();

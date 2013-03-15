@@ -16,4 +16,9 @@ public partial class User_changePassword : System.Web.UI.Page
         }
 
     }
+
+    protected void ContinuePushButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("profile.aspx");
+    }
 }
