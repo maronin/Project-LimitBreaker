@@ -13,6 +13,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 {
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
+    SystemExerciseManager sysExerciseManager = new SystemExerciseManager();
     routineManager routineManager = new routineManager();
     bool atlernatingColor = true;
     static bool addNewItem = false;
@@ -609,7 +610,9 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string[] commandArgs = e.CommandArgument.ToString().Split(new char[] { ';' });
-       
+        lblResultModify.Text = "";
+        lblMuscleGroupsModify.Text = "";
+        lblExercisesInRoutine.Text = "";
        if(commandArgs.Count() > 1)
            modifyExercise = Convert.ToBoolean(commandArgs[1]);
 
@@ -632,159 +635,196 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
         }
 
-        if (e.CommandName == "modify")
+        if (e.CommandName == "modify" || e.CommandName == "info")
         {
-            lblResultModify.Text = "";
-            lblMuscleGroupsModify.Text = "";
+            if (e.CommandName == "modify")
+            {
+                pnlModifyStartTime.Visible = true;
+                scheduledItem selectedItem = scheduleManager.getScheduledItemByID(modifyItemID, modifyExercise);
+                DateTime itemStartTime = selectedItem.startTime;
+                tbDateModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
+                for (int i = 0; i < ddlModifyItems.Items.Count; i++)
+                {
+                    if (ddlModifyItems.Items[i].Text == selectedItem.itemName)
+                    {
+                        ddlModifyItems.SelectedIndex = i;
+                        break;
+                    }
+                }
+                //Select the dropdownlist for Hour based on the selected item
+                for (int i = 0; i < ddlHoursModify.Items.Count; i++)
+                {
+                    if (Convert.ToInt32(ddlHoursModify.Items[i].Text) == Convert.ToInt32(itemStartTime.ToString("hh")))
+                    {
+                        ddlHoursModify.SelectedIndex = i;
+                        break;
+                    }
+                }
+                //Select the dropdownlist for the minute based on the selected item
+                for (int i = 0; i < ddlMinutesModify.Items.Count; i++)
+                {
+                    if (Convert.ToInt32(ddlMinutesModify.Items[i].Text) == Convert.ToInt32(itemStartTime.ToString("mm")))
+                    {
+                        ddlMinutesModify.SelectedIndex = i;
+                        break;
+                    }
+                }
+                //select the dropdownlist for the AM or PM for the selected item
+                if (itemStartTime.ToString("tt") == "AM")
+                {
+                    ddlAmPmModify.SelectedIndex = 0;
+                }
+                else
+                {
+                    ddlAmPmModify.SelectedIndex = 1;
+                }
+                if (Convert.ToBoolean(commandArgs[1]))
+                {
+                    pnlExercisesInRoutine.Visible = false;
+                    pnlEquipmentMuscle.Visible = true;
+                    Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
+                    ddlModifyItems.DataSource = exerciseManager.getExercises();
+                    ddlModifyItems.DataBind();
+                    lblEquipmentModify.Text = exercise.equipment;
+                    lblNameModify.Text = exercise.name;
+                    if (exercise != null)
+                        if (exercise.description != null)
+                            lblDescriptionModify.Text = exercise.description;
+                        else
+                        {
+                            lblDescriptionModify.Text = "None";
+                        }
+
+                    lblMuscleGroupsModify.Text = "";
+                    String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
+                    foreach (var item in muscles)
+                    {
+                        if (item != "")
+                            lblMuscleGroupsModify.Text += "- " + item + "<br/>";
+                    }
+                    //lblDescriptionModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
+
+                }
+
+            //User selected a scheduled Routine
+                else
+                {
+                    Routine routine = routineManager.getRoutineByScheduledItem(Convert.ToInt32(commandArgs[0]));
+                    ddlModifyItems.DataSource = routineManager.getUsersRoutines(userID);
+                    ddlModifyItems.DataBind();
+                    lblEquipmentModify.Visible = false;
+                    pnlEquipmentMuscle.Visible = false;
+                    lblDescriptionModify.Text = "";
+                    ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(routine.id);
+                    foreach (var item in exercisesInRoutine)
+                    {
+                        lblExercisesInRoutine.Text += "-" + item.name + "<br />";
+                    }
+                    lblDescriptionModify.Text = "None";
+                    pnlEquipmentMuscle.Visible = false;
+                }
+            }
+
+
             pnlModifyItem.Visible = true;
             btnModify.Visible = true;
             ddlModifyItems.Visible = true;
             lblEquipmentModify.Visible = true;
-            pnlEquipmentMuscle.Visible = true;
-
-            scheduledItem selectedItem = scheduleManager.getScheduledItemByID(modifyItemID, modifyExercise);
-            DateTime itemStartTime = selectedItem.startTime;
-
-            //User selected a scheduled Exercise
-            if (Convert.ToBoolean(commandArgs[1]))
-            {
-                Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
-                ddlModifyItems.DataSource = exerciseManager.getExercises();
-                ddlModifyItems.DataBind();
-                lblEquipmentModify.Text = exercise.equipment;
-                if (exercise != null)
-                    if (exercise.description != null)
-                        lblDescriptionModify.Text = exercise.description;
-                    else
-                    {
-                        lblDescriptionModify.Text = "None";
-                    }
-
-
-                String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
-                foreach (var item in muscles)
-                {
-                    if (item != "")
-                        lblMuscleGroupsModify.Text += "- " + item + "<br/>";
-                }
-                //lblDescriptionModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
-
-            }
-
-            //User selected a scheduled Routine
-            else
-            {
-                Routine routine = routineManager.getRoutine(Convert.ToInt32(commandArgs[0]));
-                ddlModifyItems.DataSource = routineManager.getUsersRoutines(userID);
-                ddlModifyItems.DataBind();
-                lblEquipmentModify.Visible = false;
-                pnlEquipmentMuscle.Visible = false;
-                lblDescriptionModify.Text = "";
-            }
-
-
-            tbDateModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
-            for (int i = 0; i < ddlModifyItems.Items.Count; i++)
-            {
-                if (ddlModifyItems.Items[i].Text == selectedItem.itemName)
-                {
-                    ddlModifyItems.SelectedIndex = i;
-                    break;
-                }
-            }
-
-
-
-            //Select the dropdownlist for Hour based on the selected item
-            for (int i = 0; i < ddlHoursModify.Items.Count; i++)
-            {
-                if (Convert.ToInt32(ddlHoursModify.Items[i].Text) == Convert.ToInt32(itemStartTime.ToString("hh")))
-                {
-                    ddlHoursModify.SelectedIndex = i;
-                    break;
-                }
-            }
-            //Select the dropdownlist for the minute based on the selected item
-            for (int i = 0; i < ddlMinutesModify.Items.Count; i++)
-            {
-                if (Convert.ToInt32(ddlMinutesModify.Items[i].Text) == Convert.ToInt32(itemStartTime.ToString("mm")))
-                {
-                    ddlMinutesModify.SelectedIndex = i;
-                    break;
-                }
-            }
-            //select the dropdownlist for the AM or PM for the selected item
-            if (itemStartTime.ToString("tt") == "AM")
-            {
-                ddlAmPmModify.SelectedIndex = 0;
-            }
-            else
-            {
-                ddlAmPmModify.SelectedIndex = 1;
-            }
-        }
-
-        if (e.CommandName == "info")
-        {
-
-            int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = GridViewScheduledItems.Rows[index];
-            Control control = row.Cells[0].Controls[0];
-   
-            WebControl wc = (WebControl)control;
-            LinkButton lb = (LinkButton)wc;
-            test1.Text = lb.Text;
-
-
-
-            control = row.Cells[0].Controls[0];
-
-
-
-
 
 
 
             //User selected a scheduled Exercise
-            if(commandArgs.Count() > 1)
-            if (Convert.ToBoolean(commandArgs[1]))
+
+
+            if (e.CommandName == "info")
             {
-                Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
-                ddlModifyItems.DataSource = exerciseManager.getExercises();
-                ddlModifyItems.DataBind();
-                lblEquipmentModify.Text = exercise.equipment;
-                if (exercise != null)
-                    if (exercise.description != null)
-                        lblDescriptionModify.Text = exercise.description;
-                    else
-                    {
-                        lblDescriptionModify.Text = "None";
-                    }
+                pnlModifyStartTime.Visible = false;
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = GridViewScheduledItems.Rows[index];
+                Control control = row.Cells[0].Controls[0];
+                WebControl wc = (WebControl)control;
+                LinkButton lb = (LinkButton)wc;
 
-
-                String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
-                foreach (var item in muscles)
+                if (lb.Text.Contains("[E] "))
                 {
-                    if (item != "")
-                        lblMuscleGroupsModify.Text += "- " + item + "<br/>";
+
+                    pnlExercisesInRoutine.Visible = false;
+                    pnlEquipmentMuscle.Visible = true;
+                    lnkVideoModify.Visible = true;
+                    Exercise selectedExercise = sysExerciseManager.getExercise(lb.Text.Substring(4, lb.Text.Length - 4));
+
+                    lblDescriptionModify.Text = selectedExercise.description;
+                    lblNameModify.Text = selectedExercise.name;
+                    lnkVideoModify.PostBackUrl = selectedExercise.videoLink;
+                    String[] muscles = exerciseManager.splitMuscleGroups(selectedExercise.muscleGroups);
+                    foreach (var item in muscles)
+                    {
+                        if (item != "")
+                            lblMuscleGroupsModify.Text += "- " + item + "<br/>";
+                    }
+                    lblEquipmentModify.Text = selectedExercise.equipment;
                 }
-                //lblDescriptionModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
 
+                else if (lb.Text.Contains("[R] "))
+                {
+                    pnlExercisesInRoutine.Visible = true;
+                    routineManager routineManager = new routineManager();
+
+                    Routine selectedRoutine = routineManager.getRoutineByName(lb.Text.Substring(4, lb.Text.Length - 4));
+                    ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(selectedRoutine.id);
+                    foreach (var item in exercisesInRoutine)
+                    {
+                        lblExercisesInRoutine.Text += "-" + item.name + "<br />";
+                    }
+                    lblDescriptionModify.Text = "None";
+                    lblNameModify.Text = selectedRoutine.name;
+                    lnkVideoModify.Visible = false;
+                    pnlEquipmentMuscle.Visible = false;
+                }
+
+                /*if (Convert.ToBoolean(commandArgs[1]))
+                {
+                    Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
+                    ddlModifyItems.DataSource = exerciseManager.getExercises();
+                    ddlModifyItems.DataBind();
+                    lblEquipmentModify.Text = exercise.equipment;
+                    if (exercise != null)
+                        if (exercise.description != null)
+                            lblDescriptionModify.Text = exercise.description;
+                        else
+                        {
+                            lblDescriptionModify.Text = "None";
+                        }
+
+
+                    String[] muscles = exerciseManager.splitMuscleGroups(exercise.muscleGroups);
+                    foreach (var item in muscles)
+                    {
+                        if (item != "")
+                            lblMuscleGroupsModify.Text += "- " + item + "<br/>";
+                    }
+                    //lblDescriptionModify.Text = itemStartTime.Date.ToString("MM/dd/yyyy");
+
+                }
+            
+                //User selected a scheduled Routine
+                else
+                {
+                    Routine routine = routineManager.getRoutine(Convert.ToInt32(commandArgs[0]));
+                    ddlModifyItems.DataSource = routineManager.getUsersRoutines(userID);
+                    ddlModifyItems.DataBind();
+                    lblEquipmentModify.Visible = false;
+                    pnlEquipmentMuscle.Visible = false;
+                    lblDescriptionModify.Text = "";
+                }
+
+                */
             }
 
-            //User selected a scheduled Routine
-            else
-            {
-                Routine routine = routineManager.getRoutine(Convert.ToInt32(commandArgs[0]));
-                ddlModifyItems.DataSource = routineManager.getUsersRoutines(userID);
-                ddlModifyItems.DataBind();
-                lblEquipmentModify.Visible = false;
-                pnlEquipmentMuscle.Visible = false;
-                lblDescriptionModify.Text = "";
-            }
-
-
+            
         }
+
+
 
     }
     protected void populateRemoveItems()
@@ -844,7 +884,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (scheduleManager.modifyScheduledItem(Convert.ToInt32(modifyItemID), Convert.ToInt32(ddlModifyItems.SelectedValue), modifyExercise, Convert.ToDateTime(Convert.ToDateTime(tbDateModify.Text + " " + ddlHoursModify.Text + ":" + ddlMinutesModify.Text + ":00 " + ddlAmPmModify.Text))))
         {
             lblResultModify.Text = "Successfully modified scheduled item";
-
+            pnlModifyItem.Visible = false;
         }
 
         else

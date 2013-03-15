@@ -400,7 +400,7 @@
                                             <SortedDescendingCellStyle BackColor="#EAEAD3" />
                                             <SortedDescendingHeaderStyle BackColor="#575357" />
                                         </asp:GridView>
-                                        <asp:Label ID="test1" runat="server" Text="Label"></asp:Label>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -414,13 +414,43 @@
                             </table>
                             <hr />
                             <asp:ObjectDataSource ID="ScheduledItems" runat="server"></asp:ObjectDataSource>
-                            <br />
+
                             <asp:Panel ID="pnlModifyItem" runat="server" Visible="False">
-                                <h5>
+                                <h2 style="text-align:center;">
+                                <asp:Label ID="lblNameModify" runat="server" Text=""></asp:Label>
+                                </h2>
+                                <h3 style="text-align:center; margin-top: -10px;"><asp:LinkButton ID="lnkVideoModify" runat="server">[Video]</asp:LinkButton></h3>
+
+                                <br />
+                                <table>
+                                <tr>
+                                <td>
+                                                                <h5>
                                     Description:</h5>
-                                <br />
+                                </td>
+                                
+                                <td>
+                                                                    <asp:Panel ID="pnlExercisesInRoutine" runat="server">
+                                  <h5>Exercises: </h5>
+                                                                    </asp:Panel>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>
+
                                 <asp:TextBox ID="lblDescriptionModify" onkeypress="return false;" runat="server" Text="None" Height="211px" TextMode="MultiLine" width="511px" Font-Italic="False" ReadOnly="True">None</asp:TextBox>
+                                
+                                </td>
+                                <td style="vertical-align:top;">
+
+                                <asp:Label ID="lblExercisesInRoutine" runat="server" Text=""></asp:Label>
+
+                                </td>
+
+                                </tr>
+                                </table>
                                 <br />
+
                                 <asp:Panel ID="pnlEquipmentMuscle" runat="server">
                                     <h5>
                                         Muscle Groups</h5>
@@ -434,6 +464,10 @@
                                 </asp:Panel>
                                 <br />
                                 <br />
+                                <hr />
+                                <asp:Panel ID="pnlModifyStartTime" runat="server" Visible="false">
+
+                                <h4>Modify Start Time</h4>
                                 <table>
                                     <tr>
                                         <td>
@@ -506,6 +540,7 @@
                                         </td>
                                     </tr>
                                 </table>
+                                                                </asp:Panel>
                             </asp:Panel>
                             <br />
                             <br />
