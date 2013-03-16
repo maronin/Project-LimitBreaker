@@ -56,6 +56,9 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
                 GridView1.DataBind();
             }
         }
+        else if (e.CommandName == "view")
+        {
+        }
     }
 
     protected void btnConfirm_Click(object sender, EventArgs e)

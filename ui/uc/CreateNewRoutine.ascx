@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CreateNewRoutine.ascx.cs" Inherits="ui_uc_CreateNewRoutine" %>
+<%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagPrefix="uc1" TagName="ucViewExercise" %>
+
 <!-- credits to: kubben, url: http://www.codeproject.com/Articles/17241/Capturing-the-Enter-key-to-cause-a-button-click -->
 <script type="text/javascript">
     function doClick(buttonName, e) {
@@ -98,7 +100,6 @@
                     </td>
                 </tr>
             </table>
-
         </ContentTemplate>
     </asp:UpdatePanel>
 </div>
