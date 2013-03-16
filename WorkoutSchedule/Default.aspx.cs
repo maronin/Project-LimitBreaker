@@ -693,6 +693,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 }
                 if (Convert.ToBoolean(commandArgs[1]))
                 {
+                    listBoxExercisesForRoutineModify.Visible = false;
+                    lblExercisesforroutine.Visible = false;
                     pnlExercisesInRoutine.Visible = false;
                     pnlEquipmentMuscle.Visible = true;
                     Exercise exercise = exerciseManager.getExerciseByScheduledItem(Convert.ToInt32(modifyItemID));
@@ -735,6 +737,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                     }
                     lblDescriptionModify.Text = "None";
                     pnlEquipmentMuscle.Visible = false;
+                    ddlModifyItems_indexChanged(sender, e);
+                    pnlExercisesInRoutine.Visible = true;
+                    listBoxExercisesForRoutineModify.Visible = true;
+                    lblExercisesforroutine.Visible = true;
                 }
             }
 
@@ -760,7 +766,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
                 if (lb.Text.Contains("[E] "))
                 {
-
+                    listBoxExercisesForRoutineModify.Visible = false;
+                    lblExercisesforroutine.Visible = false;
                     pnlExercisesInRoutine.Visible = false;
                     pnlEquipmentMuscle.Visible = true;
                     lnkVideoModify.Visible = true;
@@ -782,7 +789,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 {
                     pnlExercisesInRoutine.Visible = true;
                     routineManager routineManager = new routineManager();
-
+                    routineManager.setUserID(userID);
                     Routine selectedRoutine = routineManager.getRoutineByName(lb.Text.Substring(4, lb.Text.Length - 4));
                     ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(selectedRoutine.id);
                     foreach (var item in exercisesInRoutine)
@@ -1209,6 +1216,21 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         if (ddlRoutines.Items.Count != 0)
         {
             cbRepeatRoutine.Enabled = true;
+        }
+    }
+
+    protected void ddlModifyItems_indexChanged(object sender, EventArgs e)
+    {
+        if(pnlExercisesInRoutine.Visible){
+            Routine selectedRoutine = routineManager.getRoutineByName(ddlModifyItems.SelectedItem.Text);
+            ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(selectedRoutine.id);
+            listBoxExercisesForRoutineModify.Items.Clear();
+
+            foreach (var item in exercisesInRoutine)
+            {
+                listBoxExercisesForRoutineModify.Items.Add(item.name);
+            }
+            listBoxExercisesForRoutineModify.DataBind();
         }
     }
 

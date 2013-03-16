@@ -125,7 +125,7 @@
                                         <asp:Button ID="addExercise" runat="server" Text="Exercise" OnClick="addExercise_Click"
                                             CssClass="button" />
                                         <br />
-                                        <asp:Button ID="goBack" runat="server" Text="Back" OnClick="goBack_Click" CssClass="button" />
+                                        <asp:Button ID="goBack" runat="server" Text="Back To Calendar" OnClick="goBack_Click" CssClass="button" />
                                     </div>
                                 </asp:View>
                                 <!---------------------------------------------------------------------------- Schedule Exercise view[1] --------------------------------------------------------------------------------------->
@@ -135,6 +135,7 @@
                                             Schedule a new Exercise!</h1>
                                         <br />
                                         <uc1:viewExercises ID="viewExercises" runat="server" />
+                                        <h3>Start Time:</h3>
                                         <asp:Panel ID="TimeSelectPanel" runat="server">
                                             Time:
                                             <asp:DropDownList ID="ddlHours_exercise" runat="server">
@@ -214,6 +215,7 @@
                                         <h1 style="text-align: center">
                                             Schedule a new Routine!</h1>
                                         <table class="scheduleTable">
+                                           <tr><td></td><td></td><td>Exercises for routine:</td></tr>
                                             <tr>
                                                 <td>
                                                     Select a routine:
@@ -225,7 +227,7 @@
                                                     <asp:LinkButton ID="lnkNotHaveRoutines" runat="server" Visible="False" OnClick="changeToRoutine">Click here to add a new routine</asp:LinkButton>
                                                 </td>
                                                 <td rowspan="3">
-                                                Exercises for routine:
+                                                
                                                     <asp:ListBox ID="listBoxExercisesForRoutine" runat="server" Width="170px" Height="75px" Enabled="False"></asp:ListBox>
                                                 </td>
                                             </tr>
@@ -473,15 +475,21 @@
 
                                 <h4>Modify Start Time</h4>
                                 <table>
+                                <tr><td></td><td></td><td>
+                                    <asp:Label ID="lblExercisesforroutine" runat="server" Text="Exercises for routine:"></asp:Label></td></tr>
                                     <tr>
                                         <td>
                                             Change item to:
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="ddlModifyItems" runat="server" DataTextField="name" DataValueField="id"
-                                                Visible="False" Width="155px">
+                                                Visible="False" Width="155px" OnSelectedIndexChanged="ddlModifyItems_indexChanged" AutoPostBack="True">
                                             </asp:DropDownList>
                                         </td>
+                                                <td rowspan="3">
+
+                                                    <asp:ListBox ID="listBoxExercisesForRoutineModify" runat="server" Width="170px" Height="75px" Enabled="False"></asp:ListBox>
+                                                </td>
                                     </tr>
                                     <tr>
                                         <td>
