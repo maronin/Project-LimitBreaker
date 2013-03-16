@@ -153,7 +153,7 @@
                     <tr>
                         <td>
                             <asp:Label ID="Label3" runat="server" Font-Size="Medium" Text="Exercise List"></asp:Label>
-                            <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True"></asp:ListBox>
+                            <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="lbExerciseList_SelectedIndexChanged"></asp:ListBox>
                             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="getExercisesByMuscleGroup" TypeName="SystemExerciseManager">
                                 <SelectParameters>
                                     <asp:ControlParameter ControlID="ddlMuscleGroups" Name="muscleGroup" PropertyName="SelectedValue" Type="String" />
@@ -163,6 +163,24 @@
                         <td class="auto-style2">
                             <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add Exercise" />
                             <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Panel ID="pnlDescription" runat="server" Visible="False">
+                            <div id="description" style="max-width: 600px; padding-bottom:10px;">
+                                <asp:Label ID="lblDescEquHeader" runat="server" Font-Size="Medium" Text="Description and Equipment">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblDescription" runat="server" Text="">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblEquipment" runat="server" Text="">
+                                </asp:Label>
+                            </div>
+                        </asp:Panel>
                         </td>
                     </tr>
                     <tr>
