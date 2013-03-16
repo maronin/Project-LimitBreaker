@@ -35,6 +35,15 @@
     .selectBtn {
         text-align: center;
     }
+
+    .auto-style2 {
+        height: 23px;
+    }
+
+    .auto-style3 {
+        text-align: center;
+        height: 23px;
+    }
 </style>
 <h4>Create New Routine</h4>
 <div id="content">
@@ -61,7 +70,7 @@
                 <tr>
                     <td>
                         <asp:Label ID="Label3" runat="server" Font-Size="Medium" Text="Exercise List"></asp:Label>
-                        <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True"></asp:ListBox>
+                        <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="lbExerciseList_SelectedIndexChanged"></asp:ListBox>
                         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="getExercisesByMuscleGroup" TypeName="SystemExerciseManager">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="ddlMuscleGroups" Name="muscleGroup" PropertyName="SelectedValue" Type="String" />
@@ -76,6 +85,20 @@
                     <td>
                         <asp:Label ID="Label4" runat="server" Font-Size="Medium" Text="Selected Exercises"></asp:Label>
                         <asp:ListBox ID="lbSelected" runat="server" Width="100%" AutoPostBack="True"></asp:ListBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2" colspan="3">
+                        <asp:Panel ID="pnlDescription" runat="server" Visible="False">
+                            <div id="description" style="max-width: 600px; padding-bottom:10px;">
+                                <asp:Label ID="lblDescHeader" runat="server" Font-Size="Medium" Text="Description">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblDescription" runat="server" Text="">
+                                </asp:Label>
+                            </div>
+                        </asp:Panel>
                     </td>
                 </tr>
                 <tr>
