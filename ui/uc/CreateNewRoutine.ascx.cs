@@ -157,10 +157,11 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         {
             Exercise exerciseItem = new Exercise();
             exerciseItem = sysManager.getExercise(lbExerciseList.SelectedItem.Text);
-            if (exerciseItem != null && !exerciseItem.description.Trim().Equals(""))
+            if (exerciseItem != null )
             {
                 pnlDescription.Visible = true;
-                lblDescription.Text = exerciseItem.description.Trim();
+                lblDescription.Text = !exerciseItem.description.Trim().Equals("") ? exerciseItem.description.Trim(): "No Description";
+                lblEquipment.Text = !exerciseItem.equipment.Trim().ToLower().Equals("none") ? exerciseItem.equipment.Replace(" ", "<br />") : "No Equipment";
             }
             else
                 pnlDescription.Visible = false;

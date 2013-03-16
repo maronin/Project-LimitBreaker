@@ -91,11 +91,15 @@
                     <td class="auto-style2" colspan="3">
                         <asp:Panel ID="pnlDescription" runat="server" Visible="False">
                             <div id="description" style="max-width: 600px; padding-bottom:10px;">
-                                <asp:Label ID="lblDescHeader" runat="server" Font-Size="Medium" Text="Description">
+                                <asp:Label ID="lblDescEquHeader" runat="server" Font-Size="Medium" Text="Description and Equipment">
                                 </asp:Label>
                                 <br />
                                 <br />
                                 <asp:Label ID="lblDescription" runat="server" Text="">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblEquipment" runat="server" Text="">
                                 </asp:Label>
                             </div>
                         </asp:Panel>
