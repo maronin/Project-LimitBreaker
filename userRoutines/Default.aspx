@@ -28,41 +28,42 @@
             <p>You need to log in first before you can manage your routines.</p>
         </AnonymousTemplate>
         <LoggedInTemplate>
-        <div class="exerciseForm" style="min-height:670px;">
-            <h4>List of Routines</h4>
-            <div class="content">
-                <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%">
-                </asp:ListBox>
-            </div>
-            <asp:Panel ID="pnlButtons" runat="server">
-
-                <div id="buttons">
-                    <asp:Button ID="btnModifyRoutines" runat="server" Text="Modify Routines" CssClass="button" OnClick="btnModifyRoutines_Click" />
-                    <asp:Button ID="btnCreateRoutines" runat="server" Text="Create Routine" CssClass="button" OnClick="btnCreateRoutines_Click" />
-                    <asp:Button ID="btnViewLogs" runat="server" Text="View Logs" CssClass="button" OnClick="btnViewLogs_Click" />
-                    <asp:Button ID="btnCreateLogs" runat="server" Text="Create Logs" CssClass="button" OnClick="btnCreateLogs_Click" />
-                </div>
-            </asp:Panel>
-
-            <asp:MultiView ID="mvRoutine" runat="server">
-                <asp:View ID="ViewRoutines" runat="server">
-                    <div id="deleteModify">
-                        <uc1:DeleteModifyRoutine runat="server" ID="DeleteModifyRoutine" />
+            <div class="exerciseForm" style="min-height: 670px;">
+                <asp:Panel ID="pnlRoutineList" runat="server" Visible="false">
+                    <h4>List of Routines</h4>
+                    <div class="content">
+                        <asp:ListBox ID="lbRoutines" runat="server" AutoPostBack="True" DataTextField="name" DataValueField="id" Font-Size="Medium" Width="100%"></asp:ListBox>
                     </div>
-                </asp:View>
-                <asp:View ID="CreateRoutines" runat="server">
-                    <div id="create">
-                        <uc1:CreateNewRoutine runat="server" ID="CreateNewRoutine" />
+                </asp:Panel>
+                <asp:Panel ID="pnlButtons" runat="server">
+
+                    <div id="buttons">
+                        <asp:Button ID="btnModifyRoutines" runat="server" Text="Modify Routines" CssClass="button" OnClick="btnModifyRoutines_Click" />
+                        <asp:Button ID="btnCreateRoutines" runat="server" Text="Create Routine" CssClass="button" OnClick="btnCreateRoutines_Click" />
+                        <asp:Button ID="btnViewLogs" runat="server" Text="View Logs" CssClass="button" OnClick="btnViewLogs_Click" />
+                        <asp:Button ID="btnCreateLogs" runat="server" Text="Create Logs" CssClass="button" OnClick="btnCreateLogs_Click" />
                     </div>
-                </asp:View>
-                <asp:View ID="ViewLoggedData" runat="server">
-                    <uc1:ucModifyDeleteRoutineLog runat="server" ID="ucModifyDeleteRoutineLog" />
-                </asp:View>
-                <asp:View ID="LogRoutineData" runat="server">
-                    <uc1:ucCreateRoutineLog runat="server" ID="ucCreateRoutineLog" />
-                </asp:View>
-            </asp:MultiView>
-            <asp:Button ID="btnBack" runat="server" Text="Back" CssClass="button" OnClick="btnBack_Click" />
+                </asp:Panel>
+
+                <asp:MultiView ID="mvRoutine" runat="server">
+                    <asp:View ID="ViewRoutines" runat="server">
+                        <div id="deleteModify">
+                            <uc1:DeleteModifyRoutine runat="server" ID="DeleteModifyRoutine" />
+                        </div>
+                    </asp:View>
+                    <asp:View ID="CreateRoutines" runat="server">
+                        <div id="create">
+                            <uc1:CreateNewRoutine runat="server" ID="CreateNewRoutine" />
+                        </div>
+                    </asp:View>
+                    <asp:View ID="ViewLoggedData" runat="server">
+                        <uc1:ucModifyDeleteRoutineLog runat="server" ID="ucModifyDeleteRoutineLog" />
+                    </asp:View>
+                    <asp:View ID="LogRoutineData" runat="server">
+                        <uc1:ucCreateRoutineLog runat="server" ID="ucCreateRoutineLog" />
+                    </asp:View>
+                </asp:MultiView>
+                <asp:Button ID="btnBack" runat="server" Text="Back" CssClass="button" OnClick="btnBack_Click" />
             </div>
         </LoggedInTemplate>
     </asp:LoginView>

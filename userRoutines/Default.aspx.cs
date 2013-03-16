@@ -20,6 +20,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     Panel pnlButtons;
     Button btnBack;
     ListBox lbRoutines;
+    Panel pnlRoutineList;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -39,10 +40,12 @@ public partial class userRoutines_Default : System.Web.UI.Page
             pnlButtons = LoginView1.FindControl("pnlButtons") as Panel;
             btnBack = LoginView1.FindControl("btnBack") as Button;
             lbRoutines = LoginView1.FindControl("lbRoutines") as ListBox;
+            pnlRoutineList = LoginView1.FindControl("pnlRoutineList") as Panel;
 
         }
         if (!IsPostBack)
         {
+            pnlRoutineList.Visible = false;
             if (authenticated)
             {
                 pnlButtons.Visible = true;
@@ -70,6 +73,7 @@ public partial class userRoutines_Default : System.Web.UI.Page
     }
     protected void btnModifyRoutines_Click(object sender, EventArgs e)
     {
+        pnlRoutineList.Visible = true;
         mvRoutines.ActiveViewIndex = 0;
         pnlButtons.Visible = false;
         btnBack.Visible = true;
@@ -82,12 +86,14 @@ public partial class userRoutines_Default : System.Web.UI.Page
     }
     protected void btnViewLogs_Click(object sender, EventArgs e)
     {
+        pnlRoutineList.Visible = true;
         mvRoutines.ActiveViewIndex = 2;
         pnlButtons.Visible = false;
         btnBack.Visible = true;
     }
     protected void btnCreateLogs_Click(object sender, EventArgs e)
     {
+        pnlRoutineList.Visible = true;
         mvRoutines.ActiveViewIndex = 3;
         pnlButtons.Visible = false;
         btnBack.Visible = true;
