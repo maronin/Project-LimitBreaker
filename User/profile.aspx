@@ -15,10 +15,7 @@
         var chartData = [];
         var chartCursor;
 
-        /*AmCharts.ready(window.onload = */function load() {
-            // generate some data first
-            //generateChartData();
-
+        /*AmCharts.ready(window.onload = */function load() {           
             myDates = new Array();
 
             var unsplitWeights = "<%=JSweights%>";
@@ -31,6 +28,7 @@
             var splitMonths = unsplitMonths.split(',');
             var splitDays = unsplitDays.split(',');
 
+            // generate some data first
             for (var i = 0; i < splitDays.length; i++) {
                 myDates[i] = new Date(splitYears[i], splitMonths[i]-1, splitDays[i], 0, 0, 0, 0);
             }
@@ -67,7 +65,7 @@
             valueAxis.axisAlpha = 0;
             valueAxis.dashLength = 1;
             chart.addValueAxis(valueAxis);
-
+            
             // GRAPH
             var graph = new AmCharts.AmGraph();
             graph.title = "red line";
@@ -95,33 +93,22 @@
             chart.write("chartdiv");
         }     //);
 
-        // generate some random data, quite different range
-        function generateChartData() {
-            var firstDate = new Date();
-            firstDate.setDate(firstDate.getDate() - 500);
-
-            for (var i = 0; i < 365; i++) {
-                var newDate = new Date(firstDate);
-                newDate.setDate(newDate.getDate() + i);
-
-                var visits = Math.round(Math.random() * 140) + 23;
-
+        function populateChart(arrayWeight, arrayDate) { //run the weight and date arrays in parallel
+            for (var i = 0; i < arrayWeight.length; i++) {
                 chartData.push({
-                    date: newDate,
-                    visits: visits
+                    date: arrayDate[i],
+                    visits: arrayWeight[i]
                 });
             }
         }
 
-        function populateChart(arrayWeight, arrayDate) { //run the weight and date arrays in parallel
-            if (arrayWeight.length > 0) {
-                for (var i = 0; i < arrayWeight.length; i++) {
-                    chartData.push({
-                        date: arrayDate[i],
-                        visits: arrayWeight[i]
-                    });
-                }
-            }
+        function addNewWeight() {
+            chartData.push({
+                date: new Date("<%=JSnewYear%>", "<%=JSnewMonth%>" - 1, "<%=JSnewDay%>", 0, 0, 0, 0),
+                visits: "<%=JSnewWeight%>"
+            });
+
+            
         }
 
         // this method is called when chart is first inited as we listen for "dataUpdated" event

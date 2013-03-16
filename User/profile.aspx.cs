@@ -17,6 +17,10 @@ public partial class User_profile : System.Web.UI.Page
     public string JSmonths = "";
     public string JSdays = "";
     public string JSweights = "";
+    public string JSnewYear = "";
+    public string JSnewMonth = "";
+    public string JSnewDay = "";
+    public string JSnewWeight = "";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -79,10 +83,31 @@ public partial class User_profile : System.Web.UI.Page
         if (manager.updateWeight(username, Convert.ToDouble(newWeight.Text)))
         {
             updateResultLbl.Text = "You have successfully updated your profile!";
+
+            string[] tempFull;
+            string[] tempDate;
+            tempFull = DateTime.Now.ToString().Split(' ');
+            tempDate = tempFull[0].Split('/');
+            JSnewYear = tempDate[2];
+            JSnewMonth = tempDate[1];
+            JSnewDay = tempDate[0];
+            JSnewWeight = newWeight.Text;
+
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "addNewWeight();", true);
         }
         else
         {
             updateResultLbl.Text = "Please wait 24 hours before updating your profile again";
+            string[] tempFull;
+            string[] tempDate;
+            tempFull = DateTime.Now.ToString().Split(' ');
+            tempDate = tempFull[0].Split('/');
+            JSnewYear = tempDate[2];
+            JSnewMonth = tempDate[1];
+            JSnewDay = tempDate[0];
+            JSnewWeight = newWeight.Text;
+
+            ClientScript.RegisterStartupScript(GetType(), "hwa", "addNewWeight();", true);
         }
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);
@@ -91,9 +116,7 @@ public partial class User_profile : System.Web.UI.Page
         newWeight.Text = Convert.ToString(Math.Round(userStats.weight, 2));
         newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
         rmr.Text = Convert.ToString(Math.Round(userStats.rmr, 2));
-        bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));
-
-        populateWeightChart(username);
+        bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));       
     }
 
     public void populateMedals(string userName)
