@@ -20,7 +20,7 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         lb = (ListBox)this.Parent.FindControl("lbRoutines");
         if (!IsPostBack)
         {
-
+            lblUniqueName.Visible = false;
         }
         if (lb != null && lb.SelectedIndex > -1)
         {
@@ -71,7 +71,10 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
             lb.DataValueField = "id";
             lb.DataBind();
             lb.SelectedIndex = index;
+            lblUniqueName.Visible = false;
         }
+        else
+            lblUniqueName.Visible = true;
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)

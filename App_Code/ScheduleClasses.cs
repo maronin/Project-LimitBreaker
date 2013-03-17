@@ -41,4 +41,10 @@ public class scheduledItem
         set;
     }
 
+    public virtual string description
+    {
+        get;
+        set;
+    }
+
 }
