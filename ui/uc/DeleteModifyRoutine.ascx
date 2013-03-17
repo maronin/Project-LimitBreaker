@@ -169,7 +169,7 @@
                         <td colspan="2">
                             <asp:Panel ID="pnlDescription" runat="server" Visible="False">
                             <div id="description" style="max-width: 600px; padding-bottom:10px;">
-                                <asp:Label ID="lblDescEquHeader" runat="server" Font-Size="Medium" Text="Description and Equipment">
+                                <asp:Label ID="lblDescEquHeader" runat="server" style="font-weight:900;text-decoration:underline;" Text="Description and Equipment">
                                 </asp:Label>
                                 <br />
                                 <br />
