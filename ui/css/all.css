@@ -308,7 +308,7 @@ form, fieldset
 {
     background: url(../images/sprite.png) no-repeat -53px 0;
     width: 36px;
-    height: 44px;
+    height: 45px;
     overflow: hidden;
     text-indent: -9999px;
     display: block;
@@ -320,6 +320,7 @@ form, fieldset
 {
     display: block;
     height: 100%;
+    
 }
 .buttons
 {
@@ -443,13 +444,21 @@ form, fieldset
 {
     background-position: -4px -352px;
 }
-.buttons .ico8 span
+.buttons .icoStar span
 {
     background-position: -4px -380px;
 }
-.buttons .active .ico8 span
+.buttons .active .icoStar span
 {
     background-position: -4px -415px;
+}
+.buttons .icoRoutines span
+{
+    background-position: -4px -448px;
+}
+.buttons .active .icoRoutines span
+{
+    background-position: -4px -472px;
 }
 .buttons li:hover .tooltip
 {
