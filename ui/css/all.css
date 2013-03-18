@@ -87,6 +87,7 @@ form, fieldset
     overflow: hidden;
     padding: 26px 13px 0 34px;
     background: url(../images/bg-controls.png);
+    background: rgb(33, 38, 43);
 }
 .links
 {
@@ -510,6 +511,7 @@ form, fieldset
     padding: 15px 0px 10px 0px;
     text-align: center;
     background: url(../images/bg-controls.png);
+    background: rgb(33, 38, 43);
 }
 
 #wrapper
@@ -520,7 +522,7 @@ form, fieldset
 
 h1, #contents h2, #contents h4, #contents h5, #contents h6
 {
-    color: #2e3a54;
+    color: rgb(255, 255, 255);
     font-family: "DaysOne-Regular";
     font-size: 36px;
     font-weight: normal;
