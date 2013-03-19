@@ -88,6 +88,7 @@ form, fieldset
     padding: 26px 13px 0 34px;
     background: url(../images/bg-controls.png);
     background: rgb(33, 38, 43);
+    margin-left: -0.4px;
 }
 .links
 {
@@ -512,6 +513,7 @@ form, fieldset
     text-align: center;
     background: url(../images/bg-controls.png);
     background: rgb(33, 38, 43);
+    margin-left: -0.5px;
 }
 
 #wrapper
@@ -667,6 +669,9 @@ input.input-validation-error, textarea.input-validation-error, select.input-vali
     border-radius: 20px;
     margin-bottom: 20px;
     background: url(../images/bg-controls.png);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(202, 202, 202);
 }
 
 .removeNextButton
