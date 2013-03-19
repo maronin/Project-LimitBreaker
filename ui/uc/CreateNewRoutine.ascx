@@ -119,7 +119,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" />
+                        <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" CssClass="button" />
                     </td>
                     <td>&nbsp;</td>
                     <td>

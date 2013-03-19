@@ -125,7 +125,7 @@
             <asp:Panel ID="Panel1" runat="server" Enabled="False" Visible="False">
 
 
-                <asp:Button ID="btnDelete" runat="server" CssClass="deleteBtn" Text="Delete Routine" />
+                <asp:Button ID="btnDelete" runat="server" CssClass="deleteBtn button" Text="Delete Routine" />
                 <asp:ModalPopupExtender ID="mdeDeleteRoutine" runat="server" TargetControlID="btnDelete" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
                 <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" Style="display: none;">
                     <p>Are you sure you want to delete the routine?</p>
@@ -161,9 +161,14 @@
                             </asp:ObjectDataSource>
                         </td>
                         <td class="auto-style2">
-                            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add Exercise" />
                             <br />
                         </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="btnAdd" runat="server" CssClass="button" OnClick="btnAdd_Click" Text="Add Exercise" />
+                        </td>
+                        <td class="auto-style2">&nbsp;</td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -197,7 +202,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="btnConfirm" runat="server" Text="Change Name" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="modName" />
+                            <asp:Button ID="btnConfirm" runat="server" Text="Change Name" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="modName" CssClass="button" />
                         </td>
                         <td>&nbsp;</td>
                     </tr>

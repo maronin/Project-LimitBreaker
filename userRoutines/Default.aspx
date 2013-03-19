@@ -18,7 +18,7 @@
 
         .button {
             margin: 10px;
-            float: right;
+
         }
     </style>
 </asp:Content>

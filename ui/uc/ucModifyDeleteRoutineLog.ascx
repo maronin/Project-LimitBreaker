@@ -58,7 +58,7 @@
         </asp:Panel>
         <br />
         <h4>Delete All Logs Within Routine</h4>
-        <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs"/>
+        <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs" CssClass="button" />
         <asp:ModalPopupExtender ID="mdeDeleteLoggedExercises" runat="server" TargetControlID="btnDeleteAll" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
         <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" Style="display: none;">
             <p>Are you sure you want to delete all your logged exercises so far?</p>

@@ -17,11 +17,7 @@
     }
 
     #tableLog {
-        text-align: center;
-    }
-
-    .auto-style2 {
-        width: 478px;
+        margin: 10px;
     }
 </style>
 <h4>Log Routine Data</h4>
@@ -109,7 +105,7 @@
                         </td>
                     </tr>
                 </table>
-                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog" />
+                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog" CssClass="button" />
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
                 <asp:Label ID="expRewardLbl" runat="server" Text=""></asp:Label>
