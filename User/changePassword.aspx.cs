@@ -21,4 +21,20 @@ public partial class User_changePassword : System.Web.UI.Page
     {
         Response.Redirect("profile.aspx");
     }
+    protected void Confirm_Click(object sender, EventArgs e)
+    {
+        MembershipUser userInfo = Membership.GetUser(User.Identity.Name);
+        if (userInfo.ChangePassword(oldPassword.Text, newPassword.Text))
+        {
+            Membership.UpdateUser(userInfo);
+            status.ForeColor = System.Drawing.Color.Green;
+            status.Text = "Change successful!";
+        }
+        else
+        {
+            status.ForeColor = System.Drawing.Color.Red;
+            status.Text = "Passwords do not match";
+        }
+    }
+
 }

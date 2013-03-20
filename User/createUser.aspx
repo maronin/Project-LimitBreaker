@@ -56,7 +56,7 @@
                         <asp:TextBox ID="cPassword" runat="server" TextMode="Password"></asp:TextBox></td>
                     <td>
 
-                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="password" ControlToValidate="cPassword" ErrorMessage="Paasswords must match" ForeColor="Red" ValidationGroup="createUser"></asp:CompareValidator>
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="password" ControlToValidate="cPassword" ErrorMessage="Passwords must match" ForeColor="Red" ValidationGroup="createUser"></asp:CompareValidator>
 
                     </td>
                     <td>
