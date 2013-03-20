@@ -17,11 +17,7 @@
     }
 
     #tableLog {
-        text-align: center;
-    }
-
-    .auto-style2 {
-        width: 478px;
+        margin: 10px;
     }
 </style>
 <h4>Log Routine Data</h4>
@@ -33,8 +29,17 @@
                 <Columns>
                     <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name"></asp:BoundField>
                     <asp:BoundField DataField="equipment" HeaderText="Equipment" SortExpression="equipment" />
-                    <asp:BoundField DataField="videoLink" HeaderText="Video Link" SortExpression="videoLink" />
-                    <asp:BoundField DataField="muscleGroups" HeaderText="Muscle Groups" SortExpression="muscleGroups" />
+                    <asp:TemplateField HeaderText="How-to">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="HyperLink1" runat="server"
+                                NavigateUrl='<%# Eval("videoLink") %>' Text="Video"></asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Muscle Groups">
+                        <ItemTemplate>
+                            <asp:Label ID="lblMuscleGroups" Text='<%# (Eval("muscleGroups")).ToString().Replace("\n", "<br />")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton1" runat="server" CommandName="log" CommandArgument='<%# Eval("id") %>'>Log Data</asp:LinkButton>
@@ -100,7 +105,7 @@
                         </td>
                     </tr>
                 </table>
-                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog" />
+                <asp:Button ID="btnLog" runat="server" Text="Add Set" OnClick="btnLog_Click" ValidationGroup="SaveLog" CssClass="button" />
             </asp:Panel>
             <asp:Panel ID="pnlInfo" runat="server">
                 <asp:Label ID="expRewardLbl" runat="server" Text=""></asp:Label>

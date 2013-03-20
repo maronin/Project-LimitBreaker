@@ -169,7 +169,7 @@
 					<span class="tooltip"><span>Profile</span></span>
 				</li>
 				<li id="liuserRoutines" runat="server">
-					<a href="<%= Page.ResolveUrl("~/userRoutines/default.aspx") %>" class="ico4"><span>User Routines</span><em></em></a>
+					<a href="<%= Page.ResolveUrl("~/userRoutines/default.aspx") %>" class="icoRoutines"><span>User Routines</span><em></em></a>
 					<span class="tooltip"><span>User Routines</span></span>
 				</li>
 				<li id="liWorkoutSchedule" runat="server">
@@ -187,7 +187,7 @@
 					<span class="tooltip"><span>Manage Exercise Experience</span></span>
 				</li>
 				<li id="liManageExerciseGoals" runat="server">
-					<a href="<%= Page.ResolveUrl("~/LoggedExercise/ManageExerciseGoals.aspx") %>" class="ico8"><span>Exercise Goals</span><em></em></a>
+					<a href="<%= Page.ResolveUrl("~/LoggedExercise/ManageExerciseGoals.aspx") %>" class="icoStar"><span>Exercise Goals</span><em></em></a>
 					<span class="tooltip"><span>Exercise Goals</span></span>
 				</li>
                 

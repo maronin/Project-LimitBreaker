@@ -274,11 +274,11 @@
                                     </asp:MultiView>
                                     <tr>
                                         <td class="style1">
-                                            <asp:Button ID="updateGoalbtn" runat="server" Text="Update" OnClick="updateGoalbtn_Click" />
+                                            <asp:Button ID="updateGoalbtn" runat="server" Text="Update" OnClick="updateGoalbtn_Click" CssClass="button" Width="100px"/>
                                         </td>
                                         <td class="style1">
                                             <asp:Button ID="deleteGoalBtn" runat="server" Text="Delete" OnClientClick="return confirm('Doing this will irreversibly remove your goal from the system. Are you sure?');"
-                                                OnClick="deleteGoalBtn_Click" />
+                                                OnClick="deleteGoalBtn_Click"  CssClass="button" Width="100px"/>
                                         </td>
                                     </tr>
                                     <tr>

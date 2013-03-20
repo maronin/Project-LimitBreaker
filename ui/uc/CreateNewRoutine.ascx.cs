@@ -28,6 +28,8 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
 
         if (!IsPostBack)
         {
+            lblUniqueName.Visible = false;
+            pnlDescription.Visible = false;
             // full refresh of page will abandon current session
             Session.Abandon();
             lb = (ListBox)this.Parent.FindControl("lbRoutines");
@@ -125,6 +127,8 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         ddlMuscleGroups.SelectedIndex = 0;
         lbSelected.Items.Clear();
         tbRoutineName.Text = "";
+        lblUniqueName.Visible = false;
+        pnlDescription.Visible = false;
     }
 
     protected void btnConfirm_Click(object sender, EventArgs e)
@@ -136,10 +140,31 @@ public partial class ui_uc_CreateNewRoutine : System.Web.UI.UserControl
         if (exerciseList != null && Convert.ToInt32(userID) != -1)
             rt = routManager.createNewRoutine(tbRoutineName.Text.Trim(), userID, exerciseList);
 
-        clearAll();
+        if (rt == null)
+            lblUniqueName.Visible = true;
+        else
+        {
+            clearAll();
 
-        // redirect page to itself (refresh)
-        Response.Redirect(Request.RawUrl);
+            // redirect page to itself (refresh)
+            Response.Redirect(Request.RawUrl);
+        }
     }
 
+    protected void lbExerciseList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (lbExerciseList.SelectedIndex > -1)
+        {
+            Exercise exerciseItem = new Exercise();
+            exerciseItem = sysManager.getExercise(lbExerciseList.SelectedItem.Text);
+            if (exerciseItem != null )
+            {
+                pnlDescription.Visible = true;
+                lblDescription.Text = !exerciseItem.description.Trim().Equals("") ? exerciseItem.description.Trim(): "No Description";
+                lblEquipment.Text = !exerciseItem.equipment.Trim().ToLower().Equals("none") ? exerciseItem.equipment.Replace(" ", "<br />") : "No Equipment";
+            }
+            else
+                pnlDescription.Visible = false;
+        }
+    }
 }

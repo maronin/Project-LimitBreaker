@@ -20,7 +20,8 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         lb = (ListBox)this.Parent.FindControl("lbRoutines");
         if (!IsPostBack)
         {
-
+            pnlDescription.Visible = false;
+            lblUniqueName.Visible = false;
         }
         if (lb != null && lb.SelectedIndex > -1)
         {
@@ -56,6 +57,9 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
                 GridView1.DataBind();
             }
         }
+        else if (e.CommandName == "view")
+        {
+        }
     }
 
     protected void btnConfirm_Click(object sender, EventArgs e)
@@ -71,7 +75,10 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
             lb.DataValueField = "id";
             lb.DataBind();
             lb.SelectedIndex = index;
+            lblUniqueName.Visible = false;
         }
+        else
+            lblUniqueName.Visible = true;
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -112,6 +119,22 @@ public partial class ui_uc_DeleteModifyRoutine : System.Web.UI.UserControl
         {
             // redirect page to itself (refresh)
             Response.Redirect(Request.RawUrl);
+        }
+    }
+    protected void lbExerciseList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (lbExerciseList.SelectedIndex > -1)
+        {
+            Exercise exerciseItem = new Exercise();
+            exerciseItem = sysManager.getExercise(lbExerciseList.SelectedItem.Text);
+            if (exerciseItem != null)
+            {
+                pnlDescription.Visible = true;
+                lblDescription.Text = !exerciseItem.description.Trim().Equals("") ? exerciseItem.description.Trim() : "No Description";
+                lblEquipment.Text = !exerciseItem.equipment.Trim().ToLower().Equals("none") ? exerciseItem.equipment.Replace(" ", "<br />") : "No Equipment";
+            }
+            else
+                pnlDescription.Visible = false;
         }
     }
 }
