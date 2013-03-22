@@ -390,7 +390,7 @@
                                                 <asp:BoundField DataField="startTime" HeaderText="Start Time" SortExpression="startTime"/>
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="lnkModify" runat="server" CommandName="modify" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Modify</asp:LinkButton>
+                                                        <asp:LinkButton ID="lnkModify" runat="server" CommandName="modify" CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Update</asp:LinkButton>
                                                         <asp:LinkButton ID="lnkRemove" runat="server" CommandName="del" OnClientClick="return confirm('Doing this will irreversibly remove the scheduled item from the system. Are you sure?');"
                                                             CommandArgument='<%# Eval("id") + ";" +Eval("isExericse")%>'>Remove</asp:LinkButton>
                                                     </ItemTemplate>

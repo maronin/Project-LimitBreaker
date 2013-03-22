@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CreateNewRoutine.ascx.cs" Inherits="ui_uc_CreateNewRoutine" %>
+<%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagPrefix="uc1" TagName="ucViewExercise" %>
+
 <!-- credits to: kubben, url: http://www.codeproject.com/Articles/17241/Capturing-the-Enter-key-to-cause-a-button-click -->
 <script type="text/javascript">
     function doClick(buttonName, e) {
@@ -33,6 +35,15 @@
     .selectBtn {
         text-align: center;
     }
+
+    .auto-style2 {
+        height: 23px;
+    }
+
+    .auto-style3 {
+        text-align: center;
+        height: 23px;
+    }
 </style>
 <h4>Create New Routine</h4>
 <div id="content">
@@ -59,7 +70,7 @@
                 <tr>
                     <td>
                         <asp:Label ID="Label3" runat="server" Font-Size="Medium" Text="Exercise List"></asp:Label>
-                        <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True"></asp:ListBox>
+                        <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="lbExerciseList_SelectedIndexChanged"></asp:ListBox>
                         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="getExercisesByMuscleGroup" TypeName="SystemExerciseManager">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="ddlMuscleGroups" Name="muscleGroup" PropertyName="SelectedValue" Type="String" />
@@ -77,6 +88,24 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="auto-style2" colspan="3">
+                        <asp:Panel ID="pnlDescription" runat="server" Visible="False">
+                            <div id="description" style="max-width: 600px; padding-bottom:10px;">
+                                <asp:Label ID="lblDescEquHeader" runat="server" style="font-weight:900;text-decoration:underline;" Text="Description and Equipment">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblDescription" runat="server" Text="">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblEquipment" runat="server" Text="">
+                                </asp:Label>
+                            </div>
+                        </asp:Panel>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <asp:Label ID="Label1" runat="server" Text="Routine Name" Font-Size="Medium"></asp:Label>
                         <br />
@@ -90,7 +119,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" />
+                        <asp:Button ID="btnConfirm" runat="server" Enabled="False" Text="Confirm" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="RtnName" CssClass="button" />
                     </td>
                     <td>&nbsp;</td>
                     <td>
@@ -98,7 +127,6 @@
                     </td>
                 </tr>
             </table>
-
         </ContentTemplate>
     </asp:UpdatePanel>
 </div>

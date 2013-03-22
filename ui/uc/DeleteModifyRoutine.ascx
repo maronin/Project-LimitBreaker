@@ -69,45 +69,71 @@
 
     .puOK, .puNO {
         margin: 10px;
+        width: 75px;
+        height: 35px;
     }
 </style>
 <h4>Modify Routine</h4>
 <div id="content">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical" CssClass="gv">
-                <AlternatingRowStyle BackColor="White" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand" OnRowDeleted="GridView1_RowDeleted" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="gv">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name"></asp:BoundField>
                     <asp:BoundField DataField="equipment" HeaderText="Equipment" SortExpression="equipment" />
-                    <asp:BoundField DataField="videoLink" HeaderText="Video Link" SortExpression="videoLink" />
-                    <asp:BoundField DataField="muscleGroups" HeaderText="Muscle Groups" SortExpression="muscleGroups" />
+                    <asp:TemplateField HeaderText="How-to">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="HyperLink1" runat="server"
+                                NavigateUrl='<%# Eval("videoLink") %>' Text="Video"></asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Description">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButton2" runat="server" CommandName="view" CommandArgument='<%# Eval("description") %>'>Description</asp:LinkButton>
+                            <asp:ModalPopupExtender ID="mdeViewDescription" runat="server" TargetControlID="LinkButton2" CancelControlID="btnCancel" PopupControlID="puViewDescription" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
+                            <asp:Panel ID="puViewDescription" runat="server" CssClass="deletePopup" Style="display: none;max-width: 600px;">
+                                <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("description").ToString().Equals("") ? "None" : Eval("description") %>'></asp:Label>
+                                <br /><br />
+                                <asp:Button ID="btnCancel" runat="server" Text="Ok" />
+                            </asp:Panel>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Muscle Groups">
+                        <ItemTemplate>
+                            <asp:Label ID="lblMuscleGroups" Text='<%# (Eval("muscleGroups")).ToString().Replace("\n", "<br />")%>' runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:LinkButton ID="LinkButton1" runat="server" CommandName="del" CommandArgument='<%# Eval("id") %>'>Remove</asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <FooterStyle BackColor="#CCCC99" />
-                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                <RowStyle BackColor="#F7F7DE" />
-                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#FBFBF2" />
-                <SortedAscendingHeaderStyle BackColor="#848384" />
-                <SortedDescendingCellStyle BackColor="#EAEAD3" />
-                <SortedDescendingHeaderStyle BackColor="#575357" />
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
+
+
 
             <asp:Panel ID="Panel1" runat="server" Enabled="False" Visible="False">
 
 
-                <asp:Button ID="btnDelete" runat="server" CssClass="deleteBtn" Text="Delete Routine"/>
+                <asp:Button ID="btnDelete" runat="server" CssClass="deleteBtn button" Text="Delete Routine" />
                 <asp:ModalPopupExtender ID="mdeDeleteRoutine" runat="server" TargetControlID="btnDelete" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
-                <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" style="display:none;">
+                <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" Style="display: none;">
                     <p>Are you sure you want to delete the routine?</p>
                     <div class="btns">
-                        <asp:Button ID="btnPUOK" runat="server" Text="Confirm" CssClass="puOK" OnClick="okButton_Click" /><asp:Button ID="btnPUNO" runat="server" Text="Cancel" CssClass="puNO" /></div>
+                        <asp:Button ID="btnPUOK" runat="server" Text="Confirm" CssClass="puOK button" OnClick="okButton_Click" /><asp:Button ID="btnPUNO" runat="server" Text="Cancel" CssClass="puNO button" />
+                    </div>
                 </asp:Panel>
                 <table class="auto-style1">
                     <tr>
@@ -129,7 +155,7 @@
                     <tr>
                         <td>
                             <asp:Label ID="Label3" runat="server" Font-Size="Medium" Text="Exercise List"></asp:Label>
-                            <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True"></asp:ListBox>
+                            <asp:ListBox ID="lbExerciseList" runat="server" DataSourceID="ObjectDataSource1" DataTextField="name" DataValueField="id" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="lbExerciseList_SelectedIndexChanged"></asp:ListBox>
                             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="getExercisesByMuscleGroup" TypeName="SystemExerciseManager">
                                 <SelectParameters>
                                     <asp:ControlParameter ControlID="ddlMuscleGroups" Name="muscleGroup" PropertyName="SelectedValue" Type="String" />
@@ -137,8 +163,31 @@
                             </asp:ObjectDataSource>
                         </td>
                         <td class="auto-style2">
-                            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add Exercise" />
                             <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="btnAdd" runat="server" CssClass="button" OnClick="btnAdd_Click" Text="Add Exercise" />
+                        </td>
+                        <td class="auto-style2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Panel ID="pnlDescription" runat="server" Visible="False">
+                            <div id="description" style="max-width: 600px; padding-bottom:10px;">
+                                <asp:Label ID="lblDescEquHeader" runat="server" style="font-weight:900;text-decoration:underline;" Text="Description and Equipment">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblDescription" runat="server" Text="">
+                                </asp:Label>
+                                <br />
+                                <br />
+                                <asp:Label ID="lblEquipment" runat="server" Text="">
+                                </asp:Label>
+                            </div>
+                        </asp:Panel>
                         </td>
                     </tr>
                     <tr>
@@ -155,7 +204,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="btnConfirm" runat="server" Text="Change Name" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="modName" />
+                            <asp:Button ID="btnConfirm" runat="server" Text="Change Name" OnClick="btnConfirm_Click" PostBackUrl="~/userRoutines/Default.aspx" ValidationGroup="modName" CssClass="button" />
                         </td>
                         <td>&nbsp;</td>
                     </tr>

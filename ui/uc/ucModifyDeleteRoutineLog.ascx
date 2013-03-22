@@ -16,6 +16,8 @@
 
     .puOK, .puNO {
         margin: 10px;
+        width: 75px;
+        height: 35px;
     }
 </style>
 <h4>View Logged Data</h4>
@@ -58,12 +60,12 @@
         </asp:Panel>
         <br />
         <h4>Delete All Logs Within Routine</h4>
-        <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs"/>
+        <asp:Button ID="btnDeleteAll" runat="server" Text="Delete Logs" CssClass="button" />
         <asp:ModalPopupExtender ID="mdeDeleteLoggedExercises" runat="server" TargetControlID="btnDeleteAll" PopupControlID="puDeleteRoutine" CancelControlID="btnPUNO" Enabled="True" BackgroundCssClass="deletePopupBG" DropShadow="True"></asp:ModalPopupExtender>
         <asp:Panel ID="puDeleteRoutine" runat="server" CssClass="deletePopup" Style="display: none;">
             <p>Are you sure you want to delete all your logged exercises so far?</p>
             <div class="btns">
-                <asp:Button ID="btnPUOK" runat="server" Text="Confirm" CssClass="puOK" OnClick="okButton_Click" /><asp:Button ID="btnPUNO" runat="server" Text="Cancel" CssClass="puNO" />
+                <asp:Button ID="btnPUOK" runat="server" Text="Confirm" CssClass="puOK button" OnClick="okButton_Click" /><asp:Button ID="btnPUNO" runat="server" Text="Cancel" CssClass="puNO button" />
             </div>
         </asp:Panel>
     </ContentTemplate>
