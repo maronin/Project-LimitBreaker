@@ -12,6 +12,7 @@ using System.Web.UI.HtmlControls;
 public partial class User_createUser : System.Web.UI.Page
 {
     UserManager manager = new UserManager();
+    EmailManager emailManager = EmailManager.getInstance();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (User.Identity.Name == "")
@@ -90,17 +91,8 @@ public partial class User_createUser : System.Web.UI.Page
     {
         MembershipUser userInfo = Membership.GetUser(username);
         String verifyURL = Request.Url.GetLeftPart(UriPartial.Authority) + Page.ResolveUrl("~/User/verify.aspx?ID=" + userInfo.ProviderUserKey.ToString());
-        MailMessage mm = new MailMessage();
-        mm.To.Add(new MailAddress(email, "LimitBreaker verification"));
-        mm.From = new MailAddress("lynart@limitbreaker.com");
-        mm.Body = "<a href="+verifyURL+">Click here to verify</a> your account";
-        mm.IsBodyHtml = true;
-        mm.Subject = "Verification";
-        SmtpClient smcl = new SmtpClient();
-        smcl.Host = "smtp.gmail.com";
-        smcl.Port = 587;
-        smcl.Credentials = new System.Net.NetworkCredential("projectlimitbreaker@gmail.com", "furaijin");
-        smcl.EnableSsl = true;
-        smcl.Send(mm);
+        String body = "<a href="+verifyURL+">Click here to verify</a> your account";
+
+        emailManager.sendMessage("LimitBreaker Verification", body, email);
     }
 }
