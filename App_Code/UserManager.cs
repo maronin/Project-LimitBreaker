@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 /// <summary>
 /// Summary description for UserManager
@@ -206,5 +207,20 @@ public class UserManager
 
             context.SaveChanges();
         }
+    }
+
+    public void updateEmail(string username, string email)
+    {
+        using (var context = new Layer2Container())
+        {
+            LimitBreaker user = context.LimitBreakers.FirstOrDefault(limitbreaker => limitbreaker.username == username);
+
+            user.email = email;
+
+            context.SaveChanges();
+        }
+        MembershipUser aspUser = Membership.GetUser(username);
+        aspUser.Email = email;
+        Membership.UpdateUser(aspUser);
     }
 }
