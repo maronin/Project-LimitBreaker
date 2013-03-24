@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Title="Use Case 5.8" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="WorkoutSchedule_Default4" %>
 
 <%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercises" TagPrefix="uc1" %>
