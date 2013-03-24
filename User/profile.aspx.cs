@@ -149,8 +149,8 @@ public partial class User_profile : System.Web.UI.Page
                     JSweights += weightList[i].weight.ToString() + ",";
                     tempFull = weightList[i].date.ToString().Split(' ');
                     tempDate = tempFull[0].Split('/');
-                    JSdays += tempDate[0] + ",";
-                    JSmonths += tempDate[1] + ",";
+                    JSdays += tempDate[1] + ",";
+                    JSmonths += tempDate[0] + ",";
                     JSyears += tempDate[2] + ",";
                 }
                 else
@@ -158,8 +158,8 @@ public partial class User_profile : System.Web.UI.Page
                     JSweights += weightList[i].weight.ToString();
                     tempFull = weightList[i].date.ToString().Split(' ');
                     tempDate = tempFull[0].Split('/');
-                    JSdays += tempDate[0];
-                    JSmonths += tempDate[1];
+                    JSdays += tempDate[1];
+                    JSmonths += tempDate[0];
                     JSyears += tempDate[2];
                 }
             }
@@ -167,8 +167,8 @@ public partial class User_profile : System.Web.UI.Page
             tempFull = DateTime.Now.ToString().Split(' ');
             tempDate = tempFull[0].Split('/');
             JSyears += "," + tempDate[2];
-            JSmonths += "," + tempDate[1];
-            JSdays += "," + tempDate[0];
+            JSmonths += "," + tempDate[0];
+            JSdays += "," + tempDate[1];
             JSweights += "," + manager.getStats(userName).weight.ToString();
         }
 
@@ -177,8 +177,8 @@ public partial class User_profile : System.Web.UI.Page
             tempFull = DateTime.Now.ToString().Split(' ');
             tempDate = tempFull[0].Split('/');
             JSyears += tempDate[2];
-            JSmonths += tempDate[1];
-            JSdays += tempDate[0];
+            JSmonths += tempDate[0];
+            JSdays += tempDate[1];
             JSweights += manager.getStats(userName).weight.ToString();
         }
 
