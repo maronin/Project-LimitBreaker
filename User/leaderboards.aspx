@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Use Case 5.7" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="leaderboards.aspx.cs" Inherits="User_leaderboards" %>
+﻿<%@ Page Title="Use Case 5.5" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="leaderboards.aspx.cs" Inherits="User_leaderboards" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
@@ -10,7 +10,7 @@
 <h2 style="text-align:center;">LimitBreaker Leaderboards</h2>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-    <div class="useCase"><h3>Use Case 5.7</h3></div>
+    <div class="useCase"><h3>Use Case 5.5</h3></div>
     <p> See who's at the top of:
     <asp:DropDownList ID="orderByddl" runat="server" AutoPostBack="True" 
             onselectedindexchanged="orderByddl_SelectedIndexChanged">

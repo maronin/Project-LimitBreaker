@@ -161,34 +161,34 @@
                 
 				</li>
                 <li id="liLeaderboards" runat="server">
-					<a href="<%= Page.ResolveUrl("~/User/leaderboards.aspx") %>" class="ico4"><span>Leaderboards 5.7</span><em></em></a>
-					<span class="tooltip"><span>Leaderboards 5.7</span></span>
+					<a href="<%= Page.ResolveUrl("~/User/leaderboards.aspx") %>" class="ico4"><span>Leaderboards 5.5</span><em></em></a>
+					<span class="tooltip"><span>Leaderboards 5.5</span></span>
 				</li>
 				<li id="liprofile" runat="server">
-					<a href="<%= Page.ResolveUrl("~/User/profile.aspx") %>#tab-3" class="ico3"><span>Profile  5.7</span><em></em></a>
-					<span class="tooltip"><span>Profile 5.7</span></span>
+					<a href="<%= Page.ResolveUrl("~/User/profile.aspx") %>#tab-3" class="ico3"><span>Profile  5.5</span><em></em></a>
+					<span class="tooltip"><span>Profile 5.5</span></span>
 				</li>
 				<li id="liuserRoutines" runat="server">
 					<a href="<%= Page.ResolveUrl("~/userRoutines/default.aspx") %>" class="icoRoutines"><span>User Routines 5.2</span><em></em></a>
 					<span class="tooltip"><span>User Routines 5.2</span></span>
 				</li>
 				<li id="liWorkoutSchedule" runat="server">
-					<a href="<%= Page.ResolveUrl("~/WorkoutSchedule/Default.aspx") %>" class="ico5"><span>Workout Schedule 5.8</span><em></em></a>
-					<span class="tooltip"><span>Workout Schedule 5.8</span></span>
+					<a href="<%= Page.ResolveUrl("~/WorkoutSchedule/Default.aspx") %>" class="ico5"><span>Workout Schedule 5.6</span><em></em></a>
+					<span class="tooltip"><span>Workout Schedule 5.6</span></span>
 				</li>
 				<li  id="liLoggedExercises" runat="server"> 
 					<a href="<%= Page.ResolveUrl("~/LoggedExercise/default.aspx") %>" class="ico6">
-						<span>Logged Exercises 5.6</span><em></em>
+						<span>Logged Exercises 5.4</span><em></em>
 					</a>
-					<span class="tooltip"><span>Log Exercises 5.6</span></span>
+					<span class="tooltip"><span>Log Exercises 5.4</span></span>
 				</li>
 				<li id="liManageExerciseExperience" runat="server">
-					<a href="<%= Page.ResolveUrl("~/SystemExercise/manageExerciseExperience.aspx") %>" class="ico7"><span>Manage Exercise Experience 5.9</span><em></em></a>
-					<span class="tooltip"><span>Manage Exercise Experience 5.9</span></span>
+					<a href="<%= Page.ResolveUrl("~/SystemExercise/manageExerciseExperience.aspx") %>" class="ico7"><span>Manage Exercise Experience 5.7</span><em></em></a>
+					<span class="tooltip"><span>Manage Exercise Experience 5.7</span></span>
 				</li>
 				<li id="liManageExerciseGoals" runat="server">
-					<a href="<%= Page.ResolveUrl("~/LoggedExercise/ManageExerciseGoals.aspx") %>" class="icoStar"><span>Exercise Goals 5.11</span><em></em></a>
-					<span class="tooltip"><span>Exercise Goals 5.11</span></span>
+					<a href="<%= Page.ResolveUrl("~/LoggedExercise/ManageExerciseGoals.aspx") %>" class="icoStar"><span>Exercise Goals 5.9</span><em></em></a>
+					<span class="tooltip"><span>Exercise Goals 5.9</span></span>
 				</li>
                 
 			

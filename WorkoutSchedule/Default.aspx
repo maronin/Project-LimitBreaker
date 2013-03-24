@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Use Case 5.8" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Title="Use Case 5.6" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="WorkoutSchedule_Default4" %>
 
 <%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagName="viewExercises" TagPrefix="uc1" %>
@@ -19,7 +19,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="useCase" style="left:40%;"><h3>Use Case 5.8</h3></div>
+    <div class="useCase" style="left:40%;"><h3>Use Case 5.6</h3></div>
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
             <p>

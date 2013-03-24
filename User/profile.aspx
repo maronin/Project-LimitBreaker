@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Use Case 5.7" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="profile.aspx.cs" Inherits="User_profile" %>
+﻿<%@ Page Title="Use Case 5.5" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true" CodeFile="profile.aspx.cs" Inherits="User_profile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -127,7 +127,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<div class="useCase"><h3>Use Case 5.7</h3></div>
+<div class="useCase"><h3>Use Case 5.5</h3></div>
     <div style="text-align:center; float:left; margin-left:35px;">
             <h1>Welcome LimitBreaker</h1>
             <h2><asp:Label ID="alias" runat="server"></asp:Label>'s User Profile</h2>

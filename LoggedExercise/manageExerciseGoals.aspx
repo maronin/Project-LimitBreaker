@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Use Case 5.11" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Title="Use Case 5.9" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="manageExerciseGoals.aspx.cs" Inherits="User_manageExerciseGoals" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -22,7 +22,7 @@
     <div class="exerciseForm" style="min-height:670px;">
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>
-                <div class="useCase"><h3>Use Case 5.11</h3></div>
+                <div class="useCase"><h3>Use Case 5.9</h3></div>
                 <asp:MultiView ID="exerciseGoalMultiView" runat="server">
                     <asp:View ID="addGoalView" runat="server">
                                        <h2 style="text-align:center;">Add Exercise Goals</h2>

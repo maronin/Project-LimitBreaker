@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Use Case 5.6" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Title="Use Case 5.4" Language="C#" MasterPageFile="~/ui/mp/MasterPage.master" AutoEventWireup="true"
     CodeFile="default.aspx.cs" Inherits="LoggedExercise_default" %>
 
 <%@ Register Src="~/ui/uc/ucViewExercise.ascx" TagPrefix="uc1" TagName="ucViewExercise" %>
@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-                    <div class="useCase"><h3>Use Case 5.6</h3></div>
+                    <div class="useCase"><h3>Use Case 5.4</h3></div>
             <div class="exerciseForm">
                 <h2 style="text-align: center;">
                     Logging Exercises</h2>
