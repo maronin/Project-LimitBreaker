@@ -121,6 +121,16 @@
                             Your Current Exercise Goals</h4>
                         <div style="float: left; padding: 10px;">
                             Order Goals By:
+                            <asp:DropDownList ID="muscleGroupDdl" runat="server" AutoPostBack="True" 
+                                onselectedindexchanged="muscleGroupDdl_SelectedIndexChanged">
+                                <asp:ListItem>All Groups</asp:ListItem>
+                                <asp:ListItem>Chest</asp:ListItem>
+                                <asp:ListItem>Back</asp:ListItem>
+                                <asp:ListItem>Shoulders</asp:ListItem>
+                                <asp:ListItem>Arms</asp:ListItem>
+                                <asp:ListItem>Legs</asp:ListItem>
+                                <asp:ListItem>Cardio</asp:ListItem>
+                            </asp:DropDownList>
                             <asp:RadioButtonList ID="orderByRbl" runat="server" AutoPostBack="True" Width="230"
                                 RepeatDirection="Horizontal" TextAlign="Left" OnSelectedIndexChanged="orderByRbl_SelectedIndexChanged">
                                 <asp:ListItem Selected="True" Value="0">Name</asp:ListItem>
@@ -283,7 +293,7 @@
                                     </tr>
                                     <tr>
                                         <td class="style1" colspan="2">
-                                            <asp:Button ID="saveModifyGoalBtn" runat="server" Text="Save" Visible="false" OnClick="saveModifyGoalBtn_Click"
+                                            <asp:Button ID="saveModifyGoalBtn" runat="server" Text="Save" Visible="false" OnClick="saveModifyGoalBtn_Click" CssClass="button"  Width="100px"
                                                 ValidationGroup="modifyGoal" />
                                             <asp:Label ID="deleteGoalResultLbl" runat="server" Text=""></asp:Label>
                                             <asp:Label ID="modifyGoalResultlbl" runat="server" Text=""></asp:Label>
