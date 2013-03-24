@@ -13,10 +13,13 @@ public partial class User_profile : System.Web.UI.Page
     ExperienceManager expMngr = new ExperienceManager();
     LeaderboardManager ldrMngr = new LeaderboardManager();
 
+    public string JSyears = "";
+    public string JSmonths = "";
+    public string JSdays = "";
+    public string JSweights = "";
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liprofile");
         li.Attributes.Add("class", "active");
 
@@ -63,6 +66,8 @@ public partial class User_profile : System.Web.UI.Page
             {
                 bmi.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
+
+            populateWeightChart(username);
         }
         else
         { 
@@ -75,6 +80,7 @@ public partial class User_profile : System.Web.UI.Page
         if (manager.updateWeight(username, Convert.ToDouble(newWeight.Text)))
         {
             updateResultLbl.Text = "You have successfully updated your profile!";
+            populateWeightChart(username);
         }
         else
         {
@@ -88,8 +94,7 @@ public partial class User_profile : System.Web.UI.Page
         newWeight.Text = Convert.ToString(Math.Round(userStats.weight, 2));
         newHeight.Text = Convert.ToString(Math.Round(userStats.height, 2));
         rmr.Text = Convert.ToString(Math.Round(userStats.rmr, 2));
-        bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));
-        
+        bmi.Text = Convert.ToString(Math.Round(userStats.bmi, 2));       
     }
 
     public void populateMedals(string userName)
@@ -121,5 +126,62 @@ public partial class User_profile : System.Web.UI.Page
                 loggedRankImg.ImageUrl = "~/ui/images/rank" + i + ".png";
             }
         }
+    }
+
+    public void populateWeightChart(string userName)
+    {
+        //Date format is dd/mm/yyyy  eg: 14/03/2013
+        List<OldWeight> weightList = manager.getAllOldWeights(userName);
+        int size = weightList.Count;
+        string[] tempFull;
+        string[] tempDate;
+        JSweights = "";
+        JSyears = "";
+        JSmonths = "";
+        JSdays = "";
+
+        if (weightList.Count > 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                if (i < size - 1)
+                {
+                    JSweights += weightList[i].weight.ToString() + ",";
+                    tempFull = weightList[i].date.ToString().Split(' ');
+                    tempDate = tempFull[0].Split('/');
+                    JSdays += tempDate[0] + ",";
+                    JSmonths += tempDate[1] + ",";
+                    JSyears += tempDate[2] + ",";
+                }
+                else
+                {
+                    JSweights += weightList[i].weight.ToString();
+                    tempFull = weightList[i].date.ToString().Split(' ');
+                    tempDate = tempFull[0].Split('/');
+                    JSdays += tempDate[0];
+                    JSmonths += tempDate[1];
+                    JSyears += tempDate[2];
+                }
+            }
+
+            tempFull = DateTime.Now.ToString().Split(' ');
+            tempDate = tempFull[0].Split('/');
+            JSyears += "," + tempDate[2];
+            JSmonths += "," + tempDate[1];
+            JSdays += "," + tempDate[0];
+            JSweights += "," + manager.getStats(userName).weight.ToString();
+        }
+
+        else
+        {
+            tempFull = DateTime.Now.ToString().Split(' ');
+            tempDate = tempFull[0].Split('/');
+            JSyears += tempDate[2];
+            JSmonths += tempDate[1];
+            JSdays += tempDate[0];
+            JSweights += manager.getStats(userName).weight.ToString();
+        }
+
+        ClientScript.RegisterStartupScript(GetType(), "hwa", "load();", true);
     }
 }
