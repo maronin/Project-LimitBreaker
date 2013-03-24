@@ -216,6 +216,11 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
         loadExerciseGoals();
     }
 
+    protected void muscleGroupDdl_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        loadExerciseGoals();
+    }
+
     //page data loading functions
     public void loadExerciseGoals()
     {
@@ -223,13 +228,13 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 
         if (Convert.ToInt32(achievedRbl.SelectedValue) == 0)
         {
-            goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
+            goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
             updateGoalbtn.Visible = true;
             deleteGoalBtn.Visible = true;
         }
         else
         {
-            goalSet = goalMngr.getAchievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue));
+            goalSet = goalMngr.getAchievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
             updateGoalbtn.Visible = false;
             deleteGoalBtn.Visible = false;
         }
