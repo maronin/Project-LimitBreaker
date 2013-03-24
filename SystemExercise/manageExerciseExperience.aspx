@@ -43,6 +43,7 @@
         <ContentTemplate>
                                     <h2 style="text-align:center;">Manage Exercise Experience Formulas</h2>
                 <uc1:viewExercise ID="viewExerciseExp" runat="server" />
+
                 <asp:MultiView ID="manageExperienceMultiView" runat="server">
                     <asp:View ID="emptyView" runat="server">
                     </asp:View>
