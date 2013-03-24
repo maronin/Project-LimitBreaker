@@ -29,6 +29,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="useCase"><h3>Use Case 5.9</h3></div>
     <div class="ButtonChoiceScheduling" style="width: 50%; margin: 0px auto 0px auto">
         <asp:Button ID="mngExerciseExpBtn" runat="server" Text="Manage Exercise Experience"
             CssClass="button" OnClick="mngExerciseExpBtn_Click" />

@@ -7,6 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+                    <div class="useCase"><h3>Use Case 5.6</h3></div>
             <div class="exerciseForm">
                 <h2 style="text-align: center;">
                     Logging Exercises</h2>

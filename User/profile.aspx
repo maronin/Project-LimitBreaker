@@ -127,7 +127,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
+<div class="useCase"><h3>Use Case 5.7</h3></div>
     <div style="text-align:center; float:left; margin-left:35px;">
             <h1>Welcome LimitBreaker</h1>
             <h2><asp:Label ID="alias" runat="server"></asp:Label>'s User Profile</h2>

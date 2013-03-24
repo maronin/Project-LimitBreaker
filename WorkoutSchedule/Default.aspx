@@ -19,6 +19,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="useCase" style="left:40%;"><h3>Use Case 5.8</h3></div>
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
             <p>

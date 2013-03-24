@@ -23,6 +23,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<div class="useCase"><h3>Use Case 5.2</h3></div>
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
             <p>You need to log in first before you can manage your routines.</p>

@@ -42,6 +42,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="useCase"><h3>Use Case 5.3</h3></div>
     <div class="ButtonChoiceScheduling">
         <asp:Button ID="btnAddExercise" runat="server" Text="Add Exercise" CssClass="button"
             OnClick="btnAddExercise_Click" />
