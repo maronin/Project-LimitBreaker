@@ -36,7 +36,7 @@
             populateChart(splitWeights, myDates);
 
             // SERIAL CHART    
-            chart = new AmCharts.AmSerialChart();       
+            chart = new AmCharts.AmSerialChart();
             chart.pathToImages = "../ui/images/";
             chart.zoomOutButton = {
                 backgroundColor: '#000000',
@@ -102,13 +102,8 @@
             }
         }
 
-        function addNewWeight() {
-            chartData.push({
-                date: new Date("<%=JSnewYear%>", "<%=JSnewMonth%>" - 1, "<%=JSnewDay%>", 0, 0, 0, 0),
-                visits: "<%=JSnewWeight%>"
-            });
-
-            
+        function clearChart(divID) {
+            document.getElementById(divID).innerHTML = "";
         }
 
         // this method is called when chart is first inited as we listen for "dataUpdated" event
@@ -148,7 +143,7 @@
         <br />
 
 
-        <div style="margin-left:30px;">
+        <div style="margin-left:30px; margin-bottom:auto;">
             <asp:Panel ID="expRankPanel" runat="server">        
                 <div style="float:left; margin-right:8px; font-size:x-small;">
                     Experience Gained 
@@ -171,7 +166,7 @@
                 </div>
             </asp:Panel>
         </div>
-
+        
         <div style="text-align:left;">
     <table>
         <tr>
@@ -241,7 +236,7 @@
                 <asp:Label ID="bmi" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
-            <td>Update Email</td>
+            <td>Email</td>
             <td>
                 <asp:TextBox ID="email" runat="server"></asp:TextBox></td>
             <td>
@@ -259,11 +254,11 @@
     </div>
     </div>
 
-    <div style="width: 50%; margin-left:250px; float:left; text-align:center;"><h2>Weight Tracking</h2></div>
+    <div style="width: 50%; margin-right:50px; float:right; text-align:center;"><h2>Weight Tracking</h2></div>
     
-    <div id="chartdiv" style="width: 50%; height: 400px; margin-left:250px; float:left;"></div>
+    <div id="chartdiv" style="width: 50%; height: 400px; margin-right:50px; float:right;"></div>
 
-    <div style="width: 50%; margin-left:250px; float:left; text-align:center;">
+    <div style="width: 50%; margin-right:50px; float:right; text-align:center;">
         <input type="radio" name="group" id="rb1" onclick="setPanSelect()" />Select
         <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()" />Pan
     </div> 

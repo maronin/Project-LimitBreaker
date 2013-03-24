@@ -17,10 +17,6 @@ public partial class User_profile : System.Web.UI.Page
     public string JSmonths = "";
     public string JSdays = "";
     public string JSweights = "";
-    public string JSnewYear = "";
-    public string JSnewMonth = "";
-    public string JSnewDay = "";
-    public string JSnewWeight = "";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -46,7 +42,6 @@ public partial class User_profile : System.Web.UI.Page
             achievedGoalslbl.Text = userItem.numGoals.ToString();
             loggedExerciseslbl.Text = userItem.numLogged.ToString();
             populateMedals(username);
-            populateWeightChart(username);
 
             if (!Page.IsPostBack)
             {
@@ -71,6 +66,8 @@ public partial class User_profile : System.Web.UI.Page
             {
                 bmi.Text = "<a href=\"updateStats.aspx\">Update Stats</a>";
             }
+
+            populateWeightChart(username);
         }
         else
         { 
@@ -83,31 +80,11 @@ public partial class User_profile : System.Web.UI.Page
         if (manager.updateWeight(username, Convert.ToDouble(newWeight.Text)))
         {
             updateResultLbl.Text = "You have successfully updated your profile!";
-
-            string[] tempFull;
-            string[] tempDate;
-            tempFull = DateTime.Now.ToString().Split(' ');
-            tempDate = tempFull[0].Split('/');
-            JSnewYear = tempDate[2];
-            JSnewMonth = tempDate[1];
-            JSnewDay = tempDate[0];
-            JSnewWeight = newWeight.Text;
-
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "addNewWeight();", true);
+            populateWeightChart(username);
         }
         else
         {
             updateResultLbl.Text = "Please wait 24 hours before updating your profile again";
-            string[] tempFull;
-            string[] tempDate;
-            tempFull = DateTime.Now.ToString().Split(' ');
-            tempDate = tempFull[0].Split('/');
-            JSnewYear = tempDate[2];
-            JSnewMonth = tempDate[1];
-            JSnewDay = tempDate[0];
-            JSnewWeight = newWeight.Text;
-
-            ClientScript.RegisterStartupScript(GetType(), "hwa", "addNewWeight();", true);
         }
         manager.updateHeight(username, Convert.ToDouble(newHeight.Text));
         manager.updateRMR(username);
@@ -158,27 +135,51 @@ public partial class User_profile : System.Web.UI.Page
         int size = weightList.Count;
         string[] tempFull;
         string[] tempDate;
+        JSweights = "";
+        JSyears = "";
+        JSmonths = "";
+        JSdays = "";
 
-        for (int i = 0; i < size; i++)
+        if (weightList.Count > 0)
         {
-            if (i < size - 1)
+            for (int i = 0; i < size; i++)
             {
-                JSweights += weightList[i].weight.ToString() + ",";
-                tempFull = weightList[i].date.ToString().Split(' ');
-                tempDate = tempFull[0].Split('/');
-                JSdays += tempDate[0] + ",";
-                JSmonths += tempDate[1] + ",";
-                JSyears += tempDate[2] + ",";
+                if (i < size - 1)
+                {
+                    JSweights += weightList[i].weight.ToString() + ",";
+                    tempFull = weightList[i].date.ToString().Split(' ');
+                    tempDate = tempFull[0].Split('/');
+                    JSdays += tempDate[0] + ",";
+                    JSmonths += tempDate[1] + ",";
+                    JSyears += tempDate[2] + ",";
+                }
+                else
+                {
+                    JSweights += weightList[i].weight.ToString();
+                    tempFull = weightList[i].date.ToString().Split(' ');
+                    tempDate = tempFull[0].Split('/');
+                    JSdays += tempDate[0];
+                    JSmonths += tempDate[1];
+                    JSyears += tempDate[2];
+                }
             }
-            else
-            {
-                JSweights += weightList[i].weight.ToString();
-                tempFull = weightList[i].date.ToString().Split(' ');
-                tempDate = tempFull[0].Split('/');
-                JSdays += tempDate[0];
-                JSmonths += tempDate[1];
-                JSyears += tempDate[2];
-            }
+
+            tempFull = DateTime.Now.ToString().Split(' ');
+            tempDate = tempFull[0].Split('/');
+            JSyears += "," + tempDate[2];
+            JSmonths += "," + tempDate[1];
+            JSdays += "," + tempDate[0];
+            JSweights += "," + manager.getStats(userName).weight.ToString();
+        }
+
+        else
+        {
+            tempFull = DateTime.Now.ToString().Split(' ');
+            tempDate = tempFull[0].Split('/');
+            JSyears += tempDate[2];
+            JSmonths += tempDate[1];
+            JSdays += tempDate[0];
+            JSweights += manager.getStats(userName).weight.ToString();
         }
 
         ClientScript.RegisterStartupScript(GetType(), "hwa", "load();", true);
