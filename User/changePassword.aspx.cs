@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class User_changePassword : System.Web.UI.Page
 {
+    EmailManager emailManager = EmailManager.getInstance();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (User.Identity.Name == "")
@@ -29,6 +30,8 @@ public partial class User_changePassword : System.Web.UI.Page
             Membership.UpdateUser(userInfo);
             status.ForeColor = System.Drawing.Color.Green;
             status.Text = "Change successful!";
+            String body = "This is to notify you that your account, " + userInfo.UserName + ", has had its password changed.";
+            emailManager.sendMessage("LimitBreaker - Password Changed", body, userInfo.Email);
         }
         else
         {
