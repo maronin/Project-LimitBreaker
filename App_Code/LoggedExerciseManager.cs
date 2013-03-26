@@ -89,7 +89,8 @@ public class LoggedExerciseManager
             {
                 foreach (LoggedExercise log in logs)
                 {
-                    if ((DateTime.Now - log.timeLogged).Hours < 1)
+                    TimeSpan difference = DateTime.Now - log.timeLogged;
+                    if (difference.TotalHours < 1)
                     {
                         return log;
                     }
@@ -113,7 +114,8 @@ public class LoggedExerciseManager
             {
                 foreach (LoggedExercise log in logs)
                 {
-                    if ((DateTime.Now - log.timeLogged).Hours < 1)
+                    TimeSpan difference = DateTime.Now - log.timeLogged;
+                    if (difference.TotalHours < 1)
                     {
                         return log;
                     }
