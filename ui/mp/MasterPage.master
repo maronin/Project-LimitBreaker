@@ -135,9 +135,6 @@
                     <asp:HyperLink ID="aboutUsLink" runat="server" NavigateUrl="~/aboutUs.aspx" 
                         >About Us</asp:HyperLink>
                             <br />
-                    <asp:HyperLink ID="aboutLimitBreakerLink" runat="server" 
-                        NavigateUrl="~/aboutLimitbreaker.aspx">About Project LimitBreaker</asp:HyperLink>
-                            <br />
                     <asp:HyperLink ID="tosLink" runat="server" NavigateUrl="~/termsOfService.aspx">Terms of Service</asp:HyperLink>
                             <br />
                     <asp:HyperLink ID="contactUsLink" runat="server" NavigateUrl="~/contactUs.aspx">Contact Us</asp:HyperLink>
