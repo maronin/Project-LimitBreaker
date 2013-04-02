@@ -76,6 +76,7 @@ public class ScheduleManager
             var ruleDate = Convert.ToDateTime(day).Date;
             var routines = from r in context.ScheduledRoutines
                            orderby r.startTime
+
                            where (r.LimitBreaker.id == userID && (r.startTime.Day == day.Day && r.startTime.Month == day.Month && r.startTime.Year == day.Year))
                            select new scheduledItem
                            {
