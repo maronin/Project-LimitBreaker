@@ -14,6 +14,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
     SystemExerciseManager sysExerciseManager = new SystemExerciseManager();
+    ViewScheduledItemsTemplate scheduleItemGetter;
     routineManager routineManager = new routineManager();
     bool atlernatingColor = true;
     static bool addNewItem = false;
@@ -144,7 +145,14 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         List<ScheduledRoutine> routine;
         List<scheduledItem> items;
 
-        items = scheduleManager.getScheduledItemsByDay(userID, dt);
+
+
+        scheduleItemGetter = new ItemsByDay();
+        items = scheduleItemGetter.getScheduledItems(userID, dt);
+        
+
+        //items = scheduleManager.getScheduledItemsByDay(userID, dt);
+
 
 
         //Order the items based on the start time, from earlist to latest
@@ -330,7 +338,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             btnAddExerciseFromRemove.Enabled = true;
             List<scheduledItem> items;
             itemScheduledOn = Convert.ToDateTime(ddl_month.SelectedValue + "/" + ((LinkButton)e.CommandSource).Text.Trim() + "/" + ddl_year.SelectedValue);
-            items = scheduleManager.getScheduledItemsByDayOfYear(userID, itemScheduledOn);
+
+            scheduleItemGetter = new ItemsByDayOfYear();
+            items = scheduleItemGetter.getScheduledItems(userID, itemScheduledOn);
+            //items = scheduleManager.getScheduledItemsByDayOfYear(userID, itemScheduledOn);
             items = sortItems(items);
             GridViewScheduledItems.DataSource = items;
             GridViewScheduledItems.DataBind();
@@ -845,7 +856,6 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         }
 
 
-
     }
     protected void populateRemoveItems()
     {
@@ -853,13 +863,15 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         GridViewScheduledItems.DataBind();
         if (tbRemoveDate.Text != "" && !viewingAllRemoveItems && RegularExpressionValidator1.IsValid)
         {
-            schdledItems = scheduleManager.getScheduledItemsByDayOfYear(userID, Convert.ToDateTime(tbRemoveDate.Text));
+            scheduleItemGetter = new ItemsByDayOfYear();
+            schdledItems = scheduleItemGetter.getScheduledItems(userID, Convert.ToDateTime(tbRemoveDate.Text));
             schdledItems = sortItems(schdledItems);
         }
         else
         {
             itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
-            schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+            scheduleItemGetter = new ItemsForMonth();
+            schdledItems = scheduleItemGetter.getScheduledItems(userID, itemScheduledOn);
             schdledItems = sortItems(schdledItems);
         }
         
@@ -1066,8 +1078,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         viewingAllRemoveItems = true;
         hideModifyForm();
         itemScheduledOn = Convert.ToDateTime("01/" + ddlRemoveMonth.SelectedItem.Text + "/" + ddl_year.SelectedItem.Text);
-
-        schdledItems = scheduleManager.getScheduledItemsForMonth(userID, itemScheduledOn);
+        scheduleItemGetter = new ItemsForMonth();
+        schdledItems = scheduleItemGetter.getScheduledItems(userID, itemScheduledOn);
         schdledItems = sortItems(schdledItems);
         GridViewScheduledItems.DataSource = schdledItems;
         GridViewScheduledItems.DataBind();

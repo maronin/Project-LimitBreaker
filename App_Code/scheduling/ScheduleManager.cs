@@ -28,29 +28,13 @@ public class ScheduleManager
         }
     }
 
-    /// <summary>
-    /// Get scheduled items for a specific day
-    /// </summary>
-    /// <param name="userID">The id of the current user logged</param>
-    /// <param name="day">The day to get scheduled items for</param>
-    /// <returns>returns a list of scheduled routines and exercises</returns>
-    public List<scheduledItem> getScheduledItemsByDay(Int32 userID, DateTime day)
+    public ICollection<ScheduledExercise> getscheduledExercises(int userID, DateTime day)
     {
         using (var context = new Layer2Container())
         {
-            var ruleDate = Convert.ToDateTime(day).Date;
-            var routines = from r in context.ScheduledRoutines
-                           orderby r.startTime
-                           where (r.LimitBreaker.id == userID && r.startTime.Day == day.Day)
-                           select new scheduledItem
-                           {
-                               itemName = "[R] " + r.Routine.name,
-                               startTime = r.startTime,
-                               user = r.LimitBreaker,
-                               id = r.id,
-                               description = "None",
-                               isExericse = false
-                           };
+            ICollection<ScheduledExercise> rc = context.ScheduledExercises.ToList();
+            rc = rc.Where(x => x.LimitBreakers.id == userID).ToList();
+
             var exercises = from e in context.ScheduledExercises
                             orderby e.startTime
                             where (e.LimitBreakers.id == userID && e.startTime.Day == day.Day)
@@ -63,82 +47,10 @@ public class ScheduleManager
                                 description = e.Exercise.description,
                                 isExericse = true
                             };
-            var items = routines.Concat(exercises).ToList();
-
-            return items.ToList();
+            return rc;
         }
     }
 
-    public List<scheduledItem> getScheduledItemsByDayOfYear(Int32 userID, DateTime day)
-    {
-        using (var context = new Layer2Container())
-        {
-            var ruleDate = Convert.ToDateTime(day).Date;
-            var routines = from r in context.ScheduledRoutines
-                           orderby r.startTime
-
-                           where (r.LimitBreaker.id == userID && (r.startTime.Day == day.Day && r.startTime.Month == day.Month && r.startTime.Year == day.Year))
-                           select new scheduledItem
-                           {
-                               itemName = "[R] " + r.Routine.name,
-                               startTime = r.startTime,
-                               user = r.LimitBreaker,
-                               id = r.id,
-                               description = "None",
-                               isExericse = false
-                           };
-            var exercises = from e in context.ScheduledExercises
-                            orderby e.startTime
-                            where (e.LimitBreakers.id == userID && (e.startTime.Day == day.Day && e.startTime.Month == day.Month && e.startTime.Year == day.Year))
-                            select new scheduledItem
-                            {
-                                itemName = "[E] " + e.Exercise.name,
-                                startTime = e.startTime,
-                                user = e.LimitBreakers,
-                                id = e.id,
-                                description = e.Exercise.description,
-                                isExericse = true
-                            };
-            var items = routines.Concat(exercises).ToList().OrderBy(s=>s.startTime);
-
-            return items.ToList();
-        }
-    }
-
-    public List<scheduledItem> getScheduledItemsForMonth(Int32 userID, DateTime day)
-    {
-        using (var context = new Layer2Container())
-        {
-            var ruleDate = Convert.ToDateTime(day).Date;
-            var routines = from r in context.ScheduledRoutines
-                           orderby r.startTime
-                           where (r.LimitBreaker.id == userID && (r.startTime.Month == day.Month && r.startTime.Year == day.Year))
-                           select new scheduledItem
-                           {
-                               itemName = "[R] " + r.Routine.name,
-                               startTime = r.startTime,
-                               user = r.LimitBreaker,
-                               id = r.id,
-                               description = "None",
-                               isExericse = false
-                           };
-            var exercises = from e in context.ScheduledExercises
-                            orderby e.startTime
-                            where (e.LimitBreakers.id == userID && (e.startTime.Month == day.Month && e.startTime.Year == day.Year))
-                            select new scheduledItem
-                            {
-                                itemName = "[E] " + e.Exercise.name,
-                                startTime = e.startTime,
-                                user = e.LimitBreakers,
-                                id = e.id,
-                                description = e.Exercise.description,
-                                isExericse = true
-                            };
-            var items = routines.Concat(exercises).ToList();
-
-            return items.ToList();
-        }
-    }
     /// <summary>
     /// Schedule a new routine
     /// </summary>
