@@ -10,7 +10,8 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 {
     string userName;
     GoalManager goalMngr;
-    
+    ViewUserGoalsTemplate userGoals;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlGenericControl li = (HtmlGenericControl)this.Page.Master.FindControl("Ulnav").FindControl("liManageExerciseGoals");
@@ -228,13 +229,17 @@ public partial class User_manageExerciseGoals : System.Web.UI.Page
 
         if (Convert.ToInt32(achievedRbl.SelectedValue) == 0)
         {
-            goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
+            userGoals = new UnacheivedGoals();
+            goalSet = userGoals.getGoalsForUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
+            //goalSet = goalMngr.getUnachievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
             updateGoalbtn.Visible = true;
             deleteGoalBtn.Visible = true;
         }
         else
         {
-            goalSet = goalMngr.getAchievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
+            userGoals = new AchievedGoals();
+            goalSet = userGoals.getGoalsForUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
+            //goalSet = goalMngr.getAchievedExerciseGoalsFromUser(userName, Convert.ToInt32(orderByRbl.SelectedValue), muscleGroupDdl.SelectedItem.Text);
             updateGoalbtn.Visible = false;
             deleteGoalBtn.Visible = false;
         }

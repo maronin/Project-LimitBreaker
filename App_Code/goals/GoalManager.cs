@@ -15,53 +15,6 @@ public class GoalManager
 		//
 	}
 
-    public List<ExerciseGoal> getUnachievedExerciseGoalsFromUser(string userName, int orderBy, string muscleGroup)
-    {
-        using (var context = new Layer2Container())
-        {
-            List<ExerciseGoal> goalSet;
-
-            if (muscleGroup != "All Groups")
-            {
-                switch (orderBy)
-                {
-                    case 0:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false && s.Exercise.muscleGroups.Contains(muscleGroup)).OrderBy(o => o.Exercise.name).ToList();
-                        break;
-                    case 1:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false && s.Exercise.muscleGroups.Contains(muscleGroup)).OrderBy(o => o.id).ToList();
-                        break;
-                    default:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false && s.Exercise.muscleGroups.Contains(muscleGroup)).ToList();
-                        break;
-                }
-            }
-
-            else
-            {
-                switch (orderBy)
-                {
-                    case 0:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false).OrderBy(o => o.Exercise.name).ToList();
-                        break;
-                    case 1:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false).OrderBy(o => o.id).ToList();
-                        break;
-                    default:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == false).ToList();
-                        break;
-                }
-            }
-
-            foreach (ExerciseGoal eg in goalSet)
-            {
-                context.LoadProperty(eg, "Exercise");
-            }
-
-            return goalSet;
-        }
-    }
-
     public ExerciseGoal getUnachievedGoalByExerciseNameAndUserID(string name, int userID)
     {
         using (var context = new Layer2Container())
@@ -196,52 +149,6 @@ public class GoalManager
         return rc;
     }
 
-    public List<ExerciseGoal> getAchievedExerciseGoalsFromUser(string userName, int orderBy, string muscleGroup)
-    {
-        using (var context = new Layer2Container())
-        {
-            List<ExerciseGoal> goalSet;
-
-            if (muscleGroup != "All Groups")
-            {
-                switch (orderBy)
-                {
-                    case 0:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true && s.Exercise.muscleGroups.Contains(muscleGroup)).OrderBy(o => o.Exercise.name).ToList();
-                        break;
-                    case 1:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true && s.Exercise.muscleGroups.Contains(muscleGroup)).OrderBy(o => o.id).ToList();
-                        break;
-                    default:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true && s.Exercise.muscleGroups.Contains(muscleGroup)).ToList();
-                        break;
-                }
-            }
-
-            else
-            {
-                switch (orderBy)
-                {
-                    case 0:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true).OrderBy(o => o.Exercise.name).ToList();
-                        break;
-                    case 1:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true).OrderBy(o => o.id).ToList();
-                        break;
-                    default:
-                        goalSet = context.ExerciseGoals.Where(s => s.LimitBreaker.username == userName && s.achieved == true).ToList();
-                        break;
-                }
-            }
-
-            foreach (ExerciseGoal eg in goalSet)
-            {
-                context.LoadProperty(eg, "Exercise");
-            }
-
-            return goalSet;
-        }
-    }
 
     public bool achieveGoal(ExerciseGoal eg, int reps, int time, int weight, double distance)
     {       

@@ -8,6 +8,7 @@ using System.Web;
 /// </summary>
 public abstract class ViewScheduledItemsTemplate
 {
+    //Overloaded routine Methods
     public abstract ICollection<ScheduledRoutine> getByDay(ICollection<ScheduledRoutine> r, DateTime day, int userID);
     public abstract ICollection<ScheduledRoutine> getByDayOfYear(ICollection<ScheduledRoutine> r, DateTime day, int userID);
     public abstract ICollection<ScheduledRoutine> getItemsForMonth(ICollection<ScheduledRoutine> r, DateTime day, int userID);
@@ -21,8 +22,10 @@ public abstract class ViewScheduledItemsTemplate
     {
         using (var context = new Layer2Container())
         {
-            List<scheduledItem> exercises = new List<scheduledItem>();
-            List<scheduledItem> routines = new List<scheduledItem>();
+            List<scheduledItem> scheduledExercises = new List<scheduledItem>();
+            List<scheduledItem> scheduledRoutines = new List<scheduledItem>();
+
+            //get the routines/exercises for the current user logged in
             ICollection<ScheduledRoutine> allRoutines = context.ScheduledRoutines.Where(r => r.LimitBreaker.id == userID).ToList();
             ICollection<ScheduledExercise> allExercises = context.ScheduledExercises.Where(e => e.LimitBreakers.id == userID).ToList();
 
@@ -46,7 +49,7 @@ public abstract class ViewScheduledItemsTemplate
                 r.description = "None";
                 r.isExericse = false;
                 r.enabled = true;
-                routines.Add(r);
+                scheduledRoutines.Add(r);
             }   
 
             foreach (var item in allExercises)
@@ -59,10 +62,10 @@ public abstract class ViewScheduledItemsTemplate
                 e.description = item.Exercise.description;
                 e.isExericse = true;
                 e.enabled = item.Exercise.enabled;
-                exercises.Add(e);
+                scheduledExercises.Add(e);
             }
 
-            var items = routines.Concat(exercises).ToList();
+            var items = scheduledRoutines.Concat(scheduledExercises).ToList();
 
             return items.ToList();
         }
