@@ -38,26 +38,28 @@ public abstract class ViewScheduledItemsTemplate
 
             foreach (var item in allRoutines)
             {
-                scheduledItem newItem = new scheduledItem();
-                newItem.itemName = "[R]" + item.Routine.name;
-                newItem.startTime = item.startTime;
-                newItem.user = item.LimitBreaker;
-                newItem.id = item.id;
-                newItem.description = "None";
-                newItem.isExericse = false;
-                routines.Add(newItem);
+                scheduledItem r = new scheduledItem();
+                r.itemName = "[R]" + item.Routine.name;
+                r.startTime = item.startTime;
+                r.user = item.LimitBreaker;
+                r.id = item.id;
+                r.description = "None";
+                r.isExericse = false;
+                r.enabled = true;
+                routines.Add(r);
             }   
 
             foreach (var item in allExercises)
             {
-                scheduledItem newItem = new scheduledItem();
-                newItem.itemName = "[E]" + item.Exercise.name;
-                newItem.startTime = item.startTime;
-                newItem.user = item.LimitBreakers;
-                newItem.id = item.id;
-                newItem.description = item.Exercise.description;
-                newItem.isExericse = true;
-                exercises.Add(newItem);
+                scheduledItem e = new scheduledItem();
+                e.itemName = "[E]" + item.Exercise.name;
+                e.startTime = item.startTime;
+                e.user = item.LimitBreakers;
+                e.id = item.id;
+                e.description = item.Exercise.description;
+                e.isExericse = true;
+                e.enabled = item.Exercise.enabled;
+                exercises.Add(e);
             }
 
             var items = routines.Concat(exercises).ToList();

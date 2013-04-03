@@ -215,7 +215,8 @@
                                         <h1 style="text-align: center">
                                             Schedule a new Routine!</h1>
                                         <table class="scheduleTable">
-                                           <tr><td></td><td></td><td>Exercises for routine:</td></tr>
+                                           <tr><td></td><td></td><td>
+                                               <asp:Label ID="lblExercisesForRoutineCreate" runat="server" Text="">Exercises for routine:</asp:Label></td></tr>
                                             <tr>
                                                 <td>
                                                     Select a routine:

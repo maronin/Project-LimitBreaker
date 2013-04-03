@@ -14,7 +14,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
     ScheduleManager scheduleManager = new ScheduleManager();
     ExerciseManager exerciseManager = new ExerciseManager();
     SystemExerciseManager sysExerciseManager = new SystemExerciseManager();
+    //*****Template Stuff*****
     ViewScheduledItemsTemplate scheduleItemGetter;
+    ScheduleNewItemTemplate itemScheduler;
+    //************************
     routineManager routineManager = new routineManager();
     bool atlernatingColor = true;
     static bool addNewItem = false;
@@ -384,10 +387,10 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 selectedDaysOfWeek.Add(cblDayOfWeek.Items[i].Value);
             }
         }
-
-        if (scheduleManager.scheduleNewRoutine(Convert.ToInt32(ddlRoutines.SelectedValue),
+        itemScheduler = new ScheduleNewRoutine();
+        if (itemScheduler.scheduleNewItem(Convert.ToInt32(ddlRoutines.SelectedValue),
             Convert.ToDateTime(
-            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(userID), false, 
+            tbDate_routine.Text + " " + ddlHours_routine.Text + ":" + ddlMinutes_routine.Text + ":00 " + ddlAmPm_routine.Text), Convert.ToInt32(userID), false,
             cbRepeatRoutine.Checked,
             ddlRepeatType.SelectedItem.Text,
             Convert.ToInt32(ddlRepeatEvery.SelectedItem.Text),
@@ -450,10 +453,8 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
                 selectedDaysOfWeek.Add(cblDayOfWeek.Items[i].Value);
             }
         }
-
-        if (
-            scheduleManager.scheduleNewExercise
-            (viewExercises.ddlSelectedValue,
+        itemScheduler = new ScheduleNewExercise();
+        if (itemScheduler.scheduleNewItem(viewExercises.ddlSelectedValue,
             Convert.ToDateTime(tbDate_exercise.Text + " " + ddlHours_exercise.Text + ":" + ddlMinutes_exercise.Text + ":00 " + ddlAmPm_exercise.Text),
             Convert.ToInt32(userID),
             false,
@@ -463,7 +464,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
             endsOnAfterValue,
             rblEnd.SelectedItem.Text,
             selectedDaysOfWeek)
-            )
+            )  
         {
             addNewItem = true;
             clearScheduleForm();
@@ -516,15 +517,28 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
 
     protected void ddlRoutines_indexChanged(object sender, EventArgs e)
     {
-      Routine selectedRoutine = routineManager.getRoutineByName(ddlRoutines.SelectedItem.Text);
-      ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(selectedRoutine.id);
-      listBoxExercisesForRoutine.Items.Clear();
-      
-      foreach (var item in exercisesInRoutine)
-      {
-          listBoxExercisesForRoutine.Items.Add(item.name);
-      }
-      listBoxExercisesForRoutine.DataBind();
+        if (ddlRoutines.SelectedItem != null)
+        {
+            Routine selectedRoutine = routineManager.getRoutineByName(ddlRoutines.SelectedItem.Text);
+            ICollection<Exercise> exercisesInRoutine = routineManager.getExerciseFromRoutine(selectedRoutine.id);
+            listBoxExercisesForRoutine.Items.Clear();
+
+            if (exercisesInRoutine != null)
+            {
+                foreach (var item in exercisesInRoutine)
+                {
+                    listBoxExercisesForRoutine.Items.Add(item.name);
+                }
+                listBoxExercisesForRoutine.DataBind();
+                listBoxExercisesForRoutine.Visible = true;
+                lblExercisesForRoutineCreate.Visible = true;
+            }
+        }
+        else
+        {
+            listBoxExercisesForRoutine.Visible = false;
+            lblExercisesForRoutineCreate.Visible = false;
+        }
     }
 
     protected void goBack_Click(object sender, EventArgs e)

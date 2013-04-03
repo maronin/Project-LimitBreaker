@@ -47,4 +47,10 @@ public class scheduledItem
         set;
     }
 
+    public virtual bool enabled
+    {
+        get;
+        set;
+    }
+
 }

@@ -69,7 +69,7 @@ public class ScheduleManager
             LimitBreaker lb = context.LimitBreakers.Where(x => x.id == userID).FirstOrDefault();
             if (lb != null)
             {
-                List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
+                //List<scheduledItem> scheduledItemsForThatDay = new List<scheduledItem>();
 
                 Routine routine = context.Routines.Where(e => e.id == exerciseID).FirstOrDefault();
                 //This part is for validating if the exercise can be scheduled for a certain time
