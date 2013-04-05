@@ -64,7 +64,7 @@ public abstract class ScheduleNewItemTemplate
                         }
                         if (onAfter.Trim() == "On")
                         {
-                            //get he number of occurances
+                            //get the number of occurances
                             weeks = (Convert.ToDateTime(endsOnAfterValue) - start).Days + 1;
                             weeks /= repeatEvery * 7;
                             weeks++;

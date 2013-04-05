@@ -661,7 +661,7 @@ public partial class WorkoutSchedule_Default4 : System.Web.UI.Page
         {
            
             hideModifyForm();
-            if (scheduleManager.deletecheduledItem(Convert.ToInt32(commandArgs[0]), Convert.ToBoolean(commandArgs[1]), userID))
+            if (scheduleManager.deleteScheduledItem(Convert.ToInt32(commandArgs[0]), Convert.ToBoolean(commandArgs[1]), userID))
             {
                 lblResultModify.Text = "Modified your item!";
                 pnlModifyItem.Visible = false;

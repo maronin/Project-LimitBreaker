@@ -28,7 +28,7 @@ public class ScheduleManager
         }
     }
 
-    public ICollection<ScheduledExercise> getscheduledExercises(int userID, DateTime day)
+    public ICollection<ScheduledExercise> getScheduledExercises(int userID, DateTime day)
     {
         using (var context = new Layer2Container())
         {
@@ -58,7 +58,7 @@ public class ScheduleManager
     /// <param name="isExercise">If its an exercise or a routine</param>
     /// <param name="userID">The id of the currently logged in user</param>
     /// <returns>Returns true if deleted the scheduled Item</returns>
-    public bool deletecheduledItem(Int32 itemID, bool isExercise, Int32 userID)
+    public bool deleteScheduledItem(Int32 itemID, bool isExercise, Int32 userID)
     {
         bool result = false;
         using (var context = new Layer2Container())
