@@ -5,47 +5,64 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-<h2>Send us an email</h2>
-<p>Have questions or comments? Send us an email and let us know!</p>
+<h2>Contact Us</h2>
+<p>Here at LimitBreaker, we like to mantain a high quality system as well as good user relations. <br />If you have questions, comments, or concerns, send us an email and let us know!</p>
 <table>
     <tr>
         <td>
-            Your email address:<br />
-            <asp:RegularExpressionValidator ID="emailRegExpValid" runat="server" 
-                ControlToValidate="eAddressTextbox" ErrorMessage="Inproper email" 
-                ForeColor="Red" 
-                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="contactUs"></asp:RegularExpressionValidator>
-            <br />
-            <asp:RequiredFieldValidator 
-                ID="eAddressValid" runat="server" ControlToValidate="eAddressTextbox" 
-                ErrorMessage="Required" ForeColor="Red" ValidationGroup="contactUs"></asp:RequiredFieldValidator>
+            Your email address:
         </td>
         <td>
-            <asp:TextBox ID="eAddressTextbox" runat="server" Width="100%"  
-                style="width:100%" ValidationGroup="contactUs"></asp:TextBox>
+            <asp:TextBox ID="eAddressTextbox" runat="server" Width="250px" ValidationGroup="contactUs"></asp:TextBox>
+        </td>
+        <td>
+            <asp:RegularExpressionValidator ID="emailRegExpValid" runat="server" 
+                ControlToValidate="eAddressTextbox" ErrorMessage="*Improper Email Format" 
+                ForeColor="Red" 
+                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
+                ValidationGroup="contactUs" Display="Dynamic"></asp:RegularExpressionValidator>   
+            <asp:RequiredFieldValidator 
+                ID="eAddressValid" runat="server" ControlToValidate="eAddressTextbox" 
+                ErrorMessage="*Required" ForeColor="Red" ValidationGroup="contactUs" 
+                Display="Dynamic"></asp:RequiredFieldValidator>
         </td>
     </tr>
     <tr>
         <td>
-            &nbsp;Your message:<br />
-            <asp:RequiredFieldValidator ID="eMessageValid" runat="server" 
-                ControlToValidate="eMessageTextBox" ErrorMessage="Required" 
-                ForeColor="Red"></asp:RequiredFieldValidator>
+            Subject Line:
         </td>
         <td>
-            <asp:TextBox ID="eMessageTextBox" runat="server" rows="1" 
-                cols="20" Height="100px" Width="100%" MaxLength="255" 
+            <asp:TextBox ID="subjectTxtBox" runat="server" Width="250px" ValidationGroup="contactUs"></asp:TextBox>
+        </td>
+        <td>
+            <asp:RequiredFieldValidator ID="subjectValidator" runat="server" 
+                ControlToValidate="subjectTxtBox" ErrorMessage="*Required" 
+                ForeColor="Red" Display="Dynamic" ValidationGroup="contactUs"></asp:RequiredFieldValidator>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Your message:
+        </td>
+        <td>
+            <asp:TextBox style="resize:none;" ID="eMessageTextBox" runat="server" rows="1" 
+                cols="20" Height="125px" Width="250px" MaxLength="255" 
                 TextMode="MultiLine" ValidationGroup="contactUs"></asp:TextBox>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
+            <asp:RequiredFieldValidator ID="eMessageValid" runat="server" 
+                ControlToValidate="eMessageTextBox" ErrorMessage="*Required" 
+                ForeColor="Red" Display="Dynamic" ValidationGroup="contactUs"></asp:RequiredFieldValidator>
         </td>
     </tr>
     <tr>
         <td>
             <br />
             <asp:Button ID="sendEmailButton" runat="server" onclick="Button1_Click" 
-                Text="Send Email" ValidationGroup="contactUs" />
-            <br />
-            <asp:Label ID="confirmLabel" runat="server" ForeColor="#66FF66"></asp:Label>
+                Text="Send Email" ValidationGroup="contactUs" CssClass="button"/>
+        </td>
+        <td>
+            <asp:Label ID="confirmLabel" runat="server"></asp:Label>
         </td>
     </tr>
 </table>
