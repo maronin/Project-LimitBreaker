@@ -15,7 +15,7 @@
         var chartData = [];
         var chartCursor;
 
-        /*AmCharts.ready(window.onload = */function load() {           
+        function load() {           
             myDates = new Array();
 
             var unsplitWeights = "<%=JSweights%>";
@@ -91,7 +91,8 @@
 
             // WRITE
             chart.write("chartdiv");
-        }     //);
+            getWindowSize();
+        }    
 
         function populateChart(arrayWeight, arrayDate) { //run the weight and date arrays in parallel
             for (var i = 0; i < arrayWeight.length; i++) {
@@ -123,6 +124,18 @@
             chart.validateNow();
         }
 
+        function getWindowSize() {
+            if (window.innerWidth < 1800) {
+                var title = document.getElementById("weight");
+                var chartdiv = document.getElementById("chartdiv");
+                var options = document.getElementById("chartOptions");
+
+                title.style.cssFloat = "left";
+                chartdiv.style.cssFloat = "left";
+                options.style.cssFloat = "none";
+            }
+        }
+
         </script>
 
 </asp:Content>
@@ -143,7 +156,7 @@
         <br />
 
 
-        <div style="margin-left:30px; margin-bottom:auto;">
+        <div style="margin-left:30px;">
             <asp:Panel ID="expRankPanel" runat="server">        
                 <div style="float:left; margin-right:8px; font-size:x-small;">
                     Experience Gained 
@@ -251,17 +264,21 @@
         <tr><td><asp:Label ID="updateResultLbl" runat="server" Text=""></asp:Label></td></tr>
         <tr><td><a href="changePassword.aspx">Click here to change your password</a></td></tr>
     </table>
-    </div>
-    </div>
-
-    <div style="width: 50%; margin-right:50px; float:right; text-align:center;"><h2>Weight Tracking</h2></div>
     
-    <div id="chartdiv" style="width: 50%; height: 400px; margin-right:50px; float:right;"></div>
+    </div>
+    </div>
 
-    <div style="width: 50%; margin-right:50px; float:right; text-align:center;">
+    <br />
+
+    <div id ="weight" style="width: 60%; margin-right:50px; float:right; text-align:center;"><h2>Weight Tracking</h2></div>
+    
+    <div id="chartdiv" style="width: 60%; height: 400px; margin-right:50px; float:right;"></div>
+
+    <div id="options" style="width: 60%; margin-right:50px; float:right; text-align:center;">
         <input type="radio" name="group" id="rb1" onclick="setPanSelect()" />Select
         <input type="radio" checked="true" name="group" id="rb2" onclick="setPanSelect()" />Pan
     </div> 
-   
+   <br />
+
 </asp:Content>
 

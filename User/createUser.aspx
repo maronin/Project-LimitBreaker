@@ -159,7 +159,8 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td class="auto-style1">I accept the terms of service (link below).
+                    <td class="auto-style1">I accept the <asp:HyperLink ID="tosLink" runat="server" 
+                            NavigateUrl="~/termsOfService.aspx" Target="_blank">terms of service</asp:HyperLink>
                     <asp:CheckBox ID="termOfService" runat="server" /><br />
                         <asp:Label ID="tosValidator" runat="server" Text="You must accept the terms of agreement to create an account" ForeColor="Red" Visible="False"></asp:Label>
                     </td>
