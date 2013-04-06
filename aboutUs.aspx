@@ -4,8 +4,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<h2>About Us</h2>
-<p>Were software developers who made this</p>
+<h1>About Us</h1>
+<p>LimitBreaker is created by a team of gamers and exercise enthusiast known as <em>Vendetta</em>. We strive to create applications that apply gaming elements to real world applications.</p>
 
 </asp:Content>
 
