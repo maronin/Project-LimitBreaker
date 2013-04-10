@@ -180,7 +180,7 @@
             </asp:Panel>
         </div>
         
-        <div style="text-align:left;">
+        <div style="text-align:left; margin-top: 80px;">
     <table>
         <tr>
             <td class="auto-style1">
